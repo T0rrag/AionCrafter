@@ -1,66 +1,113 @@
 # AionCrafter — project state
 
-Checkpoint: 2026-10-04, Phase 01 / Part 03 (manual-first sequencing).
-Brief: AionCrafter_Project_Prompt.md v1.3. Roadmap: v1.1 EN/ES, original HTML preserved.
-Phase 01 status: **IN_PROGRESS**. Gate A: **UNVERIFIED**. Gate B: **UNVERIFIED**.
+Checkpoint: 2026-10-04 · Phase 02 / Part 03, acceptance continuation · Brief v1.3, ADRs 0003–0006.
+Phase 02 **IN_PROGRESS**; Phase 01 **IN_PROGRESS**, p1-catalog **BLOCKED**.
+Phase 03 groundwork **NOT_STARTED**, selected next; real integration **BLOCKED**.
+Phase 05 **DEFERRED**; Gates A/B **UNVERIFIED**. All 42 task IDs retained.
 
-## Delivered and tested
+## Repository and active writer
 
-The recovered architecture bootstrap is the actual baseline; the previously mentioned
-application implementation was not present in the available artifacts and was not
-assumed recovered. This checkpoint implements the data foundation in `aioncrafter/`.
+https://github.com/T0rrag/AionCrafter · branch `phase/02-manual-calculator`.
+Draft PR #3: https://github.com/T0rrag/AionCrafter/pull/3, explicitly stacked on
+unmerged PR #2; base `phase/01-data-foundation` at
+`3a395eb5894e65ff0d67e336d1a91dc452136843`.
+This existing Aion2 cloud Work chat is the canonical active continuation, designated
+by the user. The local parent stopped application writes. GitHub provides durable code
+and handoff state; old local transcripts are not automatically synchronized or converted.
+No merge, force-push, release, deployment or permission changes.
 
-| Task | Status | Scope/evidence |
+Remote ancestry update (2026-10-04): main is
+`81f6493999b6bca1e86cd621e7815f7d05944020`, after PR #4 merged the earlier
+`48dc8a304a9f917aec9caec27d62bd95041df530` checkpoint. Its application code matches
+Phase 02 `1bea9e9d687458eb78921fee31a979a568cbe3ae`; only documentation differs.
+PR #3 is still open/draft. The merged branch title does not mean Phase 04 features
+exist. This assistant did not execute that merge; no new merge authorization follows.
+
+## Published baseline and current increment
+
+Part 02 implementation: `4594c5a6c825733bd49c56c14cddfd41a3161ab7` (77 tests).
+Part 03 reference implementation: `f8274ad71267a7737a95cff40e45eb9f7c9fb431` (85 tests).
+Acceptance implementation: `a3254c48831ea4cd54ce9e7211e286a9b3ca5f61` (91 tests); fetched tree matches tested checkpoint.
+Previous acceptance starting head: `065dde81e685a5e80f8e3f12e8959d69b9b71d95`.
+Reference acceptance implementation: `d355f7107d0a2205a61afc672f7c27f9b2146864` (95 tests), started from actual remote
+`c70d5578c3590d22b9d582f7ca8a16895a8171a8`, which superseded the requested 4797ce5 baseline.
+Fetched implementation tree equals the tested working tree. Existing observation IDs
+can be replayed identically but cannot change any displayed record; replacements need
+new IDs. Subsecond future observations are explicitly flagged.
+Each published implementation was fetched and matched its tested local tree. Delivery
+receipts follow code; always fetch actual head before writes. Publication uses connected
+GitHub tree/commit/ref updates with force:false; HTTPS fetch verifies tree equality.
+
+Current increment fixes stale saves/deletes after a plan name is deleted/recreated,
+preserves displayed observations through consecutive calculate/search/save actions,
+shows source/age at each price input and rejects merged import ID collisions atomically.
+Plan database migrates v1→v2 without altering existing payloads. Deletion removes saved
+content while retaining a per-name revision counter. Back up before upgrading; old
+v1-only applications cannot reopen a v2 plan database. JSON/CSV plan schema stays v1.
+
+## Task evidence and remaining acceptance
+
+| Task | Status | Implemented evidence / remaining work |
 |---|---|---|
-| p1-identity | COMPLETE | Stable scoped item, variant, market and currency identity; tests/test_identity.py. |
-| p1-catalog | BLOCKED | Pilot scope and permitted real catalog unresolved. 7 synthetic variants / 3 recipes only. |
-| p1-recipe | COMPLETE | Inputs, batches, fees, requirements, joint/failure outcomes, unknown probabilities; models.py and model tests. |
-| p1-trade | COMPLETE | Tradeability and acquisition restrictions/currencies; models.py and model tests. |
-| p1-validate | COMPLETE | Strict import, duplicate/orphan/alias/cycle checks; catalog and storage tests. |
-| p1-storage | COMPLETE | SQLite migrations, immutable records, rollback, concurrency and provider contracts; storage/CLI tests. |
+| p2-economics | IN_PROGRESS | Integer units, rational ROI/break-even, deterministic batches and configurable fee/rounding assumptions. 11 economics tests include joint outputs and multiple fees. Owner behaviour accepted; game-rule validation deferred to final pilot. |
+| p2-editor | IN_PROGRESS | Offline manual/vendor/snapshot references; rights/type/scope validation; linked overrides; per-item source/age and unknown timestamps; exact displayed provenance retained. Browser/source acceptance pending. |
+| p2-listflow | IN_PROGRESS | Selected or pasted materials, ambiguity picker, known subtotal/incomplete total. Full-form HTTP acceptance passed. Visual/pilot review pending. |
+| p2-itemflow | IN_PROGRESS | English/Spanish alias search, recipe/product selection, direct ingredients, batch yield/leftovers and margins; full-form save acceptance passed. Visual/pilot review pending. |
+| p2-costmodes | IN_PROGRESS | Owned stock reduces cash but preserves replacement cost; supplied consumed-material records require complete coverage. Owner behaviour accepted; final pilot deferred. |
+| p2-save | IN_PROGRESS | Local immutable plan revisions, favorites/settings/inventory; validated JSON/CSV, preview/reset/confirmed deletion. v2 migration and delete/recreate stale-tab regression passed. Owner behaviour accepted; visual QA deferred. |
 
-Completion here means engineering implementation tested with synthetic fixtures,
-subject to architectural review. It does not establish verified game rules or meet
-p1-catalog's target of 100 real items and 25 verified recipes.
-Phase 00 remains IN_PROGRESS (only inherited p0-audit complete). Phases 03 and 05 are
-DEFERRED by user direction; Phases 02, 04 and 06 remain NOT_STARTED. Calculation records
-are modeled, but an economics engine/UI is not built.
+See `PHASE_02_ACCEPTANCE.md` for exact cases and remaining review procedure.
 
-## Version and delivery
+Latest owner clarification (2026-10-04, ADR 0005 addendum): the user marked PR
+review/closure "Done" in chat; no GitHub review/closure or merge was performed.
+The user then confirmed the calculator behaves correctly: owner behaviour acceptance
+is complete. The user's
+customization comment is treated as a presentation/controls requirement with details
+unspecified; existing fee/tax/rounding settings are configurable. Visual/keyboard QA
+remains deferred and unverified. Real-game pilot validation is scheduled after all
+phase feature work, under p6-usertest, rather than as a Phase 02 development blocker.
+The pending acceptance entries above must be read with this revised timing.
 
-Repository: https://github.com/T0rrag/AionCrafter (public, as created by the user).
-Default branch `main` was initialized from the verified empty repository at
-`0ef1e2cae70eea6fa0b60f8c506e064433f9d440`.
+## Validation and limits
 
-Phase branch: `phase/01-data-foundation`.
-Stacked base: `phase/00-architecture-bootstrap` at
-`4e6077f51eb009bdfe8ffd5d5cf0328fcbef9481`.
-Verified implementation upload: `703c7135539c69e639a5d75334ece19d55a8afe9`.
-Its tree exactly matches tested local checkpoint `c559adeaa2ed060239656ff7cff1a504da8700f5`.
-Later commits on this branch record delivery documentation; fetch the current head
-before editing. See `delivery/2026-10-04-phase01.json` and GITHUB_DELIVERY.md.
+Linux/Python 3.12.14: `python3 -m unittest discover -q` — **95 passed**.
+Latest targeted form + reference suite — 14 passed (previous form + plan suite: 13). Compileall, offline catalog validation,
+diff checks and refreshed bootstrap manifest checks passed. Tests parse and submit
+actual rendered controls over loopback HTTP; no browser layout/keyboard claim follows.
 
-Architecture PR: https://github.com/T0rrag/AionCrafter/pull/1 — open for review.
-Phase PR: https://github.com/T0rrag/AionCrafter/pull/2 — draft, based on PR #1's branch.
-The earlier 404/access blocker is resolved. Both remote trees and branch SHAs were
-read back and verified. No merge, release, deployment or visibility change performed.
+Visual QA remains **UNVERIFIED**. Prior local Chromium was absent and downloads returned
+invalid ZIPs. Connected cloud browser was also tried against the running calculator:
+`net::ERR_BLOCKED_BY_CLIENT`. No screenshot or rendered-page acceptance obtained.
+Prior Python 3.14 SQLite ResourceWarnings remain unresolved on that runtime. GitHub check-runs and Actions runs for the starting head returned zero entries; no remote
+CI success, Windows, pilot/game, live-provider or overlay success claimed.
 
-## Evidence and next action
+Fixtures remain **SYNTHETIC ONLY** (7 variants, 3 recipes); no permitted real catalog.
+p1-catalog still needs pilot scope, rights, 100 real items and 25 verified recipes.
+Unknown stochastic outcomes are rejected. Leftovers/coproducts have no revenue credit;
+all craft costs go to planned sales. Per-output-unit fees count every produced output;
+per-attempt/per-batch each count an invocation. Tax rounding applies once to batch
+proceeds as an unverified assumption. Vendor stock, restrictions and sell-through stay
+manual checks. Actual historical craft/sale fees and realized profit are unknown without
+records. Recursive optimization remains Phase 04.
 
-47 local tests passed: `python3 -m unittest discover -v`.
-Offline fixture validation passed. See TEST_RESULTS.md for limits and individual suites.
-All 42 backlog IDs retained; roadmap progress is in `roadmap-progress.json`, imported
-through the existing bilingual roadmap control without modifying its code or storage key.
+## Next action and continuity
 
-Next eligible chat: Phase 02 — Manual-first calculator, Part 01. The user directed
-continued development with automatic live prices and overlay deferred (ADR 0003).
-Start p2-economics on the tested engineering contracts using labeled synthetic data;
-then integrate manual price entry and both requested workflows. p1-catalog remains
-BLOCKED and Phase 01 is not declared complete. Its real-data requirement is retained.
+The user selected **Phase 03 — Market-price groundwork**, Part 01 and requested its
+continuation prompt. ADR 0006 supersedes the previous next-Phase-04 instruction.
+Begin independent p3-freshness with synthetic tests, then p3-resilience/p3-depth.
+Real p3-adapter, reconciliation and automatic-price release remain BLOCKED on their
+external evidence. Gate A remains UNVERIFIED; permission precedes a real connection.
+No Phase 03 implementation, branch, PR or new chat is created by this checkpoint.
 
-Phase 02 implementation belongs in a new chat. Verify and record the actual base for
-phase/02-manual-calculator; stack its PR on phase/01-data-foundation if PR #2 remains
-unmerged. No merge is authorized. Gate A/B remain UNVERIFIED; Phases 03/05 are DEFERRED.
+Read `handoffs/phase-02-to-phase-03.md`, `decisions/0006-phase-03-groundwork.md` and
+`NEXT_CHAT_PROMPT.md`. Re-fetch main and any `phase/03-market-prices` branch before
+writing. Prefer the verified main baseline when it still contains the tested calculator;
+carry the latest handoff/state decisions from Phase 02, since main's docs are older.
+Record the true branch/PR base rather than assuming the old stack still applies.
 
-Latest handoff: `handoffs/phase-01-part-03.md`. Starter: `NEXT_CHAT_PROMPT.md`.
-Earlier handoffs are historical records and remain preserved.
+The code baseline previously passed **95 tests**, Python 3.12.14. This checkpoint
+changes documentation only; no new application test run is claimed. Owner behaviour
+acceptance is complete. Visual/keyboard QA is deferred/unverified; final real-game
+pilot is scheduled after phase feature work. Stop cloud/Chromium troubleshooting.
+Use a new Aion2 chat per phase and one active branch writer. This Phase 02 chat stops
+application writes. A prepared prompt is not a created chat. No merge/force-push.

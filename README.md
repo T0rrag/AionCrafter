@@ -1,4 +1,4 @@
-# AionCrafter — Phase 01 data foundation
+# AionCrafter — manual calculator and data foundation
 
 Provider-independent Python contracts, catalog validation and SQLite persistence
 for an external AION 2 crafting companion. Current data is **SYNTHETIC ONLY**.
@@ -44,8 +44,8 @@ ignored by Git. Back them up before upgrading; unsupported newer schemas fail cl
 - Separate typed catalog/price provider protocols. No provider implementation connects
   to a game service. Missing prices remain null and timestamps retain provenance.
 
-This is a data-foundation CLI/library, not yet the player-facing calculator. Phase 02
-is the next development chat: calculations and a web UI with manually entered prices.
+Phase 02 adds a local web calculator with manually entered prices, inventory-aware
+costs and versioned saved plans alongside the data-foundation CLI/library.
 Its engineering work can use labeled synthetic fixtures while the real-catalog task
 remains blocked. Automatic prices and overlay are deferred (ADR 0003).
 
@@ -83,3 +83,51 @@ python3 -m unittest discover -v
 ```
 
 Independent project; not affiliated with NC, Overwolf or CurseForge.
+
+## Phase 02 — local manual calculator
+
+```bash
+python3 -m aioncrafter.web --catalog tests/fixtures/SYNTHETIC-catalog-v1.json
+```
+
+Open `http://127.0.0.1:8765` in your browser. Enter an explicit synthetic market ID,
+faction mode, currency code/precision and ISO 8601 observation time with timezone.
+The bundled fixture uses `TEST` with 2 decimal places for its synthetic craft fees.
+Enter unit prices manually; blank means unavailable. Materials mode needs quantities
+or pasted `quantity<TAB>exact alias` rows, with a variant picker for ambiguous names.
+Item mode needs product, recipe, planned selling quantity, selling price and explicit
+sale-fee/tax assumptions. A craft-fee override is optional; blank uses catalog fees,
+including unknown fees. A zero override explicitly waives the fee for this estimate.
+
+This local HTTP server binds to loopback. Saved plans persist prices, favorites, market
+settings, inventory and recorded material costs in `local-data/plans.sqlite3` (override
+with `--plans PATH`). Keep this user database private; back it up before upgrades.
+Load a named plan before updating it; concurrent stale saves fail instead of overwriting.
+JSON/CSV exports are lossless AionCrafter plan bundles tied to the exact catalog digest.
+CSV cells are neutralized against spreadsheet formulas. Paste exports into Import for
+a validated preview, then save. Reset clears unsaved inputs; deleting a named plan and
+its revisions requires the explicit confirmation checkbox. Deterministic
+direct ingredients only; unknown proc probabilities are refused. Unsold leftovers and
+coproducts receive no credited revenue. ROI/unrounded break-even use exact rational
+arithmetic; displayed monetary results use exact currency units and chosen proceeds
+rounding. Fees and rounding are unverified assumptions, not game rules.
+
+[Phase 02 draft PR #3](https://github.com/T0rrag/AionCrafter/pull/3) is stacked on PR #2.
+91 local tests pass, including complete-form HTTP and plan migration regressions. Browser
+visual QA remains unverified: local Chromium is unavailable and the cloud browser blocks
+the loopback URL. Phase 02 remains IN_PROGRESS; see the current state and handoff.
+
+Part 02 adds owned-quantity inputs and optional historical material-cost allocations.
+Replacement value still includes owned inputs; additional cash uses only missing units
+and known craft fees. Recorded material cost requires coverage for every consumed unit
+and a record reference. It excludes historical crafting/sale fees and realized profit.
+Product search matches English/Spanish aliases without accents. Part 03 adds validated
+offline manual/vendor/snapshot reference imports and per-item source/age labels. Exact
+observations survive calculate/search/save and JSON/CSV transfers. See
+[reference imports](docs/REFERENCE_IMPORTS.md) and [acceptance evidence](docs/PHASE_02_ACCEPTANCE.md).
+
+Plan database v2 upgrades existing v1 databases automatically without changing plan
+payloads. Revision numbers remain increasing when a name is deleted and recreated, so
+stale tabs cannot overwrite/delete the recreated plan. Only its name/revision counter
+survives deletion. Older v1-only applications refuse the upgraded database; keep a backup
+before upgrading. JSON/CSV plan schema remains v1.

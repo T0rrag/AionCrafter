@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-04",
+  "repository": "T0rrag/AionCrafter",
+  "branch": "phase/02-manual-calculator",
+  "pr": 3,
+  "base": "phase/01-data-foundation",
+  "starting_head": "c70d5578c3590d22b9d582f7ca8a16895a8171a8",
+  "implementation_sha": "d355f7107d0a2205a61afc672f7c27f9b2146864",
+  "implementation_tree": "d15fb94e7770069a4be3cf097a4f3cc5901ee86a",
+  "verified_tree_equality": true,
+  "full_suite_passed": 95,
+  "targeted_form_reference_passed": 14,
+  "python": "3.12.14",
+  "browser_acceptance": "UNVERIFIED: Chromium executable missing",
+  "remote_ci": {
+    "check_runs": 0,
+    "workflow_runs": 0,
+    "statuses": 0,
+    "combined_state": "pending",
+    "passed": false
+  },
+  "gates": {
+    "A": "UNVERIFIED",
+    "B": "UNVERIFIED"
+  },
+  "phase_status": "IN_PROGRESS",
+  "force_push": false,
+  "merged": false
+}

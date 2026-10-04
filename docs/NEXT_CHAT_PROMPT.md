@@ -1,18 +1,56 @@
-Start AionCrafter Phase 02 — Manual-first calculator, Part 01, in this same project.
-Use master prompt v1.3 sections 8, 13, 20 and 21 plus ADR 0003. Read PROJECT_STATE.md,
-handoffs/phase-01-part-03.md and backlog.json first.
+Start AionCrafter Phase 03 — Market-price groundwork, Part 01, in this same Aion2 project.
+Continue autonomously within this phase. The user selected Phase 03 preparation next;
+ADR 0006 supersedes the next-Phase-04 instruction. Use a separate chat per phase.
 
-Fetch https://github.com/T0rrag/AionCrafter and verify the actual phase/01-data-foundation
-head. Its implementation passed 47 tests. Create phase/02-manual-calculator with a
-recorded base SHA; if PR #2 remains unmerged, explicitly stack the Phase 02 PR on it.
-Do not merge or force-push.
+First fetch https://github.com/T0rrag/AionCrafter and verify actual remote heads, ancestry
+and PR state before writing. Read the latest docs/PROJECT_STATE.md, docs/backlog.json,
+docs/handoffs/phase-02-to-phase-03.md, ADRs 0003–0006 and master prompt v1.3 sections
+8/13/20/21. Retrieve current handoff documents from phase/02-manual-calculator if main
+still has the older Phase 04 starter; do not follow that obsolete sequencing.
 
-Begin p2-economics: pure exact-arithmetic batch costs, configurable fees, proceeds,
-profit/loss, ROI, break-even and explicit missing-price states. Then add manual price
-entry and both materials-only and item-economics workflows in coherent increments.
+Last verified: main 81f6493999b6bca1e86cd621e7815f7d05944020 includes the calculator via
+merged PR #4 (head 48dc8a304a9f917aec9caec27d62bd95041df530). Phase 02 acceptance
+checkpoint 1bea9e9d687458eb78921fee31a979a568cbe3ae differs from main only in docs.
+PR #3 remained open/draft. No Phase 04 features were implemented. Recheck these facts.
+Create or resume phase/03-market-prices without overwriting work. Prefer verified main
+as the base if it still contains the tested calculator; carry forward the latest handoff,
+state and decisions from Phase 02. Record the actual base and any PR dependencies.
 
-The user postponed live prices and overlay: Phases 03/05 are DEFERRED, Gates A/B
-UNVERIFIED. p1-catalog remains BLOCKED; Phase 01 is not fully complete. Use clearly
-SYNTHETIC fixtures while real pilot/catalog permissions are unresolved. Do not invent
-verified game data, fees or probabilities. Work only on Phase 02, run relevant tests,
-publish tested checkpoints, verify remote SHAs, and save state and a handoff.
+Scope: provider-independent groundwork using clearly labelled SYNTHETIC fixtures.
+Inspect and reuse existing provider, observation, reference, persistence and UI contracts.
+
+1. Begin p3-freshness: scoped cache behaviour preserving source-observed time separately
+   from fetch/ingestion time. Cache hits or refreshes never make old prices new. Preserve
+   unknown ages, zero versus unavailable, price type, rights and provenance. Use an
+   injected clock and deterministic synthetic provider for tests.
+2. Then p3-resilience: configurable batching, quotas, bounded retries/backoff, error/stale
+   states and explicit manual fallback. Test without real network calls or sleeps;
+   do not invent provider-specific limits or describe fixtures as a live integration.
+3. Then p3-depth: exact quantity-aware acquisition for supported listing/stack inputs.
+   Expose insufficient coverage; reference/minimum-only totals remain indicative with
+   stock unverified. Do not assume partial-stack purchasing or listing depth support.
+
+p3-adapter is BLOCKED until an authorized provider and working scoped sample exist.
+Real p3-reconcile and p3-releaseprice remain BLOCKED on external evidence. Gate A stays
+UNVERIFIED: synthetic tests do not pass it or enable automatic prices. Do not invent APIs,
+credentials, licences or source rights. The restricted workbook is not an authorized
+catalog. The user deferred real-game pilot validation until all phase feature work is
+done; permission is still required before connecting a real source.
+
+Baseline: 95 tests previously passed on Linux/Python 3.12.14. Rerun the fetched baseline,
+add meaningful tests, then run python3 -m unittest discover -q, compileall, catalog
+validation, git diff --check and scripts/validate_bootstrap.py as applicable. Preserve
+all 42 IDs and refresh the manifest. Report actual commands, results and limitations.
+
+Owner accepted Phase 02 behaviour and marked their review done. Visual/keyboard QA is
+deferred and UNVERIFIED; do not restart cloud/Chromium troubleshooting. Phase 01 is
+incomplete, p1-catalog BLOCKED, Phase 05 DEFERRED, Gate B UNVERIFIED. Historical craft/sale
+fees and realized profit remain unknown without records. Recursive crafting/buy-versus-
+craft belongs to Phase 04. Tax/fee/rounding inputs remain configurable.
+
+Publish tested increments, verify remote SHAs and tree equality, open a draft Phase 03 PR
+with its true base, and save state, handoff, tests and next prompt. Git shell push lacked
+authentication previously; connected GitHub create_tree/create_commit/update_ref
+(force:false) worked, followed by HTTPS fetch/tree verification. No merge or force-push.
+This Phase 02 chat stops application writes; keep one active phase-branch writer.
+Never claim new-chat startup, transcript synchronization or unexecuted tests as done.
