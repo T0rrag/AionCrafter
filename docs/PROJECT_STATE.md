@@ -10,8 +10,10 @@ Phase 03 PR #5 merged at bd23f4166ffe276179843761dea8e95275efbce1; main document
 receipt 4f06404f1846f4d586dbbf71ae7e90b5a897435f. The existing Phase 04 branch was
 normally merged with main, preserving both histories, at
 3a1e9bab7e3f6e747cfe4beb3a40bd68724e9859. Its tree matched main before feature work.
-Current branch: phase/04-crafting-intelligence. This checkpoint prepares its new draft
-PR against main; old PR #4 is closed. Read the delivery receipt and actual remote heads.
+Current branch: phase/04-crafting-intelligence. Draft PR #6 is open against main:
+https://github.com/T0rrag/AionCrafter/pull/6. Verified feature commit
+794794224cf879abfdfd86f4b10da6ec501b43a2 matches the tested tree exactly.
+Receipt: delivery/phase-04-part-01.json. Old PR #4 is closed; fetch actual remote heads.
 User authorizes tested merges; no force-push, concurrent overwrite or bypass of checks.
 
 ## Delivered in this increment
