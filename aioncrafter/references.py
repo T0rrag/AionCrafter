@@ -3,6 +3,7 @@ from datetime import datetime, timezone
 from .codec import loads, require
 from .identity import PriceIdentity
 from .models import PriceObservation, PriceType, RightsStatus, timestamp
+from .liquidity import quantity_label
 
 
 SUPPORTED = (PriceType.MANUAL, PriceType.VENDOR_PURCHASE, PriceType.SNAPSHOT)
@@ -52,4 +53,4 @@ def reference_label(obs, *, now=None):
     else:
         seconds = ((now or datetime.now(timezone.utc)) - timestamp(obs.observed_at)).total_seconds()
         age = 'future observation — check clock' if seconds < 0 else f'age {int(seconds) // 3600}h {(int(seconds) % 3600) // 60}m'
-    return f'{title}{state} · {age} · observed {obs.observed_at or "unknown"} · ingested {obs.fetched_at} · source {obs.provenance.source_id} ({obs.provenance.source_ref}) · rights {obs.provenance.rights_status.value}: {obs.provenance.rights_ref}'
+    return f'{title}{state} · {age} · observed {obs.observed_at or "unknown"} · ingested {obs.fetched_at} · source {obs.provenance.source_id} ({obs.provenance.source_ref}) · rights {obs.provenance.rights_status.value}: {obs.provenance.rights_ref} · {quantity_label(obs)}'

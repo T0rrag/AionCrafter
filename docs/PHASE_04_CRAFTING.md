@@ -34,3 +34,7 @@ fields are not applied to recursive estimates; no realized-profit claim is made.
 Remaining: stochastic outcomes and downside, explicit eligibility filtering, liquidity,
 ranking, optional actual-transaction ledger and broader acceptance. Browser visual QA
 is deferred. No provider requests or automatic-price activation were added.
+
+Part 02 implements the independent scenarios, ranking and actual-ledger scope described
+in [the follow-up contract](PHASE_04_SCENARIOS_AND_LEDGER.md). The remaining-work paragraph
+above records the Part 01 boundary; use PROJECT_STATE for current evidence/status.

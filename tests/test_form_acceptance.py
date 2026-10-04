@@ -147,6 +147,116 @@ class FormAcceptanceTests(unittest.TestCase):
         with PlanStore(self.path) as store:
             self.assertEqual(store.list(), ())
 
+    def test_scenario_view_keeps_unknown_probabilities_and_survives_save_load(self):
+        recipe = self.c.recipes[1]
+        product = next(i for i, item in enumerate(self.c.items) if item.identity == recipe.outcomes[0].outputs[0].item)
+        html = self.post(self.form, workflow='crafting', plan_mode='scenarios', recipe=recipe.recipe_id,
+                         product=str(product), target='1', selling='10', tax='0.1', sale_fee='0',
+                         fee_source='SYNTHETIC assumption', attempt_evidence_recipe=recipe.recipe_id,
+                         consumption_evidence='SYNTHETIC full-input test rule')
+        self.assertNotIn('role="alert"', html)
+        self.assertIn('Expected profit: Unknown', html)
+        self.assertIn('unknown_probabilities', html)
+        saved = self.post(FormControls(html).fields, action='save', plan_name='scenario')
+        self.assertIn('Saved locally at revision 1', saved)
+        loaded = self.post(FormControls(saved).fields, action='load')
+        self.assertEqual(FormControls(loaded).fields['plan_mode'], 'scenarios')
+        self.assertIn('Expected profit: Unknown', loaded)
+
+    def test_scenario_attestations_require_matching_recipe_and_show_downside(self):
+        html = self.post(self.form, workflow='crafting', plan_mode='scenarios', recipe='synthetic-bar', product='2',
+                         target='1', selling='10', tax='0', sale_fee='0', fee_source='SYNTHETIC', p0='10', p1='2',
+                         craft_fee='0', probability_evidence='SYNTHETIC deterministic fixture',
+                         consumption_evidence='SYNTHETIC full-input rule')
+        self.assertIn('EVIDENCE_SCOPE', html)
+        html = self.post(FormControls(html).fields, attempt_evidence_recipe='synthetic-bar')
+        self.assertNotIn('role="alert"', html)
+        self.assertIn('Worst modeled profit:', html)
+        self.assertIn('Modeled probability of loss: 1/1', html)
+        self.assertIn('not a guaranteed return', html)
+
+    def test_ranking_filters_and_saved_plan_recompute_from_real_controls(self):
+        html = self.post(self.form, workflow='crafting', plan_mode='rank', recipe='synthetic-bar', product='2',
+                         target='1', selling='100', tax='0', sale_fee='0', fee_source='SYNTHETIC', p0='10', p1='2',
+                         craft_fee='0', rank_budget='1000', rank_age='10000000', rank_professions='SYNTHETIC smith',
+                         profession0='SYNTHETIC smith', profession_ref0='SYNTHETIC classification',
+                         requirements_ok0='\n'.join(self.c.recipes[0].requirements))
+        self.assertNotIn('role="alert"', html)
+        self.assertIn('1 routes pass the selected filters', html)
+        self.assertIn('sell_through_unknown', html)
+        saved = self.post(FormControls(html).fields, action='save', plan_name='ranked')
+        self.assertIn('Saved locally at revision 1', saved)
+        loaded = self.post(FormControls(saved).fields, action='load')
+        self.assertIn('1 routes pass the selected filters', loaded)
+        stale = self.post(FormControls(loaded).fields, rank_age='0')
+        self.assertIn('0 routes pass the selected filters', stale)
+        self.assertIn('stale_future_or_unknown_price_age', stale)
+
+    def test_ranking_budget_and_requirements_never_default_to_approval(self):
+        html = self.post(self.form, workflow='crafting', plan_mode='rank', recipe='synthetic-bar', product='2',
+                         target='1', selling='100', tax='0', sale_fee='0', fee_source='SYNTHETIC', p0='10', p1='2',
+                         craft_fee='0', rank_budget='0', rank_age='10000000')
+        self.assertNotIn('role="alert"', html)
+        self.assertIn('unknown_profession:synthetic-bar', html)
+        self.assertIn('over_budget', html)
+
+    def ledger_post(self, form, **changes):
+        with urlopen(Request(self.url + '/ledger', data=urlencode(dict(form, **changes)).encode())) as response:
+            return response.read().decode()
+
+    def ledger_form(self):
+        with urlopen(self.url + '/ledger') as response:
+            return FormControls(response.read().decode()).fields
+
+    def test_actual_journal_preview_save_export_and_reopen(self):
+        from aioncrafter.ledger import decode_journal, evaluate_journal
+        form = self.ledger_form()
+        html = self.ledger_post(form, action='preview_record', journal_name='SYNTHETIC actuals',
+                                market='test-server', currency='TEST', occurred='2026-10-04T10:00:00Z',
+                                record_ref='SYNTHETIC purchase', record_kind='purchase', record_item='0',
+                                record_quantity='3', paid_total='10')
+        self.assertIn('unsaved preview', html)
+        html = self.ledger_post(FormControls(html).fields, action='preview_record', record_kind='craft',
+                                record_ref='SYNTHETIC actual craft', consumed0='3', produced2='2', paid_fee='2')
+        html = self.ledger_post(FormControls(html).fields, action='preview_record', record_kind='sale',
+                                record_ref='SYNTHETIC actual sale', record_item='2', record_quantity='1',
+                                received='10', paid_fee='1')
+        self.assertIn('Realized profit / loss: 3.00', html)
+        self.assertIn('Net cash flow during this journal: -3.00', html)
+        saved = self.ledger_post(FormControls(html).fields, action='save')
+        self.assertIn('Journal saved locally at revision 1', saved)
+        payload = self.ledger_post(FormControls(saved).fields, action='export')
+        journal = decode_journal(payload.encode(), self.c)
+        self.assertEqual(evaluate_journal(journal, self.c).realized_profit, 300)
+        loaded = self.ledger_post(self.ledger_form(), action='load', journal_name='SYNTHETIC actuals')
+        self.assertIn('Realized profit / loss: 3.00', loaded)
+        self.assertEqual(decode_journal(FormControls(loaded).fields['journal_payload'].encode(), self.c), journal)
+        imported = self.ledger_post(self.ledger_form(), action='import', import_data=payload)
+        copied = self.ledger_post(FormControls(imported).fields, action='save', journal_name='SYNTHETIC actuals copy')
+        self.assertIn('Journal saved locally at revision 1', copied)
+
+    def test_actual_journal_bad_input_preserves_preview_and_does_not_crash(self):
+        from aioncrafter.ledger import decode_journal
+        html = self.ledger_post(self.ledger_form(), action='preview_record', journal_name='SYNTHETIC preview',
+                                market='test-server', currency='TEST', occurred='2026-10-04T10:00:00Z',
+                                record_ref='SYNTHETIC <receipt>', record_kind='opening', record_item='0',
+                                record_quantity='3', paid_total='')
+        before = FormControls(html).fields['journal_payload']
+        bad = self.ledger_post(FormControls(html).fields, action='preview_record', record_kind='sale',
+                               record_quantity='4', received='10', paid_fee='0')
+        self.assertIn('INSUFFICIENT_STOCK', bad)
+        self.assertEqual(FormControls(bad).fields['journal_payload'], before)
+        self.assertIn('&lt;receipt&gt;', html)
+        broken = self.ledger_post(self.ledger_form(), action='save', journal_payload='{broken')
+        self.assertIn('Actual records', broken)
+        self.assertNotIn('Journal saved', broken)
+        self.assertEqual(len(decode_journal(before.encode(), self.c).records), 1)
+
+    def test_actual_journal_requires_csrf_before_saving(self):
+        html = self.ledger_post(self.ledger_form(), action='save', csrf='wrong')
+        self.assertIn('CSRF', html)
+        self.assertNotIn('Journal saved', html)
+
     def test_reference_id_replay_is_idempotent_but_changed_record_is_atomic(self):
         form = FormControls(self.post(self.form)).fields
         before = self.observations(form)

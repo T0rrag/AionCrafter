@@ -7,6 +7,8 @@ from .codec import require
 from .economics import amount
 from .models import CraftFee, FeeBasis, ItemQuantity, Money
 from .references import reference_label
+from .stochastic_view import render_scenarios, scenario_controls
+from .ranking_view import render_ranking, ranking_controls
 
 
 def crafting_controls(catalog, form):
@@ -15,7 +17,7 @@ def crafting_controls(catalog, form):
             f'<option value="{key}" {"selected" if form.get(name, default) == key else ""}>{text}</option>'
             for key, text in choices) + '</select></label>'
     html = '<fieldset><legend>Recursive crafting (crafting workflow only)</legend>'
-    html += select('plan_mode', 'Planning mode', (('selected', 'Expand selected recipes'), ('compare', 'Compare buying and crafting')), 'selected')
+    html += select('plan_mode', 'Planning mode', (('selected', 'Expand selected recipes'), ('compare', 'Compare buying and crafting'), ('scenarios', 'One-attempt outcome scenarios'), ('rank', 'Rank conditional craft routes')), 'selected')
     html += select('plan_objective', 'Cost view', (('additional_cash', 'Additional cash after owned stock'),
                                                 ('replacement_cost', 'Replacement cost without stock deduction')), 'additional_cash')
     html += '<p>The product and recipe selected above define the target. Choose intermediate recipes below; unselected intermediates stay external purchases. The target recipe is always included as a candidate. All requirements still need manual confirmation.</p>'
@@ -24,7 +26,7 @@ def crafting_controls(catalog, form):
         outputs = ', '.join(names[q.item] for outcome in recipe.outcomes for q in outcome.outputs)
         html += select(f'use_recipe{index}', escape(recipe.recipe_id + ' — ' + outputs),
                        (('no', 'Do not expand'), ('yes', 'Use as a crafting candidate')), 'no')
-    return html + '<p>Comparison supports up to 7 candidate recipes. It tests whole craft-or-buy routes, not every possible mixture. The crafting-fee override above applies only to the selected target recipe; other recipes retain their recorded fees or remain unknown.</p></fieldset>'
+    return html + '<p>Comparison supports up to 7 candidate recipes. It tests whole craft-or-buy routes, not every possible mixture. The crafting-fee override above applies only to the selected target recipe; other recipes retain their recorded fees or remain unknown.</p></fieldset>' + scenario_controls(catalog, form) + ranking_controls(catalog, form)
 
 
 def render_crafting(catalog, form, market, observations, inventory):
@@ -37,7 +39,7 @@ def render_crafting(catalog, form, market, observations, inventory):
     require(any(q.item == target.item for outcome in recipe.outcomes for q in outcome.outputs), 'OUTPUT', 'Recipe must produce the selected product')
     objective = form.get('plan_objective', 'additional_cash')
     mode = form.get('plan_mode', 'selected')
-    require(objective in ('additional_cash', 'replacement_cost') and mode in ('selected', 'compare'),
+    require(objective in ('additional_cash', 'replacement_cost') and mode in ('selected', 'compare', 'scenarios', 'rank'),
             'PLAN_MODE', 'Select a supported planning mode and cost view')
     selected = {recipe.recipe_id}
     for i, candidate in enumerate(catalog.recipes):
@@ -49,6 +51,10 @@ def render_crafting(catalog, form, market, observations, inventory):
     overrides = {}
     if form.get('craft_fee'):
         overrides[recipe.recipe_id] = (CraftFee(Money(form['craft_fee'], market.currency), FeeBasis(form.get('craft_basis', ''))),)
+    if mode == 'scenarios':
+        return render_scenarios(catalog, form, recipe, target, market, observations, overrides.get(recipe.recipe_id))
+    if mode == 'rank':
+        return render_ranking(catalog, form, target, chosen, market, observations, inventory, overrides)
     html = '<h2>Recursive crafting estimate</h2><p>' + ('Additional cash after owned stock' if objective == 'additional_cash'
                                                     else 'Replacement cost without stock deduction') + '</p>'
     if mode == 'compare':

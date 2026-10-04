@@ -202,3 +202,14 @@ chain, shared demand, coproducts, inventory and cycles), 13 buy/craft tests (exa
 stock coverage, unknown values, alternatives and bounded search), and 3 local HTTP form
 tests (save/load, missing-price comparisons, invalid choice rejection). Existing 149
 tests still pass. No visual QA or real-game validation claimed.
+
+## Phase 04 Part 02 — 2026-10-04
+
+Windows / Python 3.12.14, SYNTHETIC ONLY. Final `python -m unittest discover -q`:
+**238 passed** (21.480 seconds). Added 58 tests: 14 stochastic, 8 liquidity, 14 ranking,
+15 ledger and 7 HTTP form tests. Ledger conservation additionally covers 60 synthetic
+cases with fractional basis, joint outputs and partial sales. Actual save/export/import,
+failed preview preservation, source-age re-evaluation and CSRF are covered.
+`python -m compileall -q aioncrafter tests`, synthetic catalog CLI validation (7 variants,
+3 recipes), and `git diff --check` passed. The prior 180 tests remain passing.
+These checks do not establish visual QA, a real market/rule audit, remote CI or release.

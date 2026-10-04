@@ -52,7 +52,7 @@ remains blocked. Automatic prices and overlay are deferred (ADR 0003).
 ## Project records
 
 Read `docs/PROJECT_STATE.md`, `docs/backlog.json`,
-`docs/handoffs/phase-04-part-01.md` and `docs/NEXT_CHAT_PROMPT.md` before continuing.
+`docs/handoffs/phase-04-part-02.md` and `docs/NEXT_CHAT_PROMPT.md` before continuing.
 `docs/decisions/0002-phase-01-data-contracts.md` documents the engineering choices.
 `docs/TEST_RESULTS.md` records actual local validation and its limits.
 `docs/GITHUB_DELIVERY.md` retains the publishing procedure; `docs/PHASE_01_PR.md`
@@ -134,3 +134,9 @@ before upgrading. JSON/CSV plan schema remains v1.
 
 Phase 04 Part 01 adds recursive crafting and bounded buy/craft cost comparisons.
 See [crafting contracts](docs/PHASE_04_CRAFTING.md) for usage and limitations.
+
+Phase 04 Part 02 adds one-attempt scenarios, conditional route rankings and an optional
+actual-results ledger. In the crafting workflow choose `scenarios` or `rank`; the
+**Record actual purchases, crafts and sales** link opens the separate local ledger.
+See [usage and evidence limits](docs/PHASE_04_SCENARIOS_AND_LEDGER.md). No provider or game
+connection is added; historical profit needs actual records, never a guessed cost basis.

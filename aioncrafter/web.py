@@ -17,6 +17,7 @@ from .manual import manual_observation, resolve_list
 from .models import CraftFee, FeeBasis, ItemQuantity, Money, PriceType
 from .references import import_references, merge_references, validate_references, reference_label
 from .valuation import HistoricalCost, InventoryEntry, value_materials
+from .ledger_view import ledger_page
 
 
 def observation_time(form, index, old=None):
@@ -143,6 +144,7 @@ def render(catalog, form=None, *, supplied_observations=None):
         result += f'<p role="alert">{escape(str(exc))}</p>'
     select = lambda name, vals, default: f'<label>{name}<select name="{name}">' + ''.join(f'<option {"selected" if value(name,default)==x else ""}>{x}</option>' for x in vals) + '</select></label>'
     body = '<h1>AionCrafter · Manual calculator</h1><p><strong>' + escape(catalog.scope.dataset_kind.value) + '</strong> · ' + escape(catalog.scope.region + ' / ' + catalog.scope.build) + ' · Gate A/B UNVERIFIED</p><p>Fees are user assumptions, unverified for the game. Blank prices stay unavailable. No prices or fees are prefilled. Use local saved plans to keep prices and inputs between sessions. Snapshots are delayed references, never live prices.</p><form method="post">'
+    body += '<p><a href="/ledger">Record actual purchases, crafts and sales</a></p>'
     body += select('workflow', ['materials', 'item', 'crafting'], 'materials')
     body += '<fieldset><legend>Explicit market and observation</legend>'
     body += field('market', 'Market ID', required=True) + select('market_kind', ['server','group'], 'server')
@@ -225,6 +227,10 @@ def handler(catalog, plan_database=None):
             if not self.allowed_host():
                 self.send_error(403)
                 return
+            if urlsplit(self.path).path == '/ledger':
+                html, _ = ledger_page(catalog, {}, token, str(plan_database) + '.ledger.sqlite3' if plan_database else None)
+                self.reply(html)
+                return
             if urlsplit(self.path).path != '/':
                 self.send_error(404)
                 return
@@ -242,6 +248,15 @@ def handler(catalog, plan_database=None):
                 data = parse_qs(self.rfile.read(size).decode('utf-8'), keep_blank_values=True, max_num_fields=200)
                 require(all(len(v) == 1 for v in data.values()), 'DUPLICATE_FIELD', 'Form fields repeat')
                 form = {k:v[0] for k,v in data.items()}
+                if urlsplit(self.path).path == '/ledger':
+                    require(secrets.compare_digest(form.get('csrf',''), token), 'CSRF', 'Reload before changing journal records')
+                    payload, exported = ledger_page(catalog, form, token, str(plan_database) + '.ledger.sqlite3' if plan_database else None)
+                    self.reply(payload, content_type='application/json' if exported else 'text/html; charset=utf-8',
+                               filename='aioncrafter-journal.json' if exported else None)
+                    return
+                if urlsplit(self.path).path != '/':
+                    self.send_error(404)
+                    return
                 action = form.get('action', 'calculate')
                 if action == 'references':
                     previous = form_observations(catalog, form)

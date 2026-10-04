@@ -240,8 +240,8 @@
           "priority": "P0",
           "title": "Handle recursive yields and leftovers",
           "description": "Round craft counts upward by output yield, merge shared ingredients, carry leftovers and detect recipe cycles. Treat expected stochastic yields differently from guaranteed outputs.",
-          "status": "IN_PROGRESS",
-          "evidence": "Phase 04 Part 01: batches.py/buycraft.py/crafting_view.py; 15 batch tests, 13 route tests, 3 HTTP plan tests; full suite 180 passed. Deterministic selected routes, exact fees/quantity costs and saved local forms delivered. Stochastic treatment, eligibility filtering and broader acceptance pending; bounded search is not general optimization."
+          "status": "COMPLETE",
+          "evidence": "Independent deterministic engineering: batches.py aggregates shared demand before rounding, tracks joint outputs/leftovers and stock, rejects cycles/unknown stochastic yields; 15 batch tests including 1050-step chain. stochastic.py keeps one-attempt expectations separate; 238 full-suite tests passed."
         },
         {
           "id": "p4-buycraft",
@@ -249,39 +249,39 @@
           "title": "Compare buying against crafting",
           "description": "Evaluate intermediate components at the requested quantity, including batch fees and leftovers. Respect recipe requirements, bound inputs and available market stock.",
           "status": "IN_PROGRESS",
-          "evidence": "Phase 04 Part 01: batches.py/buycraft.py/crafting_view.py; 15 batch tests, 13 route tests, 3 HTTP plan tests; full suite 180 passed. Deterministic selected routes, exact fees/quantity costs and saved local forms delivered. Stochastic treatment, eligibility filtering and broader acceptance pending; bounded search is not general optimization."
+          "evidence": "Exact quantity/fee/stock-aware bounded routes and local forms; ranking.py filters explicit recipe/profession/vendor restrictions and thin quotes, preserves bound identities. 13 route and 14 ranking tests. Real catalog/rule/market evidence and integration acceptance pending; limited strategy family is not a general optimizer."
         },
         {
           "id": "p4-proc",
           "priority": "P0",
           "title": "Model success, failure and proc outcomes",
           "description": "Use verified probabilities per recipe/build; distinguish alternative outputs from bonus outputs. Report expected revenue and downside scenarios instead of promising a guaranteed return.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "stochastic.py and scenario form: exact exclusive/joint/failure/independent-bonus expectations and downside; 14 synthetic tests. Evidence bound to recipe/build/content, missing evidence stays unknown. Verified real probabilities and consumption rules pending; bonus library contract is not an automatic provider integration."
         },
         {
           "id": "p4-liquidity",
           "priority": "P1",
           "title": "Show market uncertainty",
           "description": "Keep asking prices separate from completed sales. Display stock and volume only when the provider supplies them. Do not infer liquidity or sell-through from a single cheap listing.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "liquidity.py: separates asking/completed/reference prices, explicit interval sales-volume records, stock zero versus unknown, source-time freshness; 8 tests and UI source labels. Provider volume/depth UI ingestion and real-market acceptance remain blocked with Gate A."
         },
         {
           "id": "p4-rank",
           "priority": "P1",
           "title": "Rank crafts by usable economics",
           "description": "Filter by profession, budget, tradability and price completeness. Show estimated profit, capital required, ROI and data age; exclude incomplete or stale results from confident recommendations.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "ranking.py/ranking_view.py: conditional route ranking by profit/ROI/capital; budget, professions, requirements, vendor, tradability, completeness and source-age filters; 14 library tests plus HTTP save/load/exclusions. Real recipe eligibility and market acceptance pending. No sale guarantee or general optimization claim."
         },
         {
           "id": "p4-ledger",
           "priority": "P2",
           "title": "Compare estimates with actual outcomes",
           "description": "Optionally record user-entered purchase costs, crafting results, sale proceeds and fees. A finished item alone cannot reveal the player’s historical profit.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "COMPLETE",
+          "evidence": "Independent optional actual-record workflow at /ledger; purchases/opening basis, actual craft outcomes/failures, sale proceeds/fees, FIFO rational allocation, recorded-estimate comparison; separate immutable SQLite revisions and JSON transfer. 15 ledger tests including 60 conservation cases, 3 HTTP lifecycle/error/CSRF tests. Missing historical costs remain unknown; unsold basis retained."
         }
       ]
     },
