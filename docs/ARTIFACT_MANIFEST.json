@@ -1,0 +1,78 @@
+{
+  "schema_version": 1,
+  "project": "AionCrafter",
+  "brief_version": "1.3",
+  "publication_status": "LOCAL_ONLY",
+  "files": [
+    {
+      "path": ".github/pull_request_template.md",
+      "bytes": 582,
+      "sha256": "91785a4da1829efc0ad822a37cfcd35e51655412b833e92d14eb5fd885ee387a"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 358,
+      "sha256": "3c9f3a9384a98c88085b6b9cbfffc8c89ba78c5161dd5c872a51c9c4b254b873"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 1702,
+      "sha256": "7b1c5a00cc07a7d8ac8c449312d3faf9901ed69d5aa47911aa828ded9a8b4e44"
+    },
+    {
+      "path": "AionCrafter_Project_Prompt.md",
+      "bytes": 72676,
+      "sha256": "9c687435a32fbb4e748d62361d8c2946f6299fac8896b9875d55d6dd7c40a187"
+    },
+    {
+      "path": "AionCrafter_Roadmap.html",
+      "bytes": 203394,
+      "sha256": "0881ff82158428f87fa5ed52d47ea601d4bd5665d116a179c49b3f04d623ec87"
+    },
+    {
+      "path": "README.md",
+      "bytes": 1921,
+      "sha256": "2e5e157c822c4200c07423e789e3eb59e6f188efc50373e21328ac3cffccac9d"
+    },
+    {
+      "path": "docs/CHAT_PROJECT_INSTRUCTIONS.txt",
+      "bytes": 831,
+      "sha256": "60f6bc4a142b6d7473141d96859055abc8db054765c7ee2d7e9ad0086c13e53f"
+    },
+    {
+      "path": "docs/GITHUB_DELIVERY.md",
+      "bytes": 2971,
+      "sha256": "f1d84a86bf6f30ab56a9282fb8ac5be3a3ddafe38c74013a02caf4d0471c646e"
+    },
+    {
+      "path": "docs/NEXT_CHAT_PROMPT.md",
+      "bytes": 1405,
+      "sha256": "31849863e80df9675bc17d5777a74f09d5a9358deb214637c2876ea77146925e"
+    },
+    {
+      "path": "docs/PROJECT_STATE.md",
+      "bytes": 2563,
+      "sha256": "272c891b60cad190c2553b41a15fe4567607bd3c17bd9a67fc8a44f38ada1c78"
+    },
+    {
+      "path": "docs/backlog.json",
+      "bytes": 18468,
+      "sha256": "d9afa4ffce6fcf6926370b815ccc969fdd6e3691590fdac4bad54bb898624e1c"
+    },
+    {
+      "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
+      "bytes": 1704,
+      "sha256": "1fac4257c50f24aaa832e1ebf4b9954445003edf5c6debaed68171d5fdf31cbb"
+    },
+    {
+      "path": "docs/handoffs/architecture-control-2026-10-04.md",
+      "bytes": 2365,
+      "sha256": "544eddb2e0b99a6383691c018e971d9a0b81820fe9e9c308cd883ef42378f0ee"
+    },
+    {
+      "path": "scripts/validate_bootstrap.py",
+      "bytes": 2732,
+      "sha256": "1b30cb9ee84f17e63a31aa670f792cd90ac533011f93d8161fdec2a6518db653"
+    }
+  ]
+}

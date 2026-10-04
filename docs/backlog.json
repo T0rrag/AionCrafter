@@ -1,0 +1,399 @@
+{
+  "schema_version": 1,
+  "project": "AionCrafter",
+  "brief_version": "1.3",
+  "checkpoint_date": "2026-10-04",
+  "publication_status": "LOCAL_ONLY",
+  "intended_repository": "T0rrag/AionCrafter",
+  "gates": {
+    "A": "UNVERIFIED",
+    "B": "UNVERIFIED"
+  },
+  "phases": [
+    {
+      "phase": "00",
+      "title": "Resolve the data & platform gates",
+      "status": "IN_PROGRESS",
+      "tasks": [
+        {
+          "id": "p0-audit",
+          "priority": "P0",
+          "title": "Record the public-source investigation",
+          "description": "Completed for this document: distinguish official documentation, provider claims, unverified integration and missing evidence. This is not an authenticated API test.",
+          "status": "COMPLETE",
+          "evidence": "Inherited public-source audit only; no authenticated integration test."
+        },
+        {
+          "id": "p0-scope",
+          "priority": "P0",
+          "title": "Lock a single pilot market",
+          "description": "Choose region, server or market group, faction where relevant, client build and language. TW is a candidate, not a fixed requirement. Never infer the game region from the player’s location.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p0-official",
+          "priority": "P0",
+          "title": "Ask NC about an AION 2 market-data interface",
+          "description": "Request documentation, supported regions, authentication, permitted use, refresh frequency and limits. Do not reuse Lineage 2M endpoints as if they belonged to AION 2.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p0-partner",
+          "priority": "P0",
+          "title": "Request a price-data partnership",
+          "description": "Ask Aion2t about programmatic access, source methodology, timestamps, market coverage, rates, cost, storage and redistribution rights. A consumer Premium account is not the same as an API/data licence.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p0-sample",
+          "priority": "P0",
+          "title": "Validate a representative price sample",
+          "description": "Obtain at least 20 items at two observation times, including raw materials, intermediates and finished goods. Compare with the same in-game market and item variant. Log gaps, delays and discrepancies.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p0-platform",
+          "priority": "P0",
+          "title": "Confirm the overlay route",
+          "description": "Check the exact AION 2 regional client in Overwolf’s Native / Electron support directory and test it. Clarify app approval and publishing requirements; keep a normal desktop-window route independent.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        }
+      ]
+    },
+    {
+      "phase": "01",
+      "title": "Build the data foundation",
+      "status": "NOT_STARTED",
+      "tasks": [
+        {
+          "id": "p1-identity",
+          "priority": "P0",
+          "title": "Define item and market identities",
+          "description": "Use stable item IDs plus region/build, quality, enhancement and other sale-relevant variants. Price keys must also include market scope and source currency. Localized names are search aliases, not primary keys.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p1-catalog",
+          "priority": "P0",
+          "title": "Obtain and import a permitted catalog",
+          "description": "Pilot target: at least 100 relevant items and 25 verified recipes. Confirm rights for data, icons and redistribution; a public repository or webpage alone is not a reuse licence.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p1-recipe",
+          "priority": "P0",
+          "title": "Model complete crafting outcomes",
+          "description": "Store inputs, quantities, batch yield, crafting fee, requirements and possible outputs. Attach source/build metadata; leave unknown probabilities explicitly unknown.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p1-trade",
+          "priority": "P0",
+          "title": "Model tradability and acquisition constraints",
+          "description": "Represent bound/unbound variants, vendor restrictions, quantity limits and currency types. A vendor sell-back value is not an auction purchase price; incompatible currencies are not silently added.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p1-validate",
+          "priority": "P0",
+          "title": "Validate imports before publishing",
+          "description": "Reject orphan IDs, impossible quantities, duplicate identities, cycles and ambiguous aliases. Review changes after each patch and preserve the last known-good catalog.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p1-storage",
+          "priority": "P0",
+          "title": "Create storage and provider contracts",
+          "description": "Start with SQLite and migrations. Define Item, Recipe, MarketScope, PriceObservation and Calculation records. Use exact arithmetic for money and explicit nulls for missing prices.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        }
+      ]
+    },
+    {
+      "phase": "02",
+      "title": "Ship the manual-first calculator",
+      "status": "NOT_STARTED",
+      "tasks": [
+        {
+          "id": "p2-itemflow",
+          "priority": "P0",
+          "title": "Implement item → materials → margin",
+          "description": "Search a product, select its recipe and quantity, show direct ingredients or a fully expanded tree, price the output and calculate estimated profit/loss.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p2-listflow",
+          "priority": "P0",
+          "title": "Implement materials-only pricing",
+          "description": "Accept selected items or a pasted materials list. Resolve ambiguous names with a picker. Return unit prices, quantities, subtotals and a total without requiring a recipe or a selling-price field.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p2-editor",
+          "priority": "P0",
+          "title": "Add a source-aware price editor",
+          "description": "Let users enter their own observed prices or approved reference imports. Require market and observation time; distinguish manual, vendor, snapshot, delayed and unavailable values.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p2-costmodes",
+          "priority": "P0",
+          "title": "Separate cash needed from economic cost",
+          "description": "Owned materials reduce the shopping list, not automatically the economic cost. Offer replacement-cost valuation, additional cash required and actual historical cost when the user supplies a ledger.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p2-economics",
+          "priority": "P0",
+          "title": "Implement fees, yield and missing-price states",
+          "description": "Calculate batch cost, net sale proceeds, profit, ROI and break-even price. Tax and fees are configurable and unverified until checked for the selected market. Never treat missing prices as zero.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p2-save",
+          "priority": "P1",
+          "title": "Save plans and material lists",
+          "description": "Persist favorites, market settings, user-entered prices and inventory quantities. Add JSON/CSV import/export with validation and a clear reset. No trading or crafting automation.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        }
+      ]
+    },
+    {
+      "phase": "03",
+      "title": "Connect permitted market prices",
+      "status": "NOT_STARTED",
+      "tasks": [
+        {
+          "id": "p3-adapter",
+          "priority": "P0",
+          "title": "Implement the approved provider adapter",
+          "description": "Only after permission and a working sample: add an official or contracted community adapter behind the same interface as manual prices. Keep credentials on the backend.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p3-freshness",
+          "priority": "P0",
+          "title": "Preserve observation time and cache age",
+          "description": "Record source-observed time, fetch time, price type and scope separately. A cache refresh must never make an old observation appear new. Unknown source time means freshness unknown.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p3-resilience",
+          "priority": "P0",
+          "title": "Respect quotas and degrade predictably",
+          "description": "Batch permitted requests, use provider limits, backoff on throttling and stop retry storms. Show stale/error states and allow manual overrides without silently hiding their origin.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p3-depth",
+          "priority": "P0",
+          "title": "Use prices suitable for the requested quantity",
+          "description": "When supported, consume listing depth or whole-stack offers to calculate the cost of buying all required units. With only a reference/minimum price, label the total indicative and stock unverified.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p3-reconcile",
+          "priority": "P0",
+          "title": "Run market reconciliation tests",
+          "description": "Check 20 representative items across two snapshots, multiple variants and scope changes. Test wrong-region joins, zero listings, partial coverage and listed-versus-sold price distinctions.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p3-releaseprice",
+          "priority": "P0",
+          "title": "Approve the automatic-price feature",
+          "description": "Enable it only for validated markets. Display age, source and missing-item count on every result. Do not describe snapshots as real time without evidence of their update behavior.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        }
+      ]
+    },
+    {
+      "phase": "04",
+      "title": "Add crafting intelligence",
+      "status": "NOT_STARTED",
+      "tasks": [
+        {
+          "id": "p4-batches",
+          "priority": "P0",
+          "title": "Handle recursive yields and leftovers",
+          "description": "Round craft counts upward by output yield, merge shared ingredients, carry leftovers and detect recipe cycles. Treat expected stochastic yields differently from guaranteed outputs.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p4-buycraft",
+          "priority": "P1",
+          "title": "Compare buying against crafting",
+          "description": "Evaluate intermediate components at the requested quantity, including batch fees and leftovers. Respect recipe requirements, bound inputs and available market stock.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p4-proc",
+          "priority": "P0",
+          "title": "Model success, failure and proc outcomes",
+          "description": "Use verified probabilities per recipe/build; distinguish alternative outputs from bonus outputs. Report expected revenue and downside scenarios instead of promising a guaranteed return.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p4-liquidity",
+          "priority": "P1",
+          "title": "Show market uncertainty",
+          "description": "Keep asking prices separate from completed sales. Display stock and volume only when the provider supplies them. Do not infer liquidity or sell-through from a single cheap listing.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p4-rank",
+          "priority": "P1",
+          "title": "Rank crafts by usable economics",
+          "description": "Filter by profession, budget, tradability and price completeness. Show estimated profit, capital required, ROI and data age; exclude incomplete or stale results from confident recommendations.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p4-ledger",
+          "priority": "P2",
+          "title": "Compare estimates with actual outcomes",
+          "description": "Optionally record user-entered purchase costs, crafting results, sale proceeds and fees. A finished item alone cannot reveal the player’s historical profit.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        }
+      ]
+    },
+    {
+      "phase": "05",
+      "title": "Package the companion overlay",
+      "status": "NOT_STARTED",
+      "tasks": [
+        {
+          "id": "p5-shell",
+          "priority": "P0",
+          "title": "Select and validate the production shell",
+          "description": "Choose an approved Overwolf Native/Electron route after support checks. Keep the calculator reusable in a browser or standard desktop window when platform support is absent.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p5-compact",
+          "priority": "P1",
+          "title": "Build the compact companion view",
+          "description": "Reuse item search, a pinned material list and margin summary. Keep market, source and age visible even in compact mode. Avoid covering essential game controls.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p5-hotkeys",
+          "priority": "P0",
+          "title": "Add deliberate focus and visibility controls",
+          "description": "Provide a configurable show/hide hotkey, clear close control and a visible interaction mode. Test focus restoration; do not send automated commands to the game.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p5-fallback",
+          "priority": "P1",
+          "title": "Validate the desktop-window fallback",
+          "description": "Test an always-on-top window with borderless/windowed mode; do not claim exclusive-fullscreen compatibility without tests. The browser/second-screen mode remains available.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p5-privacy",
+          "priority": "P0",
+          "title": "Keep the default integration minimal",
+          "description": "No custom DLL injection, memory reading, packet capture, credential collection or automated trading. Optional screenshot import is a later, user-triggered feature—not an MVP dependency.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p5-display",
+          "priority": "P0",
+          "title": "Test supported display and performance setups",
+          "description": "Check 1080p/1440p, DPI scaling, multiple monitors, hotkey collisions and coexistence with other overlays. Record idle CPU, memory and frame-time impact on declared hardware.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        }
+      ]
+    },
+    {
+      "phase": "06",
+      "title": "Validate, release & maintain",
+      "status": "NOT_STARTED",
+      "tasks": [
+        {
+          "id": "p6-mathqa",
+          "priority": "P0",
+          "title": "Pass the calculation regression suite",
+          "description": "Cover multi-output recipes, batch rounding, shared ingredients, fees, missing/zero values, unknown proc rates and non-tradable outputs. Verify exact monetary rounding.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p6-usertest",
+          "priority": "P0",
+          "title": "Complete both workflows with pilot users",
+          "description": "Use 20 real cases in one declared market. Verify materials, quantity, source age, listing interpretation and fee assumptions against the game; document unresolved discrepancies.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p6-patches",
+          "priority": "P0",
+          "title": "Make patch and outage handling recoverable",
+          "description": "Version recipes, provider schemas and pricing rules. Add migration tests, provider health reporting and rollback to the last known-good data release.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p6-security",
+          "priority": "P0",
+          "title": "Review secrets, privacy and input handling",
+          "description": "Keep provider credentials server-side; minimize collected data. Validate imported files and API input, restrict desktop privileges and document retention/deletion behavior.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p6-package",
+          "priority": "P1",
+          "title": "Publish installation and operating guidance",
+          "description": "Include supported clients/markets, update procedure, known limitations, data attribution, licensing and non-affiliation notice. Sign desktop releases when applicable.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        },
+        {
+          "id": "p6-golive",
+          "priority": "P0",
+          "title": "Run the release checklist and label the edition",
+          "description": "Manual edition can ship without Gate A. Automatic-price and Overwolf editions require their respective gates plus quality checks. Archive the evidence supporting each public claim.",
+          "status": "NOT_STARTED",
+          "evidence": null
+        }
+      ]
+    }
+  ]
+}
