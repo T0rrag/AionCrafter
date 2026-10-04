@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "project": "AionCrafter",
+  "date": "2026-10-04",
+  "repository": "T0rrag/AionCrafter",
+  "branch": "phase/02-manual-calculator",
+  "base_branch": "phase/01-data-foundation",
+  "recorded_base_sha": "3a395eb5894e65ff0d67e336d1a91dc452136843",
+  "stacked_on_pr": "https://github.com/T0rrag/AionCrafter/pull/2",
+  "dependency_state_at_verification": "open/draft/unmerged",
+  "pr_url": "https://github.com/T0rrag/AionCrafter/pull/3",
+  "draft": true,
+  "phase_status": "IN_PROGRESS",
+  "verified_economics_sha": "2c614636f9ef22d799732d20455aa2cb4f25610d",
+  "verified_implementation_sha": "4594c5a6c825733bd49c56c14cddfd41a3161ab7",
+  "verification": [
+    "Both published commits fetched over HTTPS",
+    "git diff --exit-code confirmed exact tested local/remote tree equality",
+    "PR creation returned recorded base SHA, draft and unmerged state"
+  ],
+  "task_ids": [
+    "p2-economics",
+    "p2-editor",
+    "p2-listflow",
+    "p2-itemflow",
+    "p2-costmodes",
+    "p2-save"
+  ],
+  "validation": {
+    "baseline_tests": 47,
+    "economics_checkpoint_tests": 55,
+    "final_tests": 77,
+    "failures": 0,
+    "errors": 0,
+    "unit_command": "python3 -m unittest discover -q",
+    "environment": "Linux / Python 3.14.7",
+    "fixture_validation": "passed",
+    "compileall": "passed",
+    "documentation_validator": "passed",
+    "remote_ci_run": false,
+    "browser_visual_qa": "unverified: browser admin-policy verification unavailable",
+    "targeted_plan_tests_after_strengthening_import_assertion": 7
+  },
+  "gate_A": "UNVERIFIED",
+  "gate_B": "UNVERIFIED",
+  "deferred_phases": [
+    "03",
+    "05"
+  ],
+  "remaining": [
+    "p1-catalog BLOCKED; Phase 01 IN_PROGRESS",
+    "Phase 02 approved reference imports, price age display and remaining acceptance",
+    "Browser/pilot QA and real market/fee rules unresolved",
+    "Cloud continuation choice pending; local project target rejected"
+  ],
+  "publication_method": "Connected GitHub tree/commit and non-force ref updates after shell authentication failure",
+  "merge_performed": false,
+  "force_push_performed": false,
+  "deployed": false,
+  "note": "Documentation commit follows implementation. Fetch current remote head; final head recorded in the final response to avoid a self-referential commit SHA."
+}

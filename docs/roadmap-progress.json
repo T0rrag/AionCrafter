@@ -1,0 +1,18 @@
+{
+  "project": "AionCrafter",
+  "schemaVersion": 1,
+  "roadmapVersion": "1.1",
+  "researchDate": "2026-10-04",
+  "exportedAt": "2026-10-04T11:53:57.030533Z",
+  "completed": [
+    "p0-audit",
+    "p1-identity",
+    "p1-recipe",
+    "p1-trade",
+    "p1-validate",
+    "p1-storage"
+  ],
+  "notes": "2026-10-04 — Phase 01 engineering checkpoint / Checkpoint técnico Fase 01. 47 local tests passed / 47 pruebas locales correctas. SYNTHETIC ONLY: 7 variants, 3 recipes / SOLO SINTÉTICO: 7 variantes, 3 recetas. p1-catalog BLOCKED/BLOQUEADO. Gate A/B UNVERIFIED/NO VERIFICADAS. Published / Publicado: https://github.com/T0rrag/AionCrafter/pull/2 (draft / borrador), dependent on / depende de PR #1. No merge / Sin merge. See docs/PROJECT_STATE.md and docs/TEST_RESULTS.md. Manual-first development / Desarrollo con precios manuales primero: Phases 03 and 05 DEFERRED / Fases 03 y 05 APLAZADAS. Next chat / Próximo chat: Phase 02. p1-catalog remains BLOCKED / sigue BLOQUEADO. ADR 0003. Phase 02 Part 03: 91 automated tests passed / 91 pruebas automáticas correctas. All six tasks IN_PROGRESS / seis tareas EN CURSO. Visual and pilot acceptance pending / aceptación visual y piloto pendiente. docs/PHASE_02_ACCEPTANCE.md. ADR 0005: next engineering phase 04, p4-batches / próxima fase técnica 04, p4-batches. Visual acceptance deferred from development queue / aceptación visual fuera de la cola activa. New chat per phase / chat nuevo por fase.",
+  "theme": "dark",
+  "language": "es"
+}

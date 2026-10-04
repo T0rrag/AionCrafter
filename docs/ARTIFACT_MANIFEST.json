@@ -1,0 +1,337 @@
+{
+  "schema_version": 1,
+  "project": "AionCrafter",
+  "brief_version": "1.3",
+  "publication_status": "PUBLISHED",
+  "checkpoint": "Phase 02 / Part 03 reference acceptance",
+  "files": [
+    {
+      "path": ".github/pull_request_template.md",
+      "bytes": 582,
+      "sha256": "91785a4da1829efc0ad822a37cfcd35e51655412b833e92d14eb5fd885ee387a"
+    },
+    {
+      "path": ".gitignore",
+      "bytes": 358,
+      "sha256": "3c9f3a9384a98c88085b6b9cbfffc8c89ba78c5161dd5c872a51c9c4b254b873"
+    },
+    {
+      "path": "AGENTS.md",
+      "bytes": 2336,
+      "sha256": "70c83d03c9f4c76c56883b4067d08b935b627e52ffa36b1ada04d9ccce0d3971"
+    },
+    {
+      "path": "AionCrafter_Project_Prompt.md",
+      "bytes": 72676,
+      "sha256": "9c687435a32fbb4e748d62361d8c2946f6299fac8896b9875d55d6dd7c40a187"
+    },
+    {
+      "path": "AionCrafter_Roadmap.html",
+      "bytes": 203394,
+      "sha256": "0881ff82158428f87fa5ed52d47ea601d4bd5665d116a179c49b3f04d623ec87"
+    },
+    {
+      "path": "README.md",
+      "bytes": 7556,
+      "sha256": "9713ba89ab50b7d8b523d4bdd17620a386076eb180e5c32ab30df726fc84733a"
+    },
+    {
+      "path": "aioncrafter/__init__.py",
+      "bytes": 103,
+      "sha256": "7849bf134ef67583f828c57d41e52431c2fb8e7fb9fed3d825b7e78cd2e135bc"
+    },
+    {
+      "path": "aioncrafter/__main__.py",
+      "bytes": 2484,
+      "sha256": "6090d6aa6d62684d96d4a7b608ec15714beb68bbaec86f9af2129e9d4cab92e0"
+    },
+    {
+      "path": "aioncrafter/catalog.py",
+      "bytes": 4113,
+      "sha256": "e40ad53812f19e2c7ed5b16f269634a04ae3c1711185d4b4eedc24e2b9107297"
+    },
+    {
+      "path": "aioncrafter/codec.py",
+      "bytes": 4305,
+      "sha256": "f17eb7cc9a7362731b5b55784820f2508bd5cf8e4a065c66d51d1b7b6e9bca4e"
+    },
+    {
+      "path": "aioncrafter/economics.py",
+      "bytes": 7002,
+      "sha256": "9d2a977848440815b4b7dcfdcc956989e8dd45424651bb70a21dcc65dffcbc81"
+    },
+    {
+      "path": "aioncrafter/identity.py",
+      "bytes": 4691,
+      "sha256": "49d92e24a4306e711c7494baa1e143b222d51d6c3e1c264bd35c55dfcaeb154d"
+    },
+    {
+      "path": "aioncrafter/manual.py",
+      "bytes": 1513,
+      "sha256": "2369979dec14bbdc8bfbd6f7490497c35718f79f0541231d5e944e9507f43ec4"
+    },
+    {
+      "path": "aioncrafter/models.py",
+      "bytes": 11149,
+      "sha256": "9bddcf65515fbc8ffe7f6335b35c1f8db34fcc2abbd7822cd68152403b4a2e40"
+    },
+    {
+      "path": "aioncrafter/plans.py",
+      "bytes": 9042,
+      "sha256": "fd15e09953eb82c0ad501bac11a17dc5f20e8e4b26730f7d52266fb162202765"
+    },
+    {
+      "path": "aioncrafter/providers.py",
+      "bytes": 1218,
+      "sha256": "c4157a3fda9e6725e5bd3def493a87cf1362367ed78e430156cc6ddac40331a3"
+    },
+    {
+      "path": "aioncrafter/storage.py",
+      "bytes": 9177,
+      "sha256": "1ffc1dea7e80942d8f91f7b3a3da38d9022346cf5cc3de288b121b176d6f74e4"
+    },
+    {
+      "path": "aioncrafter/valuation.py",
+      "bytes": 4525,
+      "sha256": "68155c33aa39dd4ffa78ecc37d8f84ede8343d5e9fffd8ebba661230c58a3b5d"
+    },
+    {
+      "path": "aioncrafter/web.py",
+      "bytes": 26028,
+      "sha256": "531a1a77f30a4efce53806afa61f9205eeea4ee7a519e3ab284b558a0d5b01ef"
+    },
+    {
+      "path": "docs/CHAT_PROJECT_INSTRUCTIONS.txt",
+      "bytes": 831,
+      "sha256": "60f6bc4a142b6d7473141d96859055abc8db054765c7ee2d7e9ad0086c13e53f"
+    },
+    {
+      "path": "docs/GITHUB_DELIVERY.md",
+      "bytes": 6058,
+      "sha256": "b1e77e945fd9087c3c2a512db7d1d0036c2cf3fe5e0371bf0b4eeba78142e6a2"
+    },
+    {
+      "path": "docs/NEXT_CHAT_PROMPT.md",
+      "bytes": 1741,
+      "sha256": "4d954e0c846be0412d3309b04894f6df7b63f2355d1cab31be1fce5a5d2d72a5"
+    },
+    {
+      "path": "docs/PHASE_01_PR.md",
+      "bytes": 1381,
+      "sha256": "f6b2d5da503698acfccf77751e08cba2f53ebfafb9fc98b7425ad998888a0ee5"
+    },
+    {
+      "path": "docs/PROJECT_STATE.md",
+      "bytes": 6427,
+      "sha256": "6b8b7459156e382b304b72dce4b3fd3d582089f9581b8d8d9fce06d7b5262022"
+    },
+    {
+      "path": "docs/TEST_RESULTS.md",
+      "bytes": 7514,
+      "sha256": "dc71c3bd1eab73254ae954011e83f6ddd2b15fef1a90b85fcaacd23fb43c58c8"
+    },
+    {
+      "path": "docs/backlog.json",
+      "bytes": 23283,
+      "sha256": "3bafab4f3c3588323f46c96f06cdd21b8de005f8d2468a8af22cd490b60bea00"
+    },
+    {
+      "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
+      "bytes": 1704,
+      "sha256": "1fac4257c50f24aaa832e1ebf4b9954445003edf5c6debaed68171d5fdf31cbb"
+    },
+    {
+      "path": "docs/decisions/0002-phase-01-data-contracts.md",
+      "bytes": 4482,
+      "sha256": "c1115e2a141c71b9f9416438fec0ce51d8463fee349da4250c613f85bde58f4c"
+    },
+    {
+      "path": "docs/decisions/0003-manual-first-development.md",
+      "bytes": 2741,
+      "sha256": "0e15282e2fa330e182a30084a4e2eccb8be276689871323c11d30a20638faa16"
+    },
+    {
+      "path": "docs/decisions/0004-autonomous-phase-continuation.md",
+      "bytes": 2492,
+      "sha256": "d28ea5fd2104a747c406f23a01a8c5a847755be2ea87d472d5d954d64234a5c8"
+    },
+    {
+      "path": "docs/delivery/2026-10-04-phase01.json",
+      "bytes": 2227,
+      "sha256": "07630d2a58db7c461d005922cc7d62d30165d5c24346124f6cf990e7ead30319"
+    },
+    {
+      "path": "docs/delivery/2026-10-04-phase02.json",
+      "bytes": 2294,
+      "sha256": "6eac1cc53b3b38b1987e39567118370581a78bce963b9774a671f2d993f00ba6"
+    },
+    {
+      "path": "docs/handoffs/architecture-control-2026-10-04.md",
+      "bytes": 2365,
+      "sha256": "544eddb2e0b99a6383691c018e971d9a0b81820fe9e9c308cd883ef42378f0ee"
+    },
+    {
+      "path": "docs/handoffs/phase-01-part-01.md",
+      "bytes": 3577,
+      "sha256": "c9ba91f36a4c880a3ff48eb0937b647c7a6f730fa42ab11bbbc8f690eecad99b"
+    },
+    {
+      "path": "docs/handoffs/phase-01-part-02.md",
+      "bytes": 3148,
+      "sha256": "8a7e58a9a8c468165a0d2b9dcc8b6ae2b5668be0dcc263056d65e2065654a4f1"
+    },
+    {
+      "path": "docs/handoffs/phase-01-part-03.md",
+      "bytes": 2579,
+      "sha256": "8bb73877699a76c7eef3746772ef08fcf89ae6b97a7d03ec29b080c6c029bd09"
+    },
+    {
+      "path": "docs/handoffs/phase-02-part-01.md",
+      "bytes": 3803,
+      "sha256": "a914d656d1cb6b7f42068205b8a088d675f642b45927ea9c02a4551b965ac562"
+    },
+    {
+      "path": "docs/handoffs/phase-02-part-02.md",
+      "bytes": 4208,
+      "sha256": "06fb7d738b2b7e6b09250c93ddf0cfba3e8d6ecdc7cbe237addc5d04efec7447"
+    },
+    {
+      "path": "docs/roadmap-progress.json",
+      "bytes": 1263,
+      "sha256": "94ec66f7754a0b7fad2027e3d90caa27a9bef79762de1d537de1d3cade63b6c6"
+    },
+    {
+      "path": "docs/sources/SYNTHETIC.md",
+      "bytes": 1204,
+      "sha256": "c5c4ed0944430d8dd8b2b116abfd3e12417891b2a814efaf4a80ef46bab725e8"
+    },
+    {
+      "path": "scripts/validate_bootstrap.py",
+      "bytes": 3260,
+      "sha256": "a678a055906ef24c0f9a1ee658751bca9ed006b825ee5719c19974d489a62b41"
+    },
+    {
+      "path": "tests/__init__.py",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/fixtures/SYNTHETIC-catalog-v1.json",
+      "bytes": 14377,
+      "sha256": "05493d7e9f8b93fe2f607b784288953e4b990774ad3fd033c105ebea9ec50fb3"
+    },
+    {
+      "path": "tests/helpers.py",
+      "bytes": 1207,
+      "sha256": "a5f297d3003072a65131b113685e54648973f0dae55632c9fa5c10c212589d1c"
+    },
+    {
+      "path": "tests/test_catalog.py",
+      "bytes": 4717,
+      "sha256": "bd98c58c07fa3d6ffb4e551b292530eb9e62d1d93849e55dd5210fa6e4b8fb5d"
+    },
+    {
+      "path": "tests/test_cli.py",
+      "bytes": 1713,
+      "sha256": "ede0c23453663ce4daa131d1674b716bef660661f84d19b05dfd6235736a3011"
+    },
+    {
+      "path": "tests/test_economics.py",
+      "bytes": 6936,
+      "sha256": "3b4aabbb0ce5df01f6325c38e95ab49edefe1542b743ea6c71bed2ab1bf300ab"
+    },
+    {
+      "path": "tests/test_identity.py",
+      "bytes": 5049,
+      "sha256": "dfd1f557f9df89519d238903cea2e4d5ecc37c82eba9cc89b50a2cf3941ee9b8"
+    },
+    {
+      "path": "tests/test_manual.py",
+      "bytes": 5380,
+      "sha256": "63ac3313adc6c1bb15490b2503999ebc8d2fdaed3369d5b570b3d855d09767ae"
+    },
+    {
+      "path": "tests/test_models.py",
+      "bytes": 5468,
+      "sha256": "95c0cb27166b5ce4e37033e8f8a38d3dec4fc357d63e37964e3bb46719b5f2a4"
+    },
+    {
+      "path": "tests/test_plans.py",
+      "bytes": 8798,
+      "sha256": "e6e51e50508ce2c8bae4a0eb60176cb4a50035ac3141980a16edf58a1f4cd51f"
+    },
+    {
+      "path": "tests/test_storage.py",
+      "bytes": 9014,
+      "sha256": "14038abfc55b419b9c68f9dfd5ff7401a8f70877de71e690362fbc5188eb48fa"
+    },
+    {
+      "path": "tests/test_valuation.py",
+      "bytes": 4365,
+      "sha256": "17ced74f1db1ea037504b386b8e7175416c918987564f2c44dbe47d1bcb35744"
+    },
+    {
+      "path": "aioncrafter/references.py",
+      "sha256": "b17cc208a16d42bb3e79cb253c0ae471ea120fefa6f9d37fc24b45d3246da57e",
+      "bytes": 3319
+    },
+    {
+      "path": "tests/test_references.py",
+      "sha256": "f42474f57521acf599dfd5dffc076fb2f78b57e9840c9e542b610e5f43d0d6ec",
+      "bytes": 7709
+    },
+    {
+      "path": "tests/fixtures/SYNTHETIC-price-references-v1.json",
+      "sha256": "f2cd727b7d1e6687541a91d90e2fc6979744c1260fc6af54237ed1f70bd006f1",
+      "bytes": 888
+    },
+    {
+      "path": "docs/REFERENCE_IMPORTS.md",
+      "sha256": "cf76c3ad0ee0c4c6c575551551fe12f20f5bb23bf08d087e8052ecf9a43e554e",
+      "bytes": 1773
+    },
+    {
+      "path": "docs/handoffs/phase-02-part-03.md",
+      "sha256": "552eaa688d35f9a5198b9064c7975087c830d70cb728af402a6f032af1e887e4",
+      "bytes": 3245
+    },
+    {
+      "path": "tests/http_form.py",
+      "sha256": "188f5f20778d8e636b9db91130d3f689b25aa314bd55ba16292ee18e248b841b",
+      "bytes": 1671
+    },
+    {
+      "path": "tests/test_form_acceptance.py",
+      "sha256": "db75e0d18da3967362f7e2ce9a9c26bcf2354dbef77b46121fafffe7c09c9b0a",
+      "bytes": 9230
+    },
+    {
+      "path": "docs/PHASE_02_ACCEPTANCE.md",
+      "sha256": "3c59ca28d7b700f79c9159d61b69edb47e6a13048596e30a9aaa145c91cb1d88",
+      "bytes": 5188
+    },
+    {
+      "path": "docs/handoffs/phase-02-part-03-acceptance.md",
+      "sha256": "870d1411935b5e0816c2491baaec09d858c97d6772abbaa0bd993cc5e2b9cd46",
+      "bytes": 3188
+    },
+    {
+      "path": "docs/delivery/phase-02-part-03-reference-acceptance.json",
+      "bytes": 847,
+      "sha256": "9f8c4bcd608726e872dcf90000e52ef33e2c913df51be23ae3aeb7b08d4b2b0c"
+    },
+    {
+      "path": "docs/handoffs/phase-02-part-03-reference-acceptance.md",
+      "bytes": 2993,
+      "sha256": "453652980359e15d073067323e5465240cbfbc3ffeeb444f7720a5f53d057d2d"
+    },
+    {
+      "path": "docs/decisions/0005-continue-engineering-without-browser-gate.md",
+      "sha256": "81a0df850fc6ebd9e8a3717452eb5bcd23e2b3fc17e15780e8cb24fb82ec47f7"
+    },
+    {
+      "path": "docs/handoffs/phase-02-to-phase-04.md",
+      "sha256": "a794b4fd99bbe996a8c7c6cfe8c55fc1479c4f155f42b69bfd8c14e7112b6ef8"
+    }
+  ]
+}
