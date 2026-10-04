@@ -23,6 +23,10 @@ Continuation start: remote head bb967e63e51add0649d523aca00c3764d6b58bf6, clean 
 checkout; main unchanged. PR #5 remains open/draft, with no discussion comments. No new
 authorized provider evidence in the repository or project sources. Integration stays blocked.
 
+Part 02 implementation 995c19fcbb8f3d1627602f41068d379be94b7837, tree
+4d4925c2093db48bd43afb5c8e4c84ac02d35dd8, is published, fetched and equal to tested files.
+Receipt: `delivery/phase-03-part-02.json`; documentation receipts follow implementation.
+
 ## Delivered groundwork
 
 p3-freshness: scoped in-memory cache preserves original observed_at/fetched_at separately

@@ -1,0 +1,47 @@
+{
+  "date": "2026-10-04",
+  "repository": "https://github.com/T0rrag/AionCrafter",
+  "branch": "phase/03-market-prices",
+  "base_branch": "main",
+  "base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
+  "starting_head": "bb967e63e51add0649d523aca00c3764d6b58bf6",
+  "implementation_sha": "995c19fcbb8f3d1627602f41068d379be94b7837",
+  "implementation_tree": "4d4925c2093db48bd43afb5c8e4c84ac02d35dd8",
+  "pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
+  "draft": true,
+  "tasks": [
+    "p3-freshness",
+    "p3-resilience"
+  ],
+  "phase_status": "IN_PROGRESS",
+  "gates": {
+    "A": "UNVERIFIED",
+    "B": "UNVERIFIED"
+  },
+  "changes": [
+    "Per-identity exhaustion in retryable mixed batches; shared cooldown and quota preserved.",
+    "Shared atomic immutable observation ID history for manual/provider records; replay allowed and conflicting reuse rejected."
+  ],
+  "validation": {
+    "python -m unittest tests.test_price_service -q (before fix)": "22 tests run, 5 new regression failures demonstrated both defects.",
+    "python -m unittest tests.test_price_cache tests.test_price_service tests.test_acquisition tests.test_market_groundwork -q": "54 passed; 13 cache, 27 service, 13 acquisition, 1 combined.",
+    "python -m unittest discover -q": "149 passed, no failures on this run.",
+    "python -m compileall -q aioncrafter tests": "passed",
+    "python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json": "passed; 7 variants/3 recipes, SYNTHETIC",
+    "git diff --check / git diff --cached --check": "passed",
+    "python scripts/validate_bootstrap.py": "passed for implementation: 42 stable IDs, 82 artifact checksums."
+  },
+  "runtime": "Windows / bundled Python 3.12.14",
+  "python_executable": "C:/Users/AngelTorresBarros/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+  "remote_verification": "Connector tree matched git write-tree; update_ref(force=false); fetched implementation then git diff --exit-code --cached FETCH_HEAD showed full tested-tree equality. Working tree clean.",
+  "evidence_check": "Main/phase heads unchanged at start; PR #5 open/draft with no comments. No new authorized provider evidence in repository/project sources.",
+  "limitations": [
+    "ID history/cache and request coordination remain instance-local, single-owner, in-memory.",
+    "No real provider, automatic-price activation, UI integration, remote CI, visual QA or real-game validation.",
+    "Historical intermittent Windows HTTP rejection-test connection reset is not claimed fixed."
+  ],
+  "next": "docs/NEXT_CHAT_PROMPT.md; stay within Phase 03, preserve external evidence blockers.",
+  "merge_performed": false,
+  "force_push_performed": false,
+  "receipt_note": "This documentation receipt follows the verified implementation; fetch actual branch head for continuation."
+}

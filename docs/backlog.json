@@ -400,7 +400,7 @@
   "base_branch": "main",
   "local_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
   "pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
-  "verified_implementation_sha": "f80b8e76c1542530b290f24e95088ab30707a4be",
+  "verified_implementation_sha": "995c19fcbb8f3d1627602f41068d379be94b7837",
   "remote_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
   "checkpoint_part": "02",

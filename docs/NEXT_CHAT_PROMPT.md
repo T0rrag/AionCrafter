@@ -4,6 +4,7 @@ Resume phase/03-market-prices / draft PR #5 against main. Read AGENTS.md,
 docs/PROJECT_STATE.md, handoffs/phase-03-part-02.md, PHASE_03_GROUNDWORK.md,
 backlog.json, delivery/phase-03-part-02.json and ADR 0006.
 
+Verified implementation: 995c19fcbb8f3d1627602f41068d379be94b7837; delivery documentation follows.
 Part 01 implemented synthetic freshness/resilience/depth. Part 02 corrected mixed-batch
 retry exhaustion and immutable IDs across manual/provider history. 149 full-suite tests
 passed on Windows/Python 3.12.14, including 54 Phase 03 tests. Preserve those regressions.

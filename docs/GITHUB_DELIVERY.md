@@ -113,3 +113,13 @@ Both were fetched and matched their tested trees exactly. Connected GitHub tree/
 operations and non-force ref update; no merge, force-push, deployment or release.
 Receipt: delivery/phase-03-part-01.json. Documentation follows implementation.
 Phase remains IN_PROGRESS, three real-integration tasks BLOCKED, Gates A/B UNVERIFIED.
+
+## Phase 03 Part 02 delivery
+
+Same branch/draft PR #5 against main; starting head bb967e63e51add0649d523aca00c3764d6b58bf6.
+Verified implementation 995c19fcbb8f3d1627602f41068d379be94b7837, tree 4d4925c2093db48bd43afb5c8e4c84ac02d35dd8.
+149 full-suite tests / 54 Phase 03 tests passed on Windows/Python 3.12.14.
+Shared immutable manual/provider observation history and independent per-item retry budgets.
+Connected GitHub tree/commit/ref publication (force=false); HTTPS fetch/tree equality verified.
+Receipt: delivery/phase-03-part-02.json. No merge/force-push or automatic-price activation.
+Phase IN_PROGRESS; real adapter/reconciliation/release BLOCKED; Gates A/B UNVERIFIED.

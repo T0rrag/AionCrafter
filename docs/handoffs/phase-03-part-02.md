@@ -54,3 +54,7 @@ backlog, ADR 0006 and the delivery receipt. Inspect authorization/scoped provide
 before any real integration. Without it, retain blockers; do not invent a provider or activate
 prices. Keep the same branch/PR and one writer; Phase 04 requires its own chat. No merge or
 force-push. Publication SHA/tree verification is recorded in the delivery receipt after upload.
+
+Published and verified implementation: 995c19fcbb8f3d1627602f41068d379be94b7837; tree
+4d4925c2093db48bd43afb5c8e4c84ac02d35dd8. HTTPS fetch matched the tested tree exactly.
+Receipt: delivery/phase-03-part-02.json. PR #5 remains draft/unmerged.
