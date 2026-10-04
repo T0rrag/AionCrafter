@@ -1,74 +1,56 @@
 # AionCrafter — project state
 
-2026-10-04 · Phase 03 / Part 02 · Brief v1.3; ADR 0006.
-Phase 03 IN_PROGRESS. Gates A/B UNVERIFIED; automatic prices remain disabled.
+2026-10-04 · Phase 03 groundwork merged; Phase 04 selected next · Brief v1.3 / ADR 0007.
+Phase 03 IN_PROGRESS, real integration BLOCKED. Gates A/B UNVERIFIED. All 42 IDs retained.
 
-## Repository and writer
+## Verified merge and repository
 
-T0rrag/AionCrafter · phase/03-market-prices · draft PR #5:
-https://github.com/T0rrag/AionCrafter/pull/5 (base main).
-This separate Aion2 Phase 03 chat is the active writer; no other writer was started.
-Verified base main: 81f6493999b6bca1e86cd621e7815f7d05944020. Main contains the accepted
-calculator through merged PR #4; its application tree matches Phase 02 handoff
-cb0ce5cb9227184300055f1df8bb415b2ef2515e. Latest Phase 02 decisions/docs carried forward.
-PR #3 remains draft/open but is not a dependency of PR #5. No Phase 04 implementation.
-Freshness checkpoint 4d10338bf4e940f8929e062d8449d48e3499e340 was published, fetched and
-verified equal to the tested tree 260bf1b58de02af779cfdf3b60334f98db5fdfd4.
-Resilience/depth implementation f80b8e76c1542530b290f24e95088ab30707a4be is published and fetched; tested tree
-b2cf609121113524c1e52a3a23809b87b90f3d49 matches exactly. Receipt:
-`delivery/phase-03-part-01.json`. Documentation receipts follow implementation; fetch
-the actual head before writing.
+Repository: https://github.com/T0rrag/AionCrafter
+PR #5 https://github.com/T0rrag/AionCrafter/pull/5 is merged, under explicit user authorization.
+Expected/tested head: 4e10fad95444241e68e353d41c9d24b4958b1dd6.
+Merge commit on main: bd23f4166ffe276179843761dea8e95275efbce1; fetched complete tree matches that head exactly.
+Documentation receipt follows the merge; always fetch actual heads before writing.
+Receipt: delivery/phase-03-merge.json. Earlier Part 01/02 receipts preserve increment history.
 
-Continuation start: remote head bb967e63e51add0649d523aca00c3764d6b58bf6, clean local
-checkout; main unchanged. PR #5 remains open/draft, with no discussion comments. No new
-authorized provider evidence in the repository or project sources. Integration stays blocked.
+User now authorizes tested phase merges and autonomous continuation (ADR 0007). Force-push,
+concurrent overwrite, visibility/permission changes and bypassing required checks remain
+unauthorized. Older PRs #1/#2/#3 were not merged or closed by this checkpoint.
 
-Part 02 implementation 995c19fcbb8f3d1627602f41068d379be94b7837, tree
-4d4925c2093db48bd43afb5c8e4c84ac02d35dd8, is published, fetched and equal to tested files.
-Receipt: `delivery/phase-03-part-02.json`; documentation receipts follow implementation.
+## Delivered and remaining Phase 03
 
-## Delivered groundwork
+Freshness cache preserves observed/fetched/retrieval times separately, exact identity,
+unknown ages, immutable replay and atomic validation. Request coordination includes
+explicit batching, quota, bounded per-identity retries, Retry-After and shared cooldown.
+Manual selections share immutable history with provider records without replacing the
+provider cache. Quantity acquisition uses exact integer amounts and whole-stack/divisible
+semantics, reports insufficient coverage, and labels reference-only estimates indicative.
 
-p3-freshness: scoped in-memory cache preserves original observed_at/fetched_at separately
-from retrieval time and TTL. Unknown, stale, future, missing and zero remain distinct.
-p3-resilience: explicit single/batch contract, caller-supplied quotas, bounded nonblocking
-retry/backoff and Retry-After, shared cooldown, last-good error states and manual fallback.
-p3-depth: exact quantity acquisition from coherent supplied listing snapshots, indivisible
-stacks unless partial purchase is explicit, minimum cash cost, bounded exact search,
-insufficient coverage and indicative/unverified-stock reference estimates.
-
-Part 02 fixes two reproduced contract defects. A retryable mixed batch now exhausts only
-identities that reached their own attempt limit; newer members retain a retry time under
-the shared cooldown/quota. Manual fallbacks now use the same immutable ID history as
-provider responses, including replaced cache records. Changed ID reuse across requests,
-identities or origins is rejected atomically; valid replay remains idempotent. This history
-lasts for the cache instance and is not cleared by retry reset. See phase-03-part-02 handoff.
-
-All three tasks remain IN_PROGRESS: these are single-owner, provider-independent contracts
-and tests, not production adapter/UI activation. See PHASE_03_GROUNDWORK.md for semantics,
-limits and integration responsibilities. Existing manual calculator behavior is unchanged.
-p3-adapter, p3-reconcile and p3-releaseprice remain BLOCKED on authorization, scoped samples,
-source rights, usage limits and actual market reconciliation. Synthetic tests do not pass Gate A.
+p3-freshness/resilience/depth remain IN_PROGRESS: single-owner, in-memory contracts are
+implemented, while production shared quota/cache ownership, transport timeout/cancellation,
+application integration and market acceptance remain pending. p3-adapter/reconcile/releaseprice
+BLOCKED on authorized source evidence. No automatic-price activation or live adapter.
+See PHASE_03_GROUNDWORK.md. Gate A/B UNVERIFIED; Phase 05 DEFERRED; p1-catalog BLOCKED.
 
 ## Validation
 
-Windows/Python 3.12.14: full suite 149 passed; Phase 03 targeted suite 54 passed.
-Includes 60 deterministic small-book comparisons with an exhaustive oracle, and a combined
-cache/outage/manual-fallback/depth/persistence scenario. Compileall and offline synthetic
-catalog validation passed. Diff/bootstrap checks are recorded in TEST_RESULTS.md.
-Baseline ran 95 tests with two pre-existing Windows SQLite migration-fixture cleanup errors;
-explicit connection closing fixed those test fixtures without production storage changes.
-One intermediate full run hit ConnectionResetError in an existing HTTP rejection test.
-That test passed in isolation and the final full rerun passed; its intermittent Windows
-transport behavior is not claimed fixed. No remote CI, browser or real-provider pass claimed.
+Pre-merge Windows/Python 3.12.14: `python -m unittest discover -q` — 149 passed again.
+54 Phase 03 tests include 60 small-book oracle cases and a combined persistence/fallback test.
+Bootstrap checks passed (42 IDs / 83 checksums at merge candidate); diff check passed.
+Prior compileall/catalog checks passed. GitHub returned no Actions runs, statuses, reviews
+or comments for this candidate; no remote CI pass. The prior intermittent Windows HTTP
+rejection-test reset remains documented, though the merge run passed.
+Phase 02 owner behavior accepted; visual/keyboard QA deferred; game pilot after phase features.
 
-## Boundaries and next action
+## Next action and writer
 
-All 42 IDs retained. Phase 01 incomplete/p1-catalog BLOCKED. Phase 02 owner behavior accepted;
-visual/keyboard QA deferred and UNVERIFIED. Real-game pilot after phase feature work.
-Phase 05 DEFERRED. No Chromium work, merge, force-push, release or deployment.
-Part 01 groundwork and Part 02 contract corrections are implemented and tested. Next Phase 03 continuation must
-first inspect evidence for an authorized provider; without it, retain blocked integration
-and review these contracts offline. Do not invent APIs, source rights, limits or game rules.
-Stay on this branch/PR for Phase 03. Do not start Phase 04 in this chat. Read the handoff and
-NEXT_CHAT_PROMPT; no new chat or transcript synchronization is claimed.
+Start Phase 04 — Crafting intelligence, Part 01, in a separate chat in the existing Aion2
+project. First p4-batches: pure deterministic recursive expansion, shared-demand aggregation,
+ceil by yield, leftovers and cycles; then integrate into manual workflows. Synthetic only.
+Read handoffs/phase-03-to-phase-04.md and NEXT_CHAT_PROMPT.md. Do not restart Phase 03.
+
+Existing phase/04-crafting-intelligence: 1bea9e9d687458eb78921fee31a979a568cbe3ae, historical
+docs only. It is not an ancestor of current main because of one documentation commit.
+Recheck and merge main into it normally, preserving both histories and current handoff;
+no force-push. Open a new Phase 04 PR against main (old PR #4 was calculator code).
+This Phase 03 chat stops application writes; next chat takes sole ownership when startup
+is verified. Chat dispatch status is reported separately; preparing a handoff is not startup.

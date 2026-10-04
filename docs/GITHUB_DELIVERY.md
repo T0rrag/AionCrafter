@@ -123,3 +123,10 @@ Shared immutable manual/provider observation history and independent per-item re
 Connected GitHub tree/commit/ref publication (force=false); HTTPS fetch/tree equality verified.
 Receipt: delivery/phase-03-part-02.json. No merge/force-push or automatic-price activation.
 Phase IN_PROGRESS; real adapter/reconciliation/release BLOCKED; Gates A/B UNVERIFIED.
+
+## Authorized Phase 03 merge
+
+PR #5 merged at bd23f4166ffe276179843761dea8e95275efbce1 after explicit user authorization (ADR 0007).
+149 tests passed again; fetched main tree equals expected head 4e10fad95444241e68e353d41c9d24b4958b1dd6.
+Receipt: delivery/phase-03-merge.json. Phase remains incomplete and Gates A/B UNVERIFIED.
+Next: Phase 04 in separate Aion2 chat, p4-batches. No other PR merge or force-push.

@@ -404,8 +404,10 @@
   "remote_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
   "checkpoint_part": "02",
-  "next_eligible_phase": "03",
-  "next_phase_dependency_note": "Phase 03 provider-independent groundwork implemented using synthetic fixtures. Adapter/application integration and real reconciliation/release remain pending external authorization and evidence; Gate A UNVERIFIED. Stay in Phase 03 for its continuation; Phase 04 requires a separate chat.",
-  "checkpoint_label": "Phase 03 Part 02 immutable fallback history and per-item retries",
-  "next_development_branch": "phase/03-market-prices"
+  "next_eligible_phase": "04",
+  "next_phase_dependency_note": "ADR 0007: user authorized tested phase merges/autonomous continuation. PR #5 merged; next independent Phase 04 starts p4-batches in separate Aion2 chat. Phase 03 integration blocked, Gates A/B UNVERIFIED.",
+  "checkpoint_label": "Phase 03 groundwork merged; Phase 04 next",
+  "next_development_branch": "phase/04-crafting-intelligence",
+  "merged_pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
+  "verified_merge_sha": "bd23f4166ffe276179843761dea8e95275efbce1"
 }

@@ -184,3 +184,12 @@ Twelve new regression tests now cover both defects and their atomicity/quota/res
 
 No real provider, UI activation, browser QA, remote CI or real-game validation. Part 01's
 intermittent Windows HTTP rejection-test reset is not claimed fixed by these changes.
+
+## Phase 03 authorized merge — 2026-10-04
+
+Tested head 4e10fad95444241e68e353d41c9d24b4958b1dd6. Immediately before merge:
+`python -m unittest discover -q`: 149 passed (Windows/Python 3.12.14).
+`python scripts/validate_bootstrap.py`: passed, 42 IDs / 83 checksums. `git diff --check`: passed.
+GitHub returned no Actions runs, statuses, reviews or comments; no remote CI pass claimed.
+PR #5 merged at bd23f4166ffe276179843761dea8e95275efbce1 with expected-head verification.
+Fetched main tree equals tested PR head exactly. No new application changes in merge receipt.
