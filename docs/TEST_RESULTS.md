@@ -129,3 +129,11 @@ Documentation-only update from verified 48dc8a304a9f917aec9caec27d62bd95041df530
 Recorded the user's review, behaviour acceptance and final-pilot timing; code is unchanged.
 The existing 95-test baseline still applies; it was not rerun for these prose changes.
 Refreshed manifest validation and git diff --check are the applicable checkpoint checks.
+
+## Phase 03 starter preparation — 2026-10-04
+
+Documentation-only from Phase 02 1bea9e9d687458eb78921fee31a979a568cbe3ae.
+Fetched main 81f6493999b6bca1e86cd621e7815f7d05944020; git diff lists docs only
+between it and Phase 02. No new application tests; previous 95-test baseline retained.
+Checkpoint validation: refreshed artifact manifest, 42 stable IDs and git diff --check.
+No Phase 03 feature, new-chat startup or external gate pass is claimed.

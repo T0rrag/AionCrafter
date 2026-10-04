@@ -1,8 +1,9 @@
 # AionCrafter — project state
 
-Checkpoint: 2026-10-04 · Phase 02 / Part 03, acceptance continuation · Brief v1.3, ADRs 0003–0005.
+Checkpoint: 2026-10-04 · Phase 02 / Part 03, acceptance continuation · Brief v1.3, ADRs 0003–0006.
 Phase 02 **IN_PROGRESS**; Phase 01 **IN_PROGRESS**, p1-catalog **BLOCKED**.
-Phases 03/05 **DEFERRED**; Gates A/B **UNVERIFIED**. All 42 task IDs retained.
+Phase 03 groundwork **NOT_STARTED**, selected next; real integration **BLOCKED**.
+Phase 05 **DEFERRED**; Gates A/B **UNVERIFIED**. All 42 task IDs retained.
 
 ## Repository and active writer
 
@@ -14,6 +15,13 @@ This existing Aion2 cloud Work chat is the canonical active continuation, design
 by the user. The local parent stopped application writes. GitHub provides durable code
 and handoff state; old local transcripts are not automatically synchronized or converted.
 No merge, force-push, release, deployment or permission changes.
+
+Remote ancestry update (2026-10-04): main is
+`81f6493999b6bca1e86cd621e7815f7d05944020`, after PR #4 merged the earlier
+`48dc8a304a9f917aec9caec27d62bd95041df530` checkpoint. Its application code matches
+Phase 02 `1bea9e9d687458eb78921fee31a979a568cbe3ae`; only documentation differs.
+PR #3 is still open/draft. The merged branch title does not mean Phase 04 features
+exist. This assistant did not execute that merge; no new merge authorization follows.
 
 ## Published baseline and current increment
 
@@ -84,18 +92,22 @@ records. Recursive optimization remains Phase 04.
 
 ## Next action and continuity
 
-User direction (2026-10-04, ADR 0005): continue normal feature development and create a
-new chat for each phase. Remove cloud/Chromium troubleshooting from the active queue.
-Next eligible development phase: **Phase 04 — Crafting intelligence**, Part 01, starting
-with **p4-batches**. The tested Phase 02 engineering is a sufficient dependency for
-synthetic Phase 04 work. Its visual/pilot acceptance remains recorded for later
-review; these pending checks do not block the next engineering phase or become passed.
+The user selected **Phase 03 — Market-price groundwork**, Part 01 and requested its
+continuation prompt. ADR 0006 supersedes the previous next-Phase-04 instruction.
+Begin independent p3-freshness with synthetic tests, then p3-resilience/p3-depth.
+Real p3-adapter, reconciliation and automatic-price release remain BLOCKED on their
+external evidence. Gate A remains UNVERIFIED; permission precedes a real connection.
+No Phase 03 implementation, branch, PR or new chat is created by this checkpoint.
 
-Read `handoffs/phase-02-to-phase-04.md` and `decisions/0005-continue-engineering-without-browser-gate.md`.
-`NEXT_CHAT_PROMPT.md` starts Phase 04. Use `phase/04-crafting-intelligence`, explicitly
-stacked on unmerged Phase 02 PR #3. Fetch actual remote branch/head before writing.
-This Phase 02 chat stops application writes at handoff. A separate same-project chat
-must be created/verified before claiming Phase 04 started there. No merge/force-push.
+Read `handoffs/phase-02-to-phase-03.md`, `decisions/0006-phase-03-groundwork.md` and
+`NEXT_CHAT_PROMPT.md`. Re-fetch main and any `phase/03-market-prices` branch before
+writing. Prefer the verified main baseline when it still contains the tested calculator;
+carry the latest handoff/state decisions from Phase 02, since main's docs are older.
+Record the true branch/PR base rather than assuming the old stack still applies.
 
-The fetched current code baseline was rerun: **95 tests passed**, Python 3.12.14.
-This checkpoint updates sequencing/documentation only; prior feature evidence stands.
+The code baseline previously passed **95 tests**, Python 3.12.14. This checkpoint
+changes documentation only; no new application test run is claimed. Owner behaviour
+acceptance is complete. Visual/keyboard QA is deferred/unverified; final real-game
+pilot is scheduled after phase feature work. Stop cloud/Chromium troubleshooting.
+Use a new Aion2 chat per phase and one active branch writer. This Phase 02 chat stops
+application writes. A prepared prompt is not a created chat. No merge/force-push.

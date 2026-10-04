@@ -3,7 +3,7 @@
   "project": "AionCrafter",
   "brief_version": "1.3",
   "publication_status": "PUBLISHED",
-  "checkpoint": "Phase 02 owner behaviour acceptance and deferred final pilot",
+  "checkpoint": "Phase 02 to Phase 03 groundwork starter",
   "files": [
     {
       "path": ".github/pull_request_template.md",
@@ -17,8 +17,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 2868,
-      "sha256": "70c83d03c9f4c76c56883b4067d08b935b627e52ffa36b1ada04d9ccce0d3971"
+      "bytes": 2854,
+      "sha256": "88cc34177cabe61ce94504ee09acb0c2be7ec1d40ddee211896e5b0565ddeea2"
     },
     {
       "path": "AionCrafter_Project_Prompt.md",
@@ -112,8 +112,8 @@
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1636,
-      "sha256": "f94334baca923034ef094248b507683ef217e6bbbe4f8dca715c5f5a080042b5"
+      "bytes": 4112,
+      "sha256": "8e18d865327d8b0497cbf1c64fd5dca8673729e6a591d6dfd9f718ff483066f0"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -122,18 +122,18 @@
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 7484,
-      "sha256": "8f59d68273663731039d9777b38cb3f6565e6e911619444d0748090c82cc763b"
+      "bytes": 8306,
+      "sha256": "3704faa0e4fd427f2a848c94bf6036122be6cd566ad9db99a396eb27b8e9c542"
     },
     {
       "path": "docs/TEST_RESULTS.md",
-      "bytes": 8466,
-      "sha256": "4525631b541e6ce10458ae9eaf45b6e6b2b5e41672556b20bc7fbce75f3d8d15"
+      "bytes": 8917,
+      "sha256": "cb2f792caaa9b436d1de32d6949ff7a2e965548e910c6999c3114212ef6235e2"
     },
     {
       "path": "docs/backlog.json",
-      "bytes": 24187,
-      "sha256": "6d5f7a72c33e36dac7b9977a9f8dd07d4e9d486549af6fb1e5d5c122d85db541"
+      "bytes": 23888,
+      "sha256": "597433a3b3e11ba2fe0cd3374aa3dbcec9f03b9a42588afb1a059e172b17fff7"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -197,8 +197,8 @@
     },
     {
       "path": "docs/roadmap-progress.json",
-      "bytes": 1490,
-      "sha256": "94ec66f7754a0b7fad2027e3d90caa27a9bef79762de1d537de1d3cade63b6c6"
+      "bytes": 1703,
+      "sha256": "48187d2856a52c70f63354814716b8b9013f69ee2d47adc167bb39c0034bdcf1"
     },
     {
       "path": "docs/sources/SYNTHETIC.md",
@@ -332,6 +332,14 @@
     {
       "path": "docs/handoffs/phase-02-to-phase-04.md",
       "sha256": "4fd57085d6ec87ffa5bdd35063a577f19163152670ce1e1960e15a10f64b5d0c"
+    },
+    {
+      "path": "docs/decisions/0006-phase-03-groundwork.md",
+      "sha256": "7ed9138f3303eb54be66df74237877cdfab35a1be2d470d982777c9011ab265a"
+    },
+    {
+      "path": "docs/handoffs/phase-02-to-phase-03.md",
+      "sha256": "5646e064a1eac6a34bd46e84f2e0cda518021335a85bee0ce841614e9fed9eaa"
     }
   ]
 }

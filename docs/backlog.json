@@ -178,55 +178,55 @@
     {
       "phase": "03",
       "title": "Connect permitted market prices",
-      "status": "DEFERRED",
+      "status": "NOT_STARTED",
       "tasks": [
         {
           "id": "p3-adapter",
           "priority": "P0",
           "title": "Implement the approved provider adapter",
           "description": "Only after permission and a working sample: add an official or contracted community adapter behind the same interface as manual prices. Keep credentials on the backend.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "BLOCKED",
+          "evidence": "ADR 0006: blocked on external provider/market evidence. Gate A UNVERIFIED; synthetic preparation does not satisfy real integration or release."
         },
         {
           "id": "p3-freshness",
           "priority": "P0",
           "title": "Preserve observation time and cache age",
           "description": "Record source-observed time, fetch time, price type and scope separately. A cache refresh must never make an old observation appear new. Unknown source time means freshness unknown.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "NOT_STARTED",
+          "evidence": "ADR 0006: independent synthetic groundwork selected next; no implementation claimed."
         },
         {
           "id": "p3-resilience",
           "priority": "P0",
           "title": "Respect quotas and degrade predictably",
           "description": "Batch permitted requests, use provider limits, backoff on throttling and stop retry storms. Show stale/error states and allow manual overrides without silently hiding their origin.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "NOT_STARTED",
+          "evidence": "ADR 0006: independent synthetic groundwork selected next; no implementation claimed."
         },
         {
           "id": "p3-depth",
           "priority": "P0",
           "title": "Use prices suitable for the requested quantity",
           "description": "When supported, consume listing depth or whole-stack offers to calculate the cost of buying all required units. With only a reference/minimum price, label the total indicative and stock unverified.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "NOT_STARTED",
+          "evidence": "ADR 0006: independent synthetic groundwork selected next; no implementation claimed."
         },
         {
           "id": "p3-reconcile",
           "priority": "P0",
           "title": "Run market reconciliation tests",
           "description": "Check 20 representative items across two snapshots, multiple variants and scope changes. Test wrong-region joins, zero listings, partial coverage and listed-versus-sold price distinctions.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "BLOCKED",
+          "evidence": "ADR 0006: blocked on external provider/market evidence. Gate A UNVERIFIED; synthetic preparation does not satisfy real integration or release."
         },
         {
           "id": "p3-releaseprice",
           "priority": "P0",
           "title": "Approve the automatic-price feature",
           "description": "Enable it only for validated markets. Display age, source and missing-item count on every result. Do not describe snapshots as real time without evidence of their update behavior.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "BLOCKED",
+          "evidence": "ADR 0006: blocked on external provider/market evidence. Gate A UNVERIFIED; synthetic preparation does not satisfy real integration or release."
         }
       ]
     },
@@ -404,8 +404,8 @@
   "remote_base_sha": "3a395eb5894e65ff0d67e336d1a91dc452136843",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
   "checkpoint_part": "03",
-  "next_eligible_phase": "04",
-  "next_phase_dependency_note": "ADR 0005: normal feature development; Phase 04 p4-batches uses tested Phase 02 engineering, stacked on unmerged PR #3. Owner behaviour acceptance and chat review complete. Visual QA deferred; real-game pilot after all phase feature work under p6-usertest. New Aion2 chat per phase.",
-  "checkpoint_label": "Phase 02 to Phase 04 engineering handoff",
-  "next_development_branch": "phase/04-crafting-intelligence"
+  "next_eligible_phase": "03",
+  "next_phase_dependency_note": "ADR 0006 supersedes next-Phase-04 scheduling: synthetic p3-freshness first, then p3-resilience/p3-depth. Main contains tested calculator through PR #4; latest handoff docs on Phase 02. Real integration blocked; Gates A/B UNVERIFIED. New Aion2 chat per phase.",
+  "checkpoint_label": "Phase 02 to Phase 03 groundwork starter",
+  "next_development_branch": "phase/03-market-prices"
 }
