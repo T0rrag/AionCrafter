@@ -2,16 +2,18 @@
 
 2026-10-04 · Part 03 continuation · Linux / Python 3.12.14.
 Engineering checks use only the permitted, explicitly SYNTHETIC fixtures. This record
-is not owner sign-off or an in-game pilot. All six Phase 02 tasks remain IN_PROGRESS.
+is separate from owner sign-off and an in-game pilot. Subsequent owner behaviour
+acceptance is recorded below. All six Phase 02 tasks remain IN_PROGRESS pending the
+deferred visual/pilot validation.
 
 | Task | Executed evidence | Outstanding acceptance |
 |---|---|---|
 | p2-listflow | Complete rendered HTML forms posted over loopback HTTP; materials total 36.90 for 3 × 12.30; missing price remains incomplete; fully owned demand needs 0.00 additional cash | Visual layout, keyboard interaction and permitted pilot |
-| p2-itemflow | Full-form product/recipe workflow; target 3, 2 crafts, 4 produced, 1 leftover; successful saved plan; bilingual search retains price observations | Browser interaction and owner/pilot validation; recursion is Phase 04 |
+| p2-itemflow | Full-form product/recipe workflow; target 3, 2 crafts, 4 produced, 1 leftover; successful saved plan; bilingual search retains price observations | Browser interaction and final pilot deferred; owner behaviour accepted; recursion is Phase 04 |
 | p2-editor | Mixed snapshot with unknown time/vendor with known old time; per-field source labels; linked manual price edit gives total 45.00; repeated calculate/search retains exact observations; cross-item ID collision refused before applying import | Visual readability and source/age review; no approved real source supplied |
-| p2-costmodes | Missing reference + owned quantity preserves unknown replacement value and known zero cash; historical costs remain incomplete without complete records | Owner/pilot review; actual fee and realized-profit ledger is later scope |
-| p2-economics | 11 exact-arithmetic tests include all three joint-output fee bases, multiple fees, wrong currency, fixed fees exceeding proceeds, minimal break-even ticks | Owner acceptance of declared assumptions; no game fee rules verified |
-| p2-save | Full-form save/load/CSV import-copy preserves observations; stale save/delete rejected after delete/recreate; v1 database migrates with payload unchanged; existing reset, deletion, CSRF and import validation tests remain passing | Visual workflow/keyboard checks and owner acceptance |
+| p2-costmodes | Missing reference + owned quantity preserves unknown replacement value and known zero cash; historical costs remain incomplete without complete records | Owner behaviour accepted; final pilot deferred; actual fee and realized-profit ledger is later scope |
+| p2-economics | 11 exact-arithmetic tests include all three joint-output fee bases, multiple fees, wrong currency, fixed fees exceeding proceeds, minimal break-even ticks | Owner behaviour accepted; game fee rules remain unverified until final pilot |
+| p2-save | Full-form save/load/CSV import-copy preserves observations; stale save/delete rejected after delete/recreate; v1 database migrates with payload unchanged; existing reset, deletion, CSRF and import validation tests remain passing | Visual workflow/keyboard checks deferred; owner behaviour accepted |
 
 ## Commands and results
 
@@ -70,3 +72,20 @@ The user directed normal development on 2026-10-04 and asked to ignore the ongoi
 cloud/Chromium work. The outstanding visual/owner/pilot acceptance above remains an
 evidence record, not the next engineering task. Proceed to Phase 04 in a new Aion2 chat
 using the tested Phase 02 foundation. No test is promoted to passed by this decision.
+
+## Owner response to remaining items — 2026-10-04
+
+1. Owner acceptance: complete. After requesting an explanation, the user confirmed
+   "Yes the calculator behaviour behaves correctly". This accepts calculator behaviour;
+   actual game-rule verification remains separate and deferred to the final pilot.
+2. Customization: user says this will be customizable. Interpreted as presentation and
+   controls, with detailed scope unspecified. Fee/tax/rounding inputs already exist;
+   broader UI customization is not claimed implemented. Visual/keyboard QA stays
+   deferred and unverified.
+3. Real-game pilot: user schedules this after all phase feature development is done.
+   Track through p6-usertest with permitted data and declared market when available.
+4. PR review/closure: user marked "Done" in chat. Record user review as done; the PR
+   itself remains open and unmerged. No connector review or GitHub closure is claimed.
+
+These decisions change review tracking/timing only, not executed test results or
+task completion evidence. Normal Phase 04 engineering remains the next action.

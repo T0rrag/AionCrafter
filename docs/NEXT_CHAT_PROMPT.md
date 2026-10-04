@@ -14,6 +14,9 @@ Use labeled synthetic fixtures and test boundaries, shared intermediates and rej
 of cycles/unsupported stochastic outcomes. Keep exact arithmetic and scoped identity.
 
 Visual/pilot acceptance is tracked for later; it does not block this engineering phase.
+The user schedules the real-game pilot after all phase feature work and marked PR
+review done in chat (no GitHub closure/merge). Owner behaviour acceptance is complete;
+presentation/controls customization scope is unspecified. Read the ADR 0005 addendum.
 Phase 01/catalog incomplete; Phases 03/05 DEFERRED; Gates A/B UNVERIFIED. Preserve all
 42 IDs. Upload tested increments, verify SHAs, open a draft Phase 04 PR, and save state
 and handoff. No merge/force-push. Previous chat stops application writes at handoff.

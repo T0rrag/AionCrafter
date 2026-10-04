@@ -41,14 +41,24 @@ v1-only applications cannot reopen a v2 plan database. JSON/CSV plan schema stay
 
 | Task | Status | Implemented evidence / remaining work |
 |---|---|---|
-| p2-economics | IN_PROGRESS | Integer units, rational ROI/break-even, deterministic batches and configurable fee/rounding assumptions. 11 economics tests include joint outputs and multiple fees. Owner/game-rule acceptance pending. |
+| p2-economics | IN_PROGRESS | Integer units, rational ROI/break-even, deterministic batches and configurable fee/rounding assumptions. 11 economics tests include joint outputs and multiple fees. Owner behaviour accepted; game-rule validation deferred to final pilot. |
 | p2-editor | IN_PROGRESS | Offline manual/vendor/snapshot references; rights/type/scope validation; linked overrides; per-item source/age and unknown timestamps; exact displayed provenance retained. Browser/source acceptance pending. |
 | p2-listflow | IN_PROGRESS | Selected or pasted materials, ambiguity picker, known subtotal/incomplete total. Full-form HTTP acceptance passed. Visual/pilot review pending. |
 | p2-itemflow | IN_PROGRESS | English/Spanish alias search, recipe/product selection, direct ingredients, batch yield/leftovers and margins; full-form save acceptance passed. Visual/pilot review pending. |
-| p2-costmodes | IN_PROGRESS | Owned stock reduces cash but preserves replacement cost; supplied consumed-material records require complete coverage. Owner/pilot acceptance pending. |
-| p2-save | IN_PROGRESS | Local immutable plan revisions, favorites/settings/inventory; validated JSON/CSV, preview/reset/confirmed deletion. v2 migration and delete/recreate stale-tab regression passed. Visual/owner acceptance pending. |
+| p2-costmodes | IN_PROGRESS | Owned stock reduces cash but preserves replacement cost; supplied consumed-material records require complete coverage. Owner behaviour accepted; final pilot deferred. |
+| p2-save | IN_PROGRESS | Local immutable plan revisions, favorites/settings/inventory; validated JSON/CSV, preview/reset/confirmed deletion. v2 migration and delete/recreate stale-tab regression passed. Owner behaviour accepted; visual QA deferred. |
 
 See `PHASE_02_ACCEPTANCE.md` for exact cases and remaining review procedure.
+
+Latest owner clarification (2026-10-04, ADR 0005 addendum): the user marked PR
+review/closure "Done" in chat; no GitHub review/closure or merge was performed.
+The user then confirmed the calculator behaves correctly: owner behaviour acceptance
+is complete. The user's
+customization comment is treated as a presentation/controls requirement with details
+unspecified; existing fee/tax/rounding settings are configurable. Visual/keyboard QA
+remains deferred and unverified. Real-game pilot validation is scheduled after all
+phase feature work, under p6-usertest, rather than as a Phase 02 development blocker.
+The pending acceptance entries above must be read with this revised timing.
 
 ## Validation and limits
 
@@ -78,7 +88,7 @@ User direction (2026-10-04, ADR 0005): continue normal feature development and c
 new chat for each phase. Remove cloud/Chromium troubleshooting from the active queue.
 Next eligible development phase: **Phase 04 — Crafting intelligence**, Part 01, starting
 with **p4-batches**. The tested Phase 02 engineering is a sufficient dependency for
-synthetic Phase 04 work. Its visual/owner/pilot acceptance remains recorded for later
+synthetic Phase 04 work. Its visual/pilot acceptance remains recorded for later
 review; these pending checks do not block the next engineering phase or become passed.
 
 Read `handoffs/phase-02-to-phase-04.md` and `decisions/0005-continue-engineering-without-browser-gate.md`.

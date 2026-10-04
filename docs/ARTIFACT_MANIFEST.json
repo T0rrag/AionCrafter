@@ -3,7 +3,7 @@
   "project": "AionCrafter",
   "brief_version": "1.3",
   "publication_status": "PUBLISHED",
-  "checkpoint": "Phase 02 / Part 03 reference acceptance",
+  "checkpoint": "Phase 02 owner behaviour acceptance and deferred final pilot",
   "files": [
     {
       "path": ".github/pull_request_template.md",
@@ -17,7 +17,7 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 2336,
+      "bytes": 2868,
       "sha256": "70c83d03c9f4c76c56883b4067d08b935b627e52ffa36b1ada04d9ccce0d3971"
     },
     {
@@ -112,8 +112,8 @@
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1741,
-      "sha256": "4d954e0c846be0412d3309b04894f6df7b63f2355d1cab31be1fce5a5d2d72a5"
+      "bytes": 1636,
+      "sha256": "f94334baca923034ef094248b507683ef217e6bbbe4f8dca715c5f5a080042b5"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -122,18 +122,18 @@
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 6427,
-      "sha256": "6b8b7459156e382b304b72dce4b3fd3d582089f9581b8d8d9fce06d7b5262022"
+      "bytes": 7484,
+      "sha256": "8f59d68273663731039d9777b38cb3f6565e6e911619444d0748090c82cc763b"
     },
     {
       "path": "docs/TEST_RESULTS.md",
-      "bytes": 7514,
-      "sha256": "dc71c3bd1eab73254ae954011e83f6ddd2b15fef1a90b85fcaacd23fb43c58c8"
+      "bytes": 8466,
+      "sha256": "4525631b541e6ce10458ae9eaf45b6e6b2b5e41672556b20bc7fbce75f3d8d15"
     },
     {
       "path": "docs/backlog.json",
-      "bytes": 23283,
-      "sha256": "3bafab4f3c3588323f46c96f06cdd21b8de005f8d2468a8af22cd490b60bea00"
+      "bytes": 24187,
+      "sha256": "6d5f7a72c33e36dac7b9977a9f8dd07d4e9d486549af6fb1e5d5c122d85db541"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -197,7 +197,7 @@
     },
     {
       "path": "docs/roadmap-progress.json",
-      "bytes": 1263,
+      "bytes": 1490,
       "sha256": "94ec66f7754a0b7fad2027e3d90caa27a9bef79762de1d537de1d3cade63b6c6"
     },
     {
@@ -307,8 +307,8 @@
     },
     {
       "path": "docs/PHASE_02_ACCEPTANCE.md",
-      "sha256": "3c59ca28d7b700f79c9159d61b69edb47e6a13048596e30a9aaa145c91cb1d88",
-      "bytes": 5188
+      "sha256": "b3099fe99453a5f57c4e5d3756a34c7f58e36453f126a4a3f39f0a8d53db09ef",
+      "bytes": 6844
     },
     {
       "path": "docs/handoffs/phase-02-part-03-acceptance.md",
@@ -327,11 +327,11 @@
     },
     {
       "path": "docs/decisions/0005-continue-engineering-without-browser-gate.md",
-      "sha256": "81a0df850fc6ebd9e8a3717452eb5bcd23e2b3fc17e15780e8cb24fb82ec47f7"
+      "sha256": "03767047d6e16a3a7623320bdff46d7b0c7abf568bd1f257cf50d04c56bb7251"
     },
     {
       "path": "docs/handoffs/phase-02-to-phase-04.md",
-      "sha256": "a794b4fd99bbe996a8c7c6cfe8c55fc1479c4f155f42b69bfd8c14e7112b6ef8"
+      "sha256": "4fd57085d6ec87ffa5bdd35063a577f19163152670ce1e1960e15a10f64b5d0c"
     }
   ]
 }

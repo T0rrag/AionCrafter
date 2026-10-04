@@ -122,3 +122,10 @@ Only documentation/sequencing changes follow this baseline; no application chang
 ADR 0005 removes cloud/Chromium work from the active development queue and authorizes
 Phase 04 synthetic engineering using Phase 02. Pending acceptance remains recorded.
 Bootstrap manifest/42-ID validation and git diff --check passed after refreshing docs.
+
+## Phase 02 owner clarification — 2026-10-04
+
+Documentation-only update from verified 48dc8a304a9f917aec9caec27d62bd95041df530.
+Recorded the user's review, behaviour acceptance and final-pilot timing; code is unchanged.
+The existing 95-test baseline still applies; it was not rerun for these prose changes.
+Refreshed manifest validation and git diff --check are the applicable checkpoint checks.
