@@ -147,7 +147,7 @@
           "title": "Add a source-aware price editor",
           "description": "Let users enter their own observed prices or approved reference imports. Require market and observation time; distinguish manual, vendor, snapshot, delayed and unavailable values.",
           "status": "IN_PROGRESS",
-          "evidence": "references.py/web.py; offline manual/vendor/snapshot imports, per-field source/age, unknown times, exact observation preservation through repeated calculate/search/save; merged ID collision rejected. 6 reference tests + full-form HTTP cases. Visual/pilot acceptance pending."
+          "evidence": "references.py/web.py; offline manual/vendor/snapshot imports, per-field source/age, unknown times, exact observation preservation through repeated calculate/search/save; merged ID collision rejected. 6 reference tests + full-form HTTP cases. Visual/pilot acceptance pending. Reference ID immutable replay, atomic invalid import, zero/unavailable, future/subsecond age coverage; 95 full-suite tests at d355f7107d0a2205a61afc672f7c27f9b2146864."
         },
         {
           "id": "p2-costmodes",
@@ -400,11 +400,11 @@
   "base_branch": "phase/01-data-foundation",
   "local_base_sha": "3a395eb5894e65ff0d67e336d1a91dc452136843",
   "pr_url": "https://github.com/T0rrag/AionCrafter/pull/3",
-  "verified_implementation_sha": "a3254c48831ea4cd54ce9e7211e286a9b3ca5f61",
+  "verified_implementation_sha": "d355f7107d0a2205a61afc672f7c27f9b2146864",
   "remote_base_sha": "3a395eb5894e65ff0d67e336d1a91dc452136843",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
   "checkpoint_part": "03",
   "next_eligible_phase": "02",
   "next_phase_dependency_note": "Continue Phase 02 acceptance in canonical Aion2 cloud chat; full-form HTTP checks pass. Browser visual/owner/pilot acceptance pending; p1-catalog BLOCKED.",
-  "checkpoint_label": "Part 03 acceptance continuation"
+  "checkpoint_label": "Part 03 reference acceptance extension"
 }

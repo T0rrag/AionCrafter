@@ -107,13 +107,13 @@
     },
     {
       "path": "docs/GITHUB_DELIVERY.md",
-      "bytes": 5350,
-      "sha256": "b7a47d70143db3d83936e19680d6395632ffbe678c34310c5bb47b8b63e56af3"
+      "bytes": 6058,
+      "sha256": "b1e77e945fd9087c3c2a512db7d1d0036c2cf3fe5e0371bf0b4eeba78142e6a2"
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1731,
-      "sha256": "9c15cd2ca5fa209e77fd119d2dfdcbe4ebdae4e76aa5a0746358650591928ca9"
+      "bytes": 1741,
+      "sha256": "68c90ac4459215e010925fdca9bd4531468b970d8a06e446ab58ac0fa7740be4"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -122,8 +122,8 @@
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 5684,
-      "sha256": "b296d4ea4e296e8ef726ca0277e5d522fde669b190180c822705dd0a8f2d7a6b"
+      "bytes": 6427,
+      "sha256": "c8bd63c3640837c466b8e6ff75260b70d5ef21c7f99aafe6c633bc8fb56bdd4c"
     },
     {
       "path": "docs/TEST_RESULTS.md",
@@ -132,8 +132,8 @@
     },
     {
       "path": "docs/backlog.json",
-      "bytes": 23108,
-      "sha256": "7ed7f334e82127002a70555b4134b33ea935af0c55f23917b59c211052e61d41"
+      "bytes": 23283,
+      "sha256": "454303786527cb0e86507f9783fc1cb2b69023912429163ad6e24536f086e970"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -307,13 +307,23 @@
     },
     {
       "path": "docs/PHASE_02_ACCEPTANCE.md",
-      "sha256": "57aee624c3b72b95da3025f31800c2a94b7f42f6cacfb1cd1b67a1bf2a2b6069",
-      "bytes": 3818
+      "sha256": "133ad832b26a071578b02ad58b09404e78c496b1a7006b2435235738139d4892",
+      "bytes": 5188
     },
     {
       "path": "docs/handoffs/phase-02-part-03-acceptance.md",
       "sha256": "870d1411935b5e0816c2491baaec09d858c97d6772abbaa0bd993cc5e2b9cd46",
       "bytes": 3188
+    },
+    {
+      "path": "docs/delivery/phase-02-part-03-reference-acceptance.json",
+      "bytes": 847,
+      "sha256": "9f8c4bcd608726e872dcf90000e52ef33e2c913df51be23ae3aeb7b08d4b2b0c"
+    },
+    {
+      "path": "docs/handoffs/phase-02-part-03-reference-acceptance.md",
+      "bytes": 2993,
+      "sha256": "453652980359e15d073067323e5465240cbfbc3ffeeb444f7720a5f53d057d2d"
     }
   ]
 }

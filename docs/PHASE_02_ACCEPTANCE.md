@@ -44,3 +44,22 @@ at 1080p/1440p, keyboard-only controls, errors and narrow windows. Record actual
 viewport, results and screenshots. This procedure has not yet been executed visually.
 Owner review and a permitted pilot catalog remain external acceptance requirements.
 Inherited Python 3.14 SQLite ResourceWarnings remain unresolved on that runtime.
+
+## Reference import acceptance extension — 2026-10-04
+
+Implementation d355f7107d0a2205a61afc672f7c27f9b2146864 was fetched and its complete
+working tree matched the tested checkpoint. Started at c70d5578c3590d22b9d582f7ca8a16895a8171a8.
+Existing displayed observation IDs reject changed price, type or ingestion time; exact
+replay is idempotent. Mixed imports fail atomically, retaining current form and saved plan.
+Full-form HTTP tests reject wrong market, vendor sell-back as acquisition, and malformed
+synthetic rights. Zero snapshots give a known 0.00 total; unavailable snapshots give
+Incomplete. Age tests cover timezone offsets and future/subsecond clock discrepancy.
+This ID check covers records in the current preview, not a global source history registry.
+
+Latest commands: `python3 -m unittest tests.test_form_acceptance tests.test_references -q`
+— 14 passed; `python3 -m unittest discover -q` — 95 passed, 4.608 seconds, Linux/Python
+3.12.14. Compileall, synthetic catalog validation and diff checks passed; bootstrap
+validator passed with 42 IDs and 62 artifact checksums. Local Playwright launch was tried
+again: Chromium executable absent (chromium_headless_shell-1234). No browser rendering
+was obtained; previous connected-browser loopback blockage remains recorded above.
+Visual/browser, owner and permitted pilot acceptance remain outstanding.
