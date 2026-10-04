@@ -1,4 +1,4 @@
-# AionCrafter — Phase 04 manual groundwork
+# Phase 04 Part 02 handoff
 
 2026-10-04 · Brief v1.3 / ADR 0007 / ADR 0008. Phase 04 IN_PROGRESS.
 Gates A/B UNVERIFIED. All 42 backlog IDs preserved; one active Phase 04 writer.
@@ -46,3 +46,18 @@ IN_PROGRESS with real adapter/reconciliation/activation BLOCKED; production quot
 transport integration pending. p1-catalog BLOCKED; Phase 05 DEFERRED; Gates A/B UNVERIFIED.
 Visual/keyboard QA remains deferred by the owner; no Chromium troubleshooting. Real-game
 pilot follows phase features. No public release until applicable quality evidence exists.
+
+## Contracts to preserve
+
+stochastic.py binds exact recipe/bonus content in AttemptEvidence. Unknown probability,
+consumption or independence evidence keeps expected values unknown. Never turn these
+expectations into deterministic recursive yields. ranking.py recomputes source age and
+uses replacement cost for profit/ROI and additional cash for budget; exclusions remain
+visible. ledger.py uses actual receipts only, explicit FIFO and exact fractional basis.
+Ledger storage is separate from plans and requires immutable prefix/expected revision.
+The form at /ledger previews records before save and preserves a valid preview on errors.
+
+Manual probability/eligibility attestations are not app-verified game evidence. Model
+extensions (conditional bonuses, repeat-attempt risk, reversal events, general route
+optimization) require separately specified semantics, not guesses or silent fallbacks.
+Current visual QA is deferred, not passed. Keep the 42 stable IDs and historical handoffs.

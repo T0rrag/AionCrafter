@@ -4,11 +4,12 @@ Read docs/PROJECT_STATE.md, the latest handoff, docs/backlog.json and current AD
 The authoritative brief is AionCrafter_Project_Prompt.md v1.3 (workflow sections 20–21).
 Preserve all seven phases and 42 stable IDs with evidence-backed statuses.
 
-Current sequence: Phase 03 synthetic groundwork merged via PR #5; Phase 03 remains
-IN_PROGRESS with real adapter/reconciliation/release BLOCKED. Next independent phase is
-Phase 04 in a separate Aion2 chat, starting p4-batches. Read ADR 0007 and the Phase 03 to
-Phase 04 handoff. Old branch/PR #4 did not implement Phase 04; verify actual ancestry.
-Phase 01 incomplete/p1-catalog BLOCKED; Phase 05 DEFERRED; Gates A/B UNVERIFIED.
+Current sequence: Phase 04 manual groundwork candidate PR #6; read PROJECT_STATE,
+handoffs/phase-04-part-02.md and ADR 0008. p4-batches/ledger engineering complete;
+Phase 04 remains IN_PROGRESS for real rules/catalog/market integration. Verify merge
+receipt before moving to independent Phase 06 manual-release preparation in a separate
+Aion2 chat. Phase 03 remains IN_PROGRESS with real integration BLOCKED; p1-catalog
+BLOCKED; Phase 05 DEFERRED; Gates A/B UNVERIFIED. Do not claim a release or real pilot.
 
 Use exact money; missing prices are not zero. Preserve observation source/time, market,
 build and variant identity. Synthetic fixtures must remain clearly labelled. Do not invent

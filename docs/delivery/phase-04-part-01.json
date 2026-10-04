@@ -1,0 +1,25 @@
+{
+  "repository": "https://github.com/T0rrag/AionCrafter",
+  "branch": "phase/04-crafting-intelligence",
+  "checkpoint": "Phase 04 Part 01",
+  "published_commit": "794794224cf879abfdfd86f4b10da6ec501b43a2",
+  "published_tree": "d1f038680cb6ca8098bdc6f6762eb3758609c610",
+  "pull_request": "https://github.com/T0rrag/AionCrafter/pull/6",
+  "state": "DRAFT",
+  "merged": false,
+  "task_ids": [
+    "p4-batches",
+    "p4-buycraft"
+  ],
+  "verification": [
+    "git fetch origin phase/04-crafting-intelligence",
+    "git diff --exit-code --cached FETCH_HEAD: exact tested tree",
+    "PR read-back: open, draft, mergeable, expected head SHA",
+    "python -m unittest discover -q: 180 passed",
+    "python scripts/validate_bootstrap.py: 42 IDs and 94 checksums passed before receipt",
+    "git diff --check: passed"
+  ],
+  "remaining": "Phase 04 incomplete: stochastic scenarios, eligibility, liquidity, ranking and ledger. Gate A/B UNVERIFIED; real provider integration blocked. Visual QA deferred.",
+  "next_starter": "docs/NEXT_CHAT_PROMPT.md",
+  "note": "This receipt follows the verified feature commit; inspect actual branch head for receipt commit. No remote CI pass claimed."
+}

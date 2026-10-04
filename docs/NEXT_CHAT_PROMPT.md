@@ -1,18 +1,14 @@
-Start AionCrafter Phase 04 — Crafting intelligence, Part 01 in the existing Aion2 project.
-Continue autonomously. Fetch https://github.com/T0rrag/AionCrafter and verify actual heads.
-PR #5 is merged at bd23f4166ffe276179843761dea8e95275efbce1; documentation receipt follows on main.
-Read AGENTS.md, docs/PROJECT_STATE.md, handoffs/phase-03-to-phase-04.md, ADR 0007,
-backlog.json and master brief v1.3 sections 8/13/20/21.
-
-Resume phase/04-crafting-intelligence after checking its historical 1bea9e9d687458eb78921fee31a979a568cbe3ae
-head. Merge current main into it without force, preserve both histories/current handoff,
-and open a new Phase 04 PR (old PR #4 is closed and contained calculator code).
-First p4-batches: pure deterministic recursive expansion, aggregate shared demand before
-rounding by yields, carry leftovers and detect cycles. Then independent Phase 04 work.
-Use SYNTHETIC fixtures/manual references and exact arithmetic. Baseline: 149 tests passed.
-
-The user now authorizes tested phase merges (ADR 0007); no force-push, concurrent overwrite
-or bypass of required checks. Preserve all 42 IDs. Phase 03 stays incomplete with real
-integration blocked; Gates A/B UNVERIFIED, p1-catalog BLOCKED, Phase 05 DEFERRED.
-No real-provider activation or guessed game rules. Visual QA deferred; no Chromium work;
-game pilot after phase features. One active writer; publish and verify tested increments.
+Start AionCrafter Phase 06 — Manual-edition validation and guidance, Part 01, in a
+separate chat in the existing Aion2 project after verifying Phase 04 PR #6 is merged.
+If #6 is not merged, resume Phase 04 publication/checks first; do not assume a merge.
+Fetch T0rrag/AionCrafter and actual heads. Read AGENTS, PROJECT_STATE, ADR 0007/0008,
+handoffs/phase-04-part-02.md, latest delivery receipt, backlog and brief sections 14/20/21.
+Phase 04 manual groundwork now includes recursive routes, one-attempt risk, conditional
+rankings and actual-record FIFO ledger; baseline 238 tests passed on Windows/Python 3.12.
+Start independent p6-mathqa/p6-patches/security/package work with synthetic fixtures.
+Inspect any existing phase/06-release branch and preserve history before writing.
+Preserve all 42 IDs. p4-batches/p4-ledger engineering complete; Phase 04 remains IN_PROGRESS
+for real integration. Phase 03 real integration and p1-catalog BLOCKED; Phase 05 DEFERRED;
+Gates A/B UNVERIFIED. No real-provider activation, guessed game rules or public release.
+Visual QA deferred; no Chromium troubleshooting; real-game pilot after phase features.
+User authorizes tested merges, not force-push/concurrent overwrite/check bypass. One writer.
