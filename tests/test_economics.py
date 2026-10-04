@@ -96,3 +96,25 @@ class EconomicsTests(unittest.TestCase):
         unknown = replace(self.r, outcomes=(replace(self.r.outcomes[0], probability=None),))
         with self.assertRaisesRegex(ValidationError, 'NONDETERMINISTIC'):
             self.calc(recipe=unknown)
+
+    def test_joint_output_fees_charge_all_units_without_crediting_coproduct(self):
+        outputs=(ItemQuantity(self.target.item,3),ItemQuantity(self.c.items[1].identity,2))
+        recipe=replace(self.r,outcomes=(Outcome(outputs,'1','SYNTHETIC'),))
+        for basis,expected in ((FeeBasis.ATTEMPT,200),(FeeBasis.BATCH,200),(FeeBasis.OUTPUT_UNIT,1000)):
+            r=self.calc(recipe=recipe,target=ItemQuantity(self.target.item,4),
+                        craft_fees=(CraftFee(Money('1',self.m.currency),basis),),
+                        selling_price='10000',sale_fees=SaleFees('0','0','floor','SYNTHETIC'))
+            self.assertEqual(r.crafting_fees,expected)
+            self.assertEqual(r.profit,4000000-1860000-expected)
+            self.assertEqual((r.produced,r.leftovers),(6,2))
+            self.assertIn('coproducts_unvalued',r.issues)
+
+    def test_multiple_fees_wrong_currency_and_fixed_fee_exceeding_proceeds(self):
+        fees=(CraftFee(Money('1',self.m.currency),FeeBasis.BATCH),
+              CraftFee(Money('2',self.m.currency),FeeBasis.OUTPUT_UNIT))
+        self.assertEqual(self.calc(craft_fees=fees).crafting_fees,300)
+        r=self.calc(selling_price='0',sale_fees=SaleFees('0','2','floor','SYNTHETIC'))
+        self.assertEqual(r.proceeds,-200)
+        self.assertEqual(r.profit,-980200)
+        with self.assertRaisesRegex(ValidationError,'CURRENCY_MISMATCH'):
+            self.calc(craft_fees=(CraftFee(Money('1',replace(self.m.currency,code='OTHER')),FeeBasis.BATCH),))

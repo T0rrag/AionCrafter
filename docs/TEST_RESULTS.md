@@ -89,3 +89,12 @@ Compileall, offline catalog validation, diff whitespace and bootstrap manifest c
 passed. Published implementation 4594c5a6c825733bd49c56c14cddfd41a3161ab7 was fetched
 and matched the tested local tree. No new browser visual, pilot/game, provider/overlay,
 Windows or remote CI tests. Inherited Python 3.14 SQLite ResourceWarnings remain.
+
+## Phase 02 Part 03 — cloud continuation (2026-10-04)
+Linux / Python 3.12.14. Full suite: 85 tests passed. Eight added tests cover six
+reference/HTTP/round-trip/default-time/permission cases and two broader fee/joint-output
+cases. Compileall, offline synthetic catalog validation (7 items/3 recipes), diff check
+and refreshed bootstrap manifest validation passed. Browser visual QA remains unverified:
+Playwright executable absent; Chromium install failed with invalid ZIP archives.
+Inherited Python 3.14 SQLite ResourceWarnings remain unresolved; runtime differs here.
+No pilot/game/provider/overlay/Windows or remote-CI success claimed.

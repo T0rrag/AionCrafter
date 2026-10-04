@@ -147,7 +147,7 @@
           "title": "Add a source-aware price editor",
           "description": "Let users enter their own observed prices or approved reference imports. Require market and observation time; distinguish manual, vendor, snapshot, delayed and unavailable values.",
           "status": "IN_PROGRESS",
-          "evidence": "manual.py/plans.py/web.py: explicit scope/time, manual observations persist across save/load/import with linked overrides. Approved vendor/snapshot reference imports and age presentation remain."
+          "evidence": "references.py/web.py: validated offline manual/vendor/snapshot imports, rights/scope/type checks, per-item source observation age and unknown-time display; provenance retained through save/reload/JSON/CSV; 6 reference tests. Browser/pilot acceptance remains."
         },
         {
           "id": "p2-costmodes",
@@ -163,7 +163,7 @@
           "title": "Implement fees, yield and missing-price states",
           "description": "Calculate batch cost, net sale proceeds, profit, ROI and break-even price. Tax and fees are configurable and unverified until checked for the selected market. Never treat missing prices as zero.",
           "status": "IN_PROGRESS",
-          "evidence": "aioncrafter/economics.py; 9 new economics tests pass. Deterministic exact batch costs, configurable fees/rounding, rational ROI and break-even; broader fee/joint-output acceptance and owner review remain."
+          "evidence": "economics.py; 11 tests including joint-output fee bases, multiple fees, negative net proceeds and exact break-even. Configurable game-unverified assumptions; owner/pilot acceptance remains."
         },
         {
           "id": "p2-save",
@@ -403,7 +403,7 @@
   "verified_implementation_sha": "4594c5a6c825733bd49c56c14cddfd41a3161ab7",
   "remote_base_sha": "3a395eb5894e65ff0d67e336d1a91dc452136843",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
-  "checkpoint_part": "02",
+  "checkpoint_part": "03",
   "next_eligible_phase": "02",
-  "next_phase_dependency_note": "Continue Phase 02 Part 03 on PR #3; autonomous chat authorization ADR 0004. Local same-project chat creation needs cloud Work clarification. p1-catalog BLOCKED."
+  "next_phase_dependency_note": "Continue Phase 02 in canonical Aion2 cloud chat; local parent stopped application writes. Browser QA and acceptance remain; p1-catalog BLOCKED."
 }

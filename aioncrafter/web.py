@@ -9,25 +9,36 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
 from .catalog import import_catalog
-from .codec import ValidationError, require
+from .codec import ValidationError, require, dumps
 from .economics import SaleFees, amount, item_economics, materials_cost
 from .identity import Currency, FactionMode, MarketKind, MarketScope, PriceIdentity, normalize_alias
 from .manual import manual_observation, resolve_list
-from .models import CraftFee, FeeBasis, ItemQuantity, Money
+from .models import CraftFee, FeeBasis, ItemQuantity, Money, PriceType
+from .references import import_references, validate_references, reference_label
 from .valuation import HistoricalCost, InventoryEntry, value_materials
+
+
+def observation_time(form, index, old=None):
+    value = form.get(f't{index}', '')
+    if value or (old and old.price_type is not PriceType.MANUAL and old.observed_at is None):
+        return value
+    return form.get('observed', '')
 
 
 def form_observations(catalog, form, previous=()):
     market = MarketScope(catalog.scope.dataset_kind, catalog.scope.region, MarketKind(form.get('market_kind', '')),
                         form.get('market', ''), FactionMode(form.get('faction_mode', '')), form.get('faction') or None,
                         Currency(catalog.scope.namespace, form.get('currency', ''), int(form.get('precision', ''))))
+    if form.get('reference_payload'):
+        previous = import_references(form['reference_payload'], catalog, market)
     prior = {obs.identity: obs for obs in previous}
     result = []
     for i, item in enumerate(catalog.items):
         identity = PriceIdentity(item.identity, market)
-        price, observed = form.get(f'p{i}', '') or None, form.get('observed', '')
+        price = form.get(f'p{i}', '') or None
         old = prior.get(identity)
-        if old and old.unit_price == price and old.observed_at == observed:
+        observed = observation_time(form, i, old)
+        if old and old.unit_price == price and (old.observed_at or '') == observed:
             result.append(old)
         else:
             new = manual_observation(item.identity, market, price, observed, catalog.provenance)
@@ -55,7 +66,8 @@ def render(catalog, form=None, *, supplied_observations=None):
             require(len(observations) == len(catalog.items), 'PLAN_OBSERVATIONS', 'Observation count differs from catalog')
             for i, (item, obs) in enumerate(zip(catalog.items, observations)):
                 require(obs.identity == PriceIdentity(item.identity, market) and obs.unit_price == (value(f'p{i}') or None)
-                        and obs.observed_at == value('observed'), 'PLAN_OBSERVATIONS', 'Saved observation differs from form scope, price or time')
+                        and (obs.observed_at or '') == observation_time(form, i, obs), 'PLAN_OBSERVATIONS', 'Saved observation differs from form scope, price or time')
+            validate_references(observations, catalog, market)
             inventory, history = [], []
             for i, item in enumerate(catalog.items):
                 owned = value(f'owned{i}', '0')
@@ -114,25 +126,29 @@ def render(catalog, form=None, *, supplied_observations=None):
             result += '<h3>Cost views</h3><p>Additional cash required' + (' including assumed crafting fees' if item_result else '') + ': ' + ('Incomplete' if cash is None else amount(cash, market)) + '</p>'
             result += '<p>Recorded consumed-material cost: ' + ('Incomplete — supply records for every consumed unit' if valuation.recorded_total is None else amount(valuation.recorded_total, market)) + '</p>'
             result += '<p>Owned inputs reduce additional cash only. Replacement cost and estimated profit retain their full value. Recorded material costs exclude crafting/sale fees and do not establish realized profit.</p>'
-            result += '<table><tr><th>Material</th><th>Required</th><th>Owned used</th><th>To buy</th><th>Unit reference</th><th>Replacement subtotal</th></tr>'
+            result += '<table><tr><th>Material</th><th>Required</th><th>Owned used</th><th>To buy</th><th>Unit reference</th><th>Replacement subtotal</th><th>Source and age</th></tr>'
             for line, valued in zip(calculation.lines, valuation.lines):
                 item = next(x for x in catalog.items if x.identity == line.item.item)
-                result += f'<tr><td>{escape(label(item))}</td><td>{line.item.quantity}</td><td>{valued.owned_used}</td><td>{valued.to_buy}</td><td>{escape(line.observation.unit_price or "Unavailable")}</td><td>{"Missing" if line.subtotal is None else amount(line.subtotal, market)}</td></tr>'
+                result += f'<tr><td>{escape(label(item))}</td><td>{line.item.quantity}</td><td>{valued.owned_used}</td><td>{valued.to_buy}</td><td>{escape((line.observation.unit_price if line.observation else None) or "Unavailable")}</td><td>{"Missing" if line.subtotal is None else amount(line.subtotal, market)}</td><td>{escape(reference_label(line.observation))}</td></tr>'
             result += f'</table><p>Total: {"Incomplete" if calculation.total is None else amount(calculation.total, market)}; known subtotal: {amount(calculation.known_subtotal, market)} {escape(market.currency.code)}</p>'
-            result += '<p>Manual references; stock and sell-through unverified. Observation: ' + escape(value('observed')) + '</p>'
+            result += '<p>Manual references and approved offline references; stock and sell-through unverified. Default observation: ' + escape(value('observed')) + '</p>'
     except (ValidationError, ValueError, StopIteration) as exc:
         result += f'<p role="alert">{escape(str(exc))}</p>'
     select = lambda name, vals, default: f'<label>{name}<select name="{name}">' + ''.join(f'<option {"selected" if value(name,default)==x else ""}>{x}</option>' for x in vals) + '</select></label>'
-    body = '<h1>AionCrafter · Manual calculator</h1><p><strong>' + escape(catalog.scope.dataset_kind.value) + '</strong> · ' + escape(catalog.scope.region + ' / ' + catalog.scope.build) + ' · Gate A/B UNVERIFIED</p><p>Fees are user assumptions, unverified for the game. Blank prices stay unavailable. No prices or fees are prefilled. Use local saved plans to keep prices and inputs between sessions.</p><form method="post">'
+    body = '<h1>AionCrafter · Manual calculator</h1><p><strong>' + escape(catalog.scope.dataset_kind.value) + '</strong> · ' + escape(catalog.scope.region + ' / ' + catalog.scope.build) + ' · Gate A/B UNVERIFIED</p><p>Fees are user assumptions, unverified for the game. Blank prices stay unavailable. No prices or fees are prefilled. Use local saved plans to keep prices and inputs between sessions. Snapshots are delayed references, never live prices.</p><form method="post">'
     body += select('workflow', ['materials', 'item'], 'materials')
     body += '<fieldset><legend>Explicit market and observation</legend>'
     body += field('market', 'Market ID', required=True) + select('market_kind', ['server','group'], 'server')
     body += select('faction_mode', ['not_applicable','specific'], 'not_applicable') + field('faction', 'Faction ID (when specific)')
     body += field('currency','Currency code', required=True) + field('precision','Currency decimals','2','number',True)
     body += field('observed','Observed at (ISO 8601 with timezone)',required=True) + '</fieldset>'
+    if supplied_observations is not None:
+        body += '<input type="hidden" name="reference_payload" value="' + escape(dumps(supplied_observations), quote=True) + '">'
+    elif value('reference_payload'):
+        body += '<input type="hidden" name="reference_payload" value="' + escape(value('reference_payload'), quote=True) + '">'
     body += '<fieldset><legend>Manual unit prices and materials-only quantities</legend>'
     for i, item in enumerate(catalog.items):
-        body += '<div>' + field(f'p{i}', label(item) + ' — unit price') + field(f'q{i}', 'Quantity', '0','number') + field(f'owned{i}', 'Owned usable quantity', '0', 'number') + '<details><summary>Recorded consumed-material cost</summary>' + field(f'hqty{i}', 'Recorded consumed quantity', '', 'number') + field(f'hcost{i}', 'Recorded total paid for those units') + field(f'href{i}', 'Record reference') + '</details></div>'
+        body += '<div>' + field(f'p{i}', label(item) + ' — unit price') + field(f't{i}', 'Item observed at (blank uses default; imported unknown remains unknown)', value('observed')) + field(f'q{i}', 'Quantity', '0','number') + field(f'owned{i}', 'Owned usable quantity', '0', 'number') + '<details><summary>Recorded consumed-material cost</summary>' + field(f'hqty{i}', 'Recorded consumed quantity', '', 'number') + field(f'hcost{i}', 'Recorded total paid for those units') + field(f'href{i}', 'Record reference') + '</details></div>'
     body += '<label>Paste quantity TAB exact name per line<textarea name="paste">' + escape(value('paste')) + '</textarea></label>'
     body += select('language',['en','es'],'en') + '</fieldset><fieldset><legend>Item workflow (ignored in materials mode)</legend>'
     query = value('product_search').strip()
@@ -153,6 +169,7 @@ def render(catalog, form=None, *, supplied_observations=None):
     body += select('craft_basis',['per_attempt','per_batch','per_output_unit'],'per_batch')
     body += field('tax','Sale tax fraction (0 through 1)') + field('sale_fee','Total listing / other sale fees')
     body += select('rounding',['floor','ceil','half_up'],'floor') + field('fee_source','Fee source / unverified assumption') + '</fieldset>'
+    body += '<fieldset><legend>Approved offline references</legend><p>Paste a JSON array of PriceObservation records from a source you are permitted to use. Synthetic references remain synthetic. Snapshot time may be unknown; import time never establishes freshness. Vendor stock and restrictions must be checked manually. Editing price/time creates a linked manual override.</p><textarea name="reference_data"></textarea><button name="action" value="references">Preview reference import</button></fieldset>'
     body += '<button>Calculate</button><section aria-live="polite">' + result + '</section></form>'
     return '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>AionCrafter manual calculator</title><style>body{font:16px system-ui;max-width:1050px;margin:2rem auto;padding:0 1rem;background:#101827;color:#e5edf8}fieldset{margin:1rem 0;border:1px solid #506078}label{display:inline-block;margin:.5rem}input,select,textarea,button{display:block;font:inherit;padding:.5rem;max-width:90%}table{border-collapse:collapse}td,th{padding:.5rem;border:1px solid #506078}button{cursor:pointer;background:#8ce5c0} [role=alert]{color:#ffbaad}</style>' + body + '</html>'
 
@@ -160,7 +177,7 @@ def render(catalog, form=None, *, supplied_observations=None):
 def handler(catalog, plan_database=None):
     from .plans import PlanStore, SavedPlan, catalog_digest, decode_plan, encode_plan
     token = secrets.token_urlsafe(32)
-    reserved = {'action','csrf','plan_name','revision','favorite','import_data','import_format','confirm_delete','import_payload'}
+    reserved = {'action','csrf','plan_name','revision','favorite','import_data','import_format','confirm_delete','import_payload','reference_data','reference_payload'}
 
     class Handler(BaseHTTPRequestHandler):
         def allowed_host(self):
@@ -210,6 +227,17 @@ def handler(catalog, plan_database=None):
                 require(all(len(v) == 1 for v in data.values()), 'DUPLICATE_FIELD', 'Form fields repeat')
                 form = {k:v[0] for k,v in data.items()}
                 action = form.get('action', 'calculate')
+                if action == 'references':
+                    previous = form_observations(catalog, form)
+                    imported = import_references(form.get('reference_data',''), catalog, previous[0].identity.market)
+                    merged = {o.identity: o for o in previous}
+                    merged.update({o.identity: o for o in imported})
+                    observations = tuple(merged[o.identity] for o in previous)
+                    for i, obs in enumerate(observations):
+                        form[f'p{i}'] = obs.unit_price or ''
+                        form[f't{i}'] = obs.observed_at or ''
+                    self.page(form, notice='Reference import validated. Review source, rights, time and quantities before saving.', observations=observations)
+                    return
                 if action in ('calculate', 'search'):
                     self.page(form)
                     return
@@ -245,7 +273,7 @@ def handler(catalog, plan_database=None):
                     if not revision and form.get('import_payload'):
                         previous = decode_plan(form['import_payload'].encode(), catalog).observations
                     fields = tuple(sorted((k,v) for k,v in form.items() if k not in reserved))
-                    observations = form_observations(catalog, dict(fields), previous)
+                    observations = form_observations(catalog, form, previous)
                     plan = SavedPlan(1, name, form.get('favorite') == 'yes', catalog.release_id, catalog_digest(catalog),
                                      fields, observations, datetime.now(timezone.utc).isoformat())
                     revision = store.save(plan, catalog, revision)

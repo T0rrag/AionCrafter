@@ -1,6 +1,6 @@
 # AionCrafter — project state
 
-Checkpoint: 2026-10-04, Phase 02 / Part 02. Brief v1.3 plus ADR 0003.
+Checkpoint: 2026-10-04, Phase 02 / Part 03. Brief v1.3 plus ADR 0003.
 Active Phase 02: **IN_PROGRESS**. Phase 01: **IN_PROGRESS**; p1-catalog: **BLOCKED**.
 Phases 03/05: **DEFERRED**. Gates A/B: **UNVERIFIED**.
 
@@ -26,7 +26,7 @@ non-force ref updates published the same tested trees. See delivery receipt.
 | Task | Status | Evidence / remaining work |
 |---|---|---|
 | p2-economics | IN_PROGRESS | economics.py: exact integer currency units, rational ROI/break-even, deterministic batches, configurable tax/fixed fees/proceeds rounding, minimal break-even currency tick, missing/unknown states. 9 new economics tests. Needs owner review and broader joint-output/market fee-rule acceptance. |
-| p2-editor | IN_PROGRESS | manual.py/web.py: explicit market/currency/faction and timezone-aware observation time; blank prices unavailable. Manual observations persist with original timestamps and linked overrides in saved plan revisions. Approved vendor/snapshot reference imports and age presentation remain. |
+| p2-editor | IN_PROGRESS | manual.py/web.py: explicit market/currency/faction and timezone-aware observation time; blank prices unavailable. Manual observations persist with original timestamps and linked overrides in saved plan revisions. Offline manual/vendor/snapshot imports and per-reference age implemented in references.py; acceptance remains. |
 | p2-listflow | IN_PROGRESS | Selected quantities or quantity-TAB-alias paste; variant picker for ambiguous names; unit/subtotal/known subtotal/incomplete total. Browser visual/pilot QA remains. |
 | p2-itemflow | IN_PROGRESS | Product/recipe selection, direct ingredients, deterministic batch yield and leftovers, manual selling price and margin. English/Spanish alias product search added. Direct ingredients supported; browser QA and remaining acceptance remain; recursive optimization stays Phase 04. |
 | p2-costmodes | IN_PROGRESS | valuation.py and 6 tests: inventory-adjusted shopping/cash, unchanged replacement value, recorded allocated material cost with explicit missing records. Historical crafting/sale fees and realized profit are not inferred. |
@@ -43,7 +43,7 @@ Stock, sell-through and craft requirements remain unverified/manual checks.
 ## Validation and limits
 
 Baseline: 47 tests passed on Python 3.14.7. Economics checkpoint: 55 tests passed.
-Current: `python3 -m unittest discover -q` — 77 tests passed. A strengthened import/save
+Part 02: `python3 -m unittest discover -q` — 77 tests passed. A strengthened import/save
 provenance assertion then passed all 7 targeted plan tests. Coverage includes local HTTP GET,
 POST, foreign-Origin refusal and oversized-body refusal. Loopback tests require an
 unsandboxed execution permission in this environment. Offline catalog validation and
@@ -56,12 +56,28 @@ evidence and p1-catalog still requires a permitted pilot catalog, 100 real items
 verified recipes.
 
 Next: continue Phase 02 Part 03 on this branch/PR: finish source-aware reference imports,
-price age display and acceptance tests/browser QA. Read `handoffs/phase-02-part-02.md`.
-The attempt to create a local continuation in Aion2 was rejected because it is a ChatGPT
-project requiring cloud Work. Cloud-execution clarification is pending; no new chat
-was created. Work continued locally for this checkpoint.
+remaining acceptance/browser QA. Read `handoffs/phase-02-part-03.md`.
+This cloud Work chat in the existing Aion2 project is the canonical active Phase 02
+continuation, explicitly designated by the user. The local parent stopped application
+writes. GitHub is the durable handoff; old local transcripts are not converted or
+synchronized. The prior cloud-choice-pending text is superseded.
 
 Autonomous continuation is now authorized by the user (ADR 0004). Create same-project
 continuation chats at phase boundaries or when context grows large, carrying the
 checkpoint and constraints. Context recovery confirmed prior architecture and Phase 01
 decisions; related translation work provides no permitted catalog.
+
+## Part 03 cloud checkpoint
+
+Started from verified head 4797ce5f5fd46fcf6055afc1357802cf02d55303. Added source-aware
+offline reference imports, per-item observation times, exact provenance-preserving plan
+transfers and source/age presentation. Synthetic reference sample and usage guide:
+REFERENCE_IMPORTS.md. Added reference/HTTP/round-trip regressions and broader joint-output,
+multiple-fee, wrong-currency and negative-proceeds tests. No provider access added.
+Actual validation: 85 tests passed on Python 3.12.14; compileall, offline catalog validation
+and diff checks passed. Visual browser QA attempted: Playwright executable missing;
+Chromium download returned invalid ZIP archives. Visual QA remains UNVERIFIED.
+Prior Python 3.14 ResourceWarnings remain an inherited unresolved issue; this run does
+not establish their resolution. All six Phase 02 tasks stay IN_PROGRESS pending acceptance.
+Next: browser QA in an environment with Chromium, then owner/pilot acceptance. Continue
+this cloud chat while practical; Part 04 starter is saved for a future context handoff.

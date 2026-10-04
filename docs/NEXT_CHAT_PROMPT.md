@@ -1,19 +1,17 @@
-Continue AionCrafter Phase 02 — Manual-first calculator, Part 03, in the same Aion2 project.
-Read docs/PROJECT_STATE.md, docs/handoffs/phase-02-part-02.md, docs/backlog.json, ADRs
-0003/0004 and master v1.3 sections 8/13/20/21. Fetch phase/02-manual-calculator and PR #3.
-Tested implementation 4594c5a6c825733bd49c56c14cddfd41a3161ab7 passed 77 tests plus
-7 targeted plan tests; delivery docs follow it. PR #3 is stacked on unmerged PR #2;
-base 3a395eb5894e65ff0d67e336d1a91dc452136843. No merge or force-push.
-
-Inventory cash/replacement/recorded material views and persisted plans with validated
-JSON/CSV transfer now exist. Finish source-aware approved reference imports, vendor/
-snapshot distinctions, explicit age display, fee/joint-output acceptance and browser QA.
-Direct ingredients work; do not start Phase 04 optimization in this chat. Synthetic
-fixtures only; p1-catalog BLOCKED, Phase 01 incomplete, Phases 03/05 DEFERRED, Gates A/B
-UNVERIFIED. All Phase 02 tasks remain IN_PROGRESS pending acceptance.
-
-User authorized autonomous continuation and same-project chats at phase boundaries or
-large context. Local chat creation in Aion2 failed because it is a ChatGPT project and
-requires cloud Work. Cloud-execution clarification is pending; do not claim a new chat
-exists. Continue eligible local work meanwhile. Preserve original observation times,
-test coherent checkpoints, publish, verify remote SHAs and save a compact handoff.
+Continue AionCrafter Phase 02 — Manual calculator, Part 04 in this same Aion2 cloud
+ChatGPT project. Use master prompt v1.3 sections 8/13/20/21 and ADRs 0003/0004.
+Fetch T0rrag/AionCrafter phase/02-manual-calculator and verify actual head before writing.
+Read docs/PROJECT_STATE.md, docs/handoffs/phase-02-part-03.md, docs/backlog.json and
+REFERENCE_IMPORTS.md. PR #3 remains draft stacked on unmerged PR #2 (recorded base
+3a395eb5894e65ff0d67e336d1a91dc452136843). Part 03 passed 85 tests on Python 3.12.14.
+Offline manual/vendor/snapshot imports and per-item observation ages are implemented;
+unknown ages stay unknown, linked manual edits and plan transfers preserve provenance.
+First: browser QA with an available Chromium, then remaining Phase 02 acceptance.
+Previous visual attempt failed: executable absent and browser download invalid ZIPs.
+All Phase 02 tasks IN_PROGRESS; Phase 01 incomplete/p1-catalog BLOCKED. Synthetic only.
+Phases 03/05 DEFERRED; Gates A/B UNVERIFIED. Historical fees/realized profit unknown
+without records; recursive optimization Phase 04. Inherited Python 3.14 warnings remain.
+Develop/upload autonomously; no merge or force-push. Persist actual tests/handoff and
+verify SHAs. This cloud continuation is canonical; local parent stopped code writes.
+Create further same-project chats only at phase/context handoffs, verifying startup and
+preventing concurrent writers. Do not claim local transcript synchronization.
