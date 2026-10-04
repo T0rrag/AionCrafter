@@ -1,19 +1,10 @@
-Start AionCrafter Phase 04 — Crafting intelligence, Part 01 inside this same Aion2 project.
-Follow master prompt v1.3 and ADRs 0003/0004/0005. The user directs normal feature
-development and a new chat for each phase; do not spend this phase on Chromium/cloud QA.
-
-Fetch T0rrag/AionCrafter, inspect phase/04-crafting-intelligence if present, and verify
-its actual head/base before editing. Otherwise create it from the current verified
-phase/02-manual-calculator handoff. Read docs/PROJECT_STATE.md, docs/backlog.json and
-docs/handoffs/phase-02-to-phase-04.md. Phase 02 PR #3 is unmerged; explicitly stack the
-new phase branch/PR on it. The Phase 02 code baseline passed 95 tests.
-
-First implement p4-batches: pure deterministic recursive recipe expansion, shared-demand
-aggregation before batch rounding, explicit recipe selection and leftover accounting.
-Use labeled synthetic fixtures and test boundaries, shared intermediates and rejection
-of cycles/unsupported stochastic outcomes. Keep exact arithmetic and scoped identity.
-
-Visual/pilot acceptance is tracked for later; it does not block this engineering phase.
-Phase 01/catalog incomplete; Phases 03/05 DEFERRED; Gates A/B UNVERIFIED. Preserve all
-42 IDs. Upload tested increments, verify SHAs, open a draft Phase 04 PR, and save state
-and handoff. No merge/force-push. Previous chat stops application writes at handoff.
+Continue AionCrafter Phase 03 — Market-price groundwork, Part 01, in Aion2.
+Fetch T0rrag/AionCrafter and verify actual heads before writing. Resume
+phase/03-market-prices based on main 81f6493999b6bca1e86cd621e7815f7d05944020.
+Read PROJECT_STATE.md, handoffs/phase-03-part-01.md, backlog.json, ADR 0006 and AGENTS.md.
+Freshness foundation passed 106 full-suite tests on Windows/Python 3.12.14 (11 cache tests).
+Next p3-resilience, then p3-depth, reusing existing contracts with SYNTHETIC fixtures.
+Keep p3-adapter/reconcile/releaseprice blocked and Gate A UNVERIFIED. No live connection
+or automatic-price activation. Preserve all 42 IDs. Visual QA deferred; no Chromium work.
+Publish tested increments, verify remote SHAs/tree equality, maintain one draft phase PR
+against main and one active writer. No merge/force-push; stay within Phase 03.

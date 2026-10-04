@@ -30,3 +30,23 @@ integrate into the existing manual workflows. Do not add guessed prices, fee rul
 probabilities, live providers or overlay dependencies. Revisit browser tooling only
 when requested or when a working environment is supplied; do not let it dominate
 normal feature development.
+
+## Owner clarification — 2026-10-04
+
+In response to the four remaining Phase 02 acceptance items, the user asked for an
+explanation of owner acceptance, said the interface/QA item "will be customizable",
+deferred real-game pilot validation until all phases are done, and marked the PR
+review/closure item "Done".
+
+Record the review as completed by the user in chat. This is not an executed GitHub
+review, PR closure, merge authorization, or evidence that the other acceptance items
+passed. The user subsequently confirmed: "Yes the calculator behaviour behaves
+correctly". Owner acceptance of calculator behaviour is therefore complete; checking
+actual game rules remains separate and deferred to the permitted real-game pilot.
+
+Interpret the customization comment as a presentation/controls requirement; the user
+has not specified its detailed scope. Do not claim a customizable interface has been
+implemented. Tax, craft/sale fees and rounding are already configurable. Visual and
+keyboard QA remain deferred and unverified. Schedule the permitted real-game pilot
+after phase feature development is finished, using the existing p6-usertest task;
+do not add or rename backlog IDs. Catalog rights and Gates A/B are unchanged.
