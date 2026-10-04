@@ -2,6 +2,8 @@
 Date: 2026-10-04. Brief v1.3; ADRs 0003/0004. Phase 02 IN_PROGRESS.
 Repository T0rrag/AionCrafter; branch phase/02-manual-calculator; draft PR #3 stacked
 on unmerged PR #2, base 3a395eb5894e65ff0d67e336d1a91dc452136843.
+Verified implementation upload: f8274ad71267a7737a95cff40e45eb9f7c9fb431.
+Full remote/local tree equality checked after fetch. Delivery documentation follows.
 Started from actual verified head 4797ce5f5fd46fcf6055afc1357802cf02d55303.
 
 ## Delivered and verified

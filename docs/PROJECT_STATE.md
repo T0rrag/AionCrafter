@@ -81,3 +81,6 @@ Prior Python 3.14 ResourceWarnings remain an inherited unresolved issue; this ru
 not establish their resolution. All six Phase 02 tasks stay IN_PROGRESS pending acceptance.
 Next: browser QA in an environment with Chromium, then owner/pilot acceptance. Continue
 this cloud chat while practical; Part 04 starter is saved for a future context handoff.
+
+Published Part 03 implementation: `f8274ad71267a7737a95cff40e45eb9f7c9fb431` (85 tests). Remote fetched;
+full tree equals tested local checkpoint. Delivery receipt follows this implementation.

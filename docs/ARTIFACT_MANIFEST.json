@@ -108,7 +108,7 @@
     {
       "path": "docs/GITHUB_DELIVERY.md",
       "bytes": 3982,
-      "sha256": "0c631300a96bde8c07d79c1b86582a86ec9f8d689855559e02752fb6fd7e80ad"
+      "sha256": "768c18525e1580e96585deb79fcbd3666be117704221a028dea914226b16ec31"
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
@@ -123,7 +123,7 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "bytes": 5352,
-      "sha256": "79c5e53758ffdaabc382edb0cf917945fd111c5e5dd324f37543b7d0fa3f0fd6"
+      "sha256": "c38fc2e0476d32c0bfb6b8ce2fb13d9db161ecd897f0c27b9fc4f1b663554d9f"
     },
     {
       "path": "docs/TEST_RESULTS.md",
@@ -133,7 +133,7 @@
     {
       "path": "docs/backlog.json",
       "bytes": 23007,
-      "sha256": "3ff0ffa11376c221cc30cfcc1899e9c9ea37d001de95630a324b5ff97ab483f7"
+      "sha256": "1b353cbe5da54eb706413fc04947ec88a99c3512d2482b5c9a3fa0233d38c9aa"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -288,7 +288,7 @@
     },
     {
       "path": "docs/handoffs/phase-02-part-03.md",
-      "sha256": "c1d9d417e860316956fd002f1b2f524d0650ef8598368dd3b37fb4fff248a22e"
+      "sha256": "552eaa688d35f9a5198b9064c7975087c830d70cb728af402a6f032af1e887e4"
     }
   ]
 }

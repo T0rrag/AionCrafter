@@ -1,0 +1,13 @@
+{
+  "implementation_sha": "f8274ad71267a7737a95cff40e45eb9f7c9fb431",
+  "implementation_tree": "28db4cbea9cb485e1921f69b69956ba753793c6d",
+  "previous_head": "4797ce5f5fd46fcf6055afc1357802cf02d55303",
+  "remote_local_tree_equal": true,
+  "branch": "phase/02-manual-calculator",
+  "pr": 3,
+  "tests": 85,
+  "python": "3.12.14",
+  "visual_qa": "UNVERIFIED",
+  "force_push": false,
+  "merged": false
+}
