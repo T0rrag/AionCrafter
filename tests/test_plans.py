@@ -125,3 +125,33 @@ class PlanTests(unittest.TestCase):
             self.assertIn('revisions deleted',post(dict(action('delete'),revision='1',confirm_delete='yes')))
         finally:
             server.shutdown();server.server_close();thread.join()
+
+    def test_deleted_recreated_name_rejects_old_tab_save_and_delete(self):
+        with PlanStore(self.path) as store:
+            old_revision = store.save(self.plan, self.c)
+            store.delete(self.plan.name, old_revision)
+            self.assertEqual(store.list(), ())
+        with PlanStore(self.path) as store:
+            recreated = store.save(replace(self.plan, favorite=False), self.c)
+            self.assertGreater(recreated, old_revision)
+            with self.assertRaisesRegex(ValidationError, 'CONCURRENT_CHANGE'):
+                store.save(self.plan, self.c, old_revision)
+            with self.assertRaisesRegex(ValidationError, 'CONCURRENT_CHANGE'):
+                store.delete(self.plan.name, old_revision)
+            self.assertEqual(store.load(self.plan.name, self.c)[0], recreated)
+            self.assertFalse(store.load(self.plan.name, self.c)[1].favorite)
+
+    def test_v1_database_migrates_without_changing_plan_payloads(self):
+        con = sqlite3.connect(self.path)
+        with con:
+            con.execute('CREATE TABLE plans (name TEXT, revision INTEGER, payload TEXT NOT NULL, PRIMARY KEY(name, revision))')
+            con.execute(f'PRAGMA application_id={PlanStore.APPLICATION_ID}')
+            con.execute('PRAGMA user_version=1')
+            con.execute('INSERT INTO plans VALUES (?,?,?)', (self.plan.name, 7, encode_plan(self.plan).decode()))
+        con.close()
+        with PlanStore(self.path) as store:
+            self.assertEqual(store.connection.execute('PRAGMA user_version').fetchone()[0], 2)
+            self.assertEqual(store.load(self.plan.name, self.c), (7, self.plan))
+            self.assertEqual(store.save(self.plan, self.c, 7), 8)
+            store.delete(self.plan.name, 8)
+            self.assertEqual(store.save(self.plan, self.c), 9)

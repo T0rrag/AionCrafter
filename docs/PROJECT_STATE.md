@@ -1,86 +1,78 @@
 # AionCrafter — project state
 
-Checkpoint: 2026-10-04, Phase 02 / Part 03. Brief v1.3 plus ADR 0003.
-Active Phase 02: **IN_PROGRESS**. Phase 01: **IN_PROGRESS**; p1-catalog: **BLOCKED**.
-Phases 03/05: **DEFERRED**. Gates A/B: **UNVERIFIED**.
+Checkpoint: 2026-10-04 · Phase 02 / Part 03, acceptance continuation · Brief v1.3, ADRs 0003/0004.
+Phase 02 **IN_PROGRESS**; Phase 01 **IN_PROGRESS**, p1-catalog **BLOCKED**.
+Phases 03/05 **DEFERRED**; Gates A/B **UNVERIFIED**. All 42 task IDs retained.
 
-## Verified repository and dependency
+## Repository and active writer
 
-Repository: https://github.com/T0rrag/AionCrafter
-Branch: `phase/02-manual-calculator`.
-Recorded base: `phase/01-data-foundation` at `3a395eb5894e65ff0d67e336d1a91dc452136843`.
-PR #2 was open, draft and unmerged when verified. Phase 02 draft PR #3 is explicitly
-stacked on that branch: https://github.com/T0rrag/AionCrafter/pull/3.
-No merge, force-push, release or deployment performed.
+https://github.com/T0rrag/AionCrafter · branch `phase/02-manual-calculator`.
+Draft PR #3: https://github.com/T0rrag/AionCrafter/pull/3, explicitly stacked on
+unmerged PR #2; base `phase/01-data-foundation` at
+`3a395eb5894e65ff0d67e336d1a91dc452136843`.
+This existing Aion2 cloud Work chat is the canonical active continuation, designated
+by the user. The local parent stopped application writes. GitHub provides durable code
+and handoff state; old local transcripts are not automatically synchronized or converted.
+No merge, force-push, release, deployment or permission changes.
 
-Published economics checkpoint: `2c614636f9ef22d799732d20455aa2cb4f25610d` (55 tests).
-Published Part 01 workflow: `7afffae4ca62e0c049429665b93ade5d25948175` (62 tests).
-Published Part 02 implementation: `4594c5a6c825733bd49c56c14cddfd41a3161ab7` (77 tests).
-Published implementation commits were fetched and their trees matched tested local checkpoints
-exactly. Delivery documentation follows the implementation SHA; fetch the actual head
-before editing. Shell Git push lacked usable authentication; connector commits and
-non-force ref updates published the same tested trees. See delivery receipt.
+## Published baseline and current increment
 
-## Delivered increments and remaining scope
+Part 02 implementation: `4594c5a6c825733bd49c56c14cddfd41a3161ab7` (77 tests).
+Part 03 reference implementation: `f8274ad71267a7737a95cff40e45eb9f7c9fb431` (85 tests).
+Starting delivery head for this continuation: `065dde81e685a5e80f8e3f12e8959d69b9b71d95`.
+Each published implementation was fetched and matched its tested local tree. Delivery
+receipts follow code; always fetch actual head before writes. Publication uses connected
+GitHub tree/commit/ref updates with force:false; HTTPS fetch verifies tree equality.
 
-| Task | Status | Evidence / remaining work |
+Current increment fixes stale saves/deletes after a plan name is deleted/recreated,
+preserves displayed observations through consecutive calculate/search/save actions,
+shows source/age at each price input and rejects merged import ID collisions atomically.
+Plan database migrates v1→v2 without altering existing payloads. Deletion removes saved
+content while retaining a per-name revision counter. Back up before upgrading; old
+v1-only applications cannot reopen a v2 plan database. JSON/CSV plan schema stays v1.
+
+## Task evidence and remaining acceptance
+
+| Task | Status | Implemented evidence / remaining work |
 |---|---|---|
-| p2-economics | IN_PROGRESS | economics.py: exact integer currency units, rational ROI/break-even, deterministic batches, configurable tax/fixed fees/proceeds rounding, minimal break-even currency tick, missing/unknown states. 9 new economics tests. Needs owner review and broader joint-output/market fee-rule acceptance. |
-| p2-editor | IN_PROGRESS | manual.py/web.py: explicit market/currency/faction and timezone-aware observation time; blank prices unavailable. Manual observations persist with original timestamps and linked overrides in saved plan revisions. Offline manual/vendor/snapshot imports and per-reference age implemented in references.py; acceptance remains. |
-| p2-listflow | IN_PROGRESS | Selected quantities or quantity-TAB-alias paste; variant picker for ambiguous names; unit/subtotal/known subtotal/incomplete total. Browser visual/pilot QA remains. |
-| p2-itemflow | IN_PROGRESS | Product/recipe selection, direct ingredients, deterministic batch yield and leftovers, manual selling price and margin. English/Spanish alias product search added. Direct ingredients supported; browser QA and remaining acceptance remain; recursive optimization stays Phase 04. |
-| p2-costmodes | IN_PROGRESS | valuation.py and 6 tests: inventory-adjusted shopping/cash, unchanged replacement value, recorded allocated material cost with explicit missing records. Historical crafting/sale fees and realized profit are not inferred. |
-| p2-save | IN_PROGRESS | plans.py/web.py and 7 plan tests: SQLite revisions, favorites/settings/prices/inventory/history, validated JSON/CSV transfer, reset/deletion, timestamp preservation and stale-writer checks. Browser/pilot acceptance remains. |
+| p2-economics | IN_PROGRESS | Integer units, rational ROI/break-even, deterministic batches and configurable fee/rounding assumptions. 11 economics tests include joint outputs and multiple fees. Owner/game-rule acceptance pending. |
+| p2-editor | IN_PROGRESS | Offline manual/vendor/snapshot references; rights/type/scope validation; linked overrides; per-item source/age and unknown timestamps; exact displayed provenance retained. Browser/source acceptance pending. |
+| p2-listflow | IN_PROGRESS | Selected or pasted materials, ambiguity picker, known subtotal/incomplete total. Full-form HTTP acceptance passed. Visual/pilot review pending. |
+| p2-itemflow | IN_PROGRESS | English/Spanish alias search, recipe/product selection, direct ingredients, batch yield/leftovers and margins; full-form save acceptance passed. Visual/pilot review pending. |
+| p2-costmodes | IN_PROGRESS | Owned stock reduces cash but preserves replacement cost; supplied consumed-material records require complete coverage. Owner/pilot acceptance pending. |
+| p2-save | IN_PROGRESS | Local immutable plan revisions, favorites/settings/inventory; validated JSON/CSV, preview/reset/confirmed deletion. v2 migration and delete/recreate stale-tab regression passed. Visual/owner acceptance pending. |
 
-Inputs are the unchanged **SYNTHETIC ONLY** catalog (7 variants, 3 recipes). Unknown
-probabilities are refused for deterministic economics; no expected-outcome engine is
-claimed. Leftovers and coproducts earn no credited revenue; all batch costs are charged
-to planned sales. Craft-fee per-output-unit counts all produced output units. Per-batch
-and per-attempt each count one recipe invocation. Tax rounding is a user-selected
-assumption applied once to batch proceeds; no verified game tax or rounding rule exists.
-Stock, sell-through and craft requirements remain unverified/manual checks.
+See `PHASE_02_ACCEPTANCE.md` for exact cases and remaining review procedure.
 
 ## Validation and limits
 
-Baseline: 47 tests passed on Python 3.14.7. Economics checkpoint: 55 tests passed.
-Part 02: `python3 -m unittest discover -q` — 77 tests passed. A strengthened import/save
-provenance assertion then passed all 7 targeted plan tests. Coverage includes local HTTP GET,
-POST, foreign-Origin refusal and oversized-body refusal. Loopback tests require an
-unsandboxed execution permission in this environment. Offline catalog validation and
-compileall passed. Bootstrap manifest/task validation passed; see TEST_RESULTS.md.
-Inherited SQLite ResourceWarnings on Python 3.14 remain; no new SQLite code was changed.
-Browser visual verification could not run: browser admin-policy verification was
-unavailable and access was denied. No browser/pilot/game/live-provider/overlay/remote-CI
-success is claimed. Phase 00 remains IN_PROGRESS; p1 engineering retains its existing
-evidence and p1-catalog still requires a permitted pilot catalog, 100 real items and 25
-verified recipes.
+Linux/Python 3.12.14: `python3 -m unittest discover -q` — **91 passed**.
+Targeted complete-form + plan suite — 13 passed. Compileall, offline catalog validation,
+diff checks and refreshed bootstrap manifest checks passed. Tests parse and submit
+actual rendered controls over loopback HTTP; no browser layout/keyboard claim follows.
 
-Next: continue Phase 02 Part 03 on this branch/PR: finish source-aware reference imports,
-remaining acceptance/browser QA. Read `handoffs/phase-02-part-03.md`.
-This cloud Work chat in the existing Aion2 project is the canonical active Phase 02
-continuation, explicitly designated by the user. The local parent stopped application
-writes. GitHub is the durable handoff; old local transcripts are not converted or
-synchronized. The prior cloud-choice-pending text is superseded.
+Visual QA remains **UNVERIFIED**. Prior local Chromium was absent and downloads returned
+invalid ZIPs. Connected cloud browser was also tried against the running calculator:
+`net::ERR_BLOCKED_BY_CLIENT`. No screenshot or rendered-page acceptance obtained.
+Prior Python 3.14 SQLite ResourceWarnings remain unresolved on that runtime. No remote
+CI, Windows, pilot/game, live-provider or overlay success claimed.
 
-Autonomous continuation is now authorized by the user (ADR 0004). Create same-project
-continuation chats at phase boundaries or when context grows large, carrying the
-checkpoint and constraints. Context recovery confirmed prior architecture and Phase 01
-decisions; related translation work provides no permitted catalog.
+Fixtures remain **SYNTHETIC ONLY** (7 variants, 3 recipes); no permitted real catalog.
+p1-catalog still needs pilot scope, rights, 100 real items and 25 verified recipes.
+Unknown stochastic outcomes are rejected. Leftovers/coproducts have no revenue credit;
+all craft costs go to planned sales. Per-output-unit fees count every produced output;
+per-attempt/per-batch each count an invocation. Tax rounding applies once to batch
+proceeds as an unverified assumption. Vendor stock, restrictions and sell-through stay
+manual checks. Actual historical craft/sale fees and realized profit are unknown without
+records. Recursive optimization remains Phase 04.
 
-## Part 03 cloud checkpoint
+## Next action and continuity
 
-Started from verified head 4797ce5f5fd46fcf6055afc1357802cf02d55303. Added source-aware
-offline reference imports, per-item observation times, exact provenance-preserving plan
-transfers and source/age presentation. Synthetic reference sample and usage guide:
-REFERENCE_IMPORTS.md. Added reference/HTTP/round-trip regressions and broader joint-output,
-multiple-fee, wrong-currency and negative-proceeds tests. No provider access added.
-Actual validation: 85 tests passed on Python 3.12.14; compileall, offline catalog validation
-and diff checks passed. Visual browser QA attempted: Playwright executable missing;
-Chromium download returned invalid ZIP archives. Visual QA remains UNVERIFIED.
-Prior Python 3.14 ResourceWarnings remain an inherited unresolved issue; this run does
-not establish their resolution. All six Phase 02 tasks stay IN_PROGRESS pending acceptance.
-Next: browser QA in an environment with Chromium, then owner/pilot acceptance. Continue
-this cloud chat while practical; Part 04 starter is saved for a future context handoff.
-
-Published Part 03 implementation: `f8274ad71267a7737a95cff40e45eb9f7c9fb431` (85 tests). Remote fetched;
-full tree equals tested local checkpoint. Delivery receipt follows this implementation.
+Continue Phase 02 acceptance in this cloud chat while context is practical. Execute the
+visual workflow matrix where a browser can reach the loopback app, then obtain owner
+and permitted pilot review. Read `handoffs/phase-02-part-03-acceptance.md`.
+`NEXT_CHAT_PROMPT.md` prepares a future Part 04 continuation; it does not create a chat.
+No callable chat-creation tool was found this turn. User authorization for autonomous
+uploads and same-project chat handoffs persists, subject to verifying actual startup
+and preventing concurrent writers. Do not start another phase or mark this one complete
+just because automated engineering tests passed.

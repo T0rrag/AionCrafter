@@ -57,6 +57,7 @@ def render(catalog, form=None, *, supplied_observations=None):
     def options(items, selected):
         return ''.join(f'<option value="{i}" {"selected" if str(i)==selected else ""}>{escape(label(item))}</option>' for i, item in items)
     result = ''
+    observations = None
     try:
         if form and value('action') != 'search':
             market = MarketScope(catalog.scope.dataset_kind, catalog.scope.region, MarketKind(value('market_kind')),
@@ -146,9 +147,11 @@ def render(catalog, form=None, *, supplied_observations=None):
         body += '<input type="hidden" name="reference_payload" value="' + escape(dumps(supplied_observations), quote=True) + '">'
     elif value('reference_payload'):
         body += '<input type="hidden" name="reference_payload" value="' + escape(value('reference_payload'), quote=True) + '">'
-    body += '<fieldset><legend>Manual unit prices and materials-only quantities</legend>'
+    body += '<fieldset><legend>Unit references and materials-only quantities</legend>'
     for i, item in enumerate(catalog.items):
-        body += '<div>' + field(f'p{i}', label(item) + ' — unit price') + field(f't{i}', 'Item observed at (blank uses default; imported unknown remains unknown)', value('observed')) + field(f'q{i}', 'Quantity', '0','number') + field(f'owned{i}', 'Owned usable quantity', '0', 'number') + '<details><summary>Recorded consumed-material cost</summary>' + field(f'hqty{i}', 'Recorded consumed quantity', '', 'number') + field(f'hcost{i}', 'Recorded total paid for those units') + field(f'href{i}', 'Record reference') + '</details></div>'
+        source = supplied_observations if supplied_observations is not None else observations
+        current = source[i] if source and i < len(source) else None
+        body += '<div>' + field(f'p{i}', label(item) + ' — unit price') + '<p class="reference-source">' + escape(reference_label(current)) + '</p>' + field(f't{i}', 'Item observed at (blank uses default; imported unknown remains unknown)', value('observed')) + field(f'q{i}', 'Quantity', '0','number') + field(f'owned{i}', 'Owned usable quantity', '0', 'number') + '<details><summary>Recorded consumed-material cost</summary>' + field(f'hqty{i}', 'Recorded consumed quantity', '', 'number') + field(f'hcost{i}', 'Recorded total paid for those units') + field(f'href{i}', 'Record reference') + '</details></div>'
     body += '<label>Paste quantity TAB exact name per line<textarea name="paste">' + escape(value('paste')) + '</textarea></label>'
     body += select('language',['en','es'],'en') + '</fieldset><fieldset><legend>Item workflow (ignored in materials mode)</legend>'
     query = value('product_search').strip()
@@ -185,6 +188,12 @@ def handler(catalog, plan_database=None):
 
         def page(self, form=None, *, notice='', observations=None):
             form = form or {}
+            if form and observations is None:
+                try:
+                    observations = form_observations(catalog, form)
+                    validate_references(observations, catalog, observations[0].identity.market)
+                except (ValidationError, ValueError):
+                    observations = None
             html = render(catalog, form or None, supplied_observations=observations)
             controls = f'<input type="hidden" name="csrf" value="{token}">'
             if form.get('import_payload'):
@@ -199,7 +208,7 @@ def handler(catalog, plan_database=None):
                 controls += '<button name="action" value="save">Save plan</button><button name="action" value="load" formnovalidate>Load named plan</button><button name="action" value="export_json" formnovalidate>Export JSON</button><button name="action" value="export_csv" formnovalidate>Export CSV</button>'
                 controls += '<p>Saved names: ' + escape(', '.join(name for name,_ in plans) or 'None') + '</p>'
                 controls += '<label>Paste exported plan JSON or CSV<textarea name="import_data"></textarea></label><label>Import format<select name="import_format"><option>json</option><option>csv</option></select></label><button name="action" value="import" formnovalidate>Preview import</button>'
-                controls += '<label><input type="checkbox" name="confirm_delete" value="yes">Delete all revisions of this named plan</label><button name="action" value="delete" formnovalidate>Delete named plan</button><button name="action" value="reset" formnovalidate>Reset unsaved form</button></fieldset>'
+                controls += '<label><input type="checkbox" name="confirm_delete" value="yes">Delete all revisions of this named plan</label><p>Deletion removes plan contents; a name/revision counter remains to reject stale tabs.</p><button name="action" value="delete" formnovalidate>Delete named plan</button><button name="action" value="reset" formnovalidate>Reset unsaved form</button></fieldset>'
             html = html.replace('<form method="post">', '<form method="post">' + controls)
             if notice:
                 html = html.replace('<h1>', '<p role="status">' + escape(notice) + '</p><h1>', 1)
@@ -233,6 +242,7 @@ def handler(catalog, plan_database=None):
                     merged = {o.identity: o for o in previous}
                     merged.update({o.identity: o for o in imported})
                     observations = tuple(merged[o.identity] for o in previous)
+                    validate_references(observations, catalog, previous[0].identity.market)
                     for i, obs in enumerate(observations):
                         form[f'p{i}'] = obs.unit_price or ''
                         form[f't{i}'] = obs.observed_at or ''

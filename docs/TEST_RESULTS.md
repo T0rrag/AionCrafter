@@ -98,3 +98,18 @@ and refreshed bootstrap manifest validation passed. Browser visual QA remains un
 Playwright executable absent; Chromium install failed with invalid ZIP archives.
 Inherited Python 3.14 SQLite ResourceWarnings remain unresolved; runtime differs here.
 No pilot/game/provider/overlay/Windows or remote-CI success claimed.
+
+## Phase 02 Part 03 — acceptance continuation (2026-10-04)
+
+Python 3.12.14 / Linux. Reproduced stale-save bug: delete/recreate reset revision 1,
+allowing the old revision-1 writer. Database v2 fixes it with persistent per-name counters.
+Actual targeted run: `python3 -m unittest tests.test_form_acceptance tests.test_plans -q`
+— 13 passed. Full run: `python3 -m unittest discover -q` — 91 passed, 2.989 seconds.
+Four new complete-form HTTP cases verify both workflows, repeated calculate/search/save,
+unknown-age snapshot + old vendor reference, linked override and CSV import-copy, and
+atomic refusal of merged observation-ID collisions. Two storage regressions verify
+v1→v2 migration without payload changes and stale save/delete rejection after recreation.
+Compileall, offline catalog validation, diff check and refreshed bootstrap validation
+passed. Connected cloud browser attempted the running loopback app and returned
+`net::ERR_BLOCKED_BY_CLIENT`. Visual QA remains unverified; no screenshot obtained.
+See PHASE_02_ACCEPTANCE.md; inherited Python 3.14 warnings remain unresolved there.

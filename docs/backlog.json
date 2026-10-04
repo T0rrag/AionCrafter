@@ -131,7 +131,7 @@
           "title": "Implement item \u2192 materials \u2192 margin",
           "description": "Search a product, select its recipe and quantity, show direct ingredients or a fully expanded tree, price the output and calculate estimated profit/loss.",
           "status": "IN_PROGRESS",
-          "evidence": "web.py; bilingual accent-insensitive product search, explicit recipe/direct ingredients, batch leftovers/margins. Browser acceptance remains; recursive optimization stays Phase 04."
+          "evidence": "web.py; bilingual alias search, direct ingredients/batches/margins; full-form HTTP calculation+save passed. Visual/pilot acceptance pending; recursion Phase 04."
         },
         {
           "id": "p2-listflow",
@@ -139,7 +139,7 @@
           "title": "Implement materials-only pricing",
           "description": "Accept selected items or a pasted materials list. Resolve ambiguous names with a picker. Return unit prices, quantities, subtotals and a total without requiring a recipe or a selling-price field.",
           "status": "IN_PROGRESS",
-          "evidence": "aioncrafter/web.py; selected quantities or pasted quantity-TAB-alias with ambiguity picker; 6 manual/workflow/HTTP tests pass. Browser/pilot QA remains unverified."
+          "evidence": "web.py; selected/pasted quantities and ambiguity picker; full-form HTTP total/missing-price/owned-cash cases passed. Visual/pilot acceptance pending."
         },
         {
           "id": "p2-editor",
@@ -147,7 +147,7 @@
           "title": "Add a source-aware price editor",
           "description": "Let users enter their own observed prices or approved reference imports. Require market and observation time; distinguish manual, vendor, snapshot, delayed and unavailable values.",
           "status": "IN_PROGRESS",
-          "evidence": "references.py/web.py: validated offline manual/vendor/snapshot imports, rights/scope/type checks, per-item source observation age and unknown-time display; provenance retained through save/reload/JSON/CSV; 6 reference tests. Browser/pilot acceptance remains."
+          "evidence": "references.py/web.py; offline manual/vendor/snapshot imports, per-field source/age, unknown times, exact observation preservation through repeated calculate/search/save; merged ID collision rejected. 6 reference tests + full-form HTTP cases. Visual/pilot acceptance pending."
         },
         {
           "id": "p2-costmodes",
@@ -171,7 +171,7 @@
           "title": "Save plans and material lists",
           "description": "Persist favorites, market settings, user-entered prices and inventory quantities. Add JSON/CSV import/export with validation and a clear reset. No trading or crafting automation.",
           "status": "IN_PROGRESS",
-          "evidence": "plans.py/web.py; 7 plan tests. Local SQLite revisions/favorites/settings/prices/inventory, validated JSON/CSV import/export, reset and confirmed deletion; original observation times preserved. Browser acceptance remains."
+          "evidence": "plans.py/web.py; v2 migration preserves payloads, monotonic counters reject stale save/delete after recreation. 9 plan tests and 4 full-form HTTP acceptance tests; JSON/CSV preserves displayed observations. Visual/owner acceptance pending."
         }
       ]
     },
@@ -405,5 +405,6 @@
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
   "checkpoint_part": "03",
   "next_eligible_phase": "02",
-  "next_phase_dependency_note": "Continue Phase 02 in canonical Aion2 cloud chat; local parent stopped application writes. Browser QA and acceptance remain; p1-catalog BLOCKED."
+  "next_phase_dependency_note": "Continue Phase 02 acceptance in canonical Aion2 cloud chat; full-form HTTP checks pass. Browser visual/owner/pilot acceptance pending; p1-catalog BLOCKED.",
+  "checkpoint_label": "Part 03 acceptance continuation"
 }

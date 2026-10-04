@@ -33,7 +33,7 @@
     {
       "path": "README.md",
       "bytes": 6946,
-      "sha256": "55beeff774c83de615cbc71a207ba0f52f52ee93b01db4c1c85616282e87a8ee"
+      "sha256": "9713ba89ab50b7d8b523d4bdd17620a386076eb180e5c32ab30df726fc84733a"
     },
     {
       "path": "aioncrafter/__init__.py",
@@ -78,7 +78,7 @@
     {
       "path": "aioncrafter/plans.py",
       "bytes": 8032,
-      "sha256": "a02788db4ec6e6617960b89858a1694663cb961141a2583264fd8094b8d9a222"
+      "sha256": "fd15e09953eb82c0ad501bac11a17dc5f20e8e4b26730f7d52266fb162202765"
     },
     {
       "path": "aioncrafter/providers.py",
@@ -98,7 +98,7 @@
     {
       "path": "aioncrafter/web.py",
       "bytes": 22885,
-      "sha256": "11830ac2c4b4c6021b782df9941e6415e9cc17585df35b8245bc25a81e1bf541"
+      "sha256": "9cd79a24f37c55f70391e2ed3649bfbabab5a02979ef12a5b02cf58d449de665"
     },
     {
       "path": "docs/CHAT_PROJECT_INSTRUCTIONS.txt",
@@ -113,7 +113,7 @@
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
       "bytes": 1445,
-      "sha256": "77d1a5923348bfff4522aba241e2f3cffaaadde0ab5f31a71960b39e277dca6d"
+      "sha256": "7cc60d468ed3ca4ab14814bf8cac7bd7d574585a256d19abf76e7464657d59c3"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -123,17 +123,17 @@
     {
       "path": "docs/PROJECT_STATE.md",
       "bytes": 5352,
-      "sha256": "c38fc2e0476d32c0bfb6b8ce2fb13d9db161ecd897f0c27b9fc4f1b663554d9f"
+      "sha256": "3619f40219d9465b70a23223738e4bad2cb3b3a620161c6886238e91b4c2f38c"
     },
     {
       "path": "docs/TEST_RESULTS.md",
       "bytes": 5769,
-      "sha256": "31f136ae1f452f2a5192b1aa748bea25e1f0e5b4770ac55902406efc0b70d1ea"
+      "sha256": "ffa8a5c1485146ca7df38b5544d3d1c558ae00b103824ee2601538428123bd49"
     },
     {
       "path": "docs/backlog.json",
       "bytes": 23007,
-      "sha256": "1b353cbe5da54eb706413fc04947ec88a99c3512d2482b5c9a3fa0233d38c9aa"
+      "sha256": "93f50c725025694c0192d32c164feb2ab5fb76de65a89eb63eda091a4717cad7"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -198,7 +198,7 @@
     {
       "path": "docs/roadmap-progress.json",
       "bytes": 1026,
-      "sha256": "b5706eb603b7df0e1c834008f89ac3235f8869e4f3ef5b5761d0bd8dfc3c50e8"
+      "sha256": "7d28ef365d217b9ff10b73d687f6a075d81d02008f270c0ef016adcc7365d16e"
     },
     {
       "path": "docs/sources/SYNTHETIC.md",
@@ -258,7 +258,7 @@
     {
       "path": "tests/test_plans.py",
       "bytes": 6994,
-      "sha256": "8cd4df61d5f68decf6357f213d778bf8db8775228dafd7c779bcf4a801b8abd3"
+      "sha256": "e6e51e50508ce2c8bae4a0eb60176cb4a50035ac3141980a16edf58a1f4cd51f"
     },
     {
       "path": "tests/test_storage.py",
@@ -289,6 +289,22 @@
     {
       "path": "docs/handoffs/phase-02-part-03.md",
       "sha256": "552eaa688d35f9a5198b9064c7975087c830d70cb728af402a6f032af1e887e4"
+    },
+    {
+      "path": "tests/http_form.py",
+      "sha256": "188f5f20778d8e636b9db91130d3f689b25aa314bd55ba16292ee18e248b841b"
+    },
+    {
+      "path": "tests/test_form_acceptance.py",
+      "sha256": "346d1b4a036b2268aed4bc37a4d2be60cc2c465fb98554eeb1d3f15322ac61af"
+    },
+    {
+      "path": "docs/PHASE_02_ACCEPTANCE.md",
+      "sha256": "57aee624c3b72b95da3025f31800c2a94b7f42f6cacfb1cd1b67a1bf2a2b6069"
+    },
+    {
+      "path": "docs/handoffs/phase-02-part-03-acceptance.md",
+      "sha256": "8d2bc96ec5ba2f86582bdf4c0ca66c25d5c3acf06c28d0b3a2c1ec59619b7319"
     }
   ]
 }

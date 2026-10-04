@@ -84,7 +84,7 @@ python3 -m unittest discover -v
 
 Independent project; not affiliated with NC, Overwolf or CurseForge.
 
-## Phase 02 / Part 01 — local manual calculator
+## Phase 02 — local manual calculator
 
 ```bash
 python3 -m aioncrafter.web --catalog tests/fixtures/SYNTHETIC-catalog-v1.json
@@ -113,12 +113,21 @@ arithmetic; displayed monetary results use exact currency units and chosen proce
 rounding. Fees and rounding are unverified assumptions, not game rules.
 
 [Phase 02 draft PR #3](https://github.com/T0rrag/AionCrafter/pull/3) is stacked on PR #2.
-77 local tests pass, plus a targeted 7-test plan provenance rerun. Browser visual QA remains unverified due to a browser policy
-verification failure. Phase 02 remains IN_PROGRESS; see the current state and handoff.
+91 local tests pass, including complete-form HTTP and plan migration regressions. Browser
+visual QA remains unverified: local Chromium is unavailable and the cloud browser blocks
+the loopback URL. Phase 02 remains IN_PROGRESS; see the current state and handoff.
 
 Part 02 adds owned-quantity inputs and optional historical material-cost allocations.
 Replacement value still includes owned inputs; additional cash uses only missing units
 and known craft fees. Recorded material cost requires coverage for every consumed unit
 and a record reference. It excludes historical crafting/sale fees and realized profit.
-Product search matches English/Spanish aliases without accents. Browser visual QA and
-approved vendor/snapshot reference imports remain unfinished. See the Part 02 handoff.
+Product search matches English/Spanish aliases without accents. Part 03 adds validated
+offline manual/vendor/snapshot reference imports and per-item source/age labels. Exact
+observations survive calculate/search/save and JSON/CSV transfers. See
+[reference imports](docs/REFERENCE_IMPORTS.md) and [acceptance evidence](docs/PHASE_02_ACCEPTANCE.md).
+
+Plan database v2 upgrades existing v1 databases automatically without changing plan
+payloads. Revision numbers remain increasing when a name is deleted and recreated, so
+stale tabs cannot overwrite/delete the recreated plan. Only its name/revision counter
+survives deletion. Older v1-only applications refuse the upgraded database; keep a backup
+before upgrading. JSON/CSV plan schema remains v1.

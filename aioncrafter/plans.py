@@ -10,7 +10,7 @@ import sqlite3
 
 from .codec import dumps, loads, require, validate_fields
 from .identity import identifier
-from .models import Catalog, PriceObservation, PriceType, timestamp
+from .models import Catalog, PriceObservation, timestamp
 
 MAX_PLAN_BYTES = 256 * 1024
 
@@ -114,11 +114,15 @@ class PlanStore:
             tables = self.connection.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()
             require(app == self.APPLICATION_ID or (app == 0 and not tables), 'PLAN_DATABASE', 'Choose a separate plan database')
             version = self.connection.execute('PRAGMA user_version').fetchone()[0]
-            require(version <= 1, 'PLAN_VERSION', 'Plan database is from a newer application')
+            require(version <= 2, 'PLAN_VERSION', 'Plan database is from a newer application')
             with self.connection:
+                # Serialize schema migration and seed counters from old revisions.
+                self.connection.execute('BEGIN IMMEDIATE')
                 self.connection.execute('CREATE TABLE IF NOT EXISTS plans (name TEXT, revision INTEGER, payload TEXT NOT NULL, PRIMARY KEY(name, revision))')
+                self.connection.execute('CREATE TABLE IF NOT EXISTS plan_versions (name TEXT PRIMARY KEY, last_revision INTEGER NOT NULL)')
+                self.connection.execute('INSERT OR IGNORE INTO plan_versions SELECT name, max(revision) FROM plans GROUP BY name')
                 self.connection.execute(f'PRAGMA application_id={self.APPLICATION_ID}')
-                self.connection.execute('PRAGMA user_version=1')
+                self.connection.execute('PRAGMA user_version=2')
         except BaseException:
             self.connection.close()
             raise
@@ -146,12 +150,18 @@ class PlanStore:
             row = self.connection.execute('SELECT max(revision) FROM plans WHERE name=?', (plan.name,)).fetchone()
             current = row[0] or 0
             require(current == expected_revision, 'CONCURRENT_CHANGE', 'Plan changed; reload before saving')
-            self.connection.execute('INSERT INTO plans VALUES (?,?,?)', (plan.name, current+1, payload))
-        return current + 1
+            last = self.connection.execute('SELECT last_revision FROM plan_versions WHERE name=?', (plan.name,)).fetchone()
+            revision = (last[0] if last else 0) + 1
+            self.connection.execute('INSERT INTO plans VALUES (?,?,?)', (plan.name, revision, payload))
+            self.connection.execute('INSERT INTO plan_versions VALUES (?,?) ON CONFLICT(name) DO UPDATE SET last_revision=excluded.last_revision',
+                                    (plan.name, revision))
+        return revision
 
     def delete(self, name, expected_revision):
+        require(type(expected_revision) is int and expected_revision > 0, 'PLAN_REVISION', 'Revision must be positive')
         with self.connection:
             self.connection.execute('BEGIN IMMEDIATE')
             row = self.connection.execute('SELECT max(revision) FROM plans WHERE name=?', (name,)).fetchone()
             require(row[0] is not None and row[0] == expected_revision, 'CONCURRENT_CHANGE', 'Plan changed; reload before deleting')
+            # Keep only the per-name counter so recreation cannot revive stale tabs.
             self.connection.execute('DELETE FROM plans WHERE name=?', (name,))
