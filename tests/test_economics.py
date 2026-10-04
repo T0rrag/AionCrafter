@@ -82,6 +82,10 @@ class EconomicsTests(unittest.TestCase):
             with self.assertRaises(ValidationError):
                 materials_cost(items, self.m, obs)
 
+    def test_equivalent_deterministic_probability(self):
+        recipe = replace(self.r, outcomes=(replace(self.r.outcomes[0], probability='1.0'),))
+        self.assertEqual(self.calc(recipe=recipe).profit, 325000)
+
     def test_invalid_values_and_unknown_probabilities(self):
         for value in ('-1', '1.001', 'NaN'):
             with self.assertRaises(ValidationError):

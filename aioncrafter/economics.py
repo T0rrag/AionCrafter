@@ -102,7 +102,7 @@ def rounded(value: Fraction, rule: str) -> int:
 def item_economics(recipe: Recipe, target: ItemQuantity, market: MarketScope,
                    observations: tuple[PriceObservation, ...], selling_price: str | None,
                    sale_fees: SaleFees, craft_fees=None) -> EconomicsResult:
-    require(len(recipe.outcomes) == 1 and recipe.outcomes[0].probability == '1',
+    require(len(recipe.outcomes) == 1 and recipe.outcomes[0].probability is not None and Fraction(recipe.outcomes[0].probability) == 1,
             'NONDETERMINISTIC', 'Only a known deterministic outcome is supported in Phase 02')
     output = next((x for x in recipe.outcomes[0].outputs if x.item == target.item), None)
     require(output is not None, 'OUTPUT', 'Target must be an explicit recipe output')
