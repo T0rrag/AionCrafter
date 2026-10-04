@@ -1,5 +1,6 @@
 Continue AionCrafter Phase 02 — Manual calculator, Part 04 in this same Aion2 cloud
 ChatGPT project. Use master prompt v1.3 sections 8/13/20/21 and ADRs 0003/0004.
+Latest verified implementation: a3254c48831ea4cd54ce9e7211e286a9b3ca5f61.
 Fetch T0rrag/AionCrafter phase/02-manual-calculator and verify actual head before writing.
 Read docs/PROJECT_STATE.md, docs/handoffs/phase-02-part-03-acceptance.md, docs/backlog.json and
 PHASE_02_ACCEPTANCE.md. PR #3 remains draft stacked on unmerged PR #2 (recorded base

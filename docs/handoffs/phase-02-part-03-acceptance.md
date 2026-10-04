@@ -5,6 +5,9 @@ Branch phase/02-manual-calculator; draft PR #3 stacked on unmerged PR #2 at base
 3a395eb5894e65ff0d67e336d1a91dc452136843. Started from verified remote
 065dde81e685a5e80f8e3f12e8959d69b9b71d95. This continues the same canonical cloud chat.
 
+Verified implementation upload: `a3254c48831ea4cd54ce9e7211e286a9b3ca5f61`.
+Full fetched tree equals tested local checkpoint; delivery documentation follows.
+
 ## Delivered
 p2-save: reproduced an old-tab overwrite after deleting/recreating the same plan name:
 both old and recreated plans had revision 1. Database v2 now preserves a per-name revision

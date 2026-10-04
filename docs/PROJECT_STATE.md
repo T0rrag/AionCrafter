@@ -19,6 +19,7 @@ No merge, force-push, release, deployment or permission changes.
 
 Part 02 implementation: `4594c5a6c825733bd49c56c14cddfd41a3161ab7` (77 tests).
 Part 03 reference implementation: `f8274ad71267a7737a95cff40e45eb9f7c9fb431` (85 tests).
+Acceptance implementation: `a3254c48831ea4cd54ce9e7211e286a9b3ca5f61` (91 tests); fetched tree matches tested checkpoint.
 Starting delivery head for this continuation: `065dde81e685a5e80f8e3f12e8959d69b9b71d95`.
 Each published implementation was fetched and matched its tested local tree. Delivery
 receipts follow code; always fetch actual head before writes. Publication uses connected
