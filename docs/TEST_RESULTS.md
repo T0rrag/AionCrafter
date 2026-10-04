@@ -113,3 +113,12 @@ Compileall, offline catalog validation, diff check and refreshed bootstrap valid
 passed. Connected cloud browser attempted the running loopback app and returned
 `net::ERR_BLOCKED_BY_CLIENT`. Visual QA remains unverified; no screenshot obtained.
 See PHASE_02_ACCEPTANCE.md; inherited Python 3.14 warnings remain unresolved there.
+
+## Phase 02 to Phase 04 sequencing handoff — 2026-10-04
+
+Reran the fetched baseline 91a2479c94a26757fc34ca09bac1e9218ff82935:
+`python3 -m unittest discover -q` — 95 passed in 3.664 seconds (Python 3.12.14).
+Only documentation/sequencing changes follow this baseline; no application changes.
+ADR 0005 removes cloud/Chromium work from the active development queue and authorizes
+Phase 04 synthetic engineering using Phase 02. Pending acceptance remains recorded.
+Bootstrap manifest/42-ID validation and git diff --check passed after refreshing docs.

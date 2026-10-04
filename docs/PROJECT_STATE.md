@@ -1,6 +1,6 @@
 # AionCrafter — project state
 
-Checkpoint: 2026-10-04 · Phase 02 / Part 03, acceptance continuation · Brief v1.3, ADRs 0003/0004.
+Checkpoint: 2026-10-04 · Phase 02 / Part 03, acceptance continuation · Brief v1.3, ADRs 0003–0005.
 Phase 02 **IN_PROGRESS**; Phase 01 **IN_PROGRESS**, p1-catalog **BLOCKED**.
 Phases 03/05 **DEFERRED**; Gates A/B **UNVERIFIED**. All 42 task IDs retained.
 
@@ -74,14 +74,18 @@ records. Recursive optimization remains Phase 04.
 
 ## Next action and continuity
 
-Continue Phase 02 acceptance in this cloud chat while context is practical. Execute the
-visual workflow matrix where a browser can reach the loopback app, then obtain owner
-and permitted pilot review. Read `handoffs/phase-02-part-03-reference-acceptance.md`.
-`NEXT_CHAT_PROMPT.md` prepares a future Part 04 continuation; it does not create a chat.
-No callable chat-creation tool was found this turn. User authorization for autonomous
-uploads and same-project chat handoffs persists, subject to verifying actual startup
-and preventing concurrent writers. Do not start another phase or mark this one complete
-just because automated engineering tests passed.
+User direction (2026-10-04, ADR 0005): continue normal feature development and create a
+new chat for each phase. Remove cloud/Chromium troubleshooting from the active queue.
+Next eligible development phase: **Phase 04 — Crafting intelligence**, Part 01, starting
+with **p4-batches**. The tested Phase 02 engineering is a sufficient dependency for
+synthetic Phase 04 work. Its visual/owner/pilot acceptance remains recorded for later
+review; these pending checks do not block the next engineering phase or become passed.
 
-Remote CI query at implementation d355f7107d0a2205a61afc672f7c27f9b2146864: zero
-check runs, Actions runs and commit statuses; combined status pending. No executed CI pass.
+Read `handoffs/phase-02-to-phase-04.md` and `decisions/0005-continue-engineering-without-browser-gate.md`.
+`NEXT_CHAT_PROMPT.md` starts Phase 04. Use `phase/04-crafting-intelligence`, explicitly
+stacked on unmerged Phase 02 PR #3. Fetch actual remote branch/head before writing.
+This Phase 02 chat stops application writes at handoff. A separate same-project chat
+must be created/verified before claiming Phase 04 started there. No merge/force-push.
+
+The fetched current code baseline was rerun: **95 tests passed**, Python 3.12.14.
+This checkpoint updates sequencing/documentation only; prior feature evidence stands.

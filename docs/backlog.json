@@ -404,7 +404,8 @@
   "remote_base_sha": "3a395eb5894e65ff0d67e336d1a91dc452136843",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
   "checkpoint_part": "03",
-  "next_eligible_phase": "02",
-  "next_phase_dependency_note": "Continue Phase 02 acceptance in canonical Aion2 cloud chat; full-form HTTP checks pass. Browser visual/owner/pilot acceptance pending; p1-catalog BLOCKED.",
-  "checkpoint_label": "Part 03 reference acceptance extension"
+  "next_eligible_phase": "04",
+  "next_phase_dependency_note": "ADR 0005: user directs normal feature development. Phase 04 p4-batches may use tested Phase 02 engineering, stacked on unmerged PR #3; outstanding visual/pilot acceptance deferred from active queue. New Aion2 chat per phase.",
+  "checkpoint_label": "Phase 02 to Phase 04 engineering handoff",
+  "next_development_branch": "phase/04-crafting-intelligence"
 }

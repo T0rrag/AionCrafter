@@ -63,3 +63,10 @@ validator passed with 42 IDs and 62 artifact checksums. Local Playwright launch 
 again: Chromium executable absent (chromium_headless_shell-1234). No browser rendering
 was obtained; previous connected-browser loopback blockage remains recorded above.
 Visual/browser, owner and permitted pilot acceptance remain outstanding.
+
+## Sequencing update — ADR 0005
+
+The user directed normal development on 2026-10-04 and asked to ignore the ongoing
+cloud/Chromium work. The outstanding visual/owner/pilot acceptance above remains an
+evidence record, not the next engineering task. Proceed to Phase 04 in a new Aion2 chat
+using the tested Phase 02 foundation. No test is promoted to passed by this decision.

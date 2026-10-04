@@ -1,20 +1,19 @@
-Continue AionCrafter Phase 02 — Manual calculator, Part 04 in this same Aion2 cloud
-ChatGPT project. Use master prompt v1.3 sections 8/13/20/21 and ADRs 0003/0004.
-Latest verified implementation: d355f7107d0a2205a61afc672f7c27f9b2146864.
-Fetch T0rrag/AionCrafter phase/02-manual-calculator and verify actual head before writing.
-Read docs/PROJECT_STATE.md, docs/handoffs/phase-02-part-03-reference-acceptance.md, docs/backlog.json and
-PHASE_02_ACCEPTANCE.md. PR #3 remains draft stacked on unmerged PR #2 (recorded base
-3a395eb5894e65ff0d67e336d1a91dc452136843). Part 03 acceptance checkpoint passed 95 tests on Python 3.12.14.
-Offline manual/vendor/snapshot imports and per-item observation ages are implemented;
-unknown ages stay unknown, linked manual edits and plan transfers preserve provenance.
-First: browser QA with an available Chromium, then remaining Phase 02 acceptance.
-Visual attempts failed: local Chromium absent/download invalid; cloud loopback URL blocked.
-Plan database v2 prevents stale writes after deletion/recreation; exact observations
-survive repeated calculate/search/save. Review migration notes before upgrades.
-All Phase 02 tasks IN_PROGRESS; Phase 01 incomplete/p1-catalog BLOCKED. Synthetic only.
-Phases 03/05 DEFERRED; Gates A/B UNVERIFIED. Historical fees/realized profit unknown
-without records; recursive optimization Phase 04. Inherited Python 3.14 warnings remain.
-Develop/upload autonomously; no merge or force-push. Persist actual tests/handoff and
-verify SHAs. This cloud continuation is canonical; local parent stopped code writes.
-Create further same-project chats only at phase/context handoffs, verifying startup and
-preventing concurrent writers. Do not claim local transcript synchronization.
+Start AionCrafter Phase 04 — Crafting intelligence, Part 01 inside this same Aion2 project.
+Follow master prompt v1.3 and ADRs 0003/0004/0005. The user directs normal feature
+development and a new chat for each phase; do not spend this phase on Chromium/cloud QA.
+
+Fetch T0rrag/AionCrafter, inspect phase/04-crafting-intelligence if present, and verify
+its actual head/base before editing. Otherwise create it from the current verified
+phase/02-manual-calculator handoff. Read docs/PROJECT_STATE.md, docs/backlog.json and
+docs/handoffs/phase-02-to-phase-04.md. Phase 02 PR #3 is unmerged; explicitly stack the
+new phase branch/PR on it. The Phase 02 code baseline passed 95 tests.
+
+First implement p4-batches: pure deterministic recursive recipe expansion, shared-demand
+aggregation before batch rounding, explicit recipe selection and leftover accounting.
+Use labeled synthetic fixtures and test boundaries, shared intermediates and rejection
+of cycles/unsupported stochastic outcomes. Keep exact arithmetic and scoped identity.
+
+Visual/pilot acceptance is tracked for later; it does not block this engineering phase.
+Phase 01/catalog incomplete; Phases 03/05 DEFERRED; Gates A/B UNVERIFIED. Preserve all
+42 IDs. Upload tested increments, verify SHAs, open a draft Phase 04 PR, and save state
+and handoff. No merge/force-push. Previous chat stops application writes at handoff.
