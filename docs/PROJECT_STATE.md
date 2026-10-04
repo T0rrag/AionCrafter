@@ -55,3 +55,8 @@ verified recipes.
 
 Next: continue Phase 02 Part 02 on this same branch/PR, beginning p2-costmodes and then
 persisted manual prices/plans. Read `handoffs/phase-02-part-01.md` and NEXT_CHAT_PROMPT.md.
+
+Autonomous continuation is now authorized by the user (ADR 0004). Create same-project
+continuation chats at phase boundaries or when context grows large, carrying the
+checkpoint and constraints. Context recovery confirmed prior architecture and Phase 01
+decisions; related translation work provides no permitted catalog.

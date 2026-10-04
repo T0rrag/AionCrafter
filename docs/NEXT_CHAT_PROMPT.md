@@ -16,3 +16,7 @@ unavailable browser admin-policy verification. Keep exact arithmetic and missing
 states. Use SYNTHETIC fixtures; p1-catalog BLOCKED and Phase 01 incomplete. Phases 03/05
 DEFERRED, Gates A/B UNVERIFIED. Work only within Phase 02, test coherent increments,
 publish checkpoints, verify remote SHAs, save state and a handoff.
+
+User authorization (ADR 0004): continue autonomously; create continuation chats in the
+existing Aion2 project when context grows too large and at each new phase. Save tested
+checkpoints and verify the next chat starts. Preserve no-merge/no-force-push constraints.

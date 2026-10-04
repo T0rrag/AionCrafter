@@ -11,3 +11,5 @@ Use exact monetary representations. Missing prices are not zero. Keep market/bui
 Verify repository, default branch and head before modifying remote state. Use one phase branch and PR per phase; keep partial work marked IN_PROGRESS. The user authorized phase-related uploads, not automatic merges or visibility/permission changes. Never force-push or overwrite concurrent work.
 
 At every checkpoint: record changes, actual test commands/results, task statuses and blockers; prepare the next starter; commit/push when available; read back and report the verified SHA. Stop at the current phase boundary. Never claim new chats, remote uploads, completed tests or passed gates without evidence.
+
+User workflow update (ADR 0004): continue autonomously. Create a new chat inside the existing Aion2 project at each new phase and when the current context grows too large. Save and verify a handoff first, confirm the next chat starts, and avoid concurrent branch writers. This replaces the earlier user-opens-next-chat default; no merge or force-push is authorized.

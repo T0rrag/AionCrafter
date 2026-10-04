@@ -17,8 +17,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 1969,
-      "sha256": "0b8d3559a5ac06d33ee10608cd8d1a220afa73a6dc72f427abae03a9d7ab7e9f"
+      "bytes": 2336,
+      "sha256": "3d9e1f4557038d911043a04e9b57513565826faf99b7a10284a074e2bfa1953a"
     },
     {
       "path": "AionCrafter_Project_Prompt.md",
@@ -102,8 +102,8 @@
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1257,
-      "sha256": "0ef5c0075109755a6a110384f7e53ca05dec67624c8256195eb3f39123d0fd82"
+      "bytes": 1522,
+      "sha256": "f33238b225c2fe2d56a7b20d2c4ba326c702e768667fb6a3c3ab2789d0502bb7"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -112,8 +112,8 @@
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 4213,
-      "sha256": "fd431eac0e4a20508469230e82e409c07f00e6961133c8076ac0143a851feddd"
+      "bytes": 4535,
+      "sha256": "417855d62abf0d7c68532e8f99bccfefad9c09c5be6cdc88236be28fc1289168"
     },
     {
       "path": "docs/TEST_RESULTS.md",
@@ -139,6 +139,11 @@
       "path": "docs/decisions/0003-manual-first-development.md",
       "bytes": 2741,
       "sha256": "0e15282e2fa330e182a30084a4e2eccb8be276689871323c11d30a20638faa16"
+    },
+    {
+      "path": "docs/decisions/0004-autonomous-phase-continuation.md",
+      "bytes": 2492,
+      "sha256": "d28ea5fd2104a747c406f23a01a8c5a847755be2ea87d472d5d954d64234a5c8"
     },
     {
       "path": "docs/delivery/2026-10-04-phase01.json",
