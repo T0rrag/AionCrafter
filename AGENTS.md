@@ -4,7 +4,7 @@ Read `docs/PROJECT_STATE.md` and the latest handoff first. Then read only the re
 
 The repository contains the architecture baseline and the tested Phase 01 data foundation. Phase 00 and Phase 01 remain incomplete. Preserve the existing 42 IDs and evidence-backed statuses. Keep the architecture control chat for decisions/review and implement in phase-scoped development chats.
 
-Continue Phase 01 (data foundation) on its existing branch and draft PR #2. Its engineering contracts passed 47 tests; `p1-catalog` remains blocked. Use explicit synthetic fixtures until the pilot market and a permitted real catalog are available. Gate A (authorized automatic prices) and Gate B (supported overlay) remain UNVERIFIED. Do not guess an external API, region, tax, proc probability or catalog licence.
+Follow the current PROJECT_STATE and ADR 0003 for sequencing: Phase 01 engineering passed 47 tests; `p1-catalog` remains blocked. The next eligible development chat is Phase 02, using explicit synthetic fixtures until the pilot market and a permitted real catalog are available. Phases 03 and 05 are DEFERRED. Preserve phase-scoped chats and record any stacked PR dependency. Gate A (authorized automatic prices) and Gate B (supported overlay) remain UNVERIFIED. Do not guess an external API, region, tax, proc probability or catalog licence.
 
 Use exact monetary representations. Missing prices are not zero. Keep market/build/variant identity separate from localized display names. Preserve input source and observation times. Test pure contracts/imports before application integration.
 

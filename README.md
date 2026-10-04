@@ -45,12 +45,14 @@ ignored by Git. Back them up before upgrading; unsupported newer schemas fail cl
   to a game service. Missing prices remain null and timestamps retain provenance.
 
 This is a data-foundation CLI/library, not yet the player-facing calculator. Phase 02
-will add calculations and UI after review of this phase and its remaining data blocker.
+is the next development chat: calculations and a web UI with manually entered prices.
+Its engineering work can use labeled synthetic fixtures while the real-catalog task
+remains blocked. Automatic prices and overlay are deferred (ADR 0003).
 
 ## Project records
 
 Read `docs/PROJECT_STATE.md`, `docs/backlog.json`,
-`docs/handoffs/phase-01-part-02.md` and `docs/NEXT_CHAT_PROMPT.md` before continuing.
+`docs/handoffs/phase-01-part-03.md` and `docs/NEXT_CHAT_PROMPT.md` before continuing.
 `docs/decisions/0002-phase-01-data-contracts.md` documents the engineering choices.
 `docs/TEST_RESULTS.md` records actual local validation and its limits.
 `docs/GITHUB_DELIVERY.md` retains the publishing procedure; `docs/PHASE_01_PR.md`

@@ -3,7 +3,7 @@
   "project": "AionCrafter",
   "brief_version": "1.3",
   "publication_status": "PUBLISHED",
-  "checkpoint": "Phase 01 / Part 02",
+  "checkpoint": "Phase 01 / Part 03",
   "files": [
     {
       "path": ".github/pull_request_template.md",
@@ -17,8 +17,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 1841,
-      "sha256": "52103e08804f2bc9a3c95d5a3e9a0f48ac64c2ced4602f6ce1ee4ab042099ff8"
+      "bytes": 1969,
+      "sha256": "0b8d3559a5ac06d33ee10608cd8d1a220afa73a6dc72f427abae03a9d7ab7e9f"
     },
     {
       "path": "AionCrafter_Project_Prompt.md",
@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4134,
-      "sha256": "71c3e7a5c2c86964ed3ccac20ec88b1c14dd666a92221d721971ad044045099d"
+      "bytes": 4287,
+      "sha256": "9eef0c6220964112cbcb5742f59642f563d1eb5bf2351d0ef58393fdb1adcc2a"
     },
     {
       "path": "aioncrafter/__init__.py",
@@ -87,8 +87,8 @@
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1290,
-      "sha256": "de19e118b6feb5c873c90d0290da1dd3f207574ce6b99f709e462a422e7bebd5"
+      "bytes": 1186,
+      "sha256": "8b24509e29d42d3d0450a1136d1b687c416aeaacb8b6bc3b2fec96bb6030f8ab"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -97,8 +97,8 @@
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 3623,
-      "sha256": "27d7a37f042c9814df1458606e20f4cb922974a461565d736a4a51bd845380c2"
+      "bytes": 3995,
+      "sha256": "f551e431e8c1d4a531f64fed39b6ce181db9a2deb29c5a58ab400d751f4c8307"
     },
     {
       "path": "docs/TEST_RESULTS.md",
@@ -107,8 +107,8 @@
     },
     {
       "path": "docs/backlog.json",
-      "bytes": 19775,
-      "sha256": "4bcc2d83b641e9cd587aea4a198f3c19666b378f57e7da568cd51d5df78f75eb"
+      "bytes": 21819,
+      "sha256": "c60365a2a192495dfb2ed08a77951c4db28a25b1d9fa57c4255513fa648ad1c4"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -119,6 +119,11 @@
       "path": "docs/decisions/0002-phase-01-data-contracts.md",
       "bytes": 4482,
       "sha256": "c1115e2a141c71b9f9416438fec0ce51d8463fee349da4250c613f85bde58f4c"
+    },
+    {
+      "path": "docs/decisions/0003-manual-first-development.md",
+      "bytes": 2741,
+      "sha256": "0e15282e2fa330e182a30084a4e2eccb8be276689871323c11d30a20638faa16"
     },
     {
       "path": "docs/delivery/2026-10-04-phase01.json",
@@ -141,9 +146,14 @@
       "sha256": "8a7e58a9a8c468165a0d2b9dcc8b6ae2b5668be0dcc263056d65e2065654a4f1"
     },
     {
+      "path": "docs/handoffs/phase-01-part-03.md",
+      "bytes": 2579,
+      "sha256": "8bb73877699a76c7eef3746772ef08fcf89ae6b97a7d03ec29b080c6c029bd09"
+    },
+    {
       "path": "docs/roadmap-progress.json",
-      "bytes": 812,
-      "sha256": "dc9e07beaafaeda3c399a929b5e26f3364c9a84514290dc3b9a3a2c570401c18"
+      "bytes": 1026,
+      "sha256": "b5706eb603b7df0e1c834008f89ac3235f8869e4f3ef5b5761d0bd8dfc3c50e8"
     },
     {
       "path": "docs/sources/SYNTHETIC.md",

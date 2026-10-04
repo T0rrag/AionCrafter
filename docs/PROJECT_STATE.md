@@ -1,6 +1,6 @@
 # AionCrafter — project state
 
-Checkpoint: 2026-10-04, Phase 01 / Part 02 (GitHub delivery).
+Checkpoint: 2026-10-04, Phase 01 / Part 03 (manual-first sequencing).
 Brief: AionCrafter_Project_Prompt.md v1.3. Roadmap: v1.1 EN/ES, original HTML preserved.
 Phase 01 status: **IN_PROGRESS**. Gate A: **UNVERIFIED**. Gate B: **UNVERIFIED**.
 
@@ -22,8 +22,9 @@ assumed recovered. This checkpoint implements the data foundation in `aioncrafte
 Completion here means engineering implementation tested with synthetic fixtures,
 subject to architectural review. It does not establish verified game rules or meet
 p1-catalog's target of 100 real items and 25 verified recipes.
-Phase 00 remains IN_PROGRESS (only inherited p0-audit complete); Phases 02–06 remain
-NOT_STARTED. Calculation records are modeled, but an economics engine/UI is not built.
+Phase 00 remains IN_PROGRESS (only inherited p0-audit complete). Phases 03 and 05 are
+DEFERRED by user direction; Phases 02, 04 and 06 remain NOT_STARTED. Calculation records
+are modeled, but an economics engine/UI is not built.
 
 ## Version and delivery
 
@@ -51,11 +52,15 @@ Offline fixture validation passed. See TEST_RESULTS.md for limits and individual
 All 42 backlog IDs retained; roadmap progress is in `roadmap-progress.json`, imported
 through the existing bilingual roadmap control without modifying its code or storage key.
 
-Continue Phase 01 / Part 03: review the delivered foundation and resolve the real
-pilot/catalog permission and verification blocker. Keep PR #2 draft until Phase 01's
-applicable exit criteria pass. After an authorized baseline merge, retarget the phase
-PR safely; no merge is authorized here. Do not start Phase 02 or pass either external
-gate without evidence.
+Next eligible chat: Phase 02 — Manual-first calculator, Part 01. The user directed
+continued development with automatic live prices and overlay deferred (ADR 0003).
+Start p2-economics on the tested engineering contracts using labeled synthetic data;
+then integrate manual price entry and both requested workflows. p1-catalog remains
+BLOCKED and Phase 01 is not declared complete. Its real-data requirement is retained.
 
-Latest handoff: `handoffs/phase-01-part-02.md`. Starter: `NEXT_CHAT_PROMPT.md`.
-Historical local implementation handoff: `handoffs/phase-01-part-01.md`.
+Phase 02 implementation belongs in a new chat. Verify and record the actual base for
+phase/02-manual-calculator; stack its PR on phase/01-data-foundation if PR #2 remains
+unmerged. No merge is authorized. Gate A/B remain UNVERIFIED; Phases 03/05 are DEFERRED.
+
+Latest handoff: `handoffs/phase-01-part-03.md`. Starter: `NEXT_CHAT_PROMPT.md`.
+Earlier handoffs are historical records and remain preserved.
