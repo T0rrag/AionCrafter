@@ -83,3 +83,29 @@ python3 -m unittest discover -v
 ```
 
 Independent project; not affiliated with NC, Overwolf or CurseForge.
+
+## Phase 02 / Part 01 — local manual calculator
+
+```bash
+python3 -m aioncrafter.web --catalog tests/fixtures/SYNTHETIC-catalog-v1.json
+```
+
+Open `http://127.0.0.1:8765` in your browser. Enter an explicit synthetic market ID,
+faction mode, currency code/precision and ISO 8601 observation time with timezone.
+The bundled fixture uses `TEST` with 2 decimal places for its synthetic craft fees.
+Enter unit prices manually; blank means unavailable. Materials mode needs quantities
+or pasted `quantity<TAB>exact alias` rows, with a variant picker for ambiguous names.
+Item mode needs product, recipe, planned selling quantity, selling price and explicit
+sale-fee/tax assumptions. A craft-fee override is optional; blank uses catalog fees,
+including unknown fees. A zero override explicitly waives the fee for this estimate.
+
+This local HTTP server binds to loopback. It is an initial web interface with no
+saved plans or price history; values persist only on form resubmission. Deterministic
+direct ingredients only; unknown proc probabilities are refused. Unsold leftovers and
+coproducts receive no credited revenue. ROI/unrounded break-even use exact rational
+arithmetic; displayed monetary results use exact currency units and chosen proceeds
+rounding. Fees and rounding are unverified assumptions, not game rules.
+
+[Phase 02 draft PR #3](https://github.com/T0rrag/AionCrafter/pull/3) is stacked on PR #2.
+62 local tests pass. Browser visual QA remains unverified due to a browser policy
+verification failure. Phase 02 remains IN_PROGRESS; see the current state and handoff.

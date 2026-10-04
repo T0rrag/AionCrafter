@@ -1,66 +1,57 @@
 # AionCrafter — project state
 
-Checkpoint: 2026-10-04, Phase 01 / Part 03 (manual-first sequencing).
-Brief: AionCrafter_Project_Prompt.md v1.3. Roadmap: v1.1 EN/ES, original HTML preserved.
-Phase 01 status: **IN_PROGRESS**. Gate A: **UNVERIFIED**. Gate B: **UNVERIFIED**.
+Checkpoint: 2026-10-04, Phase 02 / Part 01. Brief v1.3 plus ADR 0003.
+Active Phase 02: **IN_PROGRESS**. Phase 01: **IN_PROGRESS**; p1-catalog: **BLOCKED**.
+Phases 03/05: **DEFERRED**. Gates A/B: **UNVERIFIED**.
 
-## Delivered and tested
+## Verified repository and dependency
 
-The recovered architecture bootstrap is the actual baseline; the previously mentioned
-application implementation was not present in the available artifacts and was not
-assumed recovered. This checkpoint implements the data foundation in `aioncrafter/`.
+Repository: https://github.com/T0rrag/AionCrafter
+Branch: `phase/02-manual-calculator`.
+Recorded base: `phase/01-data-foundation` at `3a395eb5894e65ff0d67e336d1a91dc452136843`.
+PR #2 was open, draft and unmerged when verified. Phase 02 draft PR #3 is explicitly
+stacked on that branch: https://github.com/T0rrag/AionCrafter/pull/3.
+No merge, force-push, release or deployment performed.
 
-| Task | Status | Scope/evidence |
+Published economics checkpoint: `2c614636f9ef22d799732d20455aa2cb4f25610d` (55 tests).
+Published workflow implementation: `7afffae4ca62e0c049429665b93ade5d25948175` (62 tests).
+Both remote commits were fetched and their trees matched tested local checkpoints
+exactly. Delivery documentation follows the implementation SHA; fetch the actual head
+before editing. Shell Git push lacked usable authentication; connector commits and
+non-force ref updates published the same tested trees. See delivery receipt.
+
+## Delivered increments and remaining scope
+
+| Task | Status | Evidence / remaining work |
 |---|---|---|
-| p1-identity | COMPLETE | Stable scoped item, variant, market and currency identity; tests/test_identity.py. |
-| p1-catalog | BLOCKED | Pilot scope and permitted real catalog unresolved. 7 synthetic variants / 3 recipes only. |
-| p1-recipe | COMPLETE | Inputs, batches, fees, requirements, joint/failure outcomes, unknown probabilities; models.py and model tests. |
-| p1-trade | COMPLETE | Tradeability and acquisition restrictions/currencies; models.py and model tests. |
-| p1-validate | COMPLETE | Strict import, duplicate/orphan/alias/cycle checks; catalog and storage tests. |
-| p1-storage | COMPLETE | SQLite migrations, immutable records, rollback, concurrency and provider contracts; storage/CLI tests. |
+| p2-economics | IN_PROGRESS | economics.py: exact integer currency units, rational ROI/break-even, deterministic batches, configurable tax/fixed fees/proceeds rounding, minimal break-even currency tick, missing/unknown states. 9 new economics tests. Needs owner review and broader joint-output/market fee-rule acceptance. |
+| p2-editor | IN_PROGRESS | manual.py/web.py: explicit market/currency/faction and timezone-aware observation time; blank prices unavailable. Manual source preserved. Approved imports and persisted overrides remain. |
+| p2-listflow | IN_PROGRESS | Selected quantities or quantity-TAB-alias paste; variant picker for ambiguous names; unit/subtotal/known subtotal/incomplete total. Browser visual/pilot QA remains. |
+| p2-itemflow | IN_PROGRESS | Product/recipe selection, direct ingredients, deterministic batch yield and leftovers, manual selling price and margin. Product search and expanded tree remain. |
+| p2-costmodes | NOT_STARTED | Owned inventory, additional cash and historical ledger modes remain. Current calculation charges full replacement cost to planned sales. |
+| p2-save | NOT_STARTED | Saved plans/favorites/settings/inventory and JSON/CSV export/import/reset remain. Form resubmission alone retains values. |
 
-Completion here means engineering implementation tested with synthetic fixtures,
-subject to architectural review. It does not establish verified game rules or meet
-p1-catalog's target of 100 real items and 25 verified recipes.
-Phase 00 remains IN_PROGRESS (only inherited p0-audit complete). Phases 03 and 05 are
-DEFERRED by user direction; Phases 02, 04 and 06 remain NOT_STARTED. Calculation records
-are modeled, but an economics engine/UI is not built.
+Inputs are the unchanged **SYNTHETIC ONLY** catalog (7 variants, 3 recipes). Unknown
+probabilities are refused for deterministic economics; no expected-outcome engine is
+claimed. Leftovers and coproducts earn no credited revenue; all batch costs are charged
+to planned sales. Craft-fee per-output-unit counts all produced output units. Per-batch
+and per-attempt each count one recipe invocation. Tax rounding is a user-selected
+assumption applied once to batch proceeds; no verified game tax or rounding rule exists.
+Stock, sell-through and craft requirements remain unverified/manual checks.
 
-## Version and delivery
+## Validation and limits
 
-Repository: https://github.com/T0rrag/AionCrafter (public, as created by the user).
-Default branch `main` was initialized from the verified empty repository at
-`0ef1e2cae70eea6fa0b60f8c506e064433f9d440`.
+Baseline: 47 tests passed on Python 3.14.7. Economics checkpoint: 55 tests passed.
+Current: `python3 -m unittest discover -q` — 62 tests passed, including local HTTP GET,
+POST, foreign-Origin refusal and oversized-body refusal. Loopback tests require an
+unsandboxed execution permission in this environment. Offline catalog validation and
+compileall passed. Bootstrap manifest/task validation passed; see TEST_RESULTS.md.
+Inherited SQLite ResourceWarnings on Python 3.14 remain; no new SQLite code was changed.
+Browser visual verification could not run: browser admin-policy verification was
+unavailable and access was denied. No browser/pilot/game/live-provider/overlay/remote-CI
+success is claimed. Phase 00 remains IN_PROGRESS; p1 engineering retains its existing
+evidence and p1-catalog still requires a permitted pilot catalog, 100 real items and 25
+verified recipes.
 
-Phase branch: `phase/01-data-foundation`.
-Stacked base: `phase/00-architecture-bootstrap` at
-`4e6077f51eb009bdfe8ffd5d5cf0328fcbef9481`.
-Verified implementation upload: `703c7135539c69e639a5d75334ece19d55a8afe9`.
-Its tree exactly matches tested local checkpoint `c559adeaa2ed060239656ff7cff1a504da8700f5`.
-Later commits on this branch record delivery documentation; fetch the current head
-before editing. See `delivery/2026-10-04-phase01.json` and GITHUB_DELIVERY.md.
-
-Architecture PR: https://github.com/T0rrag/AionCrafter/pull/1 — open for review.
-Phase PR: https://github.com/T0rrag/AionCrafter/pull/2 — draft, based on PR #1's branch.
-The earlier 404/access blocker is resolved. Both remote trees and branch SHAs were
-read back and verified. No merge, release, deployment or visibility change performed.
-
-## Evidence and next action
-
-47 local tests passed: `python3 -m unittest discover -v`.
-Offline fixture validation passed. See TEST_RESULTS.md for limits and individual suites.
-All 42 backlog IDs retained; roadmap progress is in `roadmap-progress.json`, imported
-through the existing bilingual roadmap control without modifying its code or storage key.
-
-Next eligible chat: Phase 02 — Manual-first calculator, Part 01. The user directed
-continued development with automatic live prices and overlay deferred (ADR 0003).
-Start p2-economics on the tested engineering contracts using labeled synthetic data;
-then integrate manual price entry and both requested workflows. p1-catalog remains
-BLOCKED and Phase 01 is not declared complete. Its real-data requirement is retained.
-
-Phase 02 implementation belongs in a new chat. Verify and record the actual base for
-phase/02-manual-calculator; stack its PR on phase/01-data-foundation if PR #2 remains
-unmerged. No merge is authorized. Gate A/B remain UNVERIFIED; Phases 03/05 are DEFERRED.
-
-Latest handoff: `handoffs/phase-01-part-03.md`. Starter: `NEXT_CHAT_PROMPT.md`.
-Earlier handoffs are historical records and remain preserved.
+Next: continue Phase 02 Part 02 on this same branch/PR, beginning p2-costmodes and then
+persisted manual prices/plans. Read `handoffs/phase-02-part-01.md` and NEXT_CHAT_PROMPT.md.

@@ -3,7 +3,7 @@
   "project": "AionCrafter",
   "brief_version": "1.3",
   "publication_status": "PUBLISHED",
-  "checkpoint": "Phase 01 / Part 03",
+  "checkpoint": "Phase 02 / Part 01",
   "files": [
     {
       "path": ".github/pull_request_template.md",
@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 4287,
-      "sha256": "9eef0c6220964112cbcb5742f59642f563d1eb5bf2351d0ef58393fdb1adcc2a"
+      "bytes": 5863,
+      "sha256": "9e969a3b0b6f2b41093d3662b8cfc03c66eba2ec68b35cbb1e4c746b6985b963"
     },
     {
       "path": "aioncrafter/__init__.py",
@@ -56,9 +56,19 @@
       "sha256": "f17eb7cc9a7362731b5b55784820f2508bd5cf8e4a065c66d51d1b7b6e9bca4e"
     },
     {
+      "path": "aioncrafter/economics.py",
+      "bytes": 6935,
+      "sha256": "59976fa3c7419750340bc1fa7421709f33048d8c9c3e64c8d38c66636f0edb19"
+    },
+    {
       "path": "aioncrafter/identity.py",
       "bytes": 4691,
       "sha256": "49d92e24a4306e711c7494baa1e143b222d51d6c3e1c264bd35c55dfcaeb154d"
+    },
+    {
+      "path": "aioncrafter/manual.py",
+      "bytes": 1513,
+      "sha256": "2369979dec14bbdc8bfbd6f7490497c35718f79f0541231d5e944e9507f43ec4"
     },
     {
       "path": "aioncrafter/models.py",
@@ -76,19 +86,24 @@
       "sha256": "1ffc1dea7e80942d8f91f7b3a3da38d9022346cf5cc3de288b121b176d6f74e4"
     },
     {
+      "path": "aioncrafter/web.py",
+      "bytes": 11515,
+      "sha256": "4a9bb90dd9ca1c9ab66c09ceed4f86bc63bc440aa8b11a63ec32b17982d7cd5b"
+    },
+    {
       "path": "docs/CHAT_PROJECT_INSTRUCTIONS.txt",
       "bytes": 831,
       "sha256": "60f6bc4a142b6d7473141d96859055abc8db054765c7ee2d7e9ad0086c13e53f"
     },
     {
       "path": "docs/GITHUB_DELIVERY.md",
-      "bytes": 2664,
-      "sha256": "dad8cc1d3d522762b6a84588c25392e194853f7564b0feaed6b5c4cc0fbd11b1"
+      "bytes": 3547,
+      "sha256": "c578f77fdf7b3beb67a745c1f4253336095d6c951336d5b67f5606860b4da5db"
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1186,
-      "sha256": "8b24509e29d42d3d0450a1136d1b687c416aeaacb8b6bc3b2fec96bb6030f8ab"
+      "bytes": 1257,
+      "sha256": "0ef5c0075109755a6a110384f7e53ca05dec67624c8256195eb3f39123d0fd82"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -97,18 +112,18 @@
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 3995,
-      "sha256": "f551e431e8c1d4a531f64fed39b6ce181db9a2deb29c5a58ab400d751f4c8307"
+      "bytes": 4213,
+      "sha256": "fd431eac0e4a20508469230e82e409c07f00e6961133c8076ac0143a851feddd"
     },
     {
       "path": "docs/TEST_RESULTS.md",
-      "bytes": 3064,
-      "sha256": "adcec637f0328293f15932d700c2e26611558fae32f5d566a5c31da61f902b10"
+      "bytes": 4646,
+      "sha256": "016e97e0a21cce2f0dc7108134c6b547936583bc74d9a9342785f59b80846d5d"
     },
     {
       "path": "docs/backlog.json",
-      "bytes": 21819,
-      "sha256": "c60365a2a192495dfb2ed08a77951c4db28a25b1d9fa57c4255513fa648ad1c4"
+      "bytes": 22498,
+      "sha256": "215216e2d7997a732f570d56aef8d42b9c05350c4261120c2fa758f656a0bec2"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -131,6 +146,11 @@
       "sha256": "07630d2a58db7c461d005922cc7d62d30165d5c24346124f6cf990e7ead30319"
     },
     {
+      "path": "docs/delivery/2026-10-04-phase02.json",
+      "bytes": 2198,
+      "sha256": "92f64ef807804c8d7a9f72091b88b436d830eb53f73bcf6eff9b707b9fd04f6f"
+    },
+    {
       "path": "docs/handoffs/architecture-control-2026-10-04.md",
       "bytes": 2365,
       "sha256": "544eddb2e0b99a6383691c018e971d9a0b81820fe9e9c308cd883ef42378f0ee"
@@ -149,6 +169,11 @@
       "path": "docs/handoffs/phase-01-part-03.md",
       "bytes": 2579,
       "sha256": "8bb73877699a76c7eef3746772ef08fcf89ae6b97a7d03ec29b080c6c029bd09"
+    },
+    {
+      "path": "docs/handoffs/phase-02-part-01.md",
+      "bytes": 3803,
+      "sha256": "a914d656d1cb6b7f42068205b8a088d675f642b45927ea9c02a4551b965ac562"
     },
     {
       "path": "docs/roadmap-progress.json",
@@ -191,9 +216,19 @@
       "sha256": "ede0c23453663ce4daa131d1674b716bef660661f84d19b05dfd6235736a3011"
     },
     {
+      "path": "tests/test_economics.py",
+      "bytes": 5434,
+      "sha256": "2ca891e6b153c57784b6d4bed141f4723ba2764687a4b08e78b8bc03b7e6802f"
+    },
+    {
       "path": "tests/test_identity.py",
       "bytes": 5049,
       "sha256": "dfd1f557f9df89519d238903cea2e4d5ecc37c82eba9cc89b50a2cf3941ee9b8"
+    },
+    {
+      "path": "tests/test_manual.py",
+      "bytes": 4310,
+      "sha256": "de158e6df9b3d3ed6822a555e091b059a048f465d1e18386e5e4e8479b2549ed"
     },
     {
       "path": "tests/test_models.py",

@@ -49,3 +49,27 @@ validation reported 7 SYNTHETIC variants / 3 recipes. Remote implementation tree
 `bb2146a339f3cc6b10eb473e50e364a9203d8aec` exactly matches the tested local tree.
 The subsequent delivery update changes documentation/manifest only; application code
 and tests are unchanged. GitHub PRs #1 and #2 are now open and unmerged.
+
+## Phase 02 Part 01 — 2026-10-04
+
+Runtime: Linux, Python 3.14.7. Actual fetched Phase 01 baseline
+3a395eb5894e65ff0d67e336d1a91dc452136843 passed 47 tests.
+Pure economics checkpoint passed 55; final workflow implementation passed 62:
+`python3 -m unittest discover -q` (zero failures/errors, 2.057 seconds final run).
+Nine economics tests cover the brief's fictional regression, batches/leftovers and
+fee bases, missing values, zero-cost ROI, full tax, losses/rounding/minimal break-even,
+large amounts under tiny Decimal context, price semantics/scope/duplicates and
+unknown/invalid/equivalent deterministic probability inputs. Six manual tests cover
+observation timestamps/missing/source, pasted ambiguity, materials-only/no sale fields,
+item margins/non-determinism, picker/HTML escaping, and HTTP GET/POST/403/413.
+Loopback HTTP tests ran with sandbox escalation because sandbox sockets were denied.
+Initial test failures used the wrong alias for ambiguity; corrected to synthetic
+potion and reran successfully. No skipped tests.
+
+`python3 -m compileall -q aioncrafter` and offline catalog validation passed.
+`python3 scripts/validate_bootstrap.py` passed after manifest refresh.
+Fetched published checkpoints; exact tested local/remote trees matched.
+Inherited SQLite ResourceWarnings remain on Python 3.14 (observed before changes).
+Browser open was denied because admin-enforced policy verification was unavailable;
+visual/layout/focus QA has not passed. No remote CI, real pilot/game/provider/overlay,
+Windows, persistence or historical-ledger acceptance tests performed.
