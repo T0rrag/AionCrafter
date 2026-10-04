@@ -1,19 +1,20 @@
-Start AionCrafter Phase 04 — Crafting intelligence, Part 01 inside this same Aion2 project.
-Follow master prompt v1.3 and ADRs 0003/0004/0005. The user directs normal feature
-development and a new chat for each phase; do not spend this phase on Chromium/cloud QA.
+Continue AionCrafter Phase 03 — Market-price groundwork, Part 03, in Aion2.
+Fetch https://github.com/T0rrag/AionCrafter and verify actual remote heads before writing.
+Resume phase/03-market-prices / draft PR #5 against main. Read AGENTS.md,
+docs/PROJECT_STATE.md, handoffs/phase-03-part-02.md, PHASE_03_GROUNDWORK.md,
+backlog.json, delivery/phase-03-part-02.json and ADR 0006.
 
-Fetch T0rrag/AionCrafter, inspect phase/04-crafting-intelligence if present, and verify
-its actual head/base before editing. Otherwise create it from the current verified
-phase/02-manual-calculator handoff. Read docs/PROJECT_STATE.md, docs/backlog.json and
-docs/handoffs/phase-02-to-phase-04.md. Phase 02 PR #3 is unmerged; explicitly stack the
-new phase branch/PR on it. The Phase 02 code baseline passed 95 tests.
+Verified implementation: 995c19fcbb8f3d1627602f41068d379be94b7837; delivery documentation follows.
+Part 01 implemented synthetic freshness/resilience/depth. Part 02 corrected mixed-batch
+retry exhaustion and immutable IDs across manual/provider history. 149 full-suite tests
+passed on Windows/Python 3.12.14, including 54 Phase 03 tests. Preserve those regressions.
+First inspect whether authorized scoped provider evidence has become available. Without
+it, retain p3-adapter/reconcile/releaseprice BLOCKED and Gate A UNVERIFIED. No real source
+connection or automatic activation without required permission/evidence. Source rights,
+production transport/shared quota ownership and application/market acceptance remain pending.
 
-First implement p4-batches: pure deterministic recursive recipe expansion, shared-demand
-aggregation before batch rounding, explicit recipe selection and leftover accounting.
-Use labeled synthetic fixtures and test boundaries, shared intermediates and rejection
-of cycles/unsupported stochastic outcomes. Keep exact arithmetic and scoped identity.
-
-Visual/pilot acceptance is tracked for later; it does not block this engineering phase.
-Phase 01/catalog incomplete; Phases 03/05 DEFERRED; Gates A/B UNVERIFIED. Preserve all
-42 IDs. Upload tested increments, verify SHAs, open a draft Phase 04 PR, and save state
-and handoff. No merge/force-push. Previous chat stops application writes at handoff.
+Preserve all 42 IDs and one active writer. Three groundwork tasks remain IN_PROGRESS;
+Phase 01 incomplete/p1-catalog BLOCKED; Phase 05 DEFERRED; Gates A/B UNVERIFIED.
+Phase 02 behavior accepted, visual QA deferred, game pilot after phase features. No
+Chromium work. Publish tested increments and verified SHA/tree receipts on the same PR.
+No merge/force-push; stay in Phase 03. Phase 04 requires a separate chat.

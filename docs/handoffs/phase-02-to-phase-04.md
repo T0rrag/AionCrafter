@@ -51,3 +51,15 @@ No automatic conversion/synchronization of old local Codex transcripts is implie
 Chat-creation route inspected: no dedicated project-chat tool is exposed. The connected
 browser reaches ChatGPT but is signed out; secure sign-in is required to access Aion2.
 No next-phase chat has been created at this checkpoint. Do not use anonymous chat.
+
+## Subsequent owner clarification — 2026-10-04
+
+Fetched both phase branches at 48dc8a304a9f917aec9caec27d62bd95041df530 before this
+documentation-only update. The user marked PR review/closure done in chat; no GitHub
+review, closure or merge was executed. The user subsequently confirmed the calculator
+behaves correctly, completing owner acceptance of its behaviour.
+Their customization comment is recorded with unspecified presentation/controls scope;
+fee/tax/rounding inputs already are configurable. Visual/keyboard QA stays unverified
+and deferred. Real-game pilot validation moves to after all phase feature work, tracked
+under p6-usertest. Read the ADR 0005 addendum and current Phase 02 acceptance record.
+Do not restart cloud/Chromium troubleshooting or infer that an outstanding check passed.
