@@ -1,38 +1,56 @@
 # AionCrafter — project state
 
-Checkpoint date: 4 October 2026
-Brief: `AionCrafter_Project_Prompt.md` v1.3
-Roadmap: v1.1, English/Spanish, unchanged
-Control-chat designation: `Aioncrafter - Architectural control` (requested title; UI rename not performed)
+Checkpoint: 2026-10-04, Phase 01 / Part 01.
+Brief: AionCrafter_Project_Prompt.md v1.3. Roadmap: v1.1 EN/ES, original HTML preserved.
+Phase 01 status: **IN_PROGRESS**. Gate A: **UNVERIFIED**. Gate B: **UNVERIFIED**.
 
-## Actual state
+## Delivered and tested
 
-The architecture bootstrap files exist locally. No application code has been implemented or tested. No new ChatGPT conversation has been created, and these files have not been attached to a new chat or added to project sources by this work.
+The recovered architecture bootstrap is the actual baseline; the previously mentioned
+application implementation was not present in the available artifacts and was not
+assumed recovered. This checkpoint implements the data foundation in `aioncrafter/`.
 
-Connected GitHub login: `T0rrag` (verified). Intended repository: `T0rrag/AionCrafter`. No such repository was found in the accessible owner listing. The available connector has no repository-creation action; no authenticated GitHub CLI or signed-in browser session is available. No remote writes have been made. Recheck this in the next session; access can change.
-
-## Phase state
-
-| Phase | Status | Evidence / limitation |
+| Task | Status | Scope/evidence |
 |---|---|---|
-| 00 | IN_PROGRESS | Only inherited `p0-audit` is complete; pilot scope, provider access/sample and overlay support remain unresolved. |
-| 01 | NOT_STARTED | Next eligible implementation session; synthetic fixtures only until real-data prerequisites are met. |
-| 02–06 | NOT_STARTED | No implementation. |
+| p1-identity | COMPLETE | Stable scoped item, variant, market and currency identity; tests/test_identity.py. |
+| p1-catalog | BLOCKED | Pilot scope and permitted real catalog unresolved. 7 synthetic variants / 3 recipes only. |
+| p1-recipe | COMPLETE | Inputs, batches, fees, requirements, joint/failure outcomes, unknown probabilities; models.py and model tests. |
+| p1-trade | COMPLETE | Tradeability and acquisition restrictions/currencies; models.py and model tests. |
+| p1-validate | COMPLETE | Strict import, duplicate/orphan/alias/cycle checks; catalog and storage tests. |
+| p1-storage | COMPLETE | SQLite migrations, immutable records, rollback, concurrency and provider contracts; storage/CLI tests. |
 
-See `backlog.json` for all 42 task records. No new tasks have been marked complete by repository/document preparation.
+Completion here means engineering implementation tested with synthetic fixtures,
+subject to architectural review. It does not establish verified game rules or meet
+p1-catalog's target of 100 real items and 25 verified recipes.
+Phase 00 remains IN_PROGRESS (only inherited p0-audit complete); Phases 02–06 remain
+NOT_STARTED. Calculation records are modeled, but an economics engine/UI is not built.
 
-Gate A: UNVERIFIED. Gate B: UNVERIFIED. The inherited audit is not an authenticated test. Pilot region/server/build is NOT selected.
+## Version and delivery
 
-## Next eligible action
+Local branch: `phase/01-data-foundation`.
+Stacked base: `phase/00-architecture-bootstrap` at
+`ecd69ef551b8f43d44761533b8b171bd5a487a66` (local documentation baseline).
+Exact packaged head: see CHECKPOINT_RECEIPT.json beside the source tree in the ZIP,
+or `git rev-parse HEAD` after cloning its Git bundle.
 
-Create or verify an accessible private `T0rrag/AionCrafter` repository initialized with a README. Publish the documentation baseline on `phase/00-architecture-bootstrap` and review its PR. Then implement Phase 01 on `phase/01-data-foundation`, with an explicit PR base if the documentation baseline has not merged.
+Target repository `T0rrag/AionCrafter` was checked again on 2026-10-04: GitHub 404.
+Authenticated connector profile is T0rrag. No repository-create action is exposed;
+terminal `git ls-remote` could not authenticate and no GitHub CLI is installed.
+No remote writes attempted; default branch/head cannot be verified. Remote SHA and
+PR URL are null. Local commits do not imply publication. No merge performed.
+`docs/PHASE_01_PR.md` is a prepared draft, not an opened pull request.
 
-Next development chat: `AionCrafter | Phase 01 | Data foundation | Part 01` in the same existing project. First task: `p1-identity`; define stable item, variant and market identities and tests using a named SYNTHETIC scope. Continue only Phase 01. Do not mark `p1-catalog` complete without a permitted verified real catalog.
+## Evidence and next action
 
-## Verification and handoff
+47 local tests passed: `python3 -m unittest discover -v`.
+Offline fixture validation passed. See TEST_RESULTS.md for limits and individual suites.
+All 42 backlog IDs retained; roadmap progress is in `roadmap-progress.json`, imported
+through the existing bilingual roadmap control without modifying its code or storage key.
 
-Run `python3 scripts/validate_bootstrap.py` to validate this documentation package. It does not test an app. The delivery report outside the ZIP records the exact local validation results and archive checksum.
+Continue Phase 01 / Part 02: verify/create the intended private repository through an
+available authenticated route, inspect its actual base, publish the documentation
+baseline and the tested phase branch, verify remote SHAs and open the draft PR.
+Resolve the pilot/catalog permission and verification blocker before marking Phase 01
+complete. Do not start Phase 02 here or pass either external gate without evidence.
 
-Handoff: `handoffs/architecture-control-2026-10-04.md`.
-Starter: `NEXT_CHAT_PROMPT.md`.
-No remote commit SHA or PR exists to cite yet.
+Handoff: `handoffs/phase-01-part-01.md`. Starter: `NEXT_CHAT_PROMPT.md`.

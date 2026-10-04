@@ -68,55 +68,55 @@
     {
       "phase": "01",
       "title": "Build the data foundation",
-      "status": "NOT_STARTED",
+      "status": "IN_PROGRESS",
       "tasks": [
         {
           "id": "p1-identity",
           "priority": "P0",
           "title": "Define item and market identities",
           "description": "Use stable item IDs plus region/build, quality, enhancement and other sale-relevant variants. Price keys must also include market scope and source currency. Localized names are search aliases, not primary keys.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "COMPLETE",
+          "evidence": "aioncrafter/identity.py; tests/test_identity.py (8 tests). Exact scoped keys, unknown-scope blocking and strict round-trip."
         },
         {
           "id": "p1-catalog",
           "priority": "P0",
           "title": "Obtain and import a permitted catalog",
           "description": "Pilot target: at least 100 relevant items and 25 verified recipes. Confirm rights for data, icons and redistribution; a public repository or webpage alone is not a reuse licence.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "BLOCKED",
+          "evidence": "Real pilot scope and permitted catalog unresolved; 7 SYNTHETIC variants / 3 SYNTHETIC recipes do not satisfy 100 relevant real items / 25 verified recipes."
         },
         {
           "id": "p1-recipe",
           "priority": "P0",
           "title": "Model complete crafting outcomes",
           "description": "Store inputs, quantities, batch yield, crafting fee, requirements and possible outputs. Attach source/build metadata; leave unknown probabilities explicitly unknown.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "COMPLETE",
+          "evidence": "aioncrafter/models.py; tests/test_models.py; 3 synthetic recipes exercise batches, joint outcomes/failure, fees and unknown probabilities."
         },
         {
           "id": "p1-trade",
           "priority": "P0",
           "title": "Model tradability and acquisition constraints",
           "description": "Represent bound/unbound variants, vendor restrictions, quantity limits and currency types. A vendor sell-back value is not an auction purchase price; incompatible currencies are not silently added.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "COMPLETE",
+          "evidence": "aioncrafter/identity.py and models.py; tests/test_models.py. Bound/tradeable variants, vendor limits/currencies, sell-back distinction."
         },
         {
           "id": "p1-validate",
           "priority": "P0",
           "title": "Validate imports before publishing",
           "description": "Reject orphan IDs, impossible quantities, duplicate identities, cycles and ambiguous aliases. Review changes after each patch and preserve the last known-good catalog.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "COMPLETE",
+          "evidence": "aioncrafter/catalog.py; tests/test_catalog.py and test_storage.py. Strict import, orphan/duplicate/alias/cycle rejection; invalid import preserves last known-good."
         },
         {
           "id": "p1-storage",
           "priority": "P0",
           "title": "Create storage and provider contracts",
           "description": "Start with SQLite and migrations. Define Item, Recipe, MarketScope, PriceObservation and Calculation records. Use exact arithmetic for money and explicit nulls for missing prices.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "COMPLETE",
+          "evidence": "aioncrafter/storage.py and providers.py; tests/test_storage.py and test_cli.py. SQLite migrations 1->2, immutable history, concurrency check, rollback and offline CLI."
         }
       ]
     },
@@ -395,5 +395,10 @@
         }
       ]
     }
-  ]
+  ],
+  "branch": "phase/01-data-foundation",
+  "base_branch": "phase/00-architecture-bootstrap",
+  "local_base_sha": "ecd69ef551b8f43d44761533b8b171bd5a487a66",
+  "remote_sha": null,
+  "pr_url": null
 }

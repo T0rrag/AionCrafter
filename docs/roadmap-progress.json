@@ -1,0 +1,18 @@
+{
+  "project": "AionCrafter",
+  "schemaVersion": 1,
+  "roadmapVersion": "1.1",
+  "researchDate": "2026-10-04",
+  "exportedAt": "2026-10-04T11:29:22.843069Z",
+  "completed": [
+    "p0-audit",
+    "p1-identity",
+    "p1-recipe",
+    "p1-trade",
+    "p1-validate",
+    "p1-storage"
+  ],
+  "notes": "2026-10-04 — Phase 01 engineering checkpoint / Checkpoint técnico Fase 01. 47 local tests passed / 47 pruebas locales correctas. SYNTHETIC ONLY: 7 variants, 3 recipes / SOLO SINTÉTICO: 7 variantes, 3 recetas. p1-catalog BLOCKED/BLOQUEADO. Gate A/B UNVERIFIED/NO VERIFICADAS. Publication blocked: repository 404 / Publicación bloqueada: repositorio 404. See docs/PROJECT_STATE.md and docs/TEST_RESULTS.md.",
+  "theme": "dark",
+  "language": "es"
+}
