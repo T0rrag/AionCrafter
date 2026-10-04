@@ -1,6 +1,6 @@
 # AionCrafter — project state
 
-Checkpoint: 2026-10-04, Phase 01 / Part 01.
+Checkpoint: 2026-10-04, Phase 01 / Part 02 (GitHub delivery).
 Brief: AionCrafter_Project_Prompt.md v1.3. Roadmap: v1.1 EN/ES, original HTML preserved.
 Phase 01 status: **IN_PROGRESS**. Gate A: **UNVERIFIED**. Gate B: **UNVERIFIED**.
 
@@ -27,18 +27,22 @@ NOT_STARTED. Calculation records are modeled, but an economics engine/UI is not 
 
 ## Version and delivery
 
-Local branch: `phase/01-data-foundation`.
-Stacked base: `phase/00-architecture-bootstrap` at
-`ecd69ef551b8f43d44761533b8b171bd5a487a66` (local documentation baseline).
-Exact packaged head: see CHECKPOINT_RECEIPT.json beside the source tree in the ZIP,
-or `git rev-parse HEAD` after cloning its Git bundle.
+Repository: https://github.com/T0rrag/AionCrafter (public, as created by the user).
+Default branch `main` was initialized from the verified empty repository at
+`0ef1e2cae70eea6fa0b60f8c506e064433f9d440`.
 
-Target repository `T0rrag/AionCrafter` was checked again on 2026-10-04: GitHub 404.
-Authenticated connector profile is T0rrag. No repository-create action is exposed;
-terminal `git ls-remote` could not authenticate and no GitHub CLI is installed.
-No remote writes attempted; default branch/head cannot be verified. Remote SHA and
-PR URL are null. Local commits do not imply publication. No merge performed.
-`docs/PHASE_01_PR.md` is a prepared draft, not an opened pull request.
+Phase branch: `phase/01-data-foundation`.
+Stacked base: `phase/00-architecture-bootstrap` at
+`4e6077f51eb009bdfe8ffd5d5cf0328fcbef9481`.
+Verified implementation upload: `703c7135539c69e639a5d75334ece19d55a8afe9`.
+Its tree exactly matches tested local checkpoint `c559adeaa2ed060239656ff7cff1a504da8700f5`.
+Later commits on this branch record delivery documentation; fetch the current head
+before editing. See `delivery/2026-10-04-phase01.json` and GITHUB_DELIVERY.md.
+
+Architecture PR: https://github.com/T0rrag/AionCrafter/pull/1 — open for review.
+Phase PR: https://github.com/T0rrag/AionCrafter/pull/2 — draft, based on PR #1's branch.
+The earlier 404/access blocker is resolved. Both remote trees and branch SHAs were
+read back and verified. No merge, release, deployment or visibility change performed.
 
 ## Evidence and next action
 
@@ -47,10 +51,11 @@ Offline fixture validation passed. See TEST_RESULTS.md for limits and individual
 All 42 backlog IDs retained; roadmap progress is in `roadmap-progress.json`, imported
 through the existing bilingual roadmap control without modifying its code or storage key.
 
-Continue Phase 01 / Part 02: verify/create the intended private repository through an
-available authenticated route, inspect its actual base, publish the documentation
-baseline and the tested phase branch, verify remote SHAs and open the draft PR.
-Resolve the pilot/catalog permission and verification blocker before marking Phase 01
-complete. Do not start Phase 02 here or pass either external gate without evidence.
+Continue Phase 01 / Part 03: review the delivered foundation and resolve the real
+pilot/catalog permission and verification blocker. Keep PR #2 draft until Phase 01's
+applicable exit criteria pass. After an authorized baseline merge, retarget the phase
+PR safely; no merge is authorized here. Do not start Phase 02 or pass either external
+gate without evidence.
 
-Handoff: `handoffs/phase-01-part-01.md`. Starter: `NEXT_CHAT_PROMPT.md`.
+Latest handoff: `handoffs/phase-01-part-02.md`. Starter: `NEXT_CHAT_PROMPT.md`.
+Historical local implementation handoff: `handoffs/phase-01-part-01.md`.

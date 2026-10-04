@@ -50,11 +50,11 @@ will add calculations and UI after review of this phase and its remaining data b
 ## Project records
 
 Read `docs/PROJECT_STATE.md`, `docs/backlog.json`,
-`docs/handoffs/phase-01-part-01.md` and `docs/NEXT_CHAT_PROMPT.md` before continuing.
+`docs/handoffs/phase-01-part-02.md` and `docs/NEXT_CHAT_PROMPT.md` before continuing.
 `docs/decisions/0002-phase-01-data-contracts.md` documents the engineering choices.
 `docs/TEST_RESULTS.md` records actual local validation and its limits.
 `docs/GITHUB_DELIVERY.md` retains the publishing procedure; `docs/PHASE_01_PR.md`
-is the prepared draft description, not an opened PR.
+records the published draft PR.
 
 The original EN/ES roadmap remains byte-for-byte intact, with all 42 task IDs and
 existing browser notes/progress behavior. Import `docs/roadmap-progress.json` through
@@ -64,10 +64,20 @@ notes first because that existing control replaces progress and notes after conf
 
 ## GitHub and checkpoint
 
-Target: `T0rrag/AionCrafter`; remote access currently returns 404. Both local branches
-are included in the checkpoint's Git bundle. The Phase 01 branch is stacked on
-`phase/00-architecture-bootstrap`; nothing is merged, deployed or published remotely.
-See the package's `CHECKPOINT_RECEIPT.json` for exact local SHAs. A local SHA is not
-proof of a GitHub upload. Publish only after inspecting the actual remote base.
+Repository: https://github.com/T0rrag/AionCrafter
+
+- [Architecture baseline — PR #1](https://github.com/T0rrag/AionCrafter/pull/1): open for review.
+- [Phase 01 — PR #2](https://github.com/T0rrag/AionCrafter/pull/2): draft, stacked on the architecture branch.
+
+The verified implementation commit is `703c7135539c69e639a5d75334ece19d55a8afe9`.
+Current delivery documentation may follow it on `phase/01-data-foundation`.
+See `docs/GITHUB_DELIVERY.md` for exact bases, tree comparisons and review boundaries.
+The earlier repository-access blocker is resolved. Neither PR has been merged.
+
+```bash
+git clone --branch phase/01-data-foundation https://github.com/T0rrag/AionCrafter.git
+cd AionCrafter
+python3 -m unittest discover -v
+```
 
 Independent project; not affiliated with NC, Overwolf or CurseForge.

@@ -38,5 +38,14 @@ The original bilingual HTML SHA-256 remains
 
 No real catalog correctness/rights validation, authenticated price response, provider
 permission, game-client behavior, overlay, UI, production calculation engine, remote
-CI, GitHub upload, PR or deployment. No claim of live-price freshness. Tests run on
+CI or deployment. No claim of live-price freshness. Tests run on
 Linux only; Windows/macOS runtime behavior remains untested.
+
+## GitHub delivery revalidation (Part 02)
+
+Re-ran all three commands on 2026-10-04 before upload: **47 tests passed** in 0.765
+seconds, document validation passed all 36 then-current checksums, and fixture
+validation reported 7 SYNTHETIC variants / 3 recipes. Remote implementation tree
+`bb2146a339f3cc6b10eb473e50e364a9203d8aec` exactly matches the tested local tree.
+The subsequent delivery update changes documentation/manifest only; application code
+and tests are unchanged. GitHub PRs #1 and #2 are now open and unmerged.

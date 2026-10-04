@@ -1,9 +1,11 @@
 # Draft: Phase 01 — versioned data contracts and transactional catalog storage
 
-Target repository: T0rrag/AionCrafter (publication blocked; 404).
+Target repository: T0rrag/AionCrafter.
 Head: phase/01-data-foundation
 Base: phase/00-architecture-bootstrap (stacked documentation dependency).
-PR status: NOT CREATED. Keep draft pending real catalog and architectural review.
+PR: https://github.com/T0rrag/AionCrafter/pull/2 — OPEN, DRAFT, UNMERGED.
+Documentation dependency: https://github.com/T0rrag/AionCrafter/pull/1.
+Keep draft pending real catalog and architectural review.
 
 The data layer now identifies items by namespace/region/build/variant and prices by
 explicit market/faction/currency, preventing cross-market joins. Strict imports reject

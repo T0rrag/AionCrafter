@@ -2,9 +2,9 @@
 
 Read `docs/PROJECT_STATE.md` and the latest handoff first. Then read only the relevant master-brief sections and task definitions. The authoritative brief is `AionCrafter_Project_Prompt.md` v1.3; workflow rules are in sections 20–21.
 
-This architecture bootstrap is NOT a completed Phase 00 or an implemented application. Preserve the existing 42 IDs and statuses. Keep the architecture control chat for decisions/review and implement in phase-scoped development chats.
+The repository contains the architecture baseline and the tested Phase 01 data foundation. Phase 00 and Phase 01 remain incomplete. Preserve the existing 42 IDs and evidence-backed statuses. Keep the architecture control chat for decisions/review and implement in phase-scoped development chats.
 
-The next phase is 01 (data foundation), starting with `p1-identity`, using explicit synthetic fixtures until the pilot market and a permitted real catalog are available. Gate A (authorized automatic prices) and Gate B (supported overlay) remain UNVERIFIED. Do not guess an external API, region, tax, proc probability or catalog licence.
+Continue Phase 01 (data foundation) on its existing branch and draft PR #2. Its engineering contracts passed 47 tests; `p1-catalog` remains blocked. Use explicit synthetic fixtures until the pilot market and a permitted real catalog are available. Gate A (authorized automatic prices) and Gate B (supported overlay) remain UNVERIFIED. Do not guess an external API, region, tax, proc probability or catalog licence.
 
 Use exact monetary representations. Missing prices are not zero. Keep market/build/variant identity separate from localized display names. Preserve input source and observation times. Test pure contracts/imports before application integration.
 

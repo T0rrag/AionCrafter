@@ -1,19 +1,19 @@
-Continue AionCrafter in this same project: Phase 01 — Data foundation, Part 02.
-Read docs/PROJECT_STATE.md, docs/handoffs/phase-01-part-01.md, docs/backlog.json and
+Continue AionCrafter in this same project: Phase 01 — Data foundation, Part 03.
+Read docs/PROJECT_STATE.md, docs/handoffs/phase-01-part-02.md, docs/backlog.json and
 ADR 0002. Follow AionCrafter_Project_Prompt.md v1.3 sections 9, 13, 20 and 21.
 
-Recover the source tree and Git bundle from AionCrafter_Phase01_Part01_Checkpoint.zip;
-verify its exact head against CHECKPOINT_RECEIPT.json. Resume phase/01-data-foundation,
-stacked on local baseline ecd69ef551b8f43d44761533b8b171bd5a487a66.
+Repository: https://github.com/T0rrag/AionCrafter. Fetch and verify the current head
+of phase/01-data-foundation. PR #2 is draft and stacked on documentation PR #1
+(phase/00-architecture-bootstrap). Both are unmerged. Verified implementation commit:
+703c7135539c69e639a5d75334ece19d55a8afe9; later commits record delivery documentation.
 
-The data-foundation implementation passed 47 local tests. p1-catalog remains BLOCKED:
-only 7 synthetic variants and 3 synthetic recipes exist. Choose the real pilot and
-obtain permitted, verified data before completing that task. Do not invent game rules.
+47 local tests passed. First review the current foundation and resolve p1-catalog:
+select a real pilot region/server-or-market/faction/build/language and obtain a
+permitted, verified catalog (target 100 relevant items / 25 verified recipes).
+Current fixtures are only 7 SYNTHETIC variants / 3 SYNTHETIC recipes. Do not count
+synthetic expansion as completion of the real-data task or infer reuse permission.
 
-First recheck T0rrag/AionCrafter. Last check returned 404; no remote SHA or PR exists.
-Repository creation (private) and phase uploads are already authorized. When possible,
-verify the remote default/head, publish the documentation baseline and phase branch,
-read back remote SHAs, and open the prepared draft PR. Do not force-push or merge.
-
-Gate A and Gate B remain UNVERIFIED. Continue Phase 01 only; do not build Phase 02 UI.
-Run relevant tests after changes and save project state and the next handoff.
+Continue Phase 01 only. Keep Gate A and Gate B UNVERIFIED without new evidence.
+Do not build Phase 02 UI, force-push or merge without architectural/owner approval.
+Record tests, commit/upload coherent checkpoints, verify remote SHAs and update the
+existing PR, state and handoff before stopping.
