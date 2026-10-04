@@ -1,0 +1,45 @@
+{
+  "repository": "https://github.com/T0rrag/AionCrafter",
+  "phase": "04",
+  "pull_request": "https://github.com/T0rrag/AionCrafter/pull/6",
+  "state": "MERGED",
+  "tested_head": "e34ddf478c63777a0e0555664337d7eed2900134",
+  "merge_commit": "a185d0618cb315aa9468aec0de7716ccb1d56146",
+  "tested_and_merged_tree": "3511fe7e863329f5e0e8c5ab988ef4f68abdfbd8",
+  "user_authorization": "ADR 0007: user allowed tested merges and autonomous continuation",
+  "task_ids": [
+    "p4-batches",
+    "p4-buycraft",
+    "p4-proc",
+    "p4-liquidity",
+    "p4-rank",
+    "p4-ledger"
+  ],
+  "verification": [
+    "python -m unittest discover -q: 238 passed in 21.480s",
+    "python -m compileall -q aioncrafter tests: passed",
+    "python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json: 7 variants, 3 recipes",
+    "python scripts/validate_bootstrap.py: 42 IDs, 109 hashes before merge receipt",
+    "git diff --check: passed",
+    "Fetched PR head; git diff --exit-code --cached FETCH_HEAD: identical tested tree",
+    "PR reviews/comments/statuses/PR workflow runs: empty lists, not a CI pass",
+    "Merge API expected_head_sha matched tested head; merged=true read back",
+    "Fetched main; git diff --exit-code e34ddf478c63777a0e0555664337d7eed2900134 FETCH_HEAD: identical merged tree"
+  ],
+  "gates": {
+    "A": "UNVERIFIED",
+    "B": "UNVERIFIED"
+  },
+  "phase_status": "IN_PROGRESS; manual groundwork merged, real integration/acceptance pending",
+  "next": "Phase 06 independent manual-release preparation in a separate Aion2 chat; no new chat has been started by this receipt",
+  "next_branch_observation": "refs/heads/phase/06-release absent from git ls-remote at receipt time; recheck before creating",
+  "no_claims": [
+    "real-market validation",
+    "provider activation",
+    "visual QA",
+    "remote CI pass",
+    "public release",
+    "background work"
+  ],
+  "note": "Documentation receipt follows this merge on main; fetch actual main for its later SHA."
+}

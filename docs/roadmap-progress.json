@@ -14,7 +14,7 @@
     "p4-batches",
     "p4-ledger"
   ],
-  "notes": "Phase 04 manual groundwork candidate: 238 tests passed; p4-batches/p4-ledger engineering complete, other Phase 04 tasks IN_PROGRESS for real evidence/integration. PR #6 pending verified publication/merge. Next independent Phase 06 after receipt, separate Aion2 chat. Gates A/B UNVERIFIED; p1-catalog BLOCKED; Phase 03 incomplete; Phase 05 DEFERRED. All 42 IDs preserved.",
+  "notes": "Phase 04 manual groundwork merged: 238 tests passed; p4-batches/p4-ledger engineering complete, other Phase 04 tasks IN_PROGRESS for real evidence/integration. PR #6 merged at a185d0618cb315aa9468aec0de7716ccb1d56146. Next independent Phase 06 after receipt, separate Aion2 chat. Gates A/B UNVERIFIED; p1-catalog BLOCKED; Phase 03 incomplete; Phase 05 DEFERRED. All 42 IDs preserved.",
   "theme": "dark",
   "language": "es"
 }

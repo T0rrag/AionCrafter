@@ -130,3 +130,14 @@ PR #5 merged at bd23f4166ffe276179843761dea8e95275efbce1 after explicit user aut
 149 tests passed again; fetched main tree equals expected head 4e10fad95444241e68e353d41c9d24b4958b1dd6.
 Receipt: delivery/phase-03-merge.json. Phase remains incomplete and Gates A/B UNVERIFIED.
 Next: Phase 04 in separate Aion2 chat, p4-batches. No other PR merge or force-push.
+
+## Phase 04 manual-groundwork merge — 2026-10-04
+
+PR #6 merged under ADR 0007/user authorization. Tested head e34ddf478c63777a0e0555664337d7eed2900134;
+merge a185d0618cb315aa9468aec0de7716ccb1d56146. Read-back merged=true and fetched main tree
+matched the tested head exactly. 238 local tests, compilation/catalog/diff/bootstrap checks
+passed. No remote CI pass; remote status/run/review/comment queries were empty. Receipt:
+delivery/phase-04-merge.json. Documentation receipt follows on main. Phase 04 remains
+IN_PROGRESS for real evidence/integration; no provider activation or public release.
+Next independent Phase 06 work belongs in a separate Aion2 chat; this writer stops
+application edits. No Phase 06 chat startup is claimed by this receipt.

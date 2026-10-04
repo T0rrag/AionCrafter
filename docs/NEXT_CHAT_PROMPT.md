@@ -1,8 +1,9 @@
 Start AionCrafter Phase 06 — Manual-edition validation and guidance, Part 01, in a
-separate chat in the existing Aion2 project after verifying Phase 04 PR #6 is merged.
-If #6 is not merged, resume Phase 04 publication/checks first; do not assume a merge.
+separate chat in the existing Aion2 project. Phase 04 PR #6 is merged at
+a185d0618cb315aa9468aec0de7716ccb1d56146; main has a later documentation receipt.
+Fetch and verify both; do not repeat the merge.
 Fetch T0rrag/AionCrafter and actual heads. Read AGENTS, PROJECT_STATE, ADR 0007/0008,
-handoffs/phase-04-part-02.md, latest delivery receipt, backlog and brief sections 14/20/21.
+handoffs/phase-04-to-phase-06.md, latest delivery receipt, backlog and brief sections 14/20/21.
 Phase 04 manual groundwork now includes recursive routes, one-attempt risk, conditional
 rankings and actual-record FIFO ledger; baseline 238 tests passed on Windows/Python 3.12.
 Start independent p6-mathqa/p6-patches/security/package work with synthetic fixtures.

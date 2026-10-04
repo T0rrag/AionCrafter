@@ -213,3 +213,8 @@ failed preview preservation, source-age re-evaluation and CSRF are covered.
 `python -m compileall -q aioncrafter tests`, synthetic catalog CLI validation (7 variants,
 3 recipes), and `git diff --check` passed. The prior 180 tests remain passing.
 These checks do not establish visual QA, a real market/rule audit, remote CI or release.
+
+Phase 04 merge verification: published e34ddf478c63777a0e0555664337d7eed2900134 matched the staged tested
+tree. PR #6 merge a185d0618cb315aa9468aec0de7716ccb1d56146 was fetched and also matched exactly.
+No code changes after the final 238-test run. GitHub returned empty PR workflow/status/
+review/comment lists; not a CI pass. Final receipt manifest is validated separately.

@@ -4,9 +4,9 @@ Read docs/PROJECT_STATE.md, the latest handoff, docs/backlog.json and current AD
 The authoritative brief is AionCrafter_Project_Prompt.md v1.3 (workflow sections 20–21).
 Preserve all seven phases and 42 stable IDs with evidence-backed statuses.
 
-Current sequence: Phase 04 manual groundwork candidate PR #6; read PROJECT_STATE,
-handoffs/phase-04-part-02.md and ADR 0008. p4-batches/ledger engineering complete;
-Phase 04 remains IN_PROGRESS for real rules/catalog/market integration. Verify merge
+Current sequence: Phase 04 manual groundwork merged via PR #6; read PROJECT_STATE,
+handoffs/phase-04-to-phase-06.md and ADR 0008. p4-batches/ledger engineering complete;
+Phase 04 remains IN_PROGRESS for real rules/catalog/market integration. Read verified merge
 receipt before moving to independent Phase 06 manual-release preparation in a separate
 Aion2 chat. Phase 03 remains IN_PROGRESS with real integration BLOCKED; p1-catalog
 BLOCKED; Phase 05 DEFERRED; Gates A/B UNVERIFIED. Do not claim a release or real pilot.

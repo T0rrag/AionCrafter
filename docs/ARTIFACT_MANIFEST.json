@@ -3,7 +3,7 @@
   "project": "AionCrafter",
   "brief_version": "1.3",
   "publication_status": "PUBLISHED",
-  "checkpoint": "Phase 04 Part 02 manual intelligence and actual records",
+  "checkpoint": "Phase 04 merged manual groundwork and Phase 06 handoff",
   "files": [
     {
       "path": ".github/pull_request_template.md",
@@ -17,8 +17,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 2313,
-      "sha256": "b7cc63a0fb9cce30276f5341b7488bc91ab0a26dc235965a4490daf40c27c421"
+      "bytes": 2325,
+      "sha256": "4e027be2a25fc50b345888fff7b180b2dfad7e0780bfadfc64d50347784c8e06"
     },
     {
       "path": "AionCrafter_Project_Prompt.md",
@@ -177,13 +177,13 @@
     },
     {
       "path": "docs/GITHUB_DELIVERY.md",
-      "bytes": 7875,
-      "sha256": "842957cef767c3c2c8657bf141fe420d8e052af4912e4149626acdc600f55859"
+      "bytes": 8629,
+      "sha256": "4f6c499bd6a13cd47ff7facde5e49a9f1e3b5ef2e26137fd46fc9e1a5f5105c0"
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1234,
-      "sha256": "16d11d48845b9a09ef287b035a0ffaa10adcd86f8b63711153f366fcaa3f580c"
+      "bytes": 1269,
+      "sha256": "93c317b6e3a3f0c3ad373f7a670e32ea471016b7e4e8c5646101cf1090d277fc"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -212,8 +212,8 @@
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 2935,
-      "sha256": "dc7e28d13b75d9a6e10da85cafc6d630b32fea30250cbede3f1e389ce3a010c3"
+      "bytes": 3435,
+      "sha256": "6ff1b7919800400b0cd5da95ec07d9688415981d8ecbfb6e04c4be5d82fdabd3"
     },
     {
       "path": "docs/REFERENCE_IMPORTS.md",
@@ -222,8 +222,8 @@
     },
     {
       "path": "docs/TEST_RESULTS.md",
-      "bytes": 13888,
-      "sha256": "82324f9d62998a96a3833b4cd9d213feb38918453bb5b75bee11f888d9baf6a8"
+      "bytes": 14265,
+      "sha256": "504a756960988bc61bbc04e4589702680aeb18504e83a7b2c46529c7826fd9ea"
     },
     {
       "path": "docs/backlog.json",
@@ -311,6 +311,11 @@
       "sha256": "3b6f7108da3cc5811012738c8c1f0d4b60b1848daf4d5c274284420a1548047f"
     },
     {
+      "path": "docs/delivery/phase-04-merge.json",
+      "bytes": 1980,
+      "sha256": "77b8fac688ccbf6af97b9344c3cb0f2a71494a7bca48e83077d063a34d1f3cca"
+    },
+    {
       "path": "docs/delivery/phase-04-part-01.json",
       "bytes": 1180,
       "sha256": "733f254de9cd5381cb9ee20f43b062900f2a9a0615984b3df93359b93ea11533"
@@ -396,9 +401,14 @@
       "sha256": "4e0dfb57c8b8beede8e29d9a3b0fa8399d4f9975b7ce4e72a8dba9fa8fc4f055"
     },
     {
+      "path": "docs/handoffs/phase-04-to-phase-06.md",
+      "bytes": 3759,
+      "sha256": "8ecb2a9b52fda6b36dcc489b48690b224cbc086a9cfa7999881beadeac698501"
+    },
+    {
       "path": "docs/roadmap-progress.json",
-      "bytes": 749,
-      "sha256": "86f892d747f0babf13e195ddc91e246f8deb28477c17a321c91d85d6c0d0c336"
+      "bytes": 762,
+      "sha256": "586aaeb0ad0d8d107dea49e18a6b820478b42ec4d6206d94b6fc4776bd8cb2ac"
     },
     {
       "path": "docs/sources/SYNTHETIC.md",
