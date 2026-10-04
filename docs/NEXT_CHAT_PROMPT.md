@@ -1,11 +1,18 @@
-# Next chat: AionCrafter | Phase 01 | Data foundation | Part 01
+Start AionCrafter Phase 02 — Manual-first calculator, Part 01, in this same project.
+Use master prompt v1.3 sections 8, 13, 20 and 21 plus ADR 0003. Read PROJECT_STATE.md,
+handoffs/phase-01-part-03.md and backlog.json first.
 
-Continue AionCrafter in this same existing ChatGPT project. The architectural-control chat is reserved for decisions and reviews; this chat implements Phase 01 only.
+Fetch https://github.com/T0rrag/AionCrafter and verify the actual phase/01-data-foundation
+head. Its implementation passed 47 tests. Create phase/02-manual-calculator with a
+recorded base SHA; if PR #2 remains unmerged, explicitly stack the Phase 02 PR on it.
+Do not merge or force-push.
 
-Read `docs/PROJECT_STATE.md`, `docs/handoffs/architecture-control-2026-10-04.md`, and `AionCrafter_Project_Prompt.md` v1.3 sections 9, 13 (Phase 01), 20 and 21. Use the supplied bilingual `AionCrafter_Roadmap.html` and preserve all 42 task IDs.
+Begin p2-economics: pure exact-arithmetic batch costs, configurable fees, proceeds,
+profit/loss, ROI, break-even and explicit missing-price states. Then add manual price
+entry and both materials-only and item-economics workflows in coherent increments.
 
-Verify `T0rrag/AionCrafter` and its actual default branch/head. The previous session prepared only a local architecture bootstrap: it did not create a repository, upload files or implement application code. Publish the supplied documentation baseline when access permits. Use `phase/01-data-foundation` for this phase; explicitly record its base.
-
-Start `p1-identity`: design and test stable item, variant and market identities. Use clearly labeled SYNTHETIC fixtures; the real pilot market and permitted catalog remain unresolved. Gate A and Gate B are UNVERIFIED. Do not implement the Phase 02 UI yet.
-
-Implement and test this phase's next coherent increment. Commit and upload phase-related changes when available, verify the remote SHA and open/update the phase PR. Leave merging for architectural review. Save state, actual test results and the next-chat starter, then stop at the phase boundary or a coherent checkpoint.
+The user postponed live prices and overlay: Phases 03/05 are DEFERRED, Gates A/B
+UNVERIFIED. p1-catalog remains BLOCKED; Phase 01 is not fully complete. Use clearly
+SYNTHETIC fixtures while real pilot/catalog permissions are unresolved. Do not invent
+verified game data, fees or probabilities. Work only on Phase 02, run relevant tests,
+publish tested checkpoints, verify remote SHAs, and save state and a handoff.

@@ -1,50 +1,49 @@
 # Phase-based GitHub delivery
 
-## Current status
+## Verified delivery — 2026-10-04
 
-Target: `T0rrag/AionCrafter` (intended, not created or published by this bootstrap). Authenticated account `T0rrag` was verified through the connector. No remote commit, branch, issue, PR or release has been created.
+Repository: https://github.com/T0rrag/AionCrafter
+Repository ID: 1404312904. Default branch: `main`.
+Visibility observed on the user-created repository: public. No visibility change made.
+The user supplied this repository URL and requested continuation of the authorized upload.
 
-## One-time setup
+The repository was empty (no branches/PRs; README lookup explicitly returned empty).
+Initialized main with a minimal README at
+`0ef1e2cae70eea6fa0b60f8c506e064433f9d440`.
 
-Create a private repository named `AionCrafter` in `T0rrag`, initialized with a README. A GitHub CLI alternative, executed by the user in a signed-in environment, is:
+| Delivery | Branch / base | Verified commit | PR |
+|---|---|---|---|
+| Architecture baseline | phase/00-architecture-bootstrap / main | 4e6077f51eb009bdfe8ffd5d5cf0328fcbef9481 | https://github.com/T0rrag/AionCrafter/pull/1 |
+| Tested Phase 01 implementation | phase/01-data-foundation / phase/00-architecture-bootstrap | 703c7135539c69e639a5d75334ece19d55a8afe9 | https://github.com/T0rrag/AionCrafter/pull/2 |
 
-```bash
-gh repo create T0rrag/AionCrafter --private --add-readme
-```
+PR #1 is open for review; PR #2 is draft while Phase 01 remains IN_PROGRESS.
+The phase branch may contain later delivery-only documentation commits; read its
+current head from GitHub. The table records the exact verified implementation upload.
+No merge, release, deployment, force-push or permission change was performed.
 
-This command has NOT been run. Verify GitHub CLI authentication normally; never paste a token into chat. Ensure the ChatGPT GitHub connection can access the new private repository. Do not broaden access to unrelated repositories unnecessarily.
+## Verification
 
-Official CLI reference (checked 4 October 2026): https://cli.github.com/manual/gh_repo_create
+Remote branches were read using `git ls-remote` and fetched through HTTPS.
+`git diff --exit-code` confirmed complete tree equality between:
 
-## Publication sequence
+- Local original baseline `ecd69ef551b8f43d44761533b8b171bd5a487a66` and remote baseline.
+- Local tested checkpoint `c559adeaa2ed060239656ff7cff1a504da8700f5` and remote implementation.
 
-Read the existing repository/default branch and the relevant file contents before writing. Do not overwrite an existing project because its name matches. First publish this document package to `phase/00-architecture-bootstrap`, based on the verified default branch, and open a review PR. This is documentation setup, not completion of Phase 00's market/platform checks.
+Tree hashes are recorded in `delivery/2026-10-04-phase01.json`. Commit hashes differ
+because remote commits descend from the newly initialized main; no code differs.
+Original local history remains in the previously delivered ZIP/Git bundle and local
+archive refs. The remote repository is now the canonical continuation point.
 
-After architectural review, merge that baseline only with authorization. Phase 01 uses `phase/01-data-foundation`. When the baseline remains unmerged, either wait for review or explicitly stack Phase 01 on the documentation branch and set the PR base accordingly; never conceal that dependency. Rebase/retarget without force only under an agreed safe workflow.
+## Subsequent checkpoints
 
-Later branches: `phase/02-manual-calculator`, `phase/03-market-prices`, `phase/04-crafting-intelligence`, `phase/05-overlay`, `phase/06-release`. Create them when needed, not as proof of progress.
+Fetch and inspect the actual remote head before editing. Continue the same phase
+branch and draft PR; use a fast-forward update without force. Run relevant checks,
+update PROJECT_STATE, backlog, test evidence and a new handoff, then verify every
+uploaded SHA. Keep previous handoffs as history.
 
-Use one coherent implementation per phase branch. Commit and push tested checkpoints; several chats can contribute to one phase PR. No automatic merge, force-push, unrelated upload, visibility change or branch-protection modification is authorized by this convention.
+PR #2 explicitly depends on #1. After owner/architectural approval and baseline merge,
+retarget the phase PR onto the reviewed main through a safe agreed workflow. This
+procedure does not authorize a merge. Do not publish Phase 02 from this chat.
 
-## Commit and PR format
-
-Example commit title: `feat(phase-01): define item and market identity contracts`.
-
-Include stable task IDs, relevant decisions, and test evidence in the commit body or PR. Use the supplied PR template. A partial phase stays draft/IN_PROGRESS. Ready for review does not imply that external gates have passed or that the app has been released.
-
-## Verification receipt
-
-After every upload, read back the remote branch/commit and report:
-
-```text
-Repository:
-Branch and base:
-Verified commit SHA:
-Task IDs / phase status:
-Tests actually run:
-PR URL and draft/review state:
-Gate A / Gate B:
-Remaining work / next chat:
-```
-
-Do not insert invented URLs or SHAs. Local archive checksums and local commits are not remote-upload receipts. No perpetual/background delivery job is configured; publish only work actually performed in the active development session.
+p1-catalog remains blocked on pilot scope and permitted verified data; Gate A/B remain
+UNVERIFIED. GitHub publication resolves only the repository access blocker.

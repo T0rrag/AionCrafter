@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "project": "AionCrafter",
+  "date": "2026-10-04",
+  "repository": "T0rrag/AionCrafter",
+  "repository_id": 1404312904,
+  "visibility_observed": "public",
+  "visibility_changed": false,
+  "default_branch": "main",
+  "initial_main_sha": "0ef1e2cae70eea6fa0b60f8c506e064433f9d440",
+  "architecture": {
+    "branch": "phase/00-architecture-bootstrap",
+    "base": "main",
+    "verified_sha": "4e6077f51eb009bdfe8ffd5d5cf0328fcbef9481",
+    "tree_sha": "727bebb086c98c28c42f35143c96df47c9a3d1b5",
+    "original_local_sha": "ecd69ef551b8f43d44761533b8b171bd5a487a66",
+    "pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
+    "state": "open",
+    "draft": false,
+    "merged": false
+  },
+  "phase_01": {
+    "branch": "phase/01-data-foundation",
+    "base": "phase/00-architecture-bootstrap",
+    "verified_implementation_sha": "703c7135539c69e639a5d75334ece19d55a8afe9",
+    "tree_sha": "bb2146a339f3cc6b10eb473e50e364a9203d8aec",
+    "original_local_sha": "c559adeaa2ed060239656ff7cff1a504da8700f5",
+    "pr_url": "https://github.com/T0rrag/AionCrafter/pull/2",
+    "state": "open",
+    "draft": true,
+    "merged": false,
+    "status": "IN_PROGRESS",
+    "note": "Later commits may update delivery documentation; inspect the current remote head before editing."
+  },
+  "verification": [
+    "Remote branch SHAs read back with git ls-remote",
+    "Both remote branches fetched over HTTPS",
+    "git diff --exit-code confirmed complete tree equality with both original local checkpoints",
+    "PR head/base/draft/unmerged metadata returned after creation"
+  ],
+  "validation": {
+    "unit_tests": 47,
+    "failures": 0,
+    "errors": 0,
+    "unit_command": "python3 -m unittest discover -v",
+    "unit_duration_seconds": 0.765,
+    "documentation_checksums_before_delivery_update": 36,
+    "fixture_kind": "SYNTHETIC",
+    "fixture_variants": 7,
+    "fixture_recipes": 3,
+    "environment": "Linux / Python 3.12.14 / SQLite 3.53.1",
+    "remote_ci_run": false
+  },
+  "gate_A": "UNVERIFIED",
+  "gate_B": "UNVERIFIED",
+  "remaining_blockers": [
+    "p1-catalog: real pilot scope and permitted verified catalog"
+  ],
+  "merge_performed": false,
+  "force_push_performed": false,
+  "deployed": false
+}

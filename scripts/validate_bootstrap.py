@@ -26,7 +26,11 @@ def main() -> int:
         assert 'aioncrafter-roadmap-v1' in html, 'Storage key changed'
         assert '## 21. Architectural control' in md, 'Missing architecture protocol'
         completed=[t['id'] for p in phases for t in p['tasks'] if t['status']=='COMPLETE']
-        assert completed==['p0-audit'], 'Unverified completion claim'
+        assert all(t.get('evidence') for p in phases for t in p['tasks'] if t['status']=='COMPLETE'), 'Completion lacks evidence'
+        assert all(t['status'] in {'NOT_STARTED','IN_PROGRESS','BLOCKED','COMPLETE','DEFERRED'} for p in phases for t in p['tasks']), 'Invalid status'
+        progress=json.loads((root/'docs/roadmap-progress.json').read_text(encoding='utf-8'))
+        assert progress['completed']==completed, 'Roadmap progress differs from backlog'
+        assert data['gates']=={'A':'UNVERIFIED','B':'UNVERIFIED'}, 'Gate changes need separate evidence review'
         for rel in ('AGENTS.md','README.md','docs/PROJECT_STATE.md','docs/NEXT_CHAT_PROMPT.md',
                     'docs/GITHUB_DELIVERY.md','docs/handoffs/architecture-control-2026-10-04.md'):
             assert (root/rel).is_file(), f'Missing {rel}'
@@ -36,7 +40,7 @@ def main() -> int:
             assert path.is_file(), f'Missing {item["path"]}'
             assert hashlib.sha256(path.read_bytes()).hexdigest()==item['sha256'], f'Checksum mismatch: {path}'
         print(f'PASS: 7 phases, 42 stable task IDs, 6 tasks per phase.')
-        print(f'PASS: only p0-audit is complete; both external gates remain UNVERIFIED.')
+        print(f'PASS: {len(completed)} tasks carry completion evidence; both external gates remain UNVERIFIED.')
         print(f'PASS: {len(manifest["files"])} artifact checksums and required handoff files.')
         print('PASS: brief/backlog/roadmap task IDs agree; original HTML storage key retained.')
         print('Scope: documentation/package checks only. No app or remote integration tests.')

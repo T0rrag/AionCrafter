@@ -1,0 +1,580 @@
+{
+  "schema_version": 1,
+  "release_id": "SYNTHETIC-demo-v1",
+  "scope": {
+    "namespace": "synthetic-demo",
+    "region": "SYNTHETIC",
+    "build": "test-build-1",
+    "dataset_kind": "SYNTHETIC"
+  },
+  "provenance": {
+    "source_id": "synthetic-fixtures",
+    "source_ref": "tests/fixtures/SYNTHETIC-catalog-v1.json",
+    "dataset_kind": "SYNTHETIC",
+    "rights_status": "synthetic",
+    "rights_ref": "docs/sources/SYNTHETIC.md"
+  },
+  "items": [
+    {
+      "identity": {
+        "scope": {
+          "namespace": "synthetic-demo",
+          "region": "SYNTHETIC",
+          "build": "test-build-1",
+          "dataset_kind": "SYNTHETIC"
+        },
+        "item_id": "ore",
+        "variant": {
+          "quality": "standard",
+          "enhancement": 0,
+          "tradability": "tradeable",
+          "attributes": []
+        }
+      },
+      "aliases": [
+        {
+          "language": "en",
+          "text": "Synthetic ore"
+        },
+        {
+          "language": "es",
+          "text": "Mineral sintético"
+        }
+      ],
+      "acquisition": [
+        {
+          "kind": "auction",
+          "currency": {
+            "namespace": "synthetic-demo",
+            "code": "TEST",
+            "decimal_places": 2
+          },
+          "quantity_limit": null,
+          "restrictions": []
+        },
+        {
+          "kind": "vendor_purchase",
+          "currency": {
+            "namespace": "synthetic-demo",
+            "code": "TEST",
+            "decimal_places": 2
+          },
+          "quantity_limit": 10,
+          "restrictions": [
+            "SYNTHETIC: rank 2 required"
+          ]
+        }
+      ]
+    },
+    {
+      "identity": {
+        "scope": {
+          "namespace": "synthetic-demo",
+          "region": "SYNTHETIC",
+          "build": "test-build-1",
+          "dataset_kind": "SYNTHETIC"
+        },
+        "item_id": "herb",
+        "variant": {
+          "quality": "standard",
+          "enhancement": 0,
+          "tradability": "tradeable",
+          "attributes": []
+        }
+      },
+      "aliases": [
+        {
+          "language": "en",
+          "text": "Synthetic herb"
+        },
+        {
+          "language": "es",
+          "text": "Hierba sintética"
+        }
+      ],
+      "acquisition": [
+        {
+          "kind": "auction",
+          "currency": {
+            "namespace": "synthetic-demo",
+            "code": "TEST",
+            "decimal_places": 2
+          },
+          "quantity_limit": null,
+          "restrictions": []
+        },
+        {
+          "kind": "craft",
+          "currency": null,
+          "quantity_limit": null,
+          "restrictions": []
+        }
+      ]
+    },
+    {
+      "identity": {
+        "scope": {
+          "namespace": "synthetic-demo",
+          "region": "SYNTHETIC",
+          "build": "test-build-1",
+          "dataset_kind": "SYNTHETIC"
+        },
+        "item_id": "bar",
+        "variant": {
+          "quality": "standard",
+          "enhancement": 0,
+          "tradability": "tradeable",
+          "attributes": []
+        }
+      },
+      "aliases": [
+        {
+          "language": "en",
+          "text": "Synthetic bar"
+        },
+        {
+          "language": "es",
+          "text": "Lingote sintético"
+        }
+      ],
+      "acquisition": [
+        {
+          "kind": "auction",
+          "currency": {
+            "namespace": "synthetic-demo",
+            "code": "TEST",
+            "decimal_places": 2
+          },
+          "quantity_limit": null,
+          "restrictions": []
+        },
+        {
+          "kind": "craft",
+          "currency": null,
+          "quantity_limit": null,
+          "restrictions": []
+        }
+      ]
+    },
+    {
+      "identity": {
+        "scope": {
+          "namespace": "synthetic-demo",
+          "region": "SYNTHETIC",
+          "build": "test-build-1",
+          "dataset_kind": "SYNTHETIC"
+        },
+        "item_id": "potion",
+        "variant": {
+          "quality": "standard",
+          "enhancement": 0,
+          "tradability": "tradeable",
+          "attributes": []
+        }
+      },
+      "aliases": [
+        {
+          "language": "en",
+          "text": "Synthetic potion"
+        },
+        {
+          "language": "es",
+          "text": "Poción sintética"
+        }
+      ],
+      "acquisition": [
+        {
+          "kind": "auction",
+          "currency": {
+            "namespace": "synthetic-demo",
+            "code": "TEST",
+            "decimal_places": 2
+          },
+          "quantity_limit": null,
+          "restrictions": []
+        },
+        {
+          "kind": "craft",
+          "currency": null,
+          "quantity_limit": null,
+          "restrictions": []
+        }
+      ]
+    },
+    {
+      "identity": {
+        "scope": {
+          "namespace": "synthetic-demo",
+          "region": "SYNTHETIC",
+          "build": "test-build-1",
+          "dataset_kind": "SYNTHETIC"
+        },
+        "item_id": "potion",
+        "variant": {
+          "quality": "rare",
+          "enhancement": 0,
+          "tradability": "tradeable",
+          "attributes": []
+        }
+      },
+      "aliases": [
+        {
+          "language": "en",
+          "text": "Synthetic potion"
+        },
+        {
+          "language": "es",
+          "text": "Poción sintética"
+        }
+      ],
+      "acquisition": [
+        {
+          "kind": "auction",
+          "currency": {
+            "namespace": "synthetic-demo",
+            "code": "TEST",
+            "decimal_places": 2
+          },
+          "quantity_limit": null,
+          "restrictions": []
+        },
+        {
+          "kind": "craft",
+          "currency": null,
+          "quantity_limit": null,
+          "restrictions": []
+        }
+      ]
+    },
+    {
+      "identity": {
+        "scope": {
+          "namespace": "synthetic-demo",
+          "region": "SYNTHETIC",
+          "build": "test-build-1",
+          "dataset_kind": "SYNTHETIC"
+        },
+        "item_id": "charm",
+        "variant": {
+          "quality": "standard",
+          "enhancement": 0,
+          "tradability": "tradeable",
+          "attributes": []
+        }
+      },
+      "aliases": [
+        {
+          "language": "en",
+          "text": "Synthetic charm"
+        },
+        {
+          "language": "es",
+          "text": "Amuleto sintético"
+        }
+      ],
+      "acquisition": [
+        {
+          "kind": "auction",
+          "currency": {
+            "namespace": "synthetic-demo",
+            "code": "TEST",
+            "decimal_places": 2
+          },
+          "quantity_limit": null,
+          "restrictions": []
+        },
+        {
+          "kind": "craft",
+          "currency": null,
+          "quantity_limit": null,
+          "restrictions": []
+        }
+      ]
+    },
+    {
+      "identity": {
+        "scope": {
+          "namespace": "synthetic-demo",
+          "region": "SYNTHETIC",
+          "build": "test-build-1",
+          "dataset_kind": "SYNTHETIC"
+        },
+        "item_id": "charm",
+        "variant": {
+          "quality": "standard",
+          "enhancement": 0,
+          "tradability": "bound",
+          "attributes": []
+        }
+      },
+      "aliases": [
+        {
+          "language": "en",
+          "text": "Synthetic charm"
+        },
+        {
+          "language": "es",
+          "text": "Amuleto sintético"
+        }
+      ],
+      "acquisition": [
+        {
+          "kind": "craft",
+          "currency": null,
+          "quantity_limit": null,
+          "restrictions": []
+        }
+      ]
+    }
+  ],
+  "recipes": [
+    {
+      "recipe_id": "synthetic-bar",
+      "scope": {
+        "namespace": "synthetic-demo",
+        "region": "SYNTHETIC",
+        "build": "test-build-1",
+        "dataset_kind": "SYNTHETIC"
+      },
+      "inputs": [
+        {
+          "item": {
+            "scope": {
+              "namespace": "synthetic-demo",
+              "region": "SYNTHETIC",
+              "build": "test-build-1",
+              "dataset_kind": "SYNTHETIC"
+            },
+            "item_id": "ore",
+            "variant": {
+              "quality": "standard",
+              "enhancement": 0,
+              "tradability": "tradeable",
+              "attributes": []
+            }
+          },
+          "quantity": 3
+        }
+      ],
+      "outcomes": [
+        {
+          "outputs": [
+            {
+              "item": {
+                "scope": {
+                  "namespace": "synthetic-demo",
+                  "region": "SYNTHETIC",
+                  "build": "test-build-1",
+                  "dataset_kind": "SYNTHETIC"
+                },
+                "item_id": "bar",
+                "variant": {
+                  "quality": "standard",
+                  "enhancement": 0,
+                  "tradability": "tradeable",
+                  "attributes": []
+                }
+              },
+              "quantity": 2
+            }
+          ],
+          "probability": "1",
+          "probability_source": "SYNTHETIC deterministic test"
+        }
+      ],
+      "fees": [
+        {
+          "money": {
+            "amount": "1.25",
+            "currency": {
+              "namespace": "synthetic-demo",
+              "code": "TEST",
+              "decimal_places": 2
+            }
+          },
+          "basis": "per_attempt"
+        }
+      ],
+      "requirements": [
+        "SYNTHETIC: forge level 1"
+      ],
+      "provenance": {
+        "source_id": "synthetic-fixtures",
+        "source_ref": "tests/fixtures/SYNTHETIC-catalog-v1.json",
+        "dataset_kind": "SYNTHETIC",
+        "rights_status": "synthetic",
+        "rights_ref": "docs/sources/SYNTHETIC.md"
+      }
+    },
+    {
+      "recipe_id": "synthetic-potion",
+      "scope": {
+        "namespace": "synthetic-demo",
+        "region": "SYNTHETIC",
+        "build": "test-build-1",
+        "dataset_kind": "SYNTHETIC"
+      },
+      "inputs": [
+        {
+          "item": {
+            "scope": {
+              "namespace": "synthetic-demo",
+              "region": "SYNTHETIC",
+              "build": "test-build-1",
+              "dataset_kind": "SYNTHETIC"
+            },
+            "item_id": "herb",
+            "variant": {
+              "quality": "standard",
+              "enhancement": 0,
+              "tradability": "tradeable",
+              "attributes": []
+            }
+          },
+          "quantity": 2
+        }
+      ],
+      "outcomes": [
+        {
+          "outputs": [
+            {
+              "item": {
+                "scope": {
+                  "namespace": "synthetic-demo",
+                  "region": "SYNTHETIC",
+                  "build": "test-build-1",
+                  "dataset_kind": "SYNTHETIC"
+                },
+                "item_id": "potion",
+                "variant": {
+                  "quality": "standard",
+                  "enhancement": 0,
+                  "tradability": "tradeable",
+                  "attributes": []
+                }
+              },
+              "quantity": 2
+            }
+          ],
+          "probability": null,
+          "probability_source": null
+        },
+        {
+          "outputs": [
+            {
+              "item": {
+                "scope": {
+                  "namespace": "synthetic-demo",
+                  "region": "SYNTHETIC",
+                  "build": "test-build-1",
+                  "dataset_kind": "SYNTHETIC"
+                },
+                "item_id": "potion",
+                "variant": {
+                  "quality": "rare",
+                  "enhancement": 0,
+                  "tradability": "tradeable",
+                  "attributes": []
+                }
+              },
+              "quantity": 1
+            }
+          ],
+          "probability": null,
+          "probability_source": null
+        }
+      ],
+      "fees": [],
+      "requirements": [],
+      "provenance": {
+        "source_id": "synthetic-fixtures",
+        "source_ref": "tests/fixtures/SYNTHETIC-catalog-v1.json",
+        "dataset_kind": "SYNTHETIC",
+        "rights_status": "synthetic",
+        "rights_ref": "docs/sources/SYNTHETIC.md"
+      }
+    },
+    {
+      "recipe_id": "synthetic-bound-charm",
+      "scope": {
+        "namespace": "synthetic-demo",
+        "region": "SYNTHETIC",
+        "build": "test-build-1",
+        "dataset_kind": "SYNTHETIC"
+      },
+      "inputs": [
+        {
+          "item": {
+            "scope": {
+              "namespace": "synthetic-demo",
+              "region": "SYNTHETIC",
+              "build": "test-build-1",
+              "dataset_kind": "SYNTHETIC"
+            },
+            "item_id": "bar",
+            "variant": {
+              "quality": "standard",
+              "enhancement": 0,
+              "tradability": "tradeable",
+              "attributes": []
+            }
+          },
+          "quantity": 1
+        },
+        {
+          "item": {
+            "scope": {
+              "namespace": "synthetic-demo",
+              "region": "SYNTHETIC",
+              "build": "test-build-1",
+              "dataset_kind": "SYNTHETIC"
+            },
+            "item_id": "herb",
+            "variant": {
+              "quality": "standard",
+              "enhancement": 0,
+              "tradability": "tradeable",
+              "attributes": []
+            }
+          },
+          "quantity": 2
+        }
+      ],
+      "outcomes": [
+        {
+          "outputs": [
+            {
+              "item": {
+                "scope": {
+                  "namespace": "synthetic-demo",
+                  "region": "SYNTHETIC",
+                  "build": "test-build-1",
+                  "dataset_kind": "SYNTHETIC"
+                },
+                "item_id": "charm",
+                "variant": {
+                  "quality": "standard",
+                  "enhancement": 0,
+                  "tradability": "bound",
+                  "attributes": []
+                }
+              },
+              "quantity": 1
+            }
+          ],
+          "probability": "1",
+          "probability_source": "SYNTHETIC deterministic test"
+        }
+      ],
+      "fees": null,
+      "requirements": null,
+      "provenance": {
+        "source_id": "synthetic-fixtures",
+        "source_ref": "tests/fixtures/SYNTHETIC-catalog-v1.json",
+        "dataset_kind": "SYNTHETIC",
+        "rights_status": "synthetic",
+        "rights_ref": "docs/sources/SYNTHETIC.md"
+      }
+    }
+  ]
+}
