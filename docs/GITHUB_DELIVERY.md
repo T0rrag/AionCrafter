@@ -102,3 +102,14 @@ GitHub returned zero check runs, zero Actions runs and zero commit statuses for 
 implementation; combined status pending is not an executed CI check. No remote CI pass.
 Local Playwright launch failed: Chromium executable absent; visual QA remains unverified.
 Receipt: docs/delivery/phase-02-part-03-reference-acceptance.json.
+
+## Phase 03 Part 01 delivery
+
+Draft PR #5: https://github.com/T0rrag/AionCrafter/pull/5, head phase/03-market-prices,
+base main 81f6493999b6bca1e86cd621e7815f7d05944020. No dependency on draft PR #3.
+Freshness implementation 4d10338bf4e940f8929e062d8449d48e3499e340 (106 tests).
+Resilience/depth implementation f80b8e76c1542530b290f24e95088ab30707a4be (137 tests, including 42 Phase 03).
+Both were fetched and matched their tested trees exactly. Connected GitHub tree/commit
+operations and non-force ref update; no merge, force-push, deployment or release.
+Receipt: delivery/phase-03-part-01.json. Documentation follows implementation.
+Phase remains IN_PROGRESS, three real-integration tasks BLOCKED, Gates A/B UNVERIFIED.

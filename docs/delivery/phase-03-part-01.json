@@ -1,0 +1,55 @@
+{
+  "date": "2026-10-04",
+  "repository": "https://github.com/T0rrag/AionCrafter",
+  "branch": "phase/03-market-prices",
+  "base_branch": "main",
+  "base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
+  "pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
+  "draft": true,
+  "phase_status": "IN_PROGRESS",
+  "tasks": [
+    "p3-freshness",
+    "p3-resilience",
+    "p3-depth"
+  ],
+  "gates": {
+    "A": "UNVERIFIED",
+    "B": "UNVERIFIED"
+  },
+  "increments": [
+    {
+      "commit": "4d10338bf4e940f8929e062d8449d48e3499e340",
+      "tree": "260bf1b58de02af779cfdf3b60334f98db5fdfd4",
+      "tests_passed": 106,
+      "scope": "Freshness cache and inherited Windows SQLite test cleanup"
+    },
+    {
+      "commit": "f80b8e76c1542530b290f24e95088ab30707a4be",
+      "tree": "b2cf609121113524c1e52a3a23809b87b90f3d49",
+      "tests_passed": 137,
+      "scope": "Resilience and exact quantity acquisition"
+    }
+  ],
+  "verification": "Each connector tree matched git write-tree; published without force, fetched via HTTPS; git diff --exit-code --cached FETCH_HEAD confirmed complete tested tree equality. Final implementation working tree and index clean.",
+  "runtime": "Windows / Python 3.12.14",
+  "python_executable": "C:/Users/AngelTorresBarros/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe",
+  "checks": {
+    "python -m unittest discover -q": "137 passed on final run",
+    "python -m unittest tests.test_price_cache tests.test_price_service tests.test_acquisition tests.test_market_groundwork -q": "42 passed; includes exhaustive oracle across 60 synthetic books",
+    "python -m compileall -q aioncrafter tests": "passed",
+    "python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json": "passed; 7 variants, 3 recipes, SYNTHETIC",
+    "python scripts/validate_bootstrap.py": "passed for implementation; 42 stable IDs, 80 artifact checksums",
+    "git diff --check / git diff --cached --check": "passed"
+  },
+  "baseline": "95 tests run; two existing SQLite migration fixture cleanup errors fixed with explicit closing. Freshness suite then passed 106.",
+  "limitations": [
+    "One intermediate existing HTTP rejection test had ConnectionResetError; isolated and full reruns passed. Intermittent Windows behavior not claimed fixed.",
+    "Single-owner in-memory cache/request coordination; real transport timeout/cancellation, shared production quota ownership and application integration remain pending.",
+    "No real adapter, source permission, market reconciliation, automatic activation, remote CI or visual QA pass.",
+    "Phase 01 incomplete/p1-catalog BLOCKED; Phase 05 DEFERRED. Final real-game pilot after phase feature work."
+  ],
+  "next": "Read docs/NEXT_CHAT_PROMPT.md; remain in Phase 03 and inspect authorization/evidence before any real integration.",
+  "publication_method": "Connected GitHub create_tree/create_commit and update_ref(force=false); separate documentation receipt follows implementation.",
+  "merge_performed": false,
+  "force_push_performed": false
+}

@@ -56,3 +56,7 @@ ADR 0006, PHASE_03_GROUNDWORK and delivery receipt; inspect new external evidenc
 If none exists, retain blockers and review offline. Do not start Phase 04 here. One active
 writer, same phase branch/PR, no merge/force-push. Receipts follow implementation; no
 new-chat creation or automatic transcript synchronization is claimed.
+
+Verified final implementation: f80b8e76c1542530b290f24e95088ab30707a4be, tree
+b2cf609121113524c1e52a3a23809b87b90f3d49. Fetched and equal to the tested local tree.
+Receipt: delivery/phase-03-part-01.json. Draft PR #5 remains open against main.

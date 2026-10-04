@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "AionCrafter",
   "brief_version": "1.3",
-  "publication_status": "PREPARED",
+  "publication_status": "PUBLISHED",
   "checkpoint": "Phase 03 Part 01 provider-independent groundwork",
   "files": [
     {
@@ -127,13 +127,13 @@
     },
     {
       "path": "docs/GITHUB_DELIVERY.md",
-      "bytes": 6058,
-      "sha256": "b1e77e945fd9087c3c2a512db7d1d0036c2cf3fe5e0371bf0b4eeba78142e6a2"
+      "bytes": 6782,
+      "sha256": "311201a064c9e1025dee2a471e01b2b6a9a8e4a2509a8d6a37f14fda3b84ca9c"
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1381,
-      "sha256": "2218c08b4566ed2bf86236d3f77cabf8b706f23904da88292ee75d0b613222e0"
+      "bytes": 1486,
+      "sha256": "bbe0af809869b542ce12167089dbb2c451faced3561cc4aadf782eda6dc51d38"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -152,8 +152,8 @@
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 3640,
-      "sha256": "9c57c8d54d891cc58ae8b0029cb7d5ac807eb706cf31b97f6ef079cced0493e0"
+      "bytes": 3853,
+      "sha256": "040509ed0d88522a7bfe7af318807d43f100da8b46f73331351157be259cf053"
     },
     {
       "path": "docs/REFERENCE_IMPORTS.md",
@@ -168,7 +168,7 @@
     {
       "path": "docs/backlog.json",
       "bytes": 24478,
-      "sha256": "ec7b4947ce02e45d760fb279d7af69532985e5211872beec4b9131f0cd024242"
+      "sha256": "dfc36831613a27457178e5db7bd4413e8a7f4d75291c4aeadf07139c014d10b0"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -224,6 +224,11 @@
       "path": "docs/delivery/phase-02-part-03.json",
       "bytes": 400,
       "sha256": "9a4e2d0beaf5f48e884397aa4c4c932241ae721f1892a6bb017ea754262ec1ef"
+    },
+    {
+      "path": "docs/delivery/phase-03-part-01.json",
+      "bytes": 3045,
+      "sha256": "6a1a5497dd94fb50ef84a9130534a68456a201e148490b0eb20f8b533a504c8c"
     },
     {
       "path": "docs/handoffs/architecture-control-2026-10-04.md",
@@ -282,8 +287,8 @@
     },
     {
       "path": "docs/handoffs/phase-03-part-01.md",
-      "bytes": 3796,
-      "sha256": "66e449b9c79c73cbbdb71dd328a12cf0fb21ec3d3fbf9a3b11a0c26fb6f7e866"
+      "bytes": 4041,
+      "sha256": "95c230bb1b5f486e73ba63ba95de04409e7de6cbc3eac6131da3622aac272839"
     },
     {
       "path": "docs/roadmap-progress.json",

@@ -5,6 +5,7 @@ Resume phase/03-market-prices / draft PR #5, based on main
 Read AGENTS.md, docs/PROJECT_STATE.md, handoffs/phase-03-part-01.md,
 PHASE_03_GROUNDWORK.md, backlog.json, delivery/phase-03-part-01.json and ADR 0006.
 
+Latest verified implementation: f80b8e76c1542530b290f24e95088ab30707a4be; documentation receipt follows.
 Part 01 implemented synthetic freshness, resilience and quantity/depth contracts;
 137 full-suite tests passed on Windows/Python 3.12.14, including 42 Phase 03 tests.
 First inspect whether authorized provider/market evidence has become available. Without

@@ -14,7 +14,10 @@ cb0ce5cb9227184300055f1df8bb415b2ef2515e. Latest Phase 02 decisions/docs carried
 PR #3 remains draft/open but is not a dependency of PR #5. No Phase 04 implementation.
 Freshness checkpoint 4d10338bf4e940f8929e062d8449d48e3499e340 was published, fetched and
 verified equal to the tested tree 260bf1b58de02af779cfdf3b60334f98db5fdfd4.
-Later implementation/receipt commits follow; fetch the actual head before writing.
+Resilience/depth implementation f80b8e76c1542530b290f24e95088ab30707a4be is published and fetched; tested tree
+b2cf609121113524c1e52a3a23809b87b90f3d49 matches exactly. Receipt:
+`delivery/phase-03-part-01.json`. Documentation receipts follow implementation; fetch
+the actual head before writing.
 
 ## Delivered groundwork
 
