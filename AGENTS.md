@@ -1,22 +1,33 @@
 # AionCrafter working instructions
 
-Read `docs/PROJECT_STATE.md` and the latest handoff first. Then read only the relevant master-brief sections and task definitions. The authoritative brief is `AionCrafter_Project_Prompt.md` v1.3; workflow rules are in sections 20–21.
+Read docs/PROJECT_STATE.md, the latest handoff, docs/backlog.json and current ADRs first.
+The authoritative brief is AionCrafter_Project_Prompt.md v1.3 (workflow sections 20–21).
+Preserve all seven phases and 42 stable IDs with evidence-backed statuses.
 
-The repository contains the architecture baseline and the tested Phase 01 data foundation. Phase 00 and Phase 01 remain incomplete. Preserve the existing 42 IDs and evidence-backed statuses. Keep the architecture control chat for decisions/review and implement in phase-scoped development chats.
+Current sequence: Phase 03 synthetic groundwork merged via PR #5; Phase 03 remains
+IN_PROGRESS with real adapter/reconciliation/release BLOCKED. Next independent phase is
+Phase 04 in a separate Aion2 chat, starting p4-batches. Read ADR 0007 and the Phase 03 to
+Phase 04 handoff. Old branch/PR #4 did not implement Phase 04; verify actual ancestry.
+Phase 01 incomplete/p1-catalog BLOCKED; Phase 05 DEFERRED; Gates A/B UNVERIFIED.
 
-Follow the current PROJECT_STATE and ADR 0003 for sequencing: Phase 01 engineering passed 47 tests; `p1-catalog` remains blocked. The next eligible development chat is Phase 04 under ADR 0005, using explicit synthetic fixtures until the pilot market and a permitted real catalog are available. Phases 03 and 05 are DEFERRED. Preserve phase-scoped chats and record any stacked PR dependency. Gate A (authorized automatic prices) and Gate B (supported overlay) remain UNVERIFIED. Do not guess an external API, region, tax, proc probability or catalog licence.
+Use exact money; missing prices are not zero. Preserve observation source/time, market,
+build and variant identity. Synthetic fixtures must remain clearly labelled. Do not invent
+source rights, APIs, quotas, game fees or probabilities. Source permission is required
+before real connection; full gate evidence precedes automatic-price activation.
 
-Use exact monetary representations. Missing prices are not zero. Keep market/build/variant identity separate from localized display names. Preserve input source and observation times. Test pure contracts/imports before application integration.
+The user authorizes autonomous development and tested phase merges (ADR 0007 supersedes
+historical no-merge wording). Never force-push, overwrite concurrent work, bypass required
+checks or change visibility/permissions. No bulk merge of historical PRs is implied.
+Verify remote heads and PR state before writes/merges, use expected-head checks, run
+applicable tests, and read back actual SHAs/tree equality. An upload/merge is not phase
+completion, real-market acceptance, release or deployment.
 
-Verify repository, default branch and head before modifying remote state. Use one phase branch and PR per phase; keep partial work marked IN_PROGRESS. The user authorized phase-related uploads, not automatic merges or visibility/permission changes. Never force-push or overwrite concurrent work.
+Use one phase branch/PR and one active writer. Create a separate chat in existing Aion2
+for each new phase or context handoff; save and verify continuity first, verify startup,
+then stop writes in the previous chat. Do not claim chat creation or transcript sync
+without evidence. Preserve incomplete work and external blockers in every handoff.
 
-At every checkpoint: record changes, actual test commands/results, task statuses and blockers; prepare the next starter; commit/push when available; read back and report the verified SHA. Stop at the current phase boundary. Never claim new chats, remote uploads, completed tests or passed gates without evidence.
-
-User workflow update (ADR 0004): continue autonomously. Create a new chat inside the existing Aion2 project at each new phase and when the current context grows too large. Save and verify a handoff first, confirm the next chat starts, and avoid concurrent branch writers. This replaces the earlier user-opens-next-chat default; no merge or force-push is authorized.
-
-User sequencing update (ADR 0005): continue normal feature engineering; stop cloud/Chromium
-troubleshooting as the active work queue. Phase 02 tested engineering is sufficient for
-Phase 04 synthetic development while its outstanding acceptance remains tracked. Next
-phase chat: Phase 04 Part 01, p4-batches, on phase/04-crafting-intelligence explicitly
-stacked on Phase 02 PR #3. Create a new Aion2 chat per phase where supported; never
-claim a prepared starter/branch is an actual new chat. No merge or force-push.
+At checkpoints update PROJECT_STATE, backlog evidence, test results, manifest, handoff
+and NEXT_CHAT_PROMPT; publish coherent increments and verify the remote SHA. Phase 02
+behavior is accepted, visual/keyboard QA deferred, real-game pilot after phase feature
+work. Do not restart Chromium/cloud-browser troubleshooting.

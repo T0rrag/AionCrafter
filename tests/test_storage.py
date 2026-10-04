@@ -1,5 +1,6 @@
 from dataclasses import replace
 from pathlib import Path
+from contextlib import closing
 import sqlite3
 import tempfile
 import unittest
@@ -132,7 +133,7 @@ class MigrationTests(unittest.TestCase):
             path = str(Path(temp) / "old.sqlite3")
             c = catalog()
             payload = dumps(c)
-            with sqlite3.connect(path) as con:
+            with closing(sqlite3.connect(path)) as con, con:
                 for statement in MIGRATIONS[1]:
                     con.execute(statement)
                 con.execute("INSERT INTO catalog_releases VALUES (?,?,?)", (c.release_id, hashlib.sha256(payload.encode()).hexdigest(), payload))
@@ -146,9 +147,9 @@ class MigrationTests(unittest.TestCase):
     def test_newer_schema_is_refused_without_downgrading(self):
         with tempfile.TemporaryDirectory() as temp:
             path = str(Path(temp) / "future.sqlite3")
-            with sqlite3.connect(path) as con:
+            with closing(sqlite3.connect(path)) as con, con:
                 con.execute("PRAGMA user_version=999")
             with self.assertRaisesRegex(ValidationError, "STORAGE_VERSION"):
                 Store(path)
-            with sqlite3.connect(path) as con:
+            with closing(sqlite3.connect(path)) as con, con:
                 self.assertEqual(con.execute("PRAGMA user_version").fetchone()[0], 999)

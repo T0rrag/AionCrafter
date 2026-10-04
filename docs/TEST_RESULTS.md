@@ -129,3 +129,67 @@ Documentation-only update from verified 48dc8a304a9f917aec9caec27d62bd95041df530
 Recorded the user's review, behaviour acceptance and final-pilot timing; code is unchanged.
 The existing 95-test baseline still applies; it was not rerun for these prose changes.
 Refreshed manifest validation and git diff --check are the applicable checkpoint checks.
+
+## Phase 03 starter preparation — 2026-10-04
+
+Documentation-only from Phase 02 1bea9e9d687458eb78921fee31a979a568cbe3ae.
+Fetched main 81f6493999b6bca1e86cd621e7815f7d05944020; git diff lists docs only
+between it and Phase 02. No new application tests; previous 95-test baseline retained.
+Checkpoint validation: refreshed artifact manifest, 42 stable IDs and git diff --check.
+No Phase 03 feature, new-chat startup or external gate pass is claimed.
+
+## Phase 03 Part 01 — freshness (2026-10-04)
+
+Windows, bundled Python 3.12.14. `python` below means the bundled executable (not on PATH).
+Baseline `python -m unittest discover -q`: 95 run, 2 existing migration cleanup errors
+(Windows file locks). Fixed tests/test_storage.py transaction contexts to close connections.
+`python -m unittest tests.test_price_cache -q`: 11 passed.
+`python -m unittest discover -q`: 106 passed after that test-only correction.
+Synthetic provider/clock; no real provider, browser/game, remote CI or Gate A evidence.
+
+## Phase 03 Part 01 — resilience and depth (2026-10-04)
+
+Windows/Python 3.12.14. `python` denotes the bundled executable at
+`C:/Users/AngelTorresBarros/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe`.
+- `python -m unittest tests.test_price_cache tests.test_price_service tests.test_acquisition tests.test_market_groundwork -q`: **42 passed**.
+- `python -m unittest discover -q`: **137 passed**, final rerun.
+- `python -m compileall -q aioncrafter tests`: passed.
+- `python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json`: passed, 7 variants / 3 recipes, SYNTHETIC.
+- `git diff --check` / staged diff check: passed.
+
+One intermediate full run failed in unchanged test_http_get_post_and_size_origin_limits
+with Windows ConnectionResetError while testing rejected Origin. Isolated rerun passed,
+then the full suite passed. No production HTTP fix is claimed; record intermittent behavior.
+Earlier baseline migration cleanup errors were fixed in test fixtures only.
+
+42 Phase 03 tests comprise 11 cache, 17 service, 13 acquisition and 1 combined contract test.
+The acquisition oracle enumerates 60 deterministic small mixed books. All tests use
+synthetic observations and injected clock/provider; no real network transport or sleeps
+in the Phase 03 tests. Existing form tests use loopback HTTP. This is not visual QA,
+real-market reconciliation, a live integration, remote CI or Gate A acceptance.
+
+## Phase 03 Part 02 — fallback history and retry budgets (2026-10-04)
+
+Windows / bundled Python 3.12.14; same executable path as Part 01.
+Five new regression cases failed on the unchanged implementation before correction:
+manual mutation between calls, reuse of replaced provider IDs, duplicate manual IDs across
+identities, provider mutation of a manual ID, and premature exhaustion in a mixed retry batch.
+Twelve new regression tests now cover both defects and their atomicity/quota/reset boundaries.
+
+- `python -m unittest tests.test_price_cache tests.test_price_service tests.test_acquisition tests.test_market_groundwork -q`: **54 passed** (13/27/13/1).
+- `python -m unittest discover -q`: **149 passed**, no failures on this run.
+- `python -m compileall -q aioncrafter tests`: passed.
+- `python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json`: passed, 7 variants / 3 recipes.
+- `git diff --check`: passed; bootstrap/checksum results follow in delivery receipt.
+
+No real provider, UI activation, browser QA, remote CI or real-game validation. Part 01's
+intermittent Windows HTTP rejection-test reset is not claimed fixed by these changes.
+
+## Phase 03 authorized merge — 2026-10-04
+
+Tested head 4e10fad95444241e68e353d41c9d24b4958b1dd6. Immediately before merge:
+`python -m unittest discover -q`: 149 passed (Windows/Python 3.12.14).
+`python scripts/validate_bootstrap.py`: passed, 42 IDs / 83 checksums. `git diff --check`: passed.
+GitHub returned no Actions runs, statuses, reviews or comments; no remote CI pass claimed.
+PR #5 merged at bd23f4166ffe276179843761dea8e95275efbce1 with expected-head verification.
+Fetched main tree equals tested PR head exactly. No new application changes in merge receipt.

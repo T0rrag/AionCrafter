@@ -1,0 +1,29 @@
+{
+  "date": "2026-10-04",
+  "repository": "T0rrag/AionCrafter",
+  "pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
+  "tested_head": "4e10fad95444241e68e353d41c9d24b4958b1dd6",
+  "base_before_merge": "81f6493999b6bca1e86cd621e7815f7d05944020",
+  "merge_sha": "bd23f4166ffe276179843761dea8e95275efbce1",
+  "merge_method": "merge",
+  "merged": true,
+  "authorization": "User: you are allowed to merge, Continue autonously",
+  "verification": "Read PR merged=true; fetched main; git diff --exit-code tested_head origin/main confirmed full tested-tree equality.",
+  "local_tests": "149 passed on Windows/Python 3.12.14, rerun immediately before merge",
+  "bootstrap": "42 IDs / 83 checksums passed at merge candidate",
+  "github_actions_runs": 0,
+  "github_commit_statuses": 0,
+  "reviews": 0,
+  "comments": 0,
+  "remote_ci_pass_claimed": false,
+  "phase_complete": false,
+  "gates": {
+    "A": "UNVERIFIED",
+    "B": "UNVERIFIED"
+  },
+  "next_phase": "04",
+  "first_task": "p4-batches",
+  "next_handoff": "docs/handoffs/phase-03-to-phase-04.md",
+  "force_push": false,
+  "other_prs_merged": false
+}

@@ -27,7 +27,7 @@
           "id": "p0-scope",
           "priority": "P0",
           "title": "Lock a single pilot market",
-          "description": "Choose region, server or market group, faction where relevant, client build and language. TW is a candidate, not a fixed requirement. Never infer the game region from the player\u2019s location.",
+          "description": "Choose region, server or market group, faction where relevant, client build and language. TW is a candidate, not a fixed requirement. Never infer the game region from the player’s location.",
           "status": "NOT_STARTED",
           "evidence": null
         },
@@ -59,7 +59,7 @@
           "id": "p0-platform",
           "priority": "P0",
           "title": "Confirm the overlay route",
-          "description": "Check the exact AION 2 regional client in Overwolf\u2019s Native / Electron support directory and test it. Clarify app approval and publishing requirements; keep a normal desktop-window route independent.",
+          "description": "Check the exact AION 2 regional client in Overwolf’s Native / Electron support directory and test it. Clarify app approval and publishing requirements; keep a normal desktop-window route independent.",
           "status": "NOT_STARTED",
           "evidence": null
         }
@@ -128,7 +128,7 @@
         {
           "id": "p2-itemflow",
           "priority": "P0",
-          "title": "Implement item \u2192 materials \u2192 margin",
+          "title": "Implement item → materials → margin",
           "description": "Search a product, select its recipe and quantity, show direct ingredients or a fully expanded tree, price the output and calculate estimated profit/loss.",
           "status": "IN_PROGRESS",
           "evidence": "web.py; bilingual alias search, direct ingredients/batches/margins; full-form HTTP calculation+save passed. Visual QA deferred; real-game pilot after all phase feature work; recursion Phase 04. Owner confirmed calculator behaviour correct on 2026-10-04; behaviour acceptance complete."
@@ -178,55 +178,55 @@
     {
       "phase": "03",
       "title": "Connect permitted market prices",
-      "status": "DEFERRED",
+      "status": "IN_PROGRESS",
       "tasks": [
         {
           "id": "p3-adapter",
           "priority": "P0",
           "title": "Implement the approved provider adapter",
           "description": "Only after permission and a working sample: add an official or contracted community adapter behind the same interface as manual prices. Keep credentials on the backend.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "BLOCKED",
+          "evidence": "ADR 0006: blocked on external provider/market evidence. Gate A UNVERIFIED; synthetic preparation does not satisfy real integration or release."
         },
         {
           "id": "p3-freshness",
           "priority": "P0",
           "title": "Preserve observation time and cache age",
           "description": "Record source-observed time, fetch time, price type and scope separately. A cache refresh must never make an old observation appear new. Unknown source time means freshness unknown.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "IN_PROGRESS",
+          "evidence": "price_cache.py; 13 synthetic cache tests plus service/integration coverage. Shared atomic immutable ID history for provider and manual observations, independent retrieval/source clocks, unknown/future age. Provider/application integration pending."
         },
         {
           "id": "p3-resilience",
           "priority": "P0",
           "title": "Respect quotas and degrade predictably",
           "description": "Batch permitted requests, use provider limits, backoff on throttling and stop retry storms. Show stale/error states and allow manual overrides without silently hiding their origin.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "IN_PROGRESS",
+          "evidence": "price_service.py and BatchPriceProvider; 27 synthetic service tests plus combined scenario. Per-identity bounded retries, quota/Retry-After/shared cooldown, stale/manual/error states. Manual IDs immutable across calls and provider history; rejected batches reserve no records. No live transport or application activation."
         },
         {
           "id": "p3-depth",
           "priority": "P0",
           "title": "Use prices suitable for the requested quantity",
           "description": "When supported, consume listing depth or whole-stack offers to calculate the cost of buying all required units. With only a reference/minimum price, label the total indicative and stock unverified.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "IN_PROGRESS",
+          "evidence": "acquisition.py; 13 synthetic tests plus combined scenario. Exact integer-unit listing and whole-stack minimum cash cost, explicit partial support, insufficient coverage and indicative unverified-stock references. 60 small books checked against exhaustive oracle. Authorized market/application acceptance pending."
         },
         {
           "id": "p3-reconcile",
           "priority": "P0",
           "title": "Run market reconciliation tests",
           "description": "Check 20 representative items across two snapshots, multiple variants and scope changes. Test wrong-region joins, zero listings, partial coverage and listed-versus-sold price distinctions.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "BLOCKED",
+          "evidence": "ADR 0006: blocked on external provider/market evidence. Gate A UNVERIFIED; synthetic preparation does not satisfy real integration or release."
         },
         {
           "id": "p3-releaseprice",
           "priority": "P0",
           "title": "Approve the automatic-price feature",
           "description": "Enable it only for validated markets. Display age, source and missing-item count on every result. Do not describe snapshots as real time without evidence of their update behavior.",
-          "status": "DEFERRED",
-          "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
+          "status": "BLOCKED",
+          "evidence": "ADR 0006: blocked on external provider/market evidence. Gate A UNVERIFIED; synthetic preparation does not satisfy real integration or release."
         }
       ]
     },
@@ -279,7 +279,7 @@
           "id": "p4-ledger",
           "priority": "P2",
           "title": "Compare estimates with actual outcomes",
-          "description": "Optionally record user-entered purchase costs, crafting results, sale proceeds and fees. A finished item alone cannot reveal the player\u2019s historical profit.",
+          "description": "Optionally record user-entered purchase costs, crafting results, sale proceeds and fees. A finished item alone cannot reveal the player’s historical profit.",
           "status": "NOT_STARTED",
           "evidence": null
         }
@@ -326,7 +326,7 @@
           "id": "p5-privacy",
           "priority": "P0",
           "title": "Keep the default integration minimal",
-          "description": "No custom DLL injection, memory reading, packet capture, credential collection or automated trading. Optional screenshot import is a later, user-triggered feature\u2014not an MVP dependency.",
+          "description": "No custom DLL injection, memory reading, packet capture, credential collection or automated trading. Optional screenshot import is a later, user-triggered feature—not an MVP dependency.",
           "status": "DEFERRED",
           "evidence": "User priority decision 2026-10-04: manual edition first; integration deferred until its gate is evidenced. See docs/decisions/0003-manual-first-development.md."
         },
@@ -396,16 +396,18 @@
       ]
     }
   ],
-  "branch": "phase/02-manual-calculator",
-  "base_branch": "phase/01-data-foundation",
-  "local_base_sha": "3a395eb5894e65ff0d67e336d1a91dc452136843",
-  "pr_url": "https://github.com/T0rrag/AionCrafter/pull/3",
-  "verified_implementation_sha": "d355f7107d0a2205a61afc672f7c27f9b2146864",
-  "remote_base_sha": "3a395eb5894e65ff0d67e336d1a91dc452136843",
+  "branch": "phase/03-market-prices",
+  "base_branch": "main",
+  "local_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
+  "pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
+  "verified_implementation_sha": "995c19fcbb8f3d1627602f41068d379be94b7837",
+  "remote_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
-  "checkpoint_part": "03",
+  "checkpoint_part": "02",
   "next_eligible_phase": "04",
-  "next_phase_dependency_note": "ADR 0005: normal feature development; Phase 04 p4-batches uses tested Phase 02 engineering, stacked on unmerged PR #3. Owner behaviour acceptance and chat review complete. Visual QA deferred; real-game pilot after all phase feature work under p6-usertest. New Aion2 chat per phase.",
-  "checkpoint_label": "Phase 02 to Phase 04 engineering handoff",
-  "next_development_branch": "phase/04-crafting-intelligence"
+  "next_phase_dependency_note": "ADR 0007: user authorized tested phase merges/autonomous continuation. PR #5 merged; next independent Phase 04 starts p4-batches in separate Aion2 chat. Phase 03 integration blocked, Gates A/B UNVERIFIED.",
+  "checkpoint_label": "Phase 03 groundwork merged; Phase 04 next",
+  "next_development_branch": "phase/04-crafting-intelligence",
+  "merged_pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
+  "verified_merge_sha": "bd23f4166ffe276179843761dea8e95275efbce1"
 }
