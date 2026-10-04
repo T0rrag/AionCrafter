@@ -12,8 +12,7 @@
   "draft": true,
   "phase_status": "IN_PROGRESS",
   "verified_economics_sha": "2c614636f9ef22d799732d20455aa2cb4f25610d",
-  "verified_implementation_sha": "7afffae4ca62e0c049429665b93ade5d25948175",
-  "implementation_tree_sha": "aff60ab17aafb58453bc70a8abbdc9f448094f82",
+  "verified_implementation_sha": "4594c5a6c825733bd49c56c14cddfd41a3161ab7",
   "verification": [
     "Both published commits fetched over HTTPS",
     "git diff --exit-code confirmed exact tested local/remote tree equality",
@@ -23,12 +22,14 @@
     "p2-economics",
     "p2-editor",
     "p2-listflow",
-    "p2-itemflow"
+    "p2-itemflow",
+    "p2-costmodes",
+    "p2-save"
   ],
   "validation": {
     "baseline_tests": 47,
     "economics_checkpoint_tests": 55,
-    "final_tests": 62,
+    "final_tests": 77,
     "failures": 0,
     "errors": 0,
     "unit_command": "python3 -m unittest discover -q",
@@ -37,7 +38,8 @@
     "compileall": "passed",
     "documentation_validator": "passed",
     "remote_ci_run": false,
-    "browser_visual_qa": "unverified: browser admin-policy verification unavailable"
+    "browser_visual_qa": "unverified: browser admin-policy verification unavailable",
+    "targeted_plan_tests_after_strengthening_import_assertion": 7
   },
   "gate_A": "UNVERIFIED",
   "gate_B": "UNVERIFIED",
@@ -47,8 +49,9 @@
   ],
   "remaining": [
     "p1-catalog BLOCKED; Phase 01 IN_PROGRESS",
-    "p2-costmodes, p2-save, product search and remaining workflow/editor acceptance",
-    "Browser/pilot QA; verified real market/fee rules unresolved"
+    "Phase 02 approved reference imports, price age display and remaining acceptance",
+    "Browser/pilot QA and real market/fee rules unresolved",
+    "Cloud continuation choice pending; local project target rejected"
   ],
   "publication_method": "Connected GitHub tree/commit and non-force ref updates after shell authentication failure",
   "merge_performed": false,

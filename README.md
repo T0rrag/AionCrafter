@@ -1,4 +1,4 @@
-# AionCrafter — Phase 01 data foundation
+# AionCrafter — manual calculator and data foundation
 
 Provider-independent Python contracts, catalog validation and SQLite persistence
 for an external AION 2 crafting companion. Current data is **SYNTHETIC ONLY**.
@@ -44,8 +44,8 @@ ignored by Git. Back them up before upgrading; unsupported newer schemas fail cl
 - Separate typed catalog/price provider protocols. No provider implementation connects
   to a game service. Missing prices remain null and timestamps retain provenance.
 
-This is a data-foundation CLI/library, not yet the player-facing calculator. Phase 02
-is the next development chat: calculations and a web UI with manually entered prices.
+Phase 02 adds a local web calculator with manually entered prices, inventory-aware
+costs and versioned saved plans alongside the data-foundation CLI/library.
 Its engineering work can use labeled synthetic fixtures while the real-catalog task
 remains blocked. Automatic prices and overlay are deferred (ADR 0003).
 
@@ -99,13 +99,26 @@ Item mode needs product, recipe, planned selling quantity, selling price and exp
 sale-fee/tax assumptions. A craft-fee override is optional; blank uses catalog fees,
 including unknown fees. A zero override explicitly waives the fee for this estimate.
 
-This local HTTP server binds to loopback. It is an initial web interface with no
-saved plans or price history; values persist only on form resubmission. Deterministic
+This local HTTP server binds to loopback. Saved plans persist prices, favorites, market
+settings, inventory and recorded material costs in `local-data/plans.sqlite3` (override
+with `--plans PATH`). Keep this user database private; back it up before upgrades.
+Load a named plan before updating it; concurrent stale saves fail instead of overwriting.
+JSON/CSV exports are lossless AionCrafter plan bundles tied to the exact catalog digest.
+CSV cells are neutralized against spreadsheet formulas. Paste exports into Import for
+a validated preview, then save. Reset clears unsaved inputs; deleting a named plan and
+its revisions requires the explicit confirmation checkbox. Deterministic
 direct ingredients only; unknown proc probabilities are refused. Unsold leftovers and
 coproducts receive no credited revenue. ROI/unrounded break-even use exact rational
 arithmetic; displayed monetary results use exact currency units and chosen proceeds
 rounding. Fees and rounding are unverified assumptions, not game rules.
 
 [Phase 02 draft PR #3](https://github.com/T0rrag/AionCrafter/pull/3) is stacked on PR #2.
-62 local tests pass. Browser visual QA remains unverified due to a browser policy
+77 local tests pass, plus a targeted 7-test plan provenance rerun. Browser visual QA remains unverified due to a browser policy
 verification failure. Phase 02 remains IN_PROGRESS; see the current state and handoff.
+
+Part 02 adds owned-quantity inputs and optional historical material-cost allocations.
+Replacement value still includes owned inputs; additional cash uses only missing units
+and known craft fees. Recorded material cost requires coverage for every consumed unit
+and a record reference. It excludes historical crafting/sale fees and realized profit.
+Product search matches English/Spanish aliases without accents. Browser visual QA and
+approved vendor/snapshot reference imports remain unfinished. See the Part 02 handoff.

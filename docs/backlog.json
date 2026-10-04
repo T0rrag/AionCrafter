@@ -131,7 +131,7 @@
           "title": "Implement item \u2192 materials \u2192 margin",
           "description": "Search a product, select its recipe and quantity, show direct ingredients or a fully expanded tree, price the output and calculate estimated profit/loss.",
           "status": "IN_PROGRESS",
-          "evidence": "aioncrafter/web.py; explicit product/recipe/direct ingredients, batch leftovers and margins. Product search, expanded-tree scope and browser QA remain."
+          "evidence": "web.py; bilingual accent-insensitive product search, explicit recipe/direct ingredients, batch leftovers/margins. Browser acceptance remains; recursive optimization stays Phase 04."
         },
         {
           "id": "p2-listflow",
@@ -147,15 +147,15 @@
           "title": "Add a source-aware price editor",
           "description": "Let users enter their own observed prices or approved reference imports. Require market and observation time; distinguish manual, vendor, snapshot, delayed and unavailable values.",
           "status": "IN_PROGRESS",
-          "evidence": "aioncrafter/manual.py and web.py; explicit market/currency/time and manual provenance, blanks unavailable. Approved reference imports/persisted overrides and full editor acceptance remain."
+          "evidence": "manual.py/plans.py/web.py: explicit scope/time, manual observations persist across save/load/import with linked overrides. Approved vendor/snapshot reference imports and age presentation remain."
         },
         {
           "id": "p2-costmodes",
           "priority": "P0",
           "title": "Separate cash needed from economic cost",
           "description": "Owned materials reduce the shopping list, not automatically the economic cost. Offer replacement-cost valuation, additional cash required and actual historical cost when the user supplies a ledger.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "valuation.py/web.py; 6 valuation tests and form test. Replacement vs inventory-adjusted cash; allocated historical material cost requires complete records. Actual fee/sale ledger and acceptance remain."
         },
         {
           "id": "p2-economics",
@@ -170,8 +170,8 @@
           "priority": "P1",
           "title": "Save plans and material lists",
           "description": "Persist favorites, market settings, user-entered prices and inventory quantities. Add JSON/CSV import/export with validation and a clear reset. No trading or crafting automation.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "plans.py/web.py; 7 plan tests. Local SQLite revisions/favorites/settings/prices/inventory, validated JSON/CSV import/export, reset and confirmed deletion; original observation times preserved. Browser acceptance remains."
         }
       ]
     },
@@ -400,10 +400,10 @@
   "base_branch": "phase/01-data-foundation",
   "local_base_sha": "3a395eb5894e65ff0d67e336d1a91dc452136843",
   "pr_url": "https://github.com/T0rrag/AionCrafter/pull/3",
-  "verified_implementation_sha": "7afffae4ca62e0c049429665b93ade5d25948175",
+  "verified_implementation_sha": "4594c5a6c825733bd49c56c14cddfd41a3161ab7",
   "remote_base_sha": "3a395eb5894e65ff0d67e336d1a91dc452136843",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
-  "checkpoint_part": "01",
+  "checkpoint_part": "02",
   "next_eligible_phase": "02",
-  "next_phase_dependency_note": "Continue Phase 02 Part 02 on PR #3, stacked on unmerged PR #2. p1-catalog BLOCKED; Phase 01 incomplete."
+  "next_phase_dependency_note": "Continue Phase 02 Part 03 on PR #3; autonomous chat authorization ADR 0004. Local same-project chat creation needs cloud Work clarification. p1-catalog BLOCKED."
 }

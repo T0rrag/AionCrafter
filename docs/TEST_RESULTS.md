@@ -73,3 +73,19 @@ Inherited SQLite ResourceWarnings remain on Python 3.14 (observed before changes
 Browser open was denied because admin-enforced policy verification was unavailable;
 visual/layout/focus QA has not passed. No remote CI, real pilot/game/provider/overlay,
 Windows, persistence or historical-ledger acceptance tests performed.
+
+## Phase 02 Part 02 — 2026-10-04
+
+Full suite: `python3 -m unittest discover -q` — 77 passed in 2.412 seconds.
+Then strengthened the HTTP import-to-save timestamp preservation assertion and ran
+`python3 -m unittest tests.test_plans -q` — 7 passed in 0.234 seconds.
+6 valuation tests cover inventory aggregation/capping, replacement versus cash, missing
+references, complete/partial/overallocated records, currencies/scopes and invalid input.
+7 plan tests cover JSON/CSV round-trip, formula neutralization, rejected import preserving
+existing state, reopen/revisions/conflicts/deletion, original observation timestamps,
+malformed/forged plans, database-version isolation and HTTP lifecycle/CSRF.
+Manual tests now include inventory/recorded views and bilingual product search.
+Compileall, offline catalog validation, diff whitespace and bootstrap manifest checks
+passed. Published implementation 4594c5a6c825733bd49c56c14cddfd41a3161ab7 was fetched
+and matched the tested local tree. No new browser visual, pilot/game, provider/overlay,
+Windows or remote CI tests. Inherited Python 3.14 SQLite ResourceWarnings remain.
