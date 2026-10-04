@@ -7,6 +7,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 import tempfile
 import unittest
+import json
 
 from aioncrafter.codec import dumps, loads
 from aioncrafter.models import PriceObservation, PriceType
@@ -112,3 +113,50 @@ class FormAcceptanceTests(unittest.TestCase):
         self.assertIn('REFERENCE_ID', html)
         self.assertNotIn('Reference import validated', html)
         self.assertEqual(self.observations(FormControls(html).fields), before)
+
+    def test_reference_id_replay_is_idempotent_but_changed_record_is_atomic(self):
+        form = FormControls(self.post(self.form)).fields
+        before = self.observations(form)
+        replay = self.post(form, action='references', reference_data=dumps((before[0],)))
+        self.assertIn('Reference import validated', replay)
+        self.assertEqual(self.observations(FormControls(replay).fields), before)
+        valid = replace(before[1], observation_id='new-vendor', price_type=PriceType.VENDOR_PURCHASE)
+        for changed in (replace(before[0], unit_price='99'),
+                        replace(before[0], fetched_at='2026-10-05T10:00:00Z'),
+                        replace(before[0], price_type=PriceType.SNAPSHOT)):
+            html = self.post(form, action='references', reference_data=dumps((valid, changed)))
+            self.assertIn('REFERENCE_ID', html)
+            self.assertNotIn('Reference import validated', html)
+            self.assertEqual(self.observations(FormControls(html).fields), before)
+
+    def test_wrong_scope_type_and_rights_imports_preserve_saved_plan(self):
+        saved = self.post(self.form, action='save', plan_name='unchanged')
+        form = FormControls(saved).fields
+        before = self.observations(form)
+        base = replace(before[0], observation_id='rejected-import', price_type=PriceType.SNAPSHOT)
+        unverified = json.loads(dumps((base,)))
+        unverified[0]['provenance']['rights_status'] = 'unverified'
+        cases = ((dumps((replace(base, identity=replace(base.identity, market=replace(base.identity.market, market_id='other'))),)), 'REFERENCE_SCOPE'),
+                 (dumps((replace(base, price_type=PriceType.VENDOR_SELL_BACK),)), 'REFERENCE_TYPE'),
+                 (json.dumps(unverified), 'PROVENANCE'))
+        for payload, code in cases:
+            html = self.post(form, action='references', reference_data=payload)
+            self.assertIn(code, html)
+            self.assertEqual(self.observations(FormControls(html).fields), before)
+        with PlanStore(self.path) as store:
+            revision, plan = store.load('unchanged', self.c)
+            self.assertEqual(revision, 1)
+            self.assertEqual(plan.observations, before)
+
+    def test_zero_reference_is_known_and_missing_reference_is_unavailable(self):
+        base = replace(observation(), observation_id='zero-snapshot', price_type=PriceType.SNAPSHOT,
+                       unit_price='0', observed_at=None)
+        html = self.post(self.form, action='references', reference_data=dumps((base,)))
+        self.assertIn('Snapshot · age unknown', html)
+        html = self.post(FormControls(html).fields)
+        self.assertIn('Total: 0.00', html)
+        missing = replace(base, observation_id='missing-snapshot', unit_price=None)
+        html = self.post(FormControls(html).fields, action='references', reference_data=dumps((missing,)))
+        self.assertIn('Snapshot · unavailable · age unknown', html)
+        html = self.post(FormControls(html).fields)
+        self.assertIn('Total: Incomplete', html)

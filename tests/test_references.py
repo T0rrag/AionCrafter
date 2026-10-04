@@ -48,6 +48,14 @@ class ReferenceTests(unittest.TestCase):
         self.assertIn('age unknown',reference_label(replace(self.obs,observed_at=None),now=now))
         self.assertIn('unavailable',reference_label(replace(self.obs,unit_price=None),now=now))
 
+    def test_future_age_including_subsecond_is_not_reported_as_fresh(self):
+        now = datetime(2026, 10, 1, 10, tzinfo=timezone.utc)
+        for time in ('2026-10-01T10:00:00.500Z', '2026-10-01T12:00:00Z'):
+            obs = replace(self.obs, observed_at=time, fetched_at='2026-10-02T10:00:00Z')
+            self.assertIn('future observation — check clock', reference_label(obs, now=now))
+        offset = replace(self.obs, observed_at='2026-10-01T12:00:00+02:00')
+        self.assertIn('age 0h 0m', reference_label(offset, now=now))
+
     def test_reference_roundtrip_unknown_time_and_linked_manual_override(self):
         old=form_observations(self.c,self.form)
         for kind in (PriceType.VENDOR_PURCHASE,PriceType.SNAPSHOT):

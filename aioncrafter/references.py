@@ -28,6 +28,19 @@ def import_references(text, catalog, market):
     return validate_references(loads(tuple[PriceObservation, ...], text), catalog, market)
 
 
+def merge_references(previous, imported, catalog, market):
+    """Preview atomically; replaying an ID may never change its displayed record."""
+    validate_references(previous, catalog, market)
+    validate_references(imported, catalog, market)
+    by_id = {obs.observation_id: obs for obs in previous}
+    for obs in imported:
+        require(obs.observation_id not in by_id or obs == by_id[obs.observation_id],
+                'REFERENCE_ID', 'An existing observation ID cannot change; supply a new ID')
+    merged = {obs.identity: obs for obs in previous}
+    merged.update({obs.identity: obs for obs in imported})
+    return validate_references(tuple(merged.values()), catalog, market)
+
+
 def reference_label(obs, *, now=None):
     if obs is None:
         return 'Unavailable · age unknown'
@@ -37,6 +50,6 @@ def reference_label(obs, *, now=None):
     if obs.observed_at is None:
         age = 'age unknown'
     else:
-        seconds = int(((now or datetime.now(timezone.utc)) - timestamp(obs.observed_at)).total_seconds())
-        age = 'future observation — check clock' if seconds < 0 else f'age {seconds // 3600}h {(seconds % 3600) // 60}m'
+        seconds = ((now or datetime.now(timezone.utc)) - timestamp(obs.observed_at)).total_seconds()
+        age = 'future observation — check clock' if seconds < 0 else f'age {int(seconds) // 3600}h {(int(seconds) % 3600) // 60}m'
     return f'{title}{state} · {age} · observed {obs.observed_at or "unknown"} · ingested {obs.fetched_at} · source {obs.provenance.source_id} ({obs.provenance.source_ref}) · rights {obs.provenance.rights_status.value}: {obs.provenance.rights_ref}'

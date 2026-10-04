@@ -14,7 +14,7 @@ from .economics import SaleFees, amount, item_economics, materials_cost
 from .identity import Currency, FactionMode, MarketKind, MarketScope, PriceIdentity, normalize_alias
 from .manual import manual_observation, resolve_list
 from .models import CraftFee, FeeBasis, ItemQuantity, Money, PriceType
-from .references import import_references, validate_references, reference_label
+from .references import import_references, merge_references, validate_references, reference_label
 from .valuation import HistoricalCost, InventoryEntry, value_materials
 
 
@@ -239,10 +239,7 @@ def handler(catalog, plan_database=None):
                 if action == 'references':
                     previous = form_observations(catalog, form)
                     imported = import_references(form.get('reference_data',''), catalog, previous[0].identity.market)
-                    merged = {o.identity: o for o in previous}
-                    merged.update({o.identity: o for o in imported})
-                    observations = tuple(merged[o.identity] for o in previous)
-                    validate_references(observations, catalog, previous[0].identity.market)
+                    observations = merge_references(previous, imported, catalog, previous[0].identity.market)
                     for i, obs in enumerate(observations):
                         form[f'p{i}'] = obs.unit_price or ''
                         form[f't{i}'] = obs.observed_at or ''
