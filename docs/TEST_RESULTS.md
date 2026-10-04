@@ -167,3 +167,20 @@ The acquisition oracle enumerates 60 deterministic small mixed books. All tests 
 synthetic observations and injected clock/provider; no real network transport or sleeps
 in the Phase 03 tests. Existing form tests use loopback HTTP. This is not visual QA,
 real-market reconciliation, a live integration, remote CI or Gate A acceptance.
+
+## Phase 03 Part 02 — fallback history and retry budgets (2026-10-04)
+
+Windows / bundled Python 3.12.14; same executable path as Part 01.
+Five new regression cases failed on the unchanged implementation before correction:
+manual mutation between calls, reuse of replaced provider IDs, duplicate manual IDs across
+identities, provider mutation of a manual ID, and premature exhaustion in a mixed retry batch.
+Twelve new regression tests now cover both defects and their atomicity/quota/reset boundaries.
+
+- `python -m unittest tests.test_price_cache tests.test_price_service tests.test_acquisition tests.test_market_groundwork -q`: **54 passed** (13/27/13/1).
+- `python -m unittest discover -q`: **149 passed**, no failures on this run.
+- `python -m compileall -q aioncrafter tests`: passed.
+- `python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json`: passed, 7 variants / 3 recipes.
+- `git diff --check`: passed; bootstrap/checksum results follow in delivery receipt.
+
+No real provider, UI activation, browser QA, remote CI or real-game validation. Part 01's
+intermittent Windows HTTP rejection-test reset is not claimed fixed by these changes.

@@ -194,7 +194,7 @@
           "title": "Preserve observation time and cache age",
           "description": "Record source-observed time, fetch time, price type and scope separately. A cache refresh must never make an old observation appear new. Unknown source time means freshness unknown.",
           "status": "IN_PROGRESS",
-          "evidence": "price_cache.py; 11 synthetic tests plus combined persistence/fallback test. Independent retrieval/source clocks, exact identity, unknown/future age and immutable atomic cache validation. Provider/application integration pending."
+          "evidence": "price_cache.py; 13 synthetic cache tests plus service/integration coverage. Shared atomic immutable ID history for provider and manual observations, independent retrieval/source clocks, unknown/future age. Provider/application integration pending."
         },
         {
           "id": "p3-resilience",
@@ -202,7 +202,7 @@
           "title": "Respect quotas and degrade predictably",
           "description": "Batch permitted requests, use provider limits, backoff on throttling and stop retry storms. Show stale/error states and allow manual overrides without silently hiding their origin.",
           "status": "IN_PROGRESS",
-          "evidence": "price_service.py and BatchPriceProvider; 17 synthetic tests plus combined scenario. Explicit batching/fixed-window quota, bounded attempts and capped backoff/Retry-After, shared cooldown, stale/error/manual states. No sleeps/network; production transport/shared scheduler/UI integration pending."
+          "evidence": "price_service.py and BatchPriceProvider; 27 synthetic service tests plus combined scenario. Per-identity bounded retries, quota/Retry-After/shared cooldown, stale/manual/error states. Manual IDs immutable across calls and provider history; rejected batches reserve no records. No live transport or application activation."
         },
         {
           "id": "p3-depth",
@@ -403,9 +403,9 @@
   "verified_implementation_sha": "f80b8e76c1542530b290f24e95088ab30707a4be",
   "remote_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
-  "checkpoint_part": "01",
+  "checkpoint_part": "02",
   "next_eligible_phase": "03",
   "next_phase_dependency_note": "Phase 03 provider-independent groundwork implemented using synthetic fixtures. Adapter/application integration and real reconciliation/release remain pending external authorization and evidence; Gate A UNVERIFIED. Stay in Phase 03 for its continuation; Phase 04 requires a separate chat.",
-  "checkpoint_label": "Phase 03 Part 01 freshness, resilience and depth groundwork",
+  "checkpoint_label": "Phase 03 Part 02 immutable fallback history and per-item retries",
   "next_development_branch": "phase/03-market-prices"
 }

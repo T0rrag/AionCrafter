@@ -3,7 +3,7 @@
   "project": "AionCrafter",
   "brief_version": "1.3",
   "publication_status": "PUBLISHED",
-  "checkpoint": "Phase 03 Part 01 provider-independent groundwork",
+  "checkpoint": "Phase 03 Part 02 immutable fallback history and retry budgets",
   "files": [
     {
       "path": ".github/pull_request_template.md",
@@ -18,7 +18,7 @@
     {
       "path": "AGENTS.md",
       "bytes": 3292,
-      "sha256": "c752cb55767c6274fbdfa294605fa5b4cc7d23d967d55855c3ca31df185e6f35"
+      "sha256": "2dd927b4775c176ecae2bb1378036de84ecf08c7d04007796f258d091bcbeb11"
     },
     {
       "path": "AionCrafter_Project_Prompt.md",
@@ -87,13 +87,13 @@
     },
     {
       "path": "aioncrafter/price_cache.py",
-      "bytes": 5302,
-      "sha256": "f8ee9ac43724757079e81502e0de5e2ab85cd79780a3c75ca6fdb335d600181f"
+      "bytes": 6218,
+      "sha256": "ab8adbeb36a4a3cf829d12b1c3ebdc42e88904e023ea24dde958f1c22c07c5b6"
     },
     {
       "path": "aioncrafter/price_service.py",
-      "bytes": 9882,
-      "sha256": "075c1dd229fb863e1213e671c1ac036a8fa5bddbaec4c8f32b14b52542c9e91c"
+      "bytes": 9807,
+      "sha256": "a363a6f0d332af9caee836ae3d146773717ffb46288f63ba93e37d22e2c1806d"
     },
     {
       "path": "aioncrafter/providers.py",
@@ -132,8 +132,8 @@
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1486,
-      "sha256": "bbe0af809869b542ce12167089dbb2c451faced3561cc4aadf782eda6dc51d38"
+      "bytes": 1422,
+      "sha256": "b8ae067578c1e32f9b4bcef2b4512d9a2648bfa078f83b742083a50632c57bfa"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -147,13 +147,13 @@
     },
     {
       "path": "docs/PHASE_03_GROUNDWORK.md",
-      "bytes": 6572,
-      "sha256": "5373f21a08c9167bc6e90b59a1876b314d4fa6a28c6c3ad90e09d66f4a373695"
+      "bytes": 7155,
+      "sha256": "180467c9d2bfb6566919f8da1da4db16d4e2347eaf014505f5eed83e3334df12"
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 3853,
-      "sha256": "040509ed0d88522a7bfe7af318807d43f100da8b46f73331351157be259cf053"
+      "bytes": 4682,
+      "sha256": "f9bfe8af8ac9ff25e1e5978fc19778dd9509297675f5c873def15e93d30bcb26"
     },
     {
       "path": "docs/REFERENCE_IMPORTS.md",
@@ -162,13 +162,13 @@
     },
     {
       "path": "docs/TEST_RESULTS.md",
-      "bytes": 10905,
-      "sha256": "b24941420438069589d56eb4febe0a9ba3109aa76f610a87be9f4c5d1456a094"
+      "bytes": 12070,
+      "sha256": "839cbb1680f00101801fabec933e7a8c11b5c2d94203b7167fba77bc93b8d07c"
     },
     {
       "path": "docs/backlog.json",
-      "bytes": 24478,
-      "sha256": "dfc36831613a27457178e5db7bd4413e8a7f4d75291c4aeadf07139c014d10b0"
+      "bytes": 24528,
+      "sha256": "c8338953f43f2b423cf39ad9b75bb2518bd22d52d3890e973894698c1d2a15d5"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -291,9 +291,14 @@
       "sha256": "95c230bb1b5f486e73ba63ba95de04409e7de6cbc3eac6131da3622aac272839"
     },
     {
+      "path": "docs/handoffs/phase-03-part-02.md",
+      "bytes": 3855,
+      "sha256": "a302ce6d90d304fe7251074ef852e3a874921ab4a5fb806612f88a61175db5d7"
+    },
+    {
       "path": "docs/roadmap-progress.json",
-      "bytes": 750,
-      "sha256": "7d89d1a277c00a0cb2ad643d1acb5815da0a4940bc2db06c7f7ca0b7e6b0e48a"
+      "bytes": 716,
+      "sha256": "525f04bdb57cf5206331666c2e3ce805ac19637768718d8a44f04385699e1588"
     },
     {
       "path": "docs/sources/SYNTHETIC.md",
@@ -387,13 +392,13 @@
     },
     {
       "path": "tests/test_price_cache.py",
-      "bytes": 5489,
-      "sha256": "e00627aeb1e7d05febb4330f58a07d32b8236ab4e7a9c6108c0070aa48b42e6f"
+      "bytes": 6330,
+      "sha256": "2af58e37fdb1b0f8e96913e8a5202ba1bb28e470d89a90d5fad4ab3dfdee88d5"
     },
     {
       "path": "tests/test_price_service.py",
-      "bytes": 9079,
-      "sha256": "fd0b794e8648f0f49a661212a74dcb7f44c8e324ce4e25fe7564acb3311ad3fd"
+      "bytes": 15007,
+      "sha256": "af42f121ad29b205abc3d30a44fb450f142ecae7b4f2b1dc70751f4e0d2e7991"
     },
     {
       "path": "tests/test_references.py",

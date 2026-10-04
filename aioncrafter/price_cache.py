@@ -77,27 +77,44 @@ class PriceCache:
         entry = self._entries.get(identity)
         return None if entry is None else self.view(entry, cache_hit=True)
 
+    def _validated_ids(self, observations: tuple[PriceObservation, ...], now: datetime) -> dict[str, PriceObservation]:
+        require(type(observations) is tuple and all(type(x) is PriceObservation for x in observations),
+                'TYPE', 'Expected an observation tuple')
+        pending_ids = {}
+        for obs in observations:
+            self.check_identity(obs.identity)
+            require(obs.provenance.rights_status is not RightsStatus.UNVERIFIED,
+                    'RIGHTS', 'Unverified observations cannot enter the cache')
+            require(timestamp(obs.fetched_at) <= now, 'TIMESTAMP', 'Observation ingestion is in the future')
+            require(obs.observation_id not in pending_ids, 'DUPLICATE_ID', 'Response repeats an observation ID')
+            prior = self._ids.get(obs.observation_id)
+            require(prior is None or prior == obs, 'IMMUTABLE_ID', 'Changed observation needs a new ID')
+            pending_ids[obs.observation_id] = obs
+        return pending_ids
+
+    def remember_observations(self, observations: tuple[PriceObservation, ...]) -> None:
+        """Atomically reserve immutable IDs without replacing provider cache entries.
+
+        Manual selections share the same ID history as provider responses. A rejected
+        selection reserves nothing; a valid replay is idempotent for this cache lifetime.
+        """
+        self._ids.update(self._validated_ids(observations, aware_now(self.clock)))
+
     def store_batch(self, responses: dict[PriceIdentity, tuple[PriceObservation, ...]]) -> None:
         """Validate a whole response before committing any entries or ID registrations."""
+        require(type(responses) is dict, 'TYPE', 'Expected a response mapping')
         now = aware_now(self.clock)
-        pending_ids = {}
         pending_entries = {}
+        records = []
         for identity, observations in responses.items():
             self.check_identity(identity)
             require(type(observations) is tuple and all(type(x) is PriceObservation for x in observations),
                     'TYPE', 'Provider must return an observation tuple')
-            seen = set()
             for obs in observations:
                 require(obs.identity == identity, 'SCOPE_MISMATCH', 'Response identity differs from request')
-                require(obs.provenance.rights_status is not RightsStatus.UNVERIFIED,
-                        'RIGHTS', 'Unverified observations cannot enter the cache')
-                require(timestamp(obs.fetched_at) <= now, 'TIMESTAMP', 'Provider ingestion is in the future')
-                require(obs.observation_id not in seen, 'DUPLICATE_ID', 'Response repeats an observation ID')
-                seen.add(obs.observation_id)
-                prior = pending_ids.get(obs.observation_id, self._ids.get(obs.observation_id))
-                require(prior is None or prior == obs, 'IMMUTABLE_ID', 'Changed observation needs a new ID')
-                pending_ids[obs.observation_id] = obs
+            records.extend(observations)
             pending_entries[identity] = CachedPrices(identity, observations, now)
+        pending_ids = self._validated_ids(tuple(records), now)
         self._ids.update(pending_ids)
         self._entries.update(pending_entries)
 

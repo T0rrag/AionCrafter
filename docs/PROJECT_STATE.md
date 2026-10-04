@@ -1,6 +1,6 @@
 # AionCrafter — project state
 
-2026-10-04 · Phase 03 / Part 01 · Brief v1.3; ADR 0006.
+2026-10-04 · Phase 03 / Part 02 · Brief v1.3; ADR 0006.
 Phase 03 IN_PROGRESS. Gates A/B UNVERIFIED; automatic prices remain disabled.
 
 ## Repository and writer
@@ -19,6 +19,10 @@ b2cf609121113524c1e52a3a23809b87b90f3d49 matches exactly. Receipt:
 `delivery/phase-03-part-01.json`. Documentation receipts follow implementation; fetch
 the actual head before writing.
 
+Continuation start: remote head bb967e63e51add0649d523aca00c3764d6b58bf6, clean local
+checkout; main unchanged. PR #5 remains open/draft, with no discussion comments. No new
+authorized provider evidence in the repository or project sources. Integration stays blocked.
+
 ## Delivered groundwork
 
 p3-freshness: scoped in-memory cache preserves original observed_at/fetched_at separately
@@ -29,6 +33,13 @@ p3-depth: exact quantity acquisition from coherent supplied listing snapshots, i
 stacks unless partial purchase is explicit, minimum cash cost, bounded exact search,
 insufficient coverage and indicative/unverified-stock reference estimates.
 
+Part 02 fixes two reproduced contract defects. A retryable mixed batch now exhausts only
+identities that reached their own attempt limit; newer members retain a retry time under
+the shared cooldown/quota. Manual fallbacks now use the same immutable ID history as
+provider responses, including replaced cache records. Changed ID reuse across requests,
+identities or origins is rejected atomically; valid replay remains idempotent. This history
+lasts for the cache instance and is not cleared by retry reset. See phase-03-part-02 handoff.
+
 All three tasks remain IN_PROGRESS: these are single-owner, provider-independent contracts
 and tests, not production adapter/UI activation. See PHASE_03_GROUNDWORK.md for semantics,
 limits and integration responsibilities. Existing manual calculator behavior is unchanged.
@@ -37,7 +48,7 @@ source rights, usage limits and actual market reconciliation. Synthetic tests do
 
 ## Validation
 
-Windows/Python 3.12.14: full suite 137 passed; Phase 03 targeted suite 42 passed.
+Windows/Python 3.12.14: full suite 149 passed; Phase 03 targeted suite 54 passed.
 Includes 60 deterministic small-book comparisons with an exhaustive oracle, and a combined
 cache/outage/manual-fallback/depth/persistence scenario. Compileall and offline synthetic
 catalog validation passed. Diff/bootstrap checks are recorded in TEST_RESULTS.md.
@@ -52,7 +63,7 @@ transport behavior is not claimed fixed. No remote CI, browser or real-provider 
 All 42 IDs retained. Phase 01 incomplete/p1-catalog BLOCKED. Phase 02 owner behavior accepted;
 visual/keyboard QA deferred and UNVERIFIED. Real-game pilot after phase feature work.
 Phase 05 DEFERRED. No Chromium work, merge, force-push, release or deployment.
-Part 01's authorized synthetic groundwork is implemented. Next Phase 03 continuation must
+Part 01 groundwork and Part 02 contract corrections are implemented and tested. Next Phase 03 continuation must
 first inspect evidence for an authorized provider; without it, retain blocked integration
 and review these contracts offline. Do not invent APIs, source rights, limits or game rules.
 Stay on this branch/PR for Phase 03. Do not start Phase 04 in this chat. Read the handoff and

@@ -124,11 +124,9 @@ class PriceService:
                         'OVERRIDE', 'Manual fallback requires a scoped manual observation')
                 require(obs.provenance.rights_status is not RightsStatus.UNVERIFIED and timestamp(obs.fetched_at) <= now,
                         'OVERRIDE', 'Fallback needs valid rights and ingestion time')
-                previous = self.cache.peek(identity)
-                if previous:
-                    for prior in previous.entry.observations:
-                        require(obs.observation_id != prior.observation_id or obs == prior,
-                                'IMMUTABLE_ID', 'Manual override needs its own observation ID')
+        # Reserve manual IDs against all provider/manual history, not just the current
+        # entry. This is atomic across the request and leaves cached prices untouched.
+        self.cache.remember_observations(tuple(manual.values()))
         results, pending = {}, []
         for identity in unique:
             view = self.cache.peek(identity)
@@ -169,7 +167,7 @@ class PriceService:
                 failure = ProviderFailure('invalid_response', retryable=False)
             if failure is not None:
                 now = aware_now(self.cache.clock)
-                exhausted = not failure.retryable or any(self._attempts[i] >= self.policy.max_attempts for i in batch)
+                exhausted = {i for i in batch if not failure.retryable or self._attempts[i] >= self.policy.max_attempts}
                 delay = self.policy.backoff
                 # Saturating doubling avoids huge powers or timedelta overflow.
                 for _ in range(max(self._attempts[i] for i in batch) - 1):
@@ -178,13 +176,13 @@ class PriceService:
                         break
                 delay = max(delay, failure.retry_after or timedelta(0))
                 if exhausted:
-                    self._exhausted.update(batch)
+                    self._exhausted.update(exhausted)
                     delay = max(delay, self.policy.failure_cooldown)
                 self._blocked_until = max(self._blocked_until, now + delay)
                 for identity in batch:
                     self._errors[identity] = failure.code
                     results[identity] = self._result(identity, error=failure.code,
-                                                     retry_at=None if exhausted else self._ready_at(now))
+                                                     retry_at=None if identity in exhausted else self._ready_at(now))
             else:
                 for identity in batch:
                     self._attempts.pop(identity, None)

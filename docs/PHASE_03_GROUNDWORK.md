@@ -23,7 +23,11 @@ equality. A backward clock jump expires transport cache and flags future observa
 Both time thresholds are explicit caller choices, not verified freshness promises.
 
 Cache/service are single-owner, in-memory foundations, not a shared production cache.
-The ID registry lasts for that instance; persistent immutable history uses `Store`.
+The ID registry covers both provider responses and explicit manual selections, and lasts
+for that instance; persistent immutable history uses `Store`. `remember_observations`
+reserves IDs atomically without creating/replacing provider cache entries. Rejected
+batches reserve nothing. Identical replay is idempotent, but changes to any record field
+need a new ID, including after a provider entry is replaced or retry failures are reset.
 Production adapters will need a shared quota owner, bounded retention, transport timeout
 and cancellation, plus authorized source/capability evidence. Do not deploy one separate
 quota counter per concurrent request and assume provider-wide limits are enforced.
@@ -45,7 +49,10 @@ programming errors propagate rather than being concealed as missing prices.
 
 There are no sleeps or background jobs. The caller may retry at `retry_at`. Shared
 cooldown blocks later batches, limiting retry storms. Maximum attempts applies across
-calls, not just one resolve invocation. Exhausted identities require an explicit
+calls, not just one resolve invocation, and is evaluated separately for each identity.
+When one member of a retryable batch is exhausted, newer members retain their remaining
+attempts under the same shared cooldown/quota. Permanent errors exhaust every affected
+member. Exhausted identities require an explicit
 `reset_failures()`, which does not reset quota or bypass cooldown. On failure, a previous
 record is returned as `stale_error`; without one the state is `error`. The error code,
 next allowed retry and per-observation freshness remain separate fields.

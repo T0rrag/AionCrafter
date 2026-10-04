@@ -106,3 +106,18 @@ class PriceCacheTests(unittest.TestCase):
         self.provider.capabilities = replace(self.provider.capabilities, source_timestamps=False)
         with self.assertRaises(ValidationError):
             self.cache.get(self.identity)
+
+    def test_remembered_observation_validation_is_atomic(self):
+        other = replace(self.obs, observation_id='invalid', fetched_at='2026-10-04T12:00:00Z')
+        with self.assertRaises(ValidationError):
+            self.cache.remember_observations((self.obs, other))
+        # A rejected batch did not pin the earlier, otherwise-valid record.
+        corrected = replace(self.obs, unit_price='1.00')
+        self.cache.remember_observations((corrected,))
+        self.assertIsNone(self.cache.peek(self.identity))
+        with self.assertRaisesRegex(ValidationError, 'IMMUTABLE_ID'):
+            self.cache.store_batch({self.identity: (self.obs,)})
+
+    def test_invalid_response_mapping_is_rejected(self):
+        with self.assertRaisesRegex(ValidationError, 'TYPE'):
+            self.cache.store_batch([(self.identity, (self.obs,))])

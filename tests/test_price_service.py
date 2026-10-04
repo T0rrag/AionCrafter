@@ -171,3 +171,102 @@ class PriceServiceTests(unittest.TestCase):
             replace(self.obs, observation_id='missing', observed_at='2026-10-04T10:59:00Z',
                     fetched_at='2026-10-04T11:00:00Z', unit_price=None))
         self.assertEqual(self.resolve().state, 'partial')
+
+    def test_mixed_retry_batch_does_not_exhaust_new_identity(self):
+        self.service = PriceService(self.cache, replace(self.policy, max_attempts=2), batched=True)
+        self.provider.failures = [ProviderFailure('unavailable', retryable=True)] * 2
+        self.resolve()
+        self.clock.advance(2)
+        other = replace(self.identity, item=replace(self.identity.item, item_id='new-request'))
+        older, newer = self.service.resolve((self.identity, other))
+        self.assertIsNone(older.retry_at)
+        self.assertIsNotNone(newer.retry_at)
+        self.clock.advance(20)
+        self.assertIsNone(self.service.resolve((other,))[0].error)
+        self.assertEqual(len(self.provider.calls), 3)
+
+    def test_manual_observation_id_cannot_change_between_calls(self):
+        self.resolve(manual={self.identity: self.obs})
+        with self.assertRaisesRegex(ValidationError, 'IMMUTABLE_ID'):
+            self.resolve(manual={self.identity: replace(self.obs, unit_price='99.00')})
+        self.assertEqual(self.provider.calls, [])
+
+    def test_manual_id_cannot_reuse_replaced_provider_history(self):
+        self.resolve()
+        replacement = replace(self.obs, observation_id='new-quote', unit_price='13.00')
+        self.provider.responses[self.identity] = (replacement,)
+        self.resolve(refresh=True)
+        with self.assertRaisesRegex(ValidationError, 'IMMUTABLE_ID'):
+            self.resolve(manual={self.identity: replace(self.obs, unit_price='99.00')})
+
+    def test_manual_ids_cannot_collide_across_requested_identities(self):
+        other = replace(self.identity, item=replace(self.identity.item, item_id='other'))
+        with self.assertRaises(ValidationError):
+            self.service.resolve((self.identity, other), manual={
+                self.identity: self.obs, other: replace(self.obs, identity=other)})
+        self.assertEqual(self.provider.calls, [])
+
+    def test_provider_cannot_reuse_manual_id_with_different_data(self):
+        manual = replace(self.obs, observation_id='SYNTHETIC-shared-id', unit_price='99.00')
+        self.resolve(manual={self.identity: manual})
+        self.provider.responses[self.identity] = (replace(manual, unit_price='12.30'),)
+        self.assertEqual(self.resolve().error, 'invalid_response')
+        self.assertIsNone(self.cache.peek(self.identity))
+
+    def test_rejected_manual_batch_does_not_reserve_valid_records(self):
+        other = replace(self.identity, item=replace(self.identity.item, item_id='other'))
+        first = replace(self.obs, observation_id='SYNTHETIC-first-manual')
+        invalid = replace(self.obs, observation_id='SYNTHETIC-invalid', identity=other,
+                          fetched_at='2026-10-04T12:00:00Z')
+        with self.assertRaises(ValidationError):
+            self.service.resolve((self.identity, other), manual={self.identity: first, other: invalid})
+        corrected = replace(first, unit_price='1.00')
+        self.assertEqual(self.resolve(manual={self.identity: corrected}).observations, (corrected,))
+        self.assertEqual(self.provider.calls, [])
+
+    def test_manual_replay_stays_immutable_after_failure_reset(self):
+        first = self.resolve(manual={self.identity: self.obs})
+        self.service.reset_failures()
+        self.assertEqual(self.resolve(manual={self.identity: self.obs}).observations, first.observations)
+        with self.assertRaisesRegex(ValidationError, 'IMMUTABLE_ID'):
+            self.resolve(manual={self.identity: replace(self.obs, observed_at=None)})
+
+    def test_conflicting_manual_batch_does_not_reserve_prior_valid_selection(self):
+        # The collision is discovered during history validation, after shape validation.
+        known = replace(self.obs, observation_id='known')
+        self.resolve(manual={self.identity: known})
+        other = replace(self.identity, item=replace(self.identity.item, item_id='other'))
+        tentative = replace(self.obs, observation_id='tentative', identity=other)
+        with self.assertRaisesRegex(ValidationError, 'IMMUTABLE_ID'):
+            self.service.resolve((other, self.identity), manual={
+                other: tentative, self.identity: replace(known, unit_price='99.00')})
+        corrected = replace(tentative, unit_price='1.00')
+        result = self.service.resolve((other,), manual={other: corrected})[0]
+        self.assertEqual(result.observations, (corrected,))
+
+    def test_new_identity_still_respects_quota_after_mixed_batch_exhaustion(self):
+        policy = replace(self.policy, max_attempts=2, requests_per_window=2)
+        self.service = PriceService(self.cache, policy, batched=True)
+        self.provider.failures = [ProviderFailure('unavailable', retryable=True)] * 2
+        self.resolve()
+        self.clock.advance(2)
+        other = replace(self.identity, item=replace(self.identity.item, item_id='other'))
+        old, new = self.service.resolve((self.identity, other))
+        self.assertIsNone(old.retry_at)
+        self.assertEqual(new.retry_at, self.clock() + timedelta(seconds=58))
+        self.clock.advance(20)
+        self.assertEqual(self.service.resolve((other,))[0].retry_at, new.retry_at)
+        self.assertEqual(len(self.provider.calls), 2)
+        self.clock.advance(38)
+        self.assertIsNone(self.service.resolve((other,))[0].error)
+
+    def test_permanent_error_exhausts_all_mixed_batch_members(self):
+        self.provider.failures = [ProviderFailure('unavailable', retryable=True),
+                                  ProviderFailure('denied', retryable=False)]
+        self.resolve()
+        self.clock.advance(2)
+        other = replace(self.identity, item=replace(self.identity.item, item_id='other'))
+        self.assertTrue(all(r.retry_at is None for r in self.service.resolve((self.identity, other))))
+        self.clock.advance(100)
+        self.assertEqual(self.service.resolve((other,))[0].error, 'denied')
+        self.assertEqual(len(self.provider.calls), 2)
