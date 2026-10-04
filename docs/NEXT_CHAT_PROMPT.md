@@ -1,18 +1,12 @@
-Start AionCrafter Phase 04 — Crafting intelligence, Part 01 in the existing Aion2 project.
-Continue autonomously. Fetch https://github.com/T0rrag/AionCrafter and verify actual heads.
-PR #5 is merged at bd23f4166ffe276179843761dea8e95275efbce1; documentation receipt follows on main.
-Read AGENTS.md, docs/PROJECT_STATE.md, handoffs/phase-03-to-phase-04.md, ADR 0007,
-backlog.json and master brief v1.3 sections 8/13/20/21.
-
-Resume phase/04-crafting-intelligence after checking its historical 1bea9e9d687458eb78921fee31a979a568cbe3ae
-head. Merge current main into it without force, preserve both histories/current handoff,
-and open a new Phase 04 PR (old PR #4 is closed and contained calculator code).
-First p4-batches: pure deterministic recursive expansion, aggregate shared demand before
-rounding by yields, carry leftovers and detect cycles. Then independent Phase 04 work.
-Use SYNTHETIC fixtures/manual references and exact arithmetic. Baseline: 149 tests passed.
-
-The user now authorizes tested phase merges (ADR 0007); no force-push, concurrent overwrite
-or bypass of required checks. Preserve all 42 IDs. Phase 03 stays incomplete with real
-integration blocked; Gates A/B UNVERIFIED, p1-catalog BLOCKED, Phase 05 DEFERRED.
-No real-provider activation or guessed game rules. Visual QA deferred; no Chromium work;
-game pilot after phase features. One active writer; publish and verify tested increments.
+Continue AionCrafter Phase 04 — Crafting intelligence, Part 02 in Aion2.
+Fetch T0rrag/AionCrafter and verify actual heads before writing. Resume
+phase/04-crafting-intelligence and its current draft PR; do not repeat the baseline
+merge (3a1e9bab7e3f6e747cfe4beb3a40bd68724e9859). Read AGENTS, PROJECT_STATE,
+handoffs/phase-04-part-01.md, PHASE_04_CRAFTING, ADR 0007, backlog and delivery receipt.
+Part 01 added deterministic recursive batches, bounded quantity-aware buy/craft
+comparisons, local form integration and saved plans. Baseline 180 tests passed.
+Continue p4-proc then independent Phase 04 work; do not claim mixed-route optimization,
+verified requirements, game probabilities or liquidity without evidence. Synthetic only.
+All 42 IDs retained; Gates A/B UNVERIFIED; Phase 03 incomplete/real integration BLOCKED;
+p1-catalog BLOCKED, Phase 05 DEFERRED. User authorizes tested merges; no force-push or
+concurrent overwrite. One active writer. Visual QA deferred; no Chromium work.

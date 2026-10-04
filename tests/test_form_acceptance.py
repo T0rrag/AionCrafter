@@ -114,6 +114,39 @@ class FormAcceptanceTests(unittest.TestCase):
         self.assertNotIn('Reference import validated', html)
         self.assertEqual(self.observations(FormControls(html).fields), before)
 
+    def test_recursive_plan_roundtrip_from_actual_form_controls(self):
+        html = self.post(self.form, workflow='crafting', product='2', recipe='synthetic-bar', target='3',
+                         p0='10', p1='2', craft_fee='1', plan_mode='selected', plan_objective='additional_cash')
+        self.assertNotIn('role="alert"', html)
+        self.assertIn('Recursive crafting estimate', html)
+        self.assertIn('<th>Leftover</th>', html)
+        self.assertIn('stock unverified', html)
+        saved = self.post(FormControls(html).fields, action='save', plan_name='recursive')
+        self.assertIn('Saved locally at revision 1', saved)
+        loaded = self.post(FormControls(saved).fields, action='load')
+        self.assertNotIn('role="alert"', loaded)
+        fields = FormControls(loaded).fields
+        self.assertEqual(fields['workflow'], 'crafting')
+        self.assertEqual(fields['plan_mode'], 'selected')
+        self.assertEqual(fields['target'], '3')
+        self.assertEqual(self.observations(fields), self.observations(FormControls(saved).fields))
+
+    def test_recursive_comparison_keeps_missing_prices_and_unknown_stock_explicit(self):
+        html = self.post(self.form, workflow='crafting', product='2', recipe='synthetic-bar', target='3',
+                         p0='', p1='', p2='', craft_fee='0', plan_mode='compare')
+        self.assertNotIn('role="alert"', html)
+        self.assertIn('2 route choices evaluated; 2 have unknown costs', html)
+        self.assertIn('Total acquisition and crafting cost: Unknown', html)
+        self.assertIn('no mixed purchase/craft', html)
+
+    def test_recursive_invalid_candidate_cannot_be_saved(self):
+        html = self.post(self.form, action='save', plan_name='invalid recursive', workflow='crafting',
+                         product='2', recipe='synthetic-bar', target='3', use_recipe0='invalid')
+        self.assertIn('PLAN_MODE', html)
+        self.assertNotIn('Saved locally at revision', html)
+        with PlanStore(self.path) as store:
+            self.assertEqual(store.list(), ())
+
     def test_reference_id_replay_is_idempotent_but_changed_record_is_atomic(self):
         form = FormControls(self.post(self.form)).fields
         before = self.observations(form)

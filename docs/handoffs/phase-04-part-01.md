@@ -1,4 +1,4 @@
-# AionCrafter — Phase 04 Part 01
+# Phase 04 Part 01 handoff
 
 2026-10-04 · Brief v1.3 / ADR 0007. Phase 04 IN_PROGRESS, one active writer in its
 separate Aion2 chat. All 42 backlog IDs retained. Gates A/B UNVERIFIED.
@@ -43,3 +43,19 @@ scenario contracts and downside/expected values, preserving unknown probabilitie
 Phase 03 remains IN_PROGRESS with real adapter/reconciliation/activation BLOCKED;
 production quota/cache/transport integration remains pending. p1-catalog BLOCKED;
 Phase 05 DEFERRED. No live provider or automatic-price activation.
+
+## Continuation details
+
+Resume the same branch and phase PR after fetching actual heads. Do not repeat the
+baseline merge, restart Phase 03 or open a new phase branch. This chat is sole writer.
+Read batches.py, buycraft.py, crafting_view.py and their synthetic tests. Explicit
+limits: library callers supply route/search budgets; UI allows at most seven candidates
+(128 subsets) and displays up to twenty route summaries. A deterministic selected plan
+rejects ambiguous producers. Currency amounts use integer minor units throughout.
+The target recipe fee override applies only to that recipe. Historical cost fields
+are retained but are not applied to recursive cash/replacement estimates.
+
+Next tasks: p4-proc, then p4-liquidity/rank and optional ledger, with pure functions
+and synthetic verification before UI integration. Never turn an expected stochastic
+yield into a guaranteed craft count, or a listed asking price into completed-sale
+evidence. Preserve external blockers and do not mark this partial phase complete.

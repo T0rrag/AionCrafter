@@ -3,7 +3,7 @@
   "project": "AionCrafter",
   "brief_version": "1.3",
   "publication_status": "PUBLISHED",
-  "checkpoint": "Phase 03 merged groundwork and Phase 04 handoff",
+  "checkpoint": "Phase 04 Part 01 recursive planning",
   "files": [
     {
       "path": ".github/pull_request_template.md",
@@ -17,8 +17,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 2234,
-      "sha256": "009b646a47ff471952c14710c5c06f9c57835fe2e6c38c737e0372df699ca88e"
+      "bytes": 2319,
+      "sha256": "553e57dd4d1238a53043d247aac1f10681a14f4b80f9467ab3d458fa6873cd54"
     },
     {
       "path": "AionCrafter_Project_Prompt.md",
@@ -32,8 +32,8 @@
     },
     {
       "path": "README.md",
-      "bytes": 7556,
-      "sha256": "9713ba89ab50b7d8b523d4bdd17620a386076eb180e5c32ab30df726fc84733a"
+      "bytes": 7717,
+      "sha256": "5271d26a0d14434573cbc9fb8a1b070691775338e6642891c4397efd6268e94b"
     },
     {
       "path": "aioncrafter/__init__.py",
@@ -51,6 +51,16 @@
       "sha256": "501fafea0583de088d9688f39ca728cc453837fd008deb0c170956cd148c0f01"
     },
     {
+      "path": "aioncrafter/batches.py",
+      "bytes": 7102,
+      "sha256": "2149fab656632e84cddc53c2c238dcfbe221b7868671a6ca74d0b7c267ef68a9"
+    },
+    {
+      "path": "aioncrafter/buycraft.py",
+      "bytes": 8665,
+      "sha256": "17bfbd1e137e7e8be743425c46f1eb223ae0dd06614f53022703a7f5f7879acb"
+    },
+    {
       "path": "aioncrafter/catalog.py",
       "bytes": 4113,
       "sha256": "e40ad53812f19e2c7ed5b16f269634a04ae3c1711185d4b4eedc24e2b9107297"
@@ -59,6 +69,11 @@
       "path": "aioncrafter/codec.py",
       "bytes": 4305,
       "sha256": "f17eb7cc9a7362731b5b55784820f2508bd5cf8e4a065c66d51d1b7b6e9bca4e"
+    },
+    {
+      "path": "aioncrafter/crafting_view.py",
+      "bytes": 7575,
+      "sha256": "fc0d5e896a9041ea42b29a5d30b18cbc8702fe1eeeb424805a21cec0106aeb23"
     },
     {
       "path": "aioncrafter/economics.py",
@@ -82,8 +97,8 @@
     },
     {
       "path": "aioncrafter/plans.py",
-      "bytes": 9042,
-      "sha256": "fd15e09953eb82c0ad501bac11a17dc5f20e8e4b26730f7d52266fb162202765"
+      "bytes": 9157,
+      "sha256": "28ff6a69b52606d75db65d6d450fbb5e9a200c6ded65cfb3a251145b8b9cdd6f"
     },
     {
       "path": "aioncrafter/price_cache.py",
@@ -117,8 +132,8 @@
     },
     {
       "path": "aioncrafter/web.py",
-      "bytes": 26028,
-      "sha256": "531a1a77f30a4efce53806afa61f9205eeea4ee7a519e3ab284b558a0d5b01ef"
+      "bytes": 26596,
+      "sha256": "b65f4e530b6825cca6e634e282940821b08a40ff08ed6f96bcf25f76cc45ee44"
     },
     {
       "path": "docs/CHAT_PROJECT_INSTRUCTIONS.txt",
@@ -132,8 +147,8 @@
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1411,
-      "sha256": "b2650f3902517a2ddd61fab6e13ee61ad41bcf8421243ddf8f0217303affcf8d"
+      "bytes": 990,
+      "sha256": "faa7aad99584c4016f62c283fbe73e52064d545450d13874b59d4bfdcc39cbfc"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -151,9 +166,14 @@
       "sha256": "180467c9d2bfb6566919f8da1da4db16d4e2347eaf014505f5eed83e3334df12"
     },
     {
+      "path": "docs/PHASE_04_CRAFTING.md",
+      "bytes": 2474,
+      "sha256": "85c1798e246dca23beda3b38181087bc4dbd806701647458abf2bbb714fc39de"
+    },
+    {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 3588,
-      "sha256": "50850228b81844de263c034936e9e482666f9acc5e2ca5e77fbe59d4705aed04"
+      "bytes": 2691,
+      "sha256": "66344bdc8617a1dbaac3c7959e9f3edf7e91798a329be460f52524b8e213a033"
     },
     {
       "path": "docs/REFERENCE_IMPORTS.md",
@@ -162,13 +182,13 @@
     },
     {
       "path": "docs/TEST_RESULTS.md",
-      "bytes": 12641,
-      "sha256": "7b488a2e7f7217e4f6ca5f47e5fe63692cfda20215bfbdefd8d810280edd0483"
+      "bytes": 13170,
+      "sha256": "84ab221290f958a205e84000d86b37a540dfcaf85bd84ce507d7edc74b5e4e25"
     },
     {
       "path": "docs/backlog.json",
-      "bytes": 24565,
-      "sha256": "c556c827db995423964495964512cd15ab1fcc61ce7d35eded6a65d60ffd7aac"
+      "bytes": 25245,
+      "sha256": "f6db308737894908df0cf3064b0405a0f78d2d72b5696c82f4f98d09d3aa67d4"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -316,6 +336,11 @@
       "sha256": "22acad255db337ec34c58a88474481fb4f39faad60996933b2d9cf0b165323f1"
     },
     {
+      "path": "docs/handoffs/phase-04-part-01.md",
+      "bytes": 3710,
+      "sha256": "bbe711926784941e9acec3a05d6d5605456b87cee81841acb50dc6a9a923428e"
+    },
+    {
       "path": "docs/roadmap-progress.json",
       "bytes": 645,
       "sha256": "67616f84389802f8596d474449445cb13b8c48e224a57b15a0f8713ae84079b0"
@@ -356,6 +381,11 @@
       "sha256": "188f5f20778d8e636b9db91130d3f689b25aa314bd55ba16292ee18e248b841b"
     },
     {
+      "path": "tests/synthetic_crafting.py",
+      "bytes": 1139,
+      "sha256": "8e69818915be439d6b3d10053992d918bc1b907e27efd3ea4f7149349715048d"
+    },
+    {
       "path": "tests/synthetic_prices.py",
       "bytes": 1377,
       "sha256": "0ea71b24a153a6c3ce424d01d38c055ea01ca3424540ec26b4fde1bbf8fff5d0"
@@ -364,6 +394,16 @@
       "path": "tests/test_acquisition.py",
       "bytes": 6535,
       "sha256": "3dbd23696bdf85b7a47a8569436c5c8958038a6ec1452203f9456a6c690849f9"
+    },
+    {
+      "path": "tests/test_batches.py",
+      "bytes": 6992,
+      "sha256": "fa7437b805f5839cc7639e8904eeaf14f717730a423cce8a2c3a271aca506a7f"
+    },
+    {
+      "path": "tests/test_buycraft.py",
+      "bytes": 7523,
+      "sha256": "b41d8566307d23bfad8ab46fb11e6376db391fd7c032ae162fe50b1cd727489f"
     },
     {
       "path": "tests/test_catalog.py",
@@ -382,8 +422,8 @@
     },
     {
       "path": "tests/test_form_acceptance.py",
-      "bytes": 9230,
-      "sha256": "db75e0d18da3967362f7e2ce9a9c26bcf2354dbef77b46121fafffe7c09c9b0a"
+      "bytes": 11293,
+      "sha256": "90a6eb431485a1aa3527dbe5ec80c3857d8c39594c6571a2207e90cc5a7798c0"
     },
     {
       "path": "tests/test_identity.py",

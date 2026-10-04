@@ -193,3 +193,12 @@ Tested head 4e10fad95444241e68e353d41c9d24b4958b1dd6. Immediately before merge:
 GitHub returned no Actions runs, statuses, reviews or comments; no remote CI pass claimed.
 PR #5 merged at bd23f4166ffe276179843761dea8e95275efbce1 with expected-head verification.
 Fetched main tree equals tested PR head exactly. No new application changes in merge receipt.
+
+## Phase 04 Part 01 — 2026-10-04
+
+Windows / Python 3.12.14, SYNTHETIC ONLY. `python -m unittest discover -q`:
+**180 passed** (13.898 seconds). Added 15 recursive batch tests (including a 1,050-recipe
+chain, shared demand, coproducts, inventory and cycles), 13 buy/craft tests (exact fees,
+stock coverage, unknown values, alternatives and bounded search), and 3 local HTTP form
+tests (save/load, missing-price comparisons, invalid choice rejection). Existing 149
+tests still pass. No visual QA or real-game validation claimed.

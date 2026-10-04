@@ -8,6 +8,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
+from .crafting_view import crafting_controls, render_crafting
 from .catalog import import_catalog
 from .codec import ValidationError, require, dumps
 from .economics import SaleFees, amount, item_economics, materials_cost
@@ -102,6 +103,10 @@ def render(catalog, form=None, *, supplied_observations=None):
                             entries.append(ItemQuantity(item.identity, int(q)))
                 calculation = materials_cost(tuple(entries), market, observations)
                 result += '<h2>Materials estimate</h2>'
+            elif value('workflow') == 'crafting':
+                result += render_crafting(catalog, form, market, observations, tuple(inventory))
+                if history:
+                    result += '<p>Recorded consumed-material costs are retained in this form but are not applied to recursive cash or replacement estimates.</p>'
             else:
                 recipe = next((r for r in catalog.recipes if r.recipe_id == value('recipe')), None)
                 require(recipe is not None, 'RECIPE', 'Select a recipe')
@@ -120,24 +125,25 @@ def render(catalog, form=None, *, supplied_observations=None):
                     result += f'<p>{title}: {"Unknown / undefined" if total is None else amount(total, market)}</p>'
                 roi = 'Undefined' if r.roi_percent is None else f'{r.roi_percent.numerator}/{r.roi_percent.denominator}% (exact)'
                 result += f'<p>ROI: {roi}</p><p>{escape(", ".join(r.issues))}</p><p>All craft costs charged to planned sales; leftovers and coproducts have zero credited revenue. Direct ingredients only. Requirements must be checked manually.</p>'
-            valuation = value_materials(calculation, market, tuple(inventory), tuple(history))
-            cash = valuation.additional_cash
-            if item_result is not None:
-                cash = None if cash is None or item_result.crafting_fees is None else cash + item_result.crafting_fees
-            result += '<h3>Cost views</h3><p>Additional cash required' + (' including assumed crafting fees' if item_result else '') + ': ' + ('Incomplete' if cash is None else amount(cash, market)) + '</p>'
-            result += '<p>Recorded consumed-material cost: ' + ('Incomplete — supply records for every consumed unit' if valuation.recorded_total is None else amount(valuation.recorded_total, market)) + '</p>'
-            result += '<p>Owned inputs reduce additional cash only. Replacement cost and estimated profit retain their full value. Recorded material costs exclude crafting/sale fees and do not establish realized profit.</p>'
-            result += '<table><tr><th>Material</th><th>Required</th><th>Owned used</th><th>To buy</th><th>Unit reference</th><th>Replacement subtotal</th><th>Source and age</th></tr>'
-            for line, valued in zip(calculation.lines, valuation.lines):
-                item = next(x for x in catalog.items if x.identity == line.item.item)
-                result += f'<tr><td>{escape(label(item))}</td><td>{line.item.quantity}</td><td>{valued.owned_used}</td><td>{valued.to_buy}</td><td>{escape((line.observation.unit_price if line.observation else None) or "Unavailable")}</td><td>{"Missing" if line.subtotal is None else amount(line.subtotal, market)}</td><td>{escape(reference_label(line.observation))}</td></tr>'
-            result += f'</table><p>Total: {"Incomplete" if calculation.total is None else amount(calculation.total, market)}; known subtotal: {amount(calculation.known_subtotal, market)} {escape(market.currency.code)}</p>'
-            result += '<p>Manual references and approved offline references; stock and sell-through unverified. Default observation: ' + escape(value('observed')) + '</p>'
+            if value('workflow') != 'crafting':
+                valuation = value_materials(calculation, market, tuple(inventory), tuple(history))
+                cash = valuation.additional_cash
+                if item_result is not None:
+                    cash = None if cash is None or item_result.crafting_fees is None else cash + item_result.crafting_fees
+                result += '<h3>Cost views</h3><p>Additional cash required' + (' including assumed crafting fees' if item_result else '') + ': ' + ('Incomplete' if cash is None else amount(cash, market)) + '</p>'
+                result += '<p>Recorded consumed-material cost: ' + ('Incomplete — supply records for every consumed unit' if valuation.recorded_total is None else amount(valuation.recorded_total, market)) + '</p>'
+                result += '<p>Owned inputs reduce additional cash only. Replacement cost and estimated profit retain their full value. Recorded material costs exclude crafting/sale fees and do not establish realized profit.</p>'
+                result += '<table><tr><th>Material</th><th>Required</th><th>Owned used</th><th>To buy</th><th>Unit reference</th><th>Replacement subtotal</th><th>Source and age</th></tr>'
+                for line, valued in zip(calculation.lines, valuation.lines):
+                    item = next(x for x in catalog.items if x.identity == line.item.item)
+                    result += f'<tr><td>{escape(label(item))}</td><td>{line.item.quantity}</td><td>{valued.owned_used}</td><td>{valued.to_buy}</td><td>{escape((line.observation.unit_price if line.observation else None) or "Unavailable")}</td><td>{"Missing" if line.subtotal is None else amount(line.subtotal, market)}</td><td>{escape(reference_label(line.observation))}</td></tr>'
+                result += f'</table><p>Total: {"Incomplete" if calculation.total is None else amount(calculation.total, market)}; known subtotal: {amount(calculation.known_subtotal, market)} {escape(market.currency.code)}</p>'
+                result += '<p>Manual references and approved offline references; stock and sell-through unverified. Default observation: ' + escape(value('observed')) + '</p>'
     except (ValidationError, ValueError, StopIteration) as exc:
         result += f'<p role="alert">{escape(str(exc))}</p>'
     select = lambda name, vals, default: f'<label>{name}<select name="{name}">' + ''.join(f'<option {"selected" if value(name,default)==x else ""}>{x}</option>' for x in vals) + '</select></label>'
     body = '<h1>AionCrafter · Manual calculator</h1><p><strong>' + escape(catalog.scope.dataset_kind.value) + '</strong> · ' + escape(catalog.scope.region + ' / ' + catalog.scope.build) + ' · Gate A/B UNVERIFIED</p><p>Fees are user assumptions, unverified for the game. Blank prices stay unavailable. No prices or fees are prefilled. Use local saved plans to keep prices and inputs between sessions. Snapshots are delayed references, never live prices.</p><form method="post">'
-    body += select('workflow', ['materials', 'item'], 'materials')
+    body += select('workflow', ['materials', 'item', 'crafting'], 'materials')
     body += '<fieldset><legend>Explicit market and observation</legend>'
     body += field('market', 'Market ID', required=True) + select('market_kind', ['server','group'], 'server')
     body += select('faction_mode', ['not_applicable','specific'], 'not_applicable') + field('faction', 'Faction ID (when specific)')
@@ -167,11 +173,12 @@ def render(catalog, form=None, *, supplied_observations=None):
     if not products:
         body += '<p>No matching product. Change the search text.</p>'
     body += '<label>Recipe<select name="recipe">' + ''.join(f'<option value="{escape(r.recipe_id)}" {"selected" if value("recipe")==r.recipe_id else ""}>{escape(r.recipe_id)}</option>' for r in catalog.recipes) + '</select></label>'
-    body += field('target','Planned sell quantity','1','number') + field('selling','Selling unit price')
+    body += field('target','Requested / planned sell quantity','1','number') + field('selling','Selling unit price')
     body += field('craft_fee','Explicit craft-fee override (blank uses catalog; 0 explicitly waives)')
     body += select('craft_basis',['per_attempt','per_batch','per_output_unit'],'per_batch')
     body += field('tax','Sale tax fraction (0 through 1)') + field('sale_fee','Total listing / other sale fees')
     body += select('rounding',['floor','ceil','half_up'],'floor') + field('fee_source','Fee source / unverified assumption') + '</fieldset>'
+    body += crafting_controls(catalog, form)
     body += '<fieldset><legend>Approved offline references</legend><p>Paste a JSON array of PriceObservation records from a source you are permitted to use. Synthetic references remain synthetic. Snapshot time may be unknown; import time never establishes freshness. Vendor stock and restrictions must be checked manually. Editing price/time creates a linked manual override.</p><textarea name="reference_data"></textarea><button name="action" value="references">Preview reference import</button></fieldset>'
     body += '<button>Calculate</button><section aria-live="polite">' + result + '</section></form>'
     return '<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>AionCrafter manual calculator</title><style>body{font:16px system-ui;max-width:1050px;margin:2rem auto;padding:0 1rem;background:#101827;color:#e5edf8}fieldset{margin:1rem 0;border:1px solid #506078}label{display:inline-block;margin:.5rem}input,select,textarea,button{display:block;font:inherit;padding:.5rem;max-width:90%}table{border-collapse:collapse}td,th{padding:.5rem;border:1px solid #506078}button{cursor:pointer;background:#8ce5c0} [role=alert]{color:#ffbaad}</style>' + body + '</html>'

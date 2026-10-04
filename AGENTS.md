@@ -6,7 +6,8 @@ Preserve all seven phases and 42 stable IDs with evidence-backed statuses.
 
 Current sequence: Phase 03 synthetic groundwork merged via PR #5; Phase 03 remains
 IN_PROGRESS with real adapter/reconciliation/release BLOCKED. Next independent phase is
-Phase 04 in a separate Aion2 chat, starting p4-batches. Read ADR 0007 and the Phase 03 to
+Phase 04 is active in its separate Aion2 chat. Read handoffs/phase-04-part-01.md;
+p4-batches/buycraft groundwork is delivered, next p4-proc. Read ADR 0007 and the Phase 03 to
 Phase 04 handoff. Old branch/PR #4 did not implement Phase 04; verify actual ancestry.
 Phase 01 incomplete/p1-catalog BLOCKED; Phase 05 DEFERRED; Gates A/B UNVERIFIED.
 

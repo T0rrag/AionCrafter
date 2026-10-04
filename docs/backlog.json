@@ -233,23 +233,23 @@
     {
       "phase": "04",
       "title": "Add crafting intelligence",
-      "status": "NOT_STARTED",
+      "status": "IN_PROGRESS",
       "tasks": [
         {
           "id": "p4-batches",
           "priority": "P0",
           "title": "Handle recursive yields and leftovers",
           "description": "Round craft counts upward by output yield, merge shared ingredients, carry leftovers and detect recipe cycles. Treat expected stochastic yields differently from guaranteed outputs.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "Phase 04 Part 01: batches.py/buycraft.py/crafting_view.py; 15 batch tests, 13 route tests, 3 HTTP plan tests; full suite 180 passed. Deterministic selected routes, exact fees/quantity costs and saved local forms delivered. Stochastic treatment, eligibility filtering and broader acceptance pending; bounded search is not general optimization."
         },
         {
           "id": "p4-buycraft",
           "priority": "P1",
           "title": "Compare buying against crafting",
           "description": "Evaluate intermediate components at the requested quantity, including batch fees and leftovers. Respect recipe requirements, bound inputs and available market stock.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "Phase 04 Part 01: batches.py/buycraft.py/crafting_view.py; 15 batch tests, 13 route tests, 3 HTTP plan tests; full suite 180 passed. Deterministic selected routes, exact fees/quantity costs and saved local forms delivered. Stochastic treatment, eligibility filtering and broader acceptance pending; bounded search is not general optimization."
         },
         {
           "id": "p4-proc",

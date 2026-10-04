@@ -46,11 +46,12 @@ def validate_plan(plan: SavedPlan, catalog: Catalog) -> None:
             'PLAN_CATALOG', 'Plan belongs to a different catalog release or content; explicit migration required')
     fixed = {'workflow','market','market_kind','faction_mode','faction','currency','precision','observed',
              'paste','language','product','recipe','target','selling','craft_fee','craft_basis','tax',
-             'sale_fee','rounding','fee_source','product_search'}
+             'sale_fee','rounding','fee_source','product_search','plan_mode','plan_objective'}
     indexed = {f'{prefix}{i}' for i in range(len(catalog.items)) for prefix in ('p','t','q','owned','hqty','hcost','href')}
+    indexed.update(f'use_recipe{i}' for i in range(len(catalog.recipes)))
     require(all(k in fixed or k in indexed or re.fullmatch('pick[0-9]{1,3}', k) for k, _ in plan.fields),
             'PLAN_FIELD', 'Plan contains an unsupported field')
-    require(dict(plan.fields).get('workflow') in ('materials', 'item'), 'PLAN_INPUT', 'Select a workflow')
+    require(dict(plan.fields).get('workflow') in ('materials', 'item', 'crafting'), 'PLAN_INPUT', 'Select a workflow')
     from .references import validate_references
     if plan.observations:
         validate_references(plan.observations, catalog, plan.observations[0].identity.market)
