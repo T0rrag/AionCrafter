@@ -146,3 +146,24 @@ Baseline `python -m unittest discover -q`: 95 run, 2 existing migration cleanup 
 `python -m unittest tests.test_price_cache -q`: 11 passed.
 `python -m unittest discover -q`: 106 passed after that test-only correction.
 Synthetic provider/clock; no real provider, browser/game, remote CI or Gate A evidence.
+
+## Phase 03 Part 01 — resilience and depth (2026-10-04)
+
+Windows/Python 3.12.14. `python` denotes the bundled executable at
+`C:/Users/AngelTorresBarros/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe`.
+- `python -m unittest tests.test_price_cache tests.test_price_service tests.test_acquisition tests.test_market_groundwork -q`: **42 passed**.
+- `python -m unittest discover -q`: **137 passed**, final rerun.
+- `python -m compileall -q aioncrafter tests`: passed.
+- `python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json`: passed, 7 variants / 3 recipes, SYNTHETIC.
+- `git diff --check` / staged diff check: passed.
+
+One intermediate full run failed in unchanged test_http_get_post_and_size_origin_limits
+with Windows ConnectionResetError while testing rejected Origin. Isolated rerun passed,
+then the full suite passed. No production HTTP fix is claimed; record intermittent behavior.
+Earlier baseline migration cleanup errors were fixed in test fixtures only.
+
+42 Phase 03 tests comprise 11 cache, 17 service, 13 acquisition and 1 combined contract test.
+The acquisition oracle enumerates 60 deterministic small mixed books. All tests use
+synthetic observations and injected clock/provider; no real network transport or sleeps
+in the Phase 03 tests. Existing form tests use loopback HTTP. This is not visual QA,
+real-market reconciliation, a live integration, remote CI or Gate A acceptance.

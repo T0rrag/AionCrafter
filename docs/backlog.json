@@ -3,7 +3,7 @@
   "project": "AionCrafter",
   "brief_version": "1.3",
   "checkpoint_date": "2026-10-04",
-  "publication_status": "PREPARED",
+  "publication_status": "PUBLISHED",
   "intended_repository": "T0rrag/AionCrafter",
   "gates": {
     "A": "UNVERIFIED",
@@ -194,23 +194,23 @@
           "title": "Preserve observation time and cache age",
           "description": "Record source-observed time, fetch time, price type and scope separately. A cache refresh must never make an old observation appear new. Unknown source time means freshness unknown.",
           "status": "IN_PROGRESS",
-          "evidence": "price_cache.py; 11 synthetic tests for TTL versus source age, unknown/zero/unavailable, immutable replay, scope/variant/provider isolation and atomic invalid refresh. No real-provider or UI integration."
+          "evidence": "price_cache.py; 11 synthetic tests plus combined persistence/fallback test. Independent retrieval/source clocks, exact identity, unknown/future age and immutable atomic cache validation. Provider/application integration pending."
         },
         {
           "id": "p3-resilience",
           "priority": "P0",
           "title": "Respect quotas and degrade predictably",
           "description": "Batch permitted requests, use provider limits, backoff on throttling and stop retry storms. Show stale/error states and allow manual overrides without silently hiding their origin.",
-          "status": "NOT_STARTED",
-          "evidence": "ADR 0006: independent synthetic groundwork selected next; no implementation claimed."
+          "status": "IN_PROGRESS",
+          "evidence": "price_service.py and BatchPriceProvider; 17 synthetic tests plus combined scenario. Explicit batching/fixed-window quota, bounded attempts and capped backoff/Retry-After, shared cooldown, stale/error/manual states. No sleeps/network; production transport/shared scheduler/UI integration pending."
         },
         {
           "id": "p3-depth",
           "priority": "P0",
           "title": "Use prices suitable for the requested quantity",
           "description": "When supported, consume listing depth or whole-stack offers to calculate the cost of buying all required units. With only a reference/minimum price, label the total indicative and stock unverified.",
-          "status": "NOT_STARTED",
-          "evidence": "ADR 0006: independent synthetic groundwork selected next; no implementation claimed."
+          "status": "IN_PROGRESS",
+          "evidence": "acquisition.py; 13 synthetic tests plus combined scenario. Exact integer-unit listing and whole-stack minimum cash cost, explicit partial support, insufficient coverage and indicative unverified-stock references. 60 small books checked against exhaustive oracle. Authorized market/application acceptance pending."
         },
         {
           "id": "p3-reconcile",
@@ -399,13 +399,13 @@
   "branch": "phase/03-market-prices",
   "base_branch": "main",
   "local_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
-  "pr_url": null,
-  "verified_implementation_sha": null,
+  "pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
+  "verified_implementation_sha": "4d10338bf4e940f8929e062d8449d48e3499e340",
   "remote_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
   "checkpoint_part": "01",
   "next_eligible_phase": "03",
-  "next_phase_dependency_note": "ADR 0006 supersedes next-Phase-04 scheduling: synthetic p3-freshness first, then p3-resilience/p3-depth. Main contains tested calculator through PR #4; latest handoff docs on Phase 02. Real integration blocked; Gates A/B UNVERIFIED. New Aion2 chat per phase.",
-  "checkpoint_label": "Phase 03 Part 01 freshness groundwork",
+  "next_phase_dependency_note": "Phase 03 provider-independent groundwork implemented using synthetic fixtures. Adapter/application integration and real reconciliation/release remain pending external authorization and evidence; Gate A UNVERIFIED. Stay in Phase 03 for its continuation; Phase 04 requires a separate chat.",
+  "checkpoint_label": "Phase 03 Part 01 freshness, resilience and depth groundwork",
   "next_development_branch": "phase/03-market-prices"
 }

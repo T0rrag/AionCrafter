@@ -35,3 +35,9 @@ class PriceProvider(Protocol):
     def observations_for(self, identity: PriceIdentity) -> tuple[PriceObservation, ...]:
         """Return observations for this exact identity; empty tuple means missing."""
         ...
+
+
+class BatchPriceProvider(PriceProvider, Protocol):
+    def observations_for_batch(self, identities: tuple[PriceIdentity, ...]) -> dict[PriceIdentity, tuple[PriceObservation, ...]]:
+        """Explicit opt-in batching; return every requested key (empty means missing)."""
+        ...

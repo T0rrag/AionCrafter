@@ -1,26 +1,56 @@
 # AionCrafter — project state
 
-2026-10-04 · Phase 03 / Part 01 · Brief v1.3, ADR 0006.
+2026-10-04 · Phase 03 / Part 01 · Brief v1.3; ADR 0006.
 Phase 03 IN_PROGRESS. Gates A/B UNVERIFIED; automatic prices remain disabled.
-Active writer: this separate Aion2 Phase 03 chat, branch phase/03-market-prices.
-Base: verified main 81f6493999b6bca1e86cd621e7815f7d05944020. PR #4 is merged;
-its application code matches Phase 02 cb0ce5cb9227184300055f1df8bb415b2ef2515e.
-The latest Phase 02 handoff/decisions were carried forward. No dependency on draft PR #3.
 
-p3-freshness groundwork now uses the existing PriceProvider/PriceObservation contracts.
-Cache retrieval/expiry and source freshness are independent, with an injected clock,
-immutable records, explicit unknown/future age, scope validation and atomic response validation.
-It is an in-memory, single-owner foundation; no persistence, real adapter or UI activation.
-p3-freshness remains IN_PROGRESS pending integration. Next: p3-resilience, then p3-depth.
-p3-adapter, p3-reconcile and p3-releaseprice remain BLOCKED on external evidence.
+## Repository and writer
 
-Windows/Python 3.12.14 baseline: 95 tests run, two existing migration test cleanup errors.
-Tests used SQLite transaction contexts without closing connections. Explicit closing in
-those test fixtures fixes Windows file locking without changing application behavior.
-Full suite after freshness: 106 passed; targeted freshness: 11 passed.
-See TEST_RESULTS.md and handoffs/phase-03-part-01.md for checkpoint evidence.
+T0rrag/AionCrafter · phase/03-market-prices · draft PR #5:
+https://github.com/T0rrag/AionCrafter/pull/5 (base main).
+This separate Aion2 Phase 03 chat is the active writer; no other writer was started.
+Verified base main: 81f6493999b6bca1e86cd621e7815f7d05944020. Main contains the accepted
+calculator through merged PR #4; its application tree matches Phase 02 handoff
+cb0ce5cb9227184300055f1df8bb415b2ef2515e. Latest Phase 02 decisions/docs carried forward.
+PR #3 remains draft/open but is not a dependency of PR #5. No Phase 04 implementation.
+Freshness checkpoint 4d10338bf4e940f8929e062d8449d48e3499e340 was published, fetched and
+verified equal to the tested tree 260bf1b58de02af779cfdf3b60334f98db5fdfd4.
+Later implementation/receipt commits follow; fetch the actual head before writing.
 
-All 42 backlog IDs retained. Phase 01 incomplete, p1-catalog BLOCKED. Phase 02 owner
-behavior accepted; visual/keyboard QA deferred and UNVERIFIED. Final game pilot after
-phase feature work. Phase 05 DEFERRED. No Chromium work, live provider, gate pass,
-Phase 04 feature, merge or force-push. SYNTHETIC fixtures only.
+## Delivered groundwork
+
+p3-freshness: scoped in-memory cache preserves original observed_at/fetched_at separately
+from retrieval time and TTL. Unknown, stale, future, missing and zero remain distinct.
+p3-resilience: explicit single/batch contract, caller-supplied quotas, bounded nonblocking
+retry/backoff and Retry-After, shared cooldown, last-good error states and manual fallback.
+p3-depth: exact quantity acquisition from coherent supplied listing snapshots, indivisible
+stacks unless partial purchase is explicit, minimum cash cost, bounded exact search,
+insufficient coverage and indicative/unverified-stock reference estimates.
+
+All three tasks remain IN_PROGRESS: these are single-owner, provider-independent contracts
+and tests, not production adapter/UI activation. See PHASE_03_GROUNDWORK.md for semantics,
+limits and integration responsibilities. Existing manual calculator behavior is unchanged.
+p3-adapter, p3-reconcile and p3-releaseprice remain BLOCKED on authorization, scoped samples,
+source rights, usage limits and actual market reconciliation. Synthetic tests do not pass Gate A.
+
+## Validation
+
+Windows/Python 3.12.14: full suite 137 passed; Phase 03 targeted suite 42 passed.
+Includes 60 deterministic small-book comparisons with an exhaustive oracle, and a combined
+cache/outage/manual-fallback/depth/persistence scenario. Compileall and offline synthetic
+catalog validation passed. Diff/bootstrap checks are recorded in TEST_RESULTS.md.
+Baseline ran 95 tests with two pre-existing Windows SQLite migration-fixture cleanup errors;
+explicit connection closing fixed those test fixtures without production storage changes.
+One intermediate full run hit ConnectionResetError in an existing HTTP rejection test.
+That test passed in isolation and the final full rerun passed; its intermittent Windows
+transport behavior is not claimed fixed. No remote CI, browser or real-provider pass claimed.
+
+## Boundaries and next action
+
+All 42 IDs retained. Phase 01 incomplete/p1-catalog BLOCKED. Phase 02 owner behavior accepted;
+visual/keyboard QA deferred and UNVERIFIED. Real-game pilot after phase feature work.
+Phase 05 DEFERRED. No Chromium work, merge, force-push, release or deployment.
+Part 01's authorized synthetic groundwork is implemented. Next Phase 03 continuation must
+first inspect evidence for an authorized provider; without it, retain blocked integration
+and review these contracts offline. Do not invent APIs, source rights, limits or game rules.
+Stay on this branch/PR for Phase 03. Do not start Phase 04 in this chat. Read the handoff and
+NEXT_CHAT_PROMPT; no new chat or transcript synchronization is claimed.

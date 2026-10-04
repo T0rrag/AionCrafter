@@ -17,8 +17,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 2854,
-      "sha256": "88cc34177cabe61ce94504ee09acb0c2be7ec1d40ddee211896e5b0565ddeea2"
+      "bytes": 3292,
+      "sha256": "c752cb55767c6274fbdfa294605fa5b4cc7d23d967d55855c3ca31df185e6f35"
     },
     {
       "path": "AionCrafter_Project_Prompt.md",
@@ -44,6 +44,11 @@
       "path": "aioncrafter/__main__.py",
       "bytes": 2484,
       "sha256": "6090d6aa6d62684d96d4a7b608ec15714beb68bbaec86f9af2129e9d4cab92e0"
+    },
+    {
+      "path": "aioncrafter/acquisition.py",
+      "bytes": 7653,
+      "sha256": "501fafea0583de088d9688f39ca728cc453837fd008deb0c170956cd148c0f01"
     },
     {
       "path": "aioncrafter/catalog.py",
@@ -86,9 +91,14 @@
       "sha256": "f8ee9ac43724757079e81502e0de5e2ab85cd79780a3c75ca6fdb335d600181f"
     },
     {
+      "path": "aioncrafter/price_service.py",
+      "bytes": 9882,
+      "sha256": "075c1dd229fb863e1213e671c1ac036a8fa5bddbaec4c8f32b14b52542c9e91c"
+    },
+    {
       "path": "aioncrafter/providers.py",
-      "bytes": 1218,
-      "sha256": "c4157a3fda9e6725e5bd3def493a87cf1362367ed78e430156cc6ddac40331a3"
+      "bytes": 1503,
+      "sha256": "de9441742f5e7d2ae05633aa89f4e28b329b7c334d3a81f29f1357dc11cea8e8"
     },
     {
       "path": "aioncrafter/references.py",
@@ -122,8 +132,8 @@
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 847,
-      "sha256": "fa7f9d20149cdc49d2ef7e9307b869f2c976488a0ac28cf4fad88d14986ba109"
+      "bytes": 1381,
+      "sha256": "2218c08b4566ed2bf86236d3f77cabf8b706f23904da88292ee75d0b613222e0"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -136,9 +146,14 @@
       "sha256": "b3099fe99453a5f57c4e5d3756a34c7f58e36453f126a4a3f39f0a8d53db09ef"
     },
     {
+      "path": "docs/PHASE_03_GROUNDWORK.md",
+      "bytes": 6572,
+      "sha256": "5373f21a08c9167bc6e90b59a1876b314d4fa6a28c6c3ad90e09d66f4a373695"
+    },
+    {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 1768,
-      "sha256": "310088f16125bb8951a482505ddbaf7b289d44275eaf131a44c51c8e9cbdcb50"
+      "bytes": 3640,
+      "sha256": "9c57c8d54d891cc58ae8b0029cb7d5ac807eb706cf31b97f6ef079cced0493e0"
     },
     {
       "path": "docs/REFERENCE_IMPORTS.md",
@@ -147,13 +162,13 @@
     },
     {
       "path": "docs/TEST_RESULTS.md",
-      "bytes": 9463,
-      "sha256": "0219b9b55149814f117f510a397e632c06ab259ee8fd59dbd1b72b1f9af05fc7"
+      "bytes": 10905,
+      "sha256": "b24941420438069589d56eb4febe0a9ba3109aa76f610a87be9f4c5d1456a094"
     },
     {
       "path": "docs/backlog.json",
-      "bytes": 23881,
-      "sha256": "c73df402c8490e40d661b0cbca372c0e0fc209139571beb31db7a3a7c7b5ee06"
+      "bytes": 24478,
+      "sha256": "ec7b4947ce02e45d760fb279d7af69532985e5211872beec4b9131f0cd024242"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -267,13 +282,13 @@
     },
     {
       "path": "docs/handoffs/phase-03-part-01.md",
-      "bytes": 1968,
-      "sha256": "b54d3929e09b96f30d484f7d789f1c2df3e59c948a7017616a93e1905d3b5d14"
+      "bytes": 3796,
+      "sha256": "66e449b9c79c73cbbdb71dd328a12cf0fb21ec3d3fbf9a3b11a0c26fb6f7e866"
     },
     {
       "path": "docs/roadmap-progress.json",
-      "bytes": 622,
-      "sha256": "54b7e76f897b0cd12789c641d101e57a2c180358d201b5ef8d0935fb855fe932"
+      "bytes": 750,
+      "sha256": "7d89d1a277c00a0cb2ad643d1acb5815da0a4940bc2db06c7f7ca0b7e6b0e48a"
     },
     {
       "path": "docs/sources/SYNTHETIC.md",
@@ -316,6 +331,11 @@
       "sha256": "0ea71b24a153a6c3ce424d01d38c055ea01ca3424540ec26b4fde1bbf8fff5d0"
     },
     {
+      "path": "tests/test_acquisition.py",
+      "bytes": 6535,
+      "sha256": "3dbd23696bdf85b7a47a8569436c5c8958038a6ec1452203f9456a6c690849f9"
+    },
+    {
       "path": "tests/test_catalog.py",
       "bytes": 4717,
       "sha256": "bd98c58c07fa3d6ffb4e551b292530eb9e62d1d93849e55dd5210fa6e4b8fb5d"
@@ -346,6 +366,11 @@
       "sha256": "63ac3313adc6c1bb15490b2503999ebc8d2fdaed3369d5b570b3d855d09767ae"
     },
     {
+      "path": "tests/test_market_groundwork.py",
+      "bytes": 3246,
+      "sha256": "85b6972b8f73d5bf1c17cdde024a178b13ad22fcb5acf334b572dd0e4738fb4b"
+    },
+    {
       "path": "tests/test_models.py",
       "bytes": 5468,
       "sha256": "95c0cb27166b5ce4e37033e8f8a38d3dec4fc357d63e37964e3bb46719b5f2a4"
@@ -359,6 +384,11 @@
       "path": "tests/test_price_cache.py",
       "bytes": 5489,
       "sha256": "e00627aeb1e7d05febb4330f58a07d32b8236ab4e7a9c6108c0070aa48b42e6f"
+    },
+    {
+      "path": "tests/test_price_service.py",
+      "bytes": 9079,
+      "sha256": "fd0b794e8648f0f49a661212a74dcb7f44c8e324ce4e25fe7564acb3311ad3fd"
     },
     {
       "path": "tests/test_references.py",
