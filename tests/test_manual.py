@@ -58,6 +58,23 @@ class ManualTests(unittest.TestCase):
         self.assertNotIn('<script>', html)
         self.assertIn('Total: 24.60', render(self.c, dict(form, pick0='3')))
 
+    def test_inventory_and_recorded_cost_views_do_not_erase_replacement(self):
+        html = render(self.c, dict(self.form, owned0='2', hqty0='3', hcost0='18', href0='SYNTHETIC ledger row'))
+        self.assertIn('Total: 36.90', html)
+        self.assertIn('Additional cash required: 12.30', html)
+        self.assertIn('Recorded consumed-material cost: 18.00', html)
+        html = render(self.c, dict(self.form, p0='', owned0='3'))
+        self.assertIn('Total: Incomplete', html)
+        self.assertIn('Additional cash required: 0.00', html)
+
+    def test_product_search_matches_spanish_without_accent_or_market(self):
+        html = render(self.c, dict(action='search', product_search='pocion'))
+        product_options = html.split('<select name="product">')[1].split('</select>')[0]
+        self.assertIn('Synthetic potion', product_options)
+        self.assertNotIn('Synthetic ore', product_options)
+        self.assertNotIn('role="alert"', html)
+        self.assertIn('No matching product', render(self.c, dict(action='search', product_search='nonexistent')))
+
     def test_http_get_post_and_size_origin_limits(self):
         server = HTTPServer(('127.0.0.1', 0), handler(self.c))
         thread = Thread(target=server.serve_forever, daemon=True)

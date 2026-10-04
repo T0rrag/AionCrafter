@@ -57,6 +57,7 @@ class EconomicsResult:
     leftovers: int
     materials: MaterialsResult
     craft_cost: int | None
+    crafting_fees: int | None
     proceeds: int | None
     profit: int | None
     roi_percent: Fraction | None
@@ -149,4 +150,4 @@ def item_economics(recipe: Recipe, target: ItemQuantity, market: MarketScope,
     if len(recipe.outcomes[0].outputs) > 1:
         issues.append('coproducts_unvalued')
     return EconomicsResult(crafts, produced, target.quantity, produced - target.quantity, materials,
-                           cost, proceeds, profit, roi, be, minimum, tuple(issues))
+                           cost, None if fees is None else fee_total, proceeds, profit, roi, be, minimum, tuple(issues))
