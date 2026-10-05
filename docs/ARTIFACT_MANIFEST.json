@@ -3,7 +3,7 @@
   "project": "AionCrafter",
   "brief_version": "1.3",
   "publication_status": "PUBLISHED",
-  "checkpoint": "Phase 04 merged manual groundwork and Phase 06 handoff",
+  "checkpoint": "Cross-device GitHub continuation policy and Phase 06 recovery checkpoint",
   "files": [
     {
       "path": ".github/pull_request_template.md",
@@ -17,8 +17,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 2325,
-      "sha256": "4e027be2a25fc50b345888fff7b180b2dfad7e0780bfadfc64d50347784c8e06"
+      "bytes": 4471,
+      "sha256": "bd40f398f4706db6832f14efd16287dcfa5f37e612ba6e7fd3b81b1a07c680d1"
     },
     {
       "path": "AionCrafter_Project_Prompt.md",
@@ -29,11 +29,6 @@
       "path": "AionCrafter_Roadmap.html",
       "bytes": 203394,
       "sha256": "0881ff82158428f87fa5ed52d47ea601d4bd5665d116a179c49b3f04d623ec87"
-    },
-    {
-      "path": "README.md",
-      "bytes": 8153,
-      "sha256": "941fc8d70110c7650af223724c04f4b5c88cd28ae4813e4e3eaeecc04cbe4163"
     },
     {
       "path": "aioncrafter/__init__.py",
@@ -86,14 +81,14 @@
       "sha256": "49d92e24a4306e711c7494baa1e143b222d51d6c3e1c264bd35c55dfcaeb154d"
     },
     {
-      "path": "aioncrafter/ledger.py",
-      "bytes": 13590,
-      "sha256": "71a6f3c16c2acfe94b254237f5c45d79fdb05a24d8ee53f67b4547681b1dc706"
-    },
-    {
       "path": "aioncrafter/ledger_view.py",
       "bytes": 12042,
       "sha256": "e19a04b731841ebc05d77af226c1e06d078133581b4d47fc89fb5e994667b270"
+    },
+    {
+      "path": "aioncrafter/ledger.py",
+      "bytes": 13590,
+      "sha256": "71a6f3c16c2acfe94b254237f5c45d79fdb05a24d8ee53f67b4547681b1dc706"
     },
     {
       "path": "aioncrafter/liquidity.py",
@@ -131,14 +126,14 @@
       "sha256": "de9441742f5e7d2ae05633aa89f4e28b329b7c334d3a81f29f1357dc11cea8e8"
     },
     {
-      "path": "aioncrafter/ranking.py",
-      "bytes": 12726,
-      "sha256": "f00bc32058b3dcdde19278acbf8109f34138c27eb0a547a60de77c1e89135fdd"
-    },
-    {
       "path": "aioncrafter/ranking_view.py",
       "bytes": 5721,
       "sha256": "ac6b95d96a3e18aa66419889b820636150bb9dd72039b84a2dce71409db89601"
+    },
+    {
+      "path": "aioncrafter/ranking.py",
+      "bytes": 12726,
+      "sha256": "f00bc32058b3dcdde19278acbf8109f34138c27eb0a547a60de77c1e89135fdd"
     },
     {
       "path": "aioncrafter/references.py",
@@ -146,14 +141,14 @@
       "sha256": "1bae96502d2d18ce37ef449b1abe7024e8ec6fc967e673ff8b90ecfaf51750c9"
     },
     {
-      "path": "aioncrafter/stochastic.py",
-      "bytes": 11777,
-      "sha256": "f43dab259852c5251a9bb94ed797aa75553cb52a6b52cff272b6030bce12f0b9"
-    },
-    {
       "path": "aioncrafter/stochastic_view.py",
       "bytes": 5426,
       "sha256": "1c46fb56cf9146ce7ddd39dc72a09ab4fa0ed01a3f08e3869edbbe9c44fadc7f"
+    },
+    {
+      "path": "aioncrafter/stochastic.py",
+      "bytes": 11777,
+      "sha256": "f43dab259852c5251a9bb94ed797aa75553cb52a6b52cff272b6030bce12f0b9"
     },
     {
       "path": "aioncrafter/storage.py",
@@ -171,64 +166,19 @@
       "sha256": "6e19dec823cc848ecfaeb50f02762d4e4ecb5e0fa75a5c34666727c46bb4fafa"
     },
     {
+      "path": "docs/backlog.json",
+      "bytes": 26478,
+      "sha256": "8dfd70c70189f429432ca5ec57e6ecdae703225f4e8a001ba905fedd5924d407"
+    },
+    {
       "path": "docs/CHAT_PROJECT_INSTRUCTIONS.txt",
       "bytes": 831,
       "sha256": "60f6bc4a142b6d7473141d96859055abc8db054765c7ee2d7e9ad0086c13e53f"
     },
     {
-      "path": "docs/GITHUB_DELIVERY.md",
-      "bytes": 8629,
-      "sha256": "4f6c499bd6a13cd47ff7facde5e49a9f1e3b5ef2e26137fd46fc9e1a5f5105c0"
-    },
-    {
-      "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1269,
-      "sha256": "93c317b6e3a3f0c3ad373f7a670e32ea471016b7e4e8c5646101cf1090d277fc"
-    },
-    {
-      "path": "docs/PHASE_01_PR.md",
-      "bytes": 1381,
-      "sha256": "f6b2d5da503698acfccf77751e08cba2f53ebfafb9fc98b7425ad998888a0ee5"
-    },
-    {
-      "path": "docs/PHASE_02_ACCEPTANCE.md",
-      "bytes": 6844,
-      "sha256": "b3099fe99453a5f57c4e5d3756a34c7f58e36453f126a4a3f39f0a8d53db09ef"
-    },
-    {
-      "path": "docs/PHASE_03_GROUNDWORK.md",
-      "bytes": 7155,
-      "sha256": "180467c9d2bfb6566919f8da1da4db16d4e2347eaf014505f5eed83e3334df12"
-    },
-    {
-      "path": "docs/PHASE_04_CRAFTING.md",
-      "bytes": 2738,
-      "sha256": "3725b6bded5b318891eea2603cc168ac99469a10eb0c6ece45e2c06835c537c1"
-    },
-    {
-      "path": "docs/PHASE_04_SCENARIOS_AND_LEDGER.md",
-      "bytes": 6089,
-      "sha256": "5c2df3b76790ce7d11c365a719c851a5fe130079c420e85d11181c96852febeb"
-    },
-    {
-      "path": "docs/PROJECT_STATE.md",
-      "bytes": 3435,
-      "sha256": "6ff1b7919800400b0cd5da95ec07d9688415981d8ecbfb6e04c4be5d82fdabd3"
-    },
-    {
-      "path": "docs/REFERENCE_IMPORTS.md",
-      "bytes": 1773,
-      "sha256": "cf76c3ad0ee0c4c6c575551551fe12f20f5bb23bf08d087e8052ecf9a43e554e"
-    },
-    {
-      "path": "docs/TEST_RESULTS.md",
-      "bytes": 14265,
-      "sha256": "504a756960988bc61bbc04e4589702680aeb18504e83a7b2c46529c7826fd9ea"
-    },
-    {
-      "path": "docs/backlog.json",
-      "bytes": 26478,
-      "sha256": "8dfd70c70189f429432ca5ec57e6ecdae703225f4e8a001ba905fedd5924d407"
+      "path": "docs/continuations/phase-04-to-phase-06-2026-10-05.md",
+      "bytes": 3659,
+      "sha256": "c2e3a2f9353a175b39aeb14c842a6f853783ae5ce0843d6b7a663a2497764bdd"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -269,6 +219,11 @@
       "path": "docs/decisions/0008-phase-04-manual-groundwork.md",
       "bytes": 2124,
       "sha256": "75aaead70581d3e75fc7b9121c15f676699111edc0b83d24ecc78fc3b6692b77"
+    },
+    {
+      "path": "docs/decisions/0009-github-continuation-checkpoints.md",
+      "bytes": 1800,
+      "sha256": "19c6c04b35f88c8da291f6e7d31ef6f3a64bcbe67d4bafc5d2a18486adfa9ad9"
     },
     {
       "path": "docs/delivery/2026-10-04-phase01.json",
@@ -319,6 +274,11 @@
       "path": "docs/delivery/phase-04-part-01.json",
       "bytes": 1180,
       "sha256": "733f254de9cd5381cb9ee20f43b062900f2a9a0615984b3df93359b93ea11533"
+    },
+    {
+      "path": "docs/GITHUB_DELIVERY.md",
+      "bytes": 9666,
+      "sha256": "b9501cb37e76b8c7bc3dfedc0a24e5b4f6be32786a32beb541e72175fa24b849"
     },
     {
       "path": "docs/handoffs/architecture-control-2026-10-04.md",
@@ -406,6 +366,46 @@
       "sha256": "8ecb2a9b52fda6b36dcc489b48690b224cbc086a9cfa7999881beadeac698501"
     },
     {
+      "path": "docs/NEXT_CHAT_PROMPT.md",
+      "bytes": 1723,
+      "sha256": "3920e55c0e465d5c27a3d287b325c464f54b6427316f5ac486f7be53c957fb03"
+    },
+    {
+      "path": "docs/PHASE_01_PR.md",
+      "bytes": 1381,
+      "sha256": "f6b2d5da503698acfccf77751e08cba2f53ebfafb9fc98b7425ad998888a0ee5"
+    },
+    {
+      "path": "docs/PHASE_02_ACCEPTANCE.md",
+      "bytes": 6844,
+      "sha256": "b3099fe99453a5f57c4e5d3756a34c7f58e36453f126a4a3f39f0a8d53db09ef"
+    },
+    {
+      "path": "docs/PHASE_03_GROUNDWORK.md",
+      "bytes": 7155,
+      "sha256": "180467c9d2bfb6566919f8da1da4db16d4e2347eaf014505f5eed83e3334df12"
+    },
+    {
+      "path": "docs/PHASE_04_CRAFTING.md",
+      "bytes": 2738,
+      "sha256": "3725b6bded5b318891eea2603cc168ac99469a10eb0c6ece45e2c06835c537c1"
+    },
+    {
+      "path": "docs/PHASE_04_SCENARIOS_AND_LEDGER.md",
+      "bytes": 6089,
+      "sha256": "5c2df3b76790ce7d11c365a719c851a5fe130079c420e85d11181c96852febeb"
+    },
+    {
+      "path": "docs/PROJECT_STATE.md",
+      "bytes": 4102,
+      "sha256": "09931b053388d6b6666adbb8dfcd26312e916d3c3abb10443d10cb9270073e1f"
+    },
+    {
+      "path": "docs/REFERENCE_IMPORTS.md",
+      "bytes": 1773,
+      "sha256": "cf76c3ad0ee0c4c6c575551551fe12f20f5bb23bf08d087e8052ecf9a43e554e"
+    },
+    {
       "path": "docs/roadmap-progress.json",
       "bytes": 762,
       "sha256": "586aaeb0ad0d8d107dea49e18a6b820478b42ec4d6206d94b6fc4776bd8cb2ac"
@@ -414,6 +414,16 @@
       "path": "docs/sources/SYNTHETIC.md",
       "bytes": 1204,
       "sha256": "c5c4ed0944430d8dd8b2b116abfd3e12417891b2a814efaf4a80ef46bab725e8"
+    },
+    {
+      "path": "docs/TEST_RESULTS.md",
+      "bytes": 15416,
+      "sha256": "a00cd39968fd43d11dc3423a55c0c9548cdb243a55307f46da57e0a18f6bd5b1"
+    },
+    {
+      "path": "README.md",
+      "bytes": 8153,
+      "sha256": "941fc8d70110c7650af223724c04f4b5c88cd28ae4813e4e3eaeecc04cbe4163"
     },
     {
       "path": "scripts/validate_bootstrap.py",
