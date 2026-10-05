@@ -3,7 +3,10 @@
 Date: 2026-10-05. Brief v1.3. Phase status: IN_PROGRESS.
 Repository: T0rrag/AionCrafter. Branch: phase/06-release; base main.
 Verified starting main: e90c295b38245e57cf53a017d96885a770ed399f.
-Publication receipt: docs/delivery/phase-06-part-01.json (written after tested upload).
+Draft PR #8: https://github.com/T0rrag/AionCrafter/pull/8.
+Tested/published SHA: 9f8128a84045f8ee1e24bd7c7d89b5efa984ff06; fetched tree
+c8bc4bc7f5e22360f145b85be32c2b77f7d33774 equals tested candidate.
+Publication receipt: docs/delivery/phase-06-part-01.json. Documentation follows tested SHA.
 
 ## Delivered and verified
 
@@ -31,8 +34,8 @@ operating guide and release checklist. Text is LF for portable manifest checksum
 Windows/Python 3.12.14: `python -m unittest discover -q` — 266 passed in 17.177s.
 `python -m compileall -q aioncrafter tests` passed.
 `python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json` passed: 7 items,
-3 recipes. Diff/bootstrap and remote tree verification are recorded in the delivery
-receipt after documentation finalization. These are synthetic/local tests, not visual
+3 recipes. Implementation diff/bootstrap passed (42 IDs, 122 hashes); fetched-tree verification
+is recorded in the delivery receipt. Final receipt/continuation add two manifest entries. These are synthetic/local tests, not visual
 QA, game pilot, remote CI or measured performance. Initial focused recovery/security
 and seven-test math runs also passed before final added regressions.
 

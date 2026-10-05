@@ -264,3 +264,10 @@ No arithmetic defect was found in the inspected paths. Fixed three reproduced st
 HTTP failures plus bounded-input/recovery edges. Sources and all new assertions are
 SYNTHETIC. No real-game pilot, provider integration, visual/keyboard QA, p95 benchmark,
 production security assessment, remote CI pass, merge or public release is claimed.
+
+Final documentation validation: bootstrap passed with 42 stable IDs and 124 checksums;
+9 tasks carry completion evidence and Gates A/B remain UNVERIFIED. Receipt diff leaves
+the tested code/tests, original brief/roadmap and older immutable continuation unchanged.
+A separate documented-command smoke passed: web CLI subprocess launch against the
+synthetic fixture, loopback GET, server stop, temporary plans backup and read-only check.
+This verifies local source-checkout commands only, not a distributed installation.

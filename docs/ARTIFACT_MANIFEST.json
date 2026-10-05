@@ -2,8 +2,8 @@
   "schema_version": 1,
   "project": "AionCrafter",
   "brief_version": "1.3",
-  "publication_status": "LOCAL_TESTED",
-  "checkpoint": "Phase 06 Part01: manual validation, recovery and guidance",
+  "publication_status": "PUBLISHED",
+  "checkpoint": "Phase 06 Part01 verified delivery and immutable Part02 continuation",
   "files": [
     {
       "path": ".gitattributes",
@@ -187,8 +187,8 @@
     },
     {
       "path": "docs/GITHUB_DELIVERY.md",
-      "bytes": 9666,
-      "sha256": "b9501cb37e76b8c7bc3dfedc0a24e5b4f6be32786a32beb541e72175fa24b849"
+      "bytes": 10832,
+      "sha256": "7a9806644a2e58b31f5983937b277d2ccc0e679a664c76f60830efba2887f6a2"
     },
     {
       "path": "docs/MANUAL_EDITION_GUIDE.md",
@@ -197,8 +197,8 @@
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1723,
-      "sha256": "3920e55c0e465d5c27a3d287b325c464f54b6427316f5ac486f7be53c957fb03"
+      "bytes": 1541,
+      "sha256": "bed1dbed9b3c4d6257e982b988e3a6795c497cb1da274e4159af860749cfb190"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -232,8 +232,8 @@
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 4446,
-      "sha256": "faa5e55e86a06766e4a6385bfd5e51f936cbccc7d72451957dcb3fc3dd59cece"
+      "bytes": 4736,
+      "sha256": "dbfe0d497cd6d2639325010b4a6b6f4befd28a7f8f222995f8c14d150a02620b"
     },
     {
       "path": "docs/REFERENCE_IMPORTS.md",
@@ -242,18 +242,23 @@
     },
     {
       "path": "docs/TEST_RESULTS.md",
-      "bytes": 16917,
-      "sha256": "ded3995841634b33effa3b860ad6b68e766535e7d1b94021855915a0225c6af7"
+      "bytes": 17437,
+      "sha256": "4eb88c24718d239522f6450825ed85b1d4bc7ad5e27672880ae960284f02d8b4"
     },
     {
       "path": "docs/backlog.json",
-      "bytes": 27951,
-      "sha256": "4efddc73968e326b14f072c23ba7ae1ce3f79d37d83e6611160a4a92cbe80fdc"
+      "bytes": 28043,
+      "sha256": "581c68820650a38f23bacde05d97314c6f2466a3997a38f57615420ef94e5f15"
     },
     {
       "path": "docs/continuations/phase-04-to-phase-06-2026-10-05.md",
       "bytes": 3659,
       "sha256": "c2e3a2f9353a175b39aeb14c842a6f853783ae5ce0843d6b7a663a2497764bdd"
+    },
+    {
+      "path": "docs/continuations/phase-06-part-01-to-part-02-2026-10-05.md",
+      "bytes": 6434,
+      "sha256": "1e0c265e32bd3440419d8a02f1070c38a4595aa9690f8dd4fb302e510776b6e6"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -356,6 +361,11 @@
       "sha256": "733f254de9cd5381cb9ee20f43b062900f2a9a0615984b3df93359b93ea11533"
     },
     {
+      "path": "docs/delivery/phase-06-part-01.json",
+      "bytes": 3385,
+      "sha256": "5e93143fca194a78fbe18d0891825a5ef8f9a09400a943dbb0a65dd310fb47d3"
+    },
+    {
       "path": "docs/handoffs/architecture-control-2026-10-04.md",
       "bytes": 2365,
       "sha256": "544eddb2e0b99a6383691c018e971d9a0b81820fe9e9c308cd883ef42378f0ee"
@@ -442,13 +452,13 @@
     },
     {
       "path": "docs/handoffs/phase-06-part-01.md",
-      "bytes": 3850,
-      "sha256": "9014b1c7355b6ee4f1cb1aa34651634f4d45dedb50705abde8bdd80bf3c690b3"
+      "bytes": 4116,
+      "sha256": "052c708839ecf4311276bfee65a2503aab38e3109b9a5819a4f60054d28acb98"
     },
     {
       "path": "docs/roadmap-progress.json",
-      "bytes": 686,
-      "sha256": "5848d7a1d9cd9343098a9d2076b847e9c420a5d3c96c1ed719772c2d54f717ae"
+      "bytes": 765,
+      "sha256": "e0c842567e3a7345933159487b40492a8c1af88c09f01f9fb66a28615dd338d1"
     },
     {
       "path": "docs/sources/SYNTHETIC.md",

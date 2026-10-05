@@ -1,0 +1,67 @@
+{
+  "repository": "https://github.com/T0rrag/AionCrafter",
+  "phase": "06",
+  "part": "01",
+  "branch": "phase/06-release",
+  "base_branch": "main",
+  "pull_request": "https://github.com/T0rrag/AionCrafter/pull/8",
+  "state": "OPEN_DRAFT_UNMERGED",
+  "verified_base_sha": "e90c295b38245e57cf53a017d96885a770ed399f",
+  "tested_implementation_sha": "9f8128a84045f8ee1e24bd7c7d89b5efa984ff06",
+  "tested_and_fetched_tree": "c8bc4bc7f5e22360f145b85be32c2b77f7d33774",
+  "task_ids": [
+    "p6-mathqa",
+    "p6-patches",
+    "p6-security",
+    "p6-package"
+  ],
+  "tests": {
+    "environment": "Windows / Python 3.12.14 / standard-library SQLite",
+    "baseline": "238 tests passed in 10.576s",
+    "final_implementation": "266 tests passed in 17.177s",
+    "new_math": 7,
+    "new_recovery": 13,
+    "new_http_input": 8,
+    "compileall": "passed",
+    "synthetic_catalog": "passed: 7 variants, 3 recipes",
+    "diff_check": "passed",
+    "implementation_bootstrap": "42 stable IDs; 122 artifact checksums; Gates A/B unchanged",
+    "final_documentation_bootstrap": "passed: 42 stable IDs, 124 artifact checksums; 9 tasks with completion evidence; Gates A/B unchanged",
+    "operating_guide_smoke": "passed: documented web CLI subprocess launch, loopback GET, stop, plans backup and read-only check using synthetic fixture and temporary paths"
+  },
+  "verification": [
+    "Verified all remote heads before branch creation: main e90c295b38245e57cf53a017d96885a770ed399f; phase/06-release absent",
+    "Created GitHub tree matched locally staged c8bc4bc7f5e22360f145b85be32c2b77f7d33774",
+    "Fetched phase/06-release: SHA 9f8128a84045f8ee1e24bd7c7d89b5efa984ff06; complete staged/working tree equality",
+    "PR #8 read-back: head equals implementation, base equals starting main, draft=true, merged=false, mergeable=true",
+    "Commit statuses 0; check runs 0; Actions runs 0; PR reviews 0. No remote CI pass",
+    "Before receipt publication, git ls-remote reconfirmed main e90c295b38245e57cf53a017d96885a770ed399f and phase/06-release 9f8128a84045f8ee1e24bd7c7d89b5efa984ff06",
+    "Receipt diff is documentation-only; code/tests, original brief/roadmap and earlier immutable continuation unchanged"
+  ],
+  "gates": {
+    "A": "UNVERIFIED",
+    "B": "UNVERIFIED"
+  },
+  "phase_status": "IN_PROGRESS",
+  "remaining": {
+    "mathqa": "COMPLETE for calculation regression",
+    "patches_security_package": "IN_PROGRESS",
+    "usertest_golive": "BLOCKED on real pilot/applicable quality evidence",
+    "previous_phases": "p1-catalog and Phase03 real integration BLOCKED; Phase04 real integration incomplete; Phase05 DEFERRED"
+  },
+  "continuation": "docs/continuations/phase-06-part-01-to-part-02-2026-10-05.md",
+  "next": "Phase06 Part02: validated catalog-release JSON export and recipe-change launch/recovery drill; preserve same phase branch/PR",
+  "no_claims": [
+    "remote CI pass",
+    "real game/client/pilot validation",
+    "visual or keyboard QA",
+    "p95 benchmark",
+    "production security approval",
+    "provider activation",
+    "merge",
+    "release",
+    "deployment",
+    "new chat creation"
+  ],
+  "note": "This documentation receipt follows the verified tested implementation; its own commit SHA is intentionally not self-embedded. Fetch actual remote branch head. The final manifest includes this receipt and immutable continuation; validate before publication."
+}

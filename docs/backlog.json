@@ -3,7 +3,7 @@
   "project": "AionCrafter",
   "brief_version": "1.3",
   "checkpoint_date": "2026-10-05",
-  "publication_status": "LOCAL_TESTED",
+  "publication_status": "PUBLISHED",
   "intended_repository": "T0rrag/AionCrafter",
   "gates": {
     "A": "UNVERIFIED",
@@ -399,13 +399,13 @@
   "branch": "phase/06-release",
   "base_branch": "main",
   "local_base_sha": "e90c295b38245e57cf53a017d96885a770ed399f",
-  "pr_url": null,
-  "verified_implementation_sha": null,
+  "pr_url": "https://github.com/T0rrag/AionCrafter/pull/8",
+  "verified_implementation_sha": "9f8128a84045f8ee1e24bd7c7d89b5efa984ff06",
   "remote_base_sha": "e90c295b38245e57cf53a017d96885a770ed399f",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
   "checkpoint_part": "01",
   "next_eligible_phase": "06",
   "next_phase_dependency_note": "Continue Phase 06 Part02 p6-patches catalog JSON export and recipe-change recovery; no new phase or provider activation.",
-  "checkpoint_label": "Phase 06 Part01 manual validation, recovery and guidance; public release blocked",
+  "checkpoint_label": "Phase 06 Part01 published: manual validation, recovery and guidance; draft PR8; release blocked",
   "next_development_branch": "phase/06-release"
 }

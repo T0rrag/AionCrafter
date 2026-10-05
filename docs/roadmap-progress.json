@@ -15,7 +15,7 @@
     "p4-ledger",
     "p6-mathqa"
   ],
-  "notes": "Phase 06 Part01: 266 local synthetic tests pass; p6-mathqa COMPLETE, p6-patches/security/package IN_PROGRESS; p6-usertest/golive BLOCKED. No release. Phase04 groundwork preserved; p1-catalog and Phase03 real integration blocked; Phase05 deferred; Gates A/B UNVERIFIED. All 42 IDs unchanged.",
+  "notes": "Phase 06 Part01: 266 local synthetic tests pass; p6-mathqa COMPLETE, p6-patches/security/package IN_PROGRESS; p6-usertest/golive BLOCKED. PR #8 draft; implementation 9f8128a84045f8ee1e24bd7c7d89b5efa984ff06 verified. No release. Phase04 groundwork preserved; p1-catalog and Phase03 real integration blocked; Phase05 deferred; Gates A/B UNVERIFIED. All 42 IDs unchanged.",
   "theme": "dark",
   "language": "es"
 }

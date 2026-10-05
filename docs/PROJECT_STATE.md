@@ -6,19 +6,20 @@ Gates A/B UNVERIFIED. All seven phases and 42 stable task IDs preserved.
 ## Repository and current writer
 
 Repository: https://github.com/T0rrag/AionCrafter
-Active branch: phase/06-release; target main. One repository writer in this chat;
+Active branch: phase/06-release; target main. Draft PR #8: https://github.com/T0rrag/AionCrafter/pull/8. One repository writer in this chat;
 supporting arithmetic/recovery/security reviews were read-only.
 Verified starting main: e90c295b38245e57cf53a017d96885a770ed399f.
-Remote phase/06-release was absent at startup; created locally from that main.
+Remote phase/06-release was absent at startup; created from that main and now published.
 PR #6 read-back confirmed merged at a185d0618cb315aa9468aec0de7716ccb1d56146 with
 tested head e34ddf478c63777a0e0555664337d7eed2900134 in main ancestry. Only continuity
 documentation differed from the Phase 04 implementation. Historical draft PRs #2/#3
 are unchanged. No phase merge or release is implied by this checkpoint.
 
-The tested implementation and verified remote publication are recorded in
-delivery/phase-06-part-01.json after upload. Documentation may follow that SHA;
-always fetch actual heads. NEXT_CHAT_PROMPT will point to the new immutable continuation
-before this writer finishes.
+Tested/published implementation: 9f8128a84045f8ee1e24bd7c7d89b5efa984ff06.
+Fetched tree equals the tested candidate: c8bc4bc7f5e22360f145b85be32c2b77f7d33774.
+Receipt: delivery/phase-06-part-01.json. PR read-back confirms open/draft/unmerged.
+NEXT_CHAT_PROMPT points to continuations/phase-06-part-01-to-part-02-2026-10-05.md.
+This documentation receipt follows the implementation; fetch actual heads.
 
 ## Delivered and tested
 
@@ -39,8 +40,8 @@ before this writer finishes.
   the current phase instead of historical Phase 01 delivery instructions.
 
 Final code validation on Windows/Python 3.12.14: 266 tests passed (17.177s), compileall
-and synthetic catalog validation passed (7 variants/3 recipes). Checksums/bootstrap
-and publication receipts follow in this checkpoint. All new inputs are SYNTHETIC.
+and synthetic catalog validation passed (7 variants/3 recipes). Implementation bootstrap passed: 42 IDs, 122 checksums. Remote implementation tree
+equality is verified; receipt/continuation add two files to the final manifest. All new inputs are SYNTHETIC.
 No visual/keyboard QA, real-game pilot, p95 benchmark or remote CI pass is claimed.
 See PHASE_06_VALIDATION.md, MANUAL_EDITION_GUIDE.md and TEST_RESULTS.md.
 

@@ -159,3 +159,23 @@ This protocol exists specifically so AionCrafter can continue safely across comp
 when a ChatGPT Work conversation is device-local or not visible elsewhere. Chat transcripts
 are helpful working context, but GitHub is the durable continuity source.
 
+
+
+## Phase 06 Part 01 — verified implementation and draft PR
+
+Verified starting main: e90c295b38245e57cf53a017d96885a770ed399f.
+Branch: phase/06-release; draft PR #8 https://github.com/T0rrag/AionCrafter/pull/8,
+base main. Historical PRs were not modified. Phase 06 remains IN_PROGRESS.
+
+Implementation 9f8128a84045f8ee1e24bd7c7d89b5efa984ff06, tree
+c8bc4bc7f5e22360f145b85be32c2b77f7d33774, parent equals starting main.
+266 local tests passed, compilation/catalog/diff checks passed and implementation
+bootstrap verified 42 IDs/122 hashes. GitHub tree creation matched the staged tree;
+HTTPS fetch returned the implementation SHA and complete tree comparison passed.
+PR read-back confirmed same head/base, draft=true and merged=false. Zero statuses,
+check runs, workflow runs and reviews were returned; no remote CI pass is claimed.
+
+Receipt: delivery/phase-06-part-01.json. The immutable continuation is
+continuations/phase-06-part-01-to-part-02-2026-10-05.md; NEXT_CHAT_PROMPT points there.
+A documentation-only receipt commit follows implementation, so fetch actual head.
+Its final manifest adds those two files. No merge/release/deployment or new-chat claim.
