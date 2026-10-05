@@ -53,3 +53,16 @@ pilot follows phase features. No public release until applicable quality evidenc
 Phase 04 application writes stop at this handoff. No Phase 06 chat has been created or
 started by this checkpoint. Remote phase/06-release was absent at receipt time; recheck
 and create from current reviewed main if still absent. See handoffs/phase-04-to-phase-06.md.
+
+## Cross-device continuity policy
+
+AionCrafter development sessions now require a durable GitHub continuation before the
+writer stops. The moving entry point is `docs/NEXT_CHAT_PROMPT.md`; immutable prompts are
+stored under `docs/continuations/`. Missing/device-local ChatGPT history must not block
+recovery. The current immutable continuation is
+`docs/continuations/phase-04-to-phase-06-2026-10-05.md`.
+
+This policy changes no backlog status or gate. All 42 IDs are preserved; Gates A/B remain
+UNVERIFIED. The next engineering target remains Phase 06 manual-edition validation and
+guidance, with Phase 03 real integration/p1-catalog blocked and Phase 05 deferred.
+

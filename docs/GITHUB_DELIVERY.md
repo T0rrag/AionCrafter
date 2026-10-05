@@ -141,3 +141,21 @@ delivery/phase-04-merge.json. Documentation receipt follows on main. Phase 04 re
 IN_PROGRESS for real evidence/integration; no provider activation or public release.
 Next independent Phase 06 work belongs in a separate Aion2 chat; this writer stops
 application edits. No Phase 06 chat startup is claimed by this receipt.
+
+## Cross-device chat continuation protocol
+
+Every development-chat handoff is persisted in GitHub before that chat stops writing.
+`docs/NEXT_CHAT_PROMPT.md` is the moving entry point; `docs/continuations/` stores
+immutable historical prompts. A continuation is not a substitute for fetching current
+remote refs: it records the verified tested/base/merge checkpoint and the next chat must
+confirm the actual head and ancestry before edits.
+
+Required handoff contents are repository, branch/PR, verified SHA(s), first-read files,
+completed work, executed tests, remaining backlog/gates/blockers, governing ADRs,
+do-not-repeat constraints and the exact next task. The normal PROJECT_STATE, backlog,
+TEST_RESULTS, delivery/handoff and manifest records are updated when applicable.
+
+This protocol exists specifically so AionCrafter can continue safely across computers even
+when a ChatGPT Work conversation is device-local or not visible elsewhere. Chat transcripts
+are helpful working context, but GitHub is the durable continuity source.
+
