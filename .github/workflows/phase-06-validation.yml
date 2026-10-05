@@ -21,7 +21,25 @@ jobs:
       - name: Unit tests
         run: python -m unittest discover -q
       - name: Compile
-        run: python -m compileall -q aioncrafter tests
+        run: python -m compileall -q aioncrafter tests scripts
+      - name: Build deterministic source-checkout artifacts
+        run: |
+          mkdir -p /tmp/aioncrafter-package
+          python scripts/build_source_checkout.py --output /tmp/aioncrafter-package/source-a.zip
+          python scripts/build_source_checkout.py --output /tmp/aioncrafter-package/source-b.zip
+          cmp /tmp/aioncrafter-package/source-a.zip /tmp/aioncrafter-package/source-b.zip
+          sha256sum /tmp/aioncrafter-package/source-a.zip
+      - name: Verify isolated source-checkout install
+        run: |
+          rm -rf /tmp/aioncrafter-install /tmp/aioncrafter-venv
+          mkdir -p /tmp/aioncrafter-install
+          python -m zipfile -e /tmp/aioncrafter-package/source-a.zip /tmp/aioncrafter-install
+          python -m venv /tmp/aioncrafter-venv
+          cd /tmp/aioncrafter-install/AionCrafter-source
+          /tmp/aioncrafter-venv/bin/python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json
+          /tmp/aioncrafter-venv/bin/python scripts/validate_bootstrap.py
+      - name: Benchmark synthetic cached calculation
+        run: python scripts/benchmark_cached_calculation.py --warmup 250 --samples 2000 --target-p95-ms 300 --output /tmp/aioncrafter-benchmark.json
       - name: Validate synthetic catalog
         run: python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json
       - name: Validate project bootstrap
