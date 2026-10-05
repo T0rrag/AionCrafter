@@ -1,11 +1,13 @@
-"""Offline database recognition and per-file SQLite snapshots; no migrations."""
+"""Offline database recognition, catalog export and per-file SQLite snapshots; no migrations."""
 from contextlib import closing
 import hashlib
 from pathlib import Path
 import sqlite3
 import time
 
-from .codec import require
+from .catalog import validate_catalog
+from .codec import loads, require
+from .models import Catalog
 
 CATALOG_APPLICATION_ID = 0x41494331
 PLAN_APPLICATION_ID = 0x41495032
@@ -59,6 +61,50 @@ def _readonly(path):
 def check_database(path):
     with closing(_readonly(path)) as connection:
         return database_info(connection)
+
+
+def export_catalog_release(source, destination, release_id=None):
+    """Export one validated stored catalog payload to a NEW JSON file.
+
+    The catalog database is opened read-only and never migrated. The stored SHA-256 and
+    the payload's own release ID must match before bytes are written. The stored JSON is
+    copied exactly so its digest remains the catalog identity used by saved plans/journals.
+    """
+    destination = Path(destination)
+    created = False
+    try:
+        with closing(_readonly(source)) as connection:
+            info = database_info(connection)
+            require(info['kind'] == 'catalog', 'DATABASE_SCHEMA', 'Expected a catalog database')
+            if release_id is None:
+                active = connection.execute('SELECT release_id FROM active_catalog WHERE singleton=1').fetchone()
+                require(active is not None, 'CATALOG_NOT_FOUND', 'Catalog database has no active release')
+                release_id = active[0]
+            row = connection.execute('SELECT payload, digest FROM catalog_releases WHERE release_id=?',
+                                     (release_id,)).fetchone()
+            require(row is not None, 'CATALOG_NOT_FOUND', str(release_id))
+            payload, digest = row
+            require(type(payload) is str and type(digest) is str,
+                    'STORAGE_INTEGRITY', 'Catalog payload/checksum has an invalid SQLite type')
+            encoded = payload.encode('utf-8')
+            require(hashlib.sha256(encoded).hexdigest() == digest,
+                    'STORAGE_INTEGRITY', 'Catalog checksum mismatch')
+            catalog = loads(Catalog, payload)
+            validate_catalog(catalog)
+            require(catalog.release_id == release_id,
+                    'STORAGE_INTEGRITY', 'Stored catalog release ID does not match its payload')
+            with destination.open('xb') as stream:
+                created = True
+                stream.write(encoded)
+        with destination.open('rb') as stream:
+            exported_digest = hashlib.file_digest(stream, 'sha256').hexdigest()
+        require(exported_digest == digest, 'STORAGE_INTEGRITY', 'Exported catalog checksum mismatch')
+        return {'release_id': release_id, 'dataset_kind': catalog.scope.dataset_kind.value,
+                'sha256': digest, 'bytes': destination.stat().st_size}
+    except BaseException:
+        if created:
+            destination.unlink(missing_ok=True)
+        raise
 
 
 def backup_database(source, destination):
