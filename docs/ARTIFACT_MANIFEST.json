@@ -3,7 +3,7 @@
   "project": "AionCrafter",
   "brief_version": "1.3",
   "publication_status": "PUBLISHED",
-  "checkpoint": "Phase 06 Part02 implementation: validated catalog export and recipe-change recovery drill",
+  "checkpoint": "Phase 06 Part02 verified delivery and immutable Part03 continuation",
   "files": [
     {
       "path": ".gitattributes",
@@ -27,8 +27,8 @@
     },
     {
       "path": "AGENTS.md",
-      "bytes": 4529,
-      "sha256": "3ccb5165c2da3fda70132130276d0ecf2dbb9859e5018634b4e155dc1ab578a6"
+      "bytes": 4627,
+      "sha256": "ebf318136c4f1b8cddb27de88144763b7f815b6ce093537476e672deb55f49fb"
     },
     {
       "path": "AionCrafter_Project_Prompt.md",
@@ -182,8 +182,8 @@
     },
     {
       "path": "docs/backlog.json",
-      "bytes": 28043,
-      "sha256": "581c68820650a38f23bacde05d97314c6f2466a3997a38f57615420ef94e5f15"
+      "bytes": 28344,
+      "sha256": "481ccb4579749fc00d2ecf265011fcaecbb8bb3d5a700c134a5925b8f1ab2ea3"
     },
     {
       "path": "docs/CHAT_PROJECT_INSTRUCTIONS.txt",
@@ -199,6 +199,11 @@
       "path": "docs/continuations/phase-06-part-01-to-part-02-2026-10-05.md",
       "bytes": 6434,
       "sha256": "1e0c265e32bd3440419d8a02f1070c38a4595aa9690f8dd4fb302e510776b6e6"
+    },
+    {
+      "path": "docs/continuations/phase-06-part-02-to-part-03-2026-10-05.md",
+      "bytes": 4330,
+      "sha256": "eb138a75f5762d169836186b2cf8f3ff27d0d78e250c794db1204413e1d46ebd"
     },
     {
       "path": "docs/decisions/0001-architectural-control-and-phase-delivery.md",
@@ -306,9 +311,14 @@
       "sha256": "5e93143fca194a78fbe18d0891825a5ef8f9a09400a943dbb0a65dd310fb47d3"
     },
     {
+      "path": "docs/delivery/phase-06-part-02.json",
+      "bytes": 3245,
+      "sha256": "0a98f8dff7faf5a17d92e7c20503192068139948733afb7d767b6009779d2557"
+    },
+    {
       "path": "docs/GITHUB_DELIVERY.md",
-      "bytes": 10832,
-      "sha256": "7a9806644a2e58b31f5983937b277d2ccc0e679a664c76f60830efba2887f6a2"
+      "bytes": 12549,
+      "sha256": "209822ebb67021ed63cca7fb4a6cf0e1be28ea83817817521bfcf9de9ddad930"
     },
     {
       "path": "docs/handoffs/architecture-control-2026-10-04.md",
@@ -401,14 +411,19 @@
       "sha256": "052c708839ecf4311276bfee65a2503aab38e3109b9a5819a4f60054d28acb98"
     },
     {
+      "path": "docs/handoffs/phase-06-part-02.md",
+      "bytes": 3098,
+      "sha256": "9c22b2115948da3897ca6f88d8307686ab3261573285fffcc5734901e91c1581"
+    },
+    {
       "path": "docs/MANUAL_EDITION_GUIDE.md",
-      "bytes": 8977,
-      "sha256": "7cec7723897ec1cb2d0f7186624201e803a0bcacb0cb4982494587501f8bc185"
+      "bytes": 9775,
+      "sha256": "32abfebc0698d54ed075c36d8ad89351faf30b9c2b7753fc96e4d0ff005b542f"
     },
     {
       "path": "docs/NEXT_CHAT_PROMPT.md",
-      "bytes": 1541,
-      "sha256": "bed1dbed9b3c4d6257e982b988e3a6795c497cb1da274e4159af860749cfb190"
+      "bytes": 2273,
+      "sha256": "00df51173c48c6a87e37088e328a8d222d54b4373f043de4f68407201d25e65b"
     },
     {
       "path": "docs/PHASE_01_PR.md",
@@ -437,13 +452,13 @@
     },
     {
       "path": "docs/PHASE_06_VALIDATION.md",
-      "bytes": 6137,
-      "sha256": "6d77895f920c4bbaae2afe47aee463d9254aac424b6364fa5ccd3aa372b3006f"
+      "bytes": 7701,
+      "sha256": "6b60c9186f102869788f44cff55e4f5575627afa1ee12cd93f988606fd6ba77d"
     },
     {
       "path": "docs/PROJECT_STATE.md",
-      "bytes": 4736,
-      "sha256": "dbfe0d497cd6d2639325010b4a6b6f4befd28a7f8f222995f8c14d150a02620b"
+      "bytes": 3772,
+      "sha256": "ad91ccd19f3e41f33b73c5ad75b52035f5a0a430c8a382a600ad1114da522275"
     },
     {
       "path": "docs/REFERENCE_IMPORTS.md",
@@ -452,8 +467,8 @@
     },
     {
       "path": "docs/roadmap-progress.json",
-      "bytes": 765,
-      "sha256": "e0c842567e3a7345933159487b40492a8c1af88c09f01f9fb66a28615dd338d1"
+      "bytes": 904,
+      "sha256": "0535a927ecc1affda9fd24f795cee974134a2c2db3876db84527fec547ab0beb"
     },
     {
       "path": "docs/sources/SYNTHETIC.md",
@@ -462,8 +477,8 @@
     },
     {
       "path": "docs/TEST_RESULTS.md",
-      "bytes": 17437,
-      "sha256": "4eb88c24718d239522f6450825ed85b1d4bc7ad5e27672880ae960284f02d8b4"
+      "bytes": 18860,
+      "sha256": "762f718c1688d74e5907b62ebfbec7265dda2905ed4e72fd082cfb2892212473"
     },
     {
       "path": "README.md",
