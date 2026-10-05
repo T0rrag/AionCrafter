@@ -32,3 +32,35 @@ At checkpoints update PROJECT_STATE, backlog evidence, test results, manifest, h
 and NEXT_CHAT_PROMPT; publish coherent increments and verify the remote SHA. Phase 02
 behavior is accepted, visual/keyboard QA deferred, real-game pilot after phase feature
 work. Do not restart Chromium/cloud-browser troubleshooting.
+
+## Mandatory end-of-chat GitHub continuation
+
+GitHub is the canonical cross-device recovery record for development sessions. Do not rely
+on ChatGPT/Work conversation sync as the only copy of phase context.
+
+Before any development chat is considered finished:
+
+1. Fetch and verify the actual remote branch/PR/main heads before final writes.
+2. Run the applicable tests, validators and diff checks for the work being handed off.
+3. Publish the coherent tested checkpoint to the active phase branch/PR and read it back.
+   Record the tested/verified implementation SHA or merge SHA and tree equality when used.
+4. Update PROJECT_STATE, backlog evidence/statuses only when supported, TEST_RESULTS and
+   delivery/handoff records as applicable. Preserve incomplete work, blockers and Gates A/B.
+5. Create a new immutable continuation prompt under `docs/continuations/`. Never overwrite
+   an older continuation file. Naming should identify the phase/part transition and date.
+6. Refresh `docs/NEXT_CHAT_PROMPT.md` so it points to and summarizes the newest immutable
+   continuation. The next chat must still fetch the actual remote heads before writing.
+7. Every continuation must contain: repository; active/next branch and PR if any; verified
+   baseline/tested/merge SHA(s); files to read first; completed work; tests actually run;
+   remaining task IDs/statuses; Gates A/B and external blockers; applicable ADRs; explicit
+   work not to repeat; and the exact next implementation task.
+8. Refresh ARTIFACT_MANIFEST/checksums and run bootstrap validation when repository
+   conventions require it. Publish the continuity documentation and verify its remote head.
+9. Only after the remote continuation is readable and verified may the previous chat stop
+   writing. A documentation receipt may follow a tested implementation SHA; state that
+   explicitly instead of pretending a self-referential final commit SHA can be embedded.
+
+For recovery on another computer, start from `docs/NEXT_CHAT_PROMPT.md`, then open the
+referenced immutable continuation and fetch the actual remote heads. GitHub state wins over
+missing or device-local chat history.
+
