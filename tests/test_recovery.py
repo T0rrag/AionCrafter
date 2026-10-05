@@ -2,18 +2,22 @@
 from contextlib import closing
 from dataclasses import replace
 import hashlib
+import http.client
 import json
 from pathlib import Path
+import socket
 import sqlite3
 import subprocess
 import sys
 import tempfile
+import time
 import unittest
 from unittest.mock import patch
 
+from aioncrafter.catalog import import_catalog
 from aioncrafter.codec import ValidationError, dumps
-from aioncrafter.database import backup_database, check_database
-from aioncrafter.ledger import Journal, LedgerStore
+from aioncrafter.database import backup_database, check_database, export_catalog_release
+from aioncrafter.ledger import Journal, LedgerStore, evaluate_journal
 from aioncrafter.plans import PlanStore, SavedPlan, catalog_digest, encode_plan
 from aioncrafter.storage import MIGRATIONS, Store
 from aioncrafter.web import form_observations
@@ -37,6 +41,46 @@ class RecoveryTests(unittest.TestCase):
                          tuple(sorted(fields.items())), form_observations(self.c, fields),
                          '2026-10-05T10:00:00Z')
 
+    def assert_web_starts(self, catalog_path, plans_path):
+        with socket.socket() as probe:
+            probe.bind(('127.0.0.1', 0))
+            port = probe.getsockname()[1]
+        process = subprocess.Popen(
+            [sys.executable, '-m', 'aioncrafter.web', '--catalog', str(catalog_path),
+             '--plans', str(plans_path), '--port', str(port)],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+        )
+        try:
+            deadline = time.monotonic() + 8
+            last_error = None
+            while time.monotonic() < deadline:
+                if process.poll() is not None:
+                    stdout, stderr = process.communicate()
+                    self.fail(f'web process exited early ({process.returncode})\nstdout={stdout}\nstderr={stderr}')
+                connection = http.client.HTTPConnection('127.0.0.1', port, timeout=0.25)
+                try:
+                    connection.request('GET', '/')
+                    response = connection.getresponse()
+                    body = response.read()
+                    if response.status == 200:
+                        self.assertIn(b'AionCrafter', body)
+                        return body
+                    last_error = AssertionError(f'HTTP {response.status}')
+                except (OSError, http.client.HTTPException) as exc:
+                    last_error = exc
+                    time.sleep(0.05)
+                finally:
+                    connection.close()
+            self.fail(f'web process did not become ready: {last_error}')
+        finally:
+            if process.poll() is None:
+                process.terminate()
+                try:
+                    process.wait(timeout=5)
+                except subprocess.TimeoutExpired:
+                    process.kill()
+                    process.wait(timeout=5)
+
     def test_catalog_snapshot_preserves_history_and_rollback_on_restored_copy(self):
         with Store(self.source) as store:
             store.publish(self.c, expected_active=None)
@@ -56,6 +100,137 @@ class RecoveryTests(unittest.TestCase):
             self.assertEqual(store.catalog(), self.c)
         with Store(self.source) as store:
             self.assertEqual(store.active_release_id, 'SYNTHETIC-patch')
+
+    def test_catalog_export_preserves_exact_json_and_refuses_overwrite(self):
+        exported = self.root / 'catalog.json'
+        with Store(self.source) as store:
+            store.publish(self.c, expected_active=None)
+        receipt = export_catalog_release(self.source, exported)
+        self.assertEqual(receipt['release_id'], self.c.release_id)
+        self.assertEqual(receipt['dataset_kind'], 'SYNTHETIC')
+        self.assertEqual(exported.read_bytes(), dumps(self.c).encode())
+        self.assertEqual(receipt['sha256'], hashlib.sha256(exported.read_bytes()).hexdigest())
+        self.assertEqual(import_catalog(exported.read_bytes()), self.c)
+
+        before = exported.read_bytes()
+        with self.assertRaises(FileExistsError):
+            export_catalog_release(self.source, exported, self.c.release_id)
+        self.assertEqual(exported.read_bytes(), before)
+
+        missing = self.root / 'missing-release.json'
+        with self.assertRaisesRegex(ValidationError, 'CATALOG_NOT_FOUND'):
+            export_catalog_release(self.source, missing, 'SYNTHETIC-does-not-exist')
+        self.assertFalse(missing.exists())
+
+    def test_catalog_export_rejects_bad_checksum_and_release_identity_without_output(self):
+        bad_checksum = self.root / 'bad-checksum.sqlite3'
+        with Store(bad_checksum) as store:
+            store.publish(self.c, expected_active=None)
+            store.connection.execute('UPDATE catalog_releases SET digest=? WHERE release_id=?',
+                                     ('0' * 64, self.c.release_id))
+        output = self.root / 'bad-checksum.json'
+        with self.assertRaisesRegex(ValidationError, 'STORAGE_INTEGRITY'):
+            export_catalog_release(bad_checksum, output, self.c.release_id)
+        self.assertFalse(output.exists())
+
+        bad_release = self.root / 'bad-release.sqlite3'
+        mismatched = replace(self.c, release_id='SYNTHETIC-other-release')
+        payload = dumps(mismatched)
+        with Store(bad_release) as store:
+            store.publish(self.c, expected_active=None)
+            store.connection.execute('UPDATE catalog_releases SET payload=?, digest=? WHERE release_id=?',
+                                     (payload, hashlib.sha256(payload.encode()).hexdigest(), self.c.release_id))
+        output = self.root / 'bad-release.json'
+        with self.assertRaisesRegex(ValidationError, 'STORAGE_INTEGRITY'):
+            export_catalog_release(bad_release, output, self.c.release_id)
+        self.assertFalse(output.exists())
+
+    def test_recipe_change_launch_rejects_old_records_and_last_known_good_restore_recovers_them(self):
+        catalog_db = self.root / 'catalog.sqlite3'
+        plans_db = self.root / 'plans.sqlite3'
+        ledger_db = Path(str(plans_db) + '.ledger.sqlite3')
+        catalog_backup = self.root / 'catalog-before.sqlite3'
+        plans_backup = self.root / 'plans-before.sqlite3'
+        ledger_backup = self.root / 'ledger-before.sqlite3'
+        original_json = self.root / 'catalog-before.json'
+        changed_json = self.root / 'catalog-changed.json'
+
+        plan = self.plan()
+        journal = Journal(1, 'SYNTHETIC recovery', catalog_digest(self.c), market(), 'fifo', ())
+        baseline_result = evaluate_journal(journal, self.c)
+        with Store(catalog_db) as store:
+            store.publish(self.c, expected_active=None)
+            store.save_observation(observation(), release_id=self.c.release_id)
+            store.save_calculation(calculation())
+        with PlanStore(plans_db) as store:
+            self.assertEqual(store.save(plan, self.c), 1)
+            self.assertEqual(store.save(plan, self.c, 1), 2)
+        with LedgerStore(ledger_db) as store:
+            self.assertEqual(store.save(journal, self.c), 1)
+            self.assertEqual(store.save(journal, self.c, 1), 2)
+
+        export_catalog_release(catalog_db, original_json, self.c.release_id)
+        backup_database(catalog_db, catalog_backup)
+        backup_database(plans_db, plans_backup)
+        backup_database(ledger_db, ledger_backup)
+
+        changed_recipe = replace(
+            self.c.recipes[0],
+            requirements=(*self.c.recipes[0].requirements, 'SYNTHETIC: recipe-change recovery drill'),
+        )
+        changed = replace(
+            self.c,
+            release_id='SYNTHETIC-recipe-change-v2',
+            recipes=(changed_recipe, *self.c.recipes[1:]),
+        )
+        with Store(catalog_db) as store:
+            store.publish(changed, expected_active=self.c.release_id)
+        export_catalog_release(catalog_db, changed_json)
+        launched = import_catalog(changed_json.read_bytes())
+        self.assertEqual(launched, changed)
+        self.assert_web_starts(changed_json, plans_db)
+
+        with closing(sqlite3.connect(plans_db)) as connection:
+            plan_rows_before = connection.execute('SELECT * FROM plans ORDER BY name, revision').fetchall()
+        with closing(sqlite3.connect(ledger_db)) as connection:
+            journal_rows_before = connection.execute('SELECT * FROM journals ORDER BY name, revision').fetchall()
+        with PlanStore(plans_db) as store:
+            with self.assertRaisesRegex(ValidationError, 'PLAN_CATALOG'):
+                store.load(plan.name, launched)
+        with LedgerStore(ledger_db) as store:
+            with self.assertRaisesRegex(ValidationError, 'LEDGER_CATALOG'):
+                store.load(journal.name, launched)
+        with closing(sqlite3.connect(plans_db)) as connection:
+            self.assertEqual(connection.execute('SELECT * FROM plans ORDER BY name, revision').fetchall(), plan_rows_before)
+        with closing(sqlite3.connect(ledger_db)) as connection:
+            self.assertEqual(connection.execute('SELECT * FROM journals ORDER BY name, revision').fetchall(), journal_rows_before)
+
+        restored_catalog_db = self.root / 'restored-catalog.sqlite3'
+        restored_plans_db = self.root / 'restored-plans.sqlite3'
+        restored_ledger_db = Path(str(restored_plans_db) + '.ledger.sqlite3')
+        restored_json = self.root / 'restored-catalog.json'
+        backup_database(catalog_backup, restored_catalog_db)
+        backup_database(plans_backup, restored_plans_db)
+        backup_database(ledger_backup, restored_ledger_db)
+        export_catalog_release(restored_catalog_db, restored_json, self.c.release_id)
+        restored_catalog = import_catalog(restored_json.read_bytes())
+        self.assertEqual(restored_catalog, self.c)
+        self.assertEqual(restored_json.read_bytes(), original_json.read_bytes())
+        self.assert_web_starts(restored_json, restored_plans_db)
+
+        with Store(restored_catalog_db) as store:
+            self.assertEqual(store.active_release_id, self.c.release_id)
+            self.assertEqual(store.observation('obs-1'), observation())
+            self.assertEqual(store.calculation('calc-1'), calculation())
+        with PlanStore(restored_plans_db) as store:
+            self.assertEqual(store.load(plan.name, restored_catalog), (2, plan))
+        with LedgerStore(restored_ledger_db) as store:
+            revision, restored_journal = store.load(journal.name, restored_catalog)
+            self.assertEqual(revision, 2)
+            self.assertEqual(restored_journal, journal)
+            self.assertEqual(evaluate_journal(restored_journal, restored_catalog), baseline_result)
+        with Store(catalog_db) as store:
+            self.assertEqual(store.active_release_id, changed.release_id)
 
     def test_legacy_catalog_backup_is_readonly_and_only_restored_copy_migrates(self):
         payload = dumps(self.c)
@@ -208,11 +383,19 @@ class RecoveryTests(unittest.TestCase):
             Store(self.source)
         self.assertEqual(self.source.read_bytes(), before)
 
-    def test_offline_cli_backup_check_and_failure_exit_codes(self):
+    def test_offline_cli_backup_check_export_and_failure_exit_codes(self):
         with Store(self.source) as store:
             store.publish(self.c, expected_active=None)
         def run(*args):
             return subprocess.run([sys.executable, '-m', 'aioncrafter', *map(str, args)], capture_output=True, text=True)
+        exported = self.root / 'catalog.json'
+        result = run('export-catalog', '--database', self.source, '--output', exported)
+        self.assertEqual(result.returncode, 0, result.stderr)
+        self.assertEqual(json.loads(result.stdout)['release_id'], self.c.release_id)
+        self.assertEqual(import_catalog(exported.read_bytes()), self.c)
+        result = run('export-catalog', '--database', self.source, '--output', exported)
+        self.assertEqual(result.returncode, 2)
+        self.assertNotIn('Traceback', result.stderr)
         result = run('backup', '--database', self.source, '--output', self.backup)
         self.assertEqual(result.returncode, 0, result.stderr)
         self.assertEqual(json.loads(result.stdout)['kind'], 'catalog')
