@@ -117,9 +117,21 @@ The paired ledger filename must derive from the restored plans path as shown abo
 
 For a catalog database, `rollback RELEASE_ID --database PATH --expect-active CURRENT_ID`
 selects a previously stored validated release without deleting later history. It does
-**not** change a running web process or its `--catalog` JSON. Restart with the matching
-JSON and matching plan/journal files. Automatic catalog export and a combined recipe-change
-launch/recovery drill are not delivered in Part01.
+**not** change a running web process or its `--catalog` JSON. Export the exact stored
+release to a NEW file, then restart with matching plan/journal files:
+
+```text
+python -m aioncrafter export-catalog --database local-data/catalog.sqlite3 --release-id RELEASE_ID --output local-data/catalog-release.json
+python -m aioncrafter.web --catalog local-data/catalog-release.json --plans local-data/restored-plans.sqlite3
+```
+
+Omit `--release-id` to export the active stored release. Export validates the catalog
+database, stored checksum, strict payload and release identity and refuses to overwrite an
+existing output. It preserves the exact stored JSON bytes so saved plan/journal digests can
+be checked against the same catalog content. A Part 02 synthetic drill verifies that a
+changed recipe release causes old plans/journals to fail compatibility checks without
+rewriting them, and that restoring the prior catalog plus database backups to new paths
+recovers the prior revisions and results. No automatic remapping is performed.
 
 On `STORAGE_UNAVAILABLE`, preserve the unsaved form or journal preview, inspect the path,
 free space and permissions, and check/restore a copy. A failed response does not prove a
