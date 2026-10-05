@@ -367,7 +367,7 @@
           "title": "Make patch and outage handling recoverable",
           "description": "Version recipes, provider schemas and pricing rules. Add migration tests, provider health reporting and rollback to the last known-good data release.",
           "status": "IN_PROGRESS",
-          "evidence": "database.py/CLI: read-only structure/integrity checks and verified no-overwrite per-file SQLite backups; 13 recovery tests cover history, legacy migrations on copies, rollback, WAL, counters, invalid sources and preserved destination sidecars. Existing synthetic outage/quota tests pass. Part02 catalog JSON export/recipe-change launch recovery and real-provider integration remain pending."
+          "evidence": "Part01 database.py/CLI: read-only structure/integrity checks and verified no-overwrite per-file SQLite backups. Part02 adds validated exact stored catalog-release JSON export with checksum/release-identity checks and overwrite refusal; recovery drill publishes/exports/starts a changed SYNTHETIC recipe catalog, rejects prior plan/journal digests without remapping, restores catalog/plans/ledger to new paths and recovers observations, calculations, revision 2 records and ledger result. GitHub Actions run 37310693174 on d01f575b2c4a88d802828820f0d1dd3f9c3f9ea7: 269 tests passed on Python 3.12.14, compile/catalog/bootstrap passed. Real-provider health/version integration remains blocked."
         },
         {
           "id": "p6-security",
