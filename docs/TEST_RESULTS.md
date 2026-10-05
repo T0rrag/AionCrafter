@@ -271,3 +271,27 @@ the tested code/tests, original brief/roadmap and older immutable continuation u
 A separate documented-command smoke passed: web CLI subprocess launch against the
 synthetic fixture, loopback GET, server stop, temporary plans backup and read-only check.
 This verifies local source-checkout commands only, not a distributed installation.
+
+
+## Phase 06 Part 02 — catalog export and recipe-change recovery (2026-10-05)
+
+Verified implementation checkpoint: `d01f575b2c4a88d802828820f0d1dd3f9c3f9ea7`,
+tree `9eeae62900aa741e386735dfa72a46279d65aa67`. The tree equals the prebuilt
+implementation tree. GitHub Actions run 37310693174 checked out that exact SHA on
+Ubuntu 24.04 / CPython 3.12.14 and completed successfully.
+
+- `python -m unittest discover -q`: **269 passed in 18.910s**.
+- `python -m compileall -q aioncrafter tests`: passed.
+- `python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json`: passed,
+  7 items / 3 recipes.
+- `python scripts/validate_bootstrap.py`: passed: 7 phases, 42 stable task IDs,
+  9 completed tasks with evidence, Gates A/B UNVERIFIED, 125 artifact checksums.
+- New recovery coverage: exact stored JSON export/checksum/release identity; overwrite and
+  missing/corrupt release refusal; changed-recipe publish/export/web startup; old plan and
+  journal catalog-digest rejection without mutation/remapping; restore to new catalog/plan/
+  ledger paths; recovery of original JSON, observation, calculation, plan/journal revisions
+  and ledger result.
+
+The runner emitted ResourceWarning messages for subprocess pipe handles while the complete
+suite still passed. No real provider, game/client pilot, visual/keyboard QA, performance
+benchmark, public release or production-security approval is implied by this CI pass.
