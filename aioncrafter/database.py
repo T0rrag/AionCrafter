@@ -1,0 +1,146 @@
+"""Offline database recognition, catalog export and per-file SQLite snapshots; no migrations."""
+from contextlib import closing
+import hashlib
+from pathlib import Path
+import sqlite3
+import time
+
+from .catalog import validate_catalog
+from .codec import loads, require
+from .models import Catalog
+
+CATALOG_APPLICATION_ID = 0x41494331
+PLAN_APPLICATION_ID = 0x41495032
+LEDGER_APPLICATION_ID = 0x41494C34
+CATALOG_V1 = {
+    'catalog_releases': ('release_id', 'digest', 'payload'),
+    'active_catalog': ('singleton', 'release_id'),
+}
+CATALOG_V2 = dict(CATALOG_V1, observations=('observation_id', 'release_id', 'price_key', 'supersedes_id', 'payload'),
+                  calculations=('calculation_id', 'release_id', 'payload'))
+PLAN_V1 = {'plans': ('name', 'revision', 'payload')}
+PLAN_V2 = dict(PLAN_V1, plan_versions=('name', 'last_revision'))
+LEDGER_V1 = {'journals': ('name', 'revision', 'payload')}
+
+
+def schema_matches(connection, expected):
+    tables = {row[0] for row in connection.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+    if tables != set(expected):
+        return False
+    # Only constant, recognized table names are interpolated.
+    return all(tuple(row[1] for row in connection.execute(f'PRAGMA table_info({table})')) == columns
+               for table, columns in expected.items())
+
+
+def database_info(connection):
+    """Check structure/integrity, not catalog rights or application payload semantics."""
+    app = connection.execute('PRAGMA application_id').fetchone()[0]
+    version = connection.execute('PRAGMA user_version').fetchone()[0]
+    known = (
+        ('catalog', (0, CATALOG_APPLICATION_ID), {1: CATALOG_V1, 2: CATALOG_V2}),
+        ('plans', (PLAN_APPLICATION_ID,), {1: PLAN_V1, 2: PLAN_V2}),
+        ('ledger', (LEDGER_APPLICATION_ID,), {1: LEDGER_V1}),
+    )
+    kind = next((name for name, apps, versions in known if app in apps and version in versions
+                 and schema_matches(connection, versions[version])), None)
+    require(kind is not None, 'DATABASE_SCHEMA', 'Unrecognized or unsupported database; no migration performed')
+    require(connection.execute('PRAGMA integrity_check').fetchall() == [('ok',)],
+            'DATABASE_INTEGRITY', 'SQLite integrity check failed')
+    require(not connection.execute('PRAGMA foreign_key_check').fetchall(),
+            'DATABASE_INTEGRITY', 'SQLite foreign-key check failed')
+    return {'kind': kind, 'schema_version': version, 'application_id': app,
+            'sqlite_integrity': 'ok', 'payload_validation': 'not_performed'}
+
+
+def _readonly(path):
+    path = Path(path).resolve()
+    require(path.is_file(), 'DATABASE_NOT_FOUND', 'Database file does not exist')
+    return sqlite3.connect(path.as_uri() + '?mode=ro', uri=True)
+
+
+def check_database(path):
+    with closing(_readonly(path)) as connection:
+        return database_info(connection)
+
+
+def export_catalog_release(source, destination, release_id=None):
+    """Export one validated stored catalog payload to a NEW JSON file.
+
+    The catalog database is opened read-only and never migrated. The stored SHA-256 and
+    the payload's own release ID must match before bytes are written. The stored JSON is
+    copied exactly so its digest remains the catalog identity used by saved plans/journals.
+    """
+    destination = Path(destination)
+    created = False
+    try:
+        with closing(_readonly(source)) as connection:
+            info = database_info(connection)
+            require(info['kind'] == 'catalog', 'DATABASE_SCHEMA', 'Expected a catalog database')
+            if release_id is None:
+                active = connection.execute('SELECT release_id FROM active_catalog WHERE singleton=1').fetchone()
+                require(active is not None, 'CATALOG_NOT_FOUND', 'Catalog database has no active release')
+                release_id = active[0]
+            row = connection.execute('SELECT payload, digest FROM catalog_releases WHERE release_id=?',
+                                     (release_id,)).fetchone()
+            require(row is not None, 'CATALOG_NOT_FOUND', str(release_id))
+            payload, digest = row
+            require(type(payload) is str and type(digest) is str,
+                    'STORAGE_INTEGRITY', 'Catalog payload/checksum has an invalid SQLite type')
+            encoded = payload.encode('utf-8')
+            require(hashlib.sha256(encoded).hexdigest() == digest,
+                    'STORAGE_INTEGRITY', 'Catalog checksum mismatch')
+            catalog = loads(Catalog, payload)
+            validate_catalog(catalog)
+            require(catalog.release_id == release_id,
+                    'STORAGE_INTEGRITY', 'Stored catalog release ID does not match its payload')
+            with destination.open('xb') as stream:
+                created = True
+                stream.write(encoded)
+        with destination.open('rb') as stream:
+            exported_digest = hashlib.file_digest(stream, 'sha256').hexdigest()
+        require(exported_digest == digest, 'STORAGE_INTEGRITY', 'Exported catalog checksum mismatch')
+        return {'release_id': release_id, 'dataset_kind': catalog.scope.dataset_kind.value,
+                'sha256': digest, 'bytes': destination.stat().st_size}
+    except BaseException:
+        if created:
+            destination.unlink(missing_ok=True)
+        raise
+
+
+def backup_database(source, destination):
+    """Copy a consistent SQLite snapshot to a NEW file, refusing any overwrite.
+
+    Each invocation covers one file. Stop writers before backing up a related set.
+    The digest identifies the backup bytes, not a promise of source-byte equality.
+    """
+    destination = Path(destination)
+    created = False
+    try:
+        with closing(_readonly(source)) as original:
+            database_info(original)
+            # SQLite may consume/delete orphaned journals even when the main file
+            # does not exist. Preserve all pre-existing recovery data at this path.
+            for suffix in ('-wal', '-shm', '-journal'):
+                sidecar = Path(str(destination) + suffix)
+                require(not sidecar.exists() and not sidecar.is_symlink(), 'BACKUP_DESTINATION',
+                        'Destination has SQLite sidecars; choose a new path')
+            # Exclusive creation also rejects same-file aliases and existing empty files.
+            with destination.open('xb'):
+                created = True
+            deadline = time.monotonic() + 30
+
+            def progress(status, remaining, total):
+                require(time.monotonic() < deadline, 'BACKUP_BUSY', 'Backup timed out; stop writers and retry')
+
+            with closing(sqlite3.connect(destination)) as copy:
+                original.backup(copy, pages=256, progress=progress, sleep=0.05)
+                require(copy.execute('PRAGMA journal_mode=DELETE').fetchone()[0] == 'delete',
+                        'BACKUP_JOURNAL', 'Backup must be a standalone database')
+                info = database_info(copy)
+        with destination.open('rb') as stream:
+            digest = hashlib.file_digest(stream, 'sha256').hexdigest()
+        return dict(info, sha256=digest, bytes=destination.stat().st_size)
+    except BaseException:
+        if created:
+            destination.unlink(missing_ok=True)
+        raise

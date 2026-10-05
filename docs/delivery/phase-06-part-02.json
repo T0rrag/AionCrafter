@@ -1,0 +1,64 @@
+{
+  "repository": "https://github.com/T0rrag/AionCrafter",
+  "phase": "06",
+  "part": "02",
+  "branch": "phase/06-release",
+  "base_branch": "main",
+  "pull_request": "https://github.com/T0rrag/AionCrafter/pull/8",
+  "state": "OPEN_DRAFT_UNMERGED",
+  "verified_starting_branch_sha": "0f0c839ac93aebfef2841daadb4a3c18b2ec8db4",
+  "verified_base_sha": "e90c295b38245e57cf53a017d96885a770ed399f",
+  "tested_implementation_sha": "d01f575b2c4a88d802828820f0d1dd3f9c3f9ea7",
+  "tested_and_fetched_tree": "9eeae62900aa741e386735dfa72a46279d65aa67",
+  "task_ids": [
+    "p6-patches",
+    "p6-security",
+    "p6-package"
+  ],
+  "tests": {
+    "environment": "GitHub Actions ubuntu-24.04 / CPython 3.12.14 / standard-library SQLite",
+    "workflow_run_id": 37310693174,
+    "workflow_run_url": "https://github.com/T0rrag/AionCrafter/actions/runs/37310693174",
+    "suite": "269 tests passed in 18.910s",
+    "compileall": "passed",
+    "synthetic_catalog": "passed: 7 items, 3 recipes",
+    "implementation_bootstrap": "passed: 42 stable IDs; 125 artifact checksums; 9 tasks with completion evidence; Gates A/B unchanged"
+  },
+  "delivered": [
+    "Validated no-overwrite export of active or selected stored catalog release to exact JSON bytes",
+    "Stored checksum, strict catalog payload and release-key/payload identity validation before export",
+    "Changed-recipe publish/export/web-start recovery drill",
+    "Old plan and journal catalog mismatches rejected without mutation or automatic remapping",
+    "Last-known-good catalog/plans/ledger restored to new paths; observations, calculation, revision 2 plan/journal and ledger result recovered"
+  ],
+  "verification": [
+    "Initial phase branch 0f0c839... was 2 commits ahead and 0 behind main e90c295...",
+    "PR #8 was open/draft/unmerged/mergeable with no review threads before Part 02 writes",
+    "Implementation tree 9eeae629... equals the prebuilt Git tree used before publication",
+    "GitHub Actions checked out exact implementation SHA d01f575... and concluded success",
+    "No force-push; sequential content writes checked the expected branch head before mutation"
+  ],
+  "gates": {
+    "A": "UNVERIFIED",
+    "B": "UNVERIFIED"
+  },
+  "phase_status": "IN_PROGRESS",
+  "remaining": {
+    "mathqa": "COMPLETE",
+    "patches_security_package": "IN_PROGRESS; real-provider health/version integration and packaging/security evidence remain",
+    "usertest_golive": "BLOCKED on real pilot/applicable quality evidence",
+    "previous_phases": "p1-catalog and Phase03 real integration BLOCKED; Phase04 real integration incomplete; Phase05 DEFERRED"
+  },
+  "continuation": "docs/continuations/phase-06-part-02-to-part-03-2026-10-05.md",
+  "next": "Phase06 Part03: reproducible source packaging/installation evidence and declared synthetic cached-calculation p95 measurement; same branch/PR",
+  "no_claims": [
+    "real game/client/pilot validation",
+    "visual or keyboard QA",
+    "real-provider integration",
+    "public release",
+    "deployment",
+    "production security approval",
+    "Gate A/B passage"
+  ],
+  "note": "Documentation follows the tested implementation SHA. Fetch actual remote heads before writing; final documentation commits are intentionally not self-embedded."
+}

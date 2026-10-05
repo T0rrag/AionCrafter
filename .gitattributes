@@ -1,0 +1,2 @@
+# Canonical text bytes keep artifact checksums portable across Windows and Unix.
+* text=auto eol=lf

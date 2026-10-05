@@ -2,7 +2,7 @@
   "schema_version": 1,
   "project": "AionCrafter",
   "brief_version": "1.3",
-  "checkpoint_date": "2026-10-04",
+  "checkpoint_date": "2026-10-05",
   "publication_status": "PUBLISHED",
   "intended_repository": "T0rrag/AionCrafter",
   "gates": {
@@ -343,71 +343,69 @@
     {
       "phase": "06",
       "title": "Validate, release & maintain",
-      "status": "NOT_STARTED",
+      "status": "IN_PROGRESS",
       "tasks": [
         {
           "id": "p6-mathqa",
           "priority": "P0",
           "title": "Pass the calculation regression suite",
           "description": "Cover multi-output recipes, batch rounding, shared ingredients, fees, missing/zero values, unknown proc rates and non-tradable outputs. Verify exact monetary rounding.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "COMPLETE",
+          "evidence": "tests/test_math_acceptance.py: seven independent hand-calculated SYNTHETIC cases with nine currency-scale/rounding combinations; existing regression suite retained. 266 tests passed on Windows/Python 3.12.14. PHASE_06_VALIDATION.md derives literal totals; no real-game correctness claim."
         },
         {
           "id": "p6-usertest",
           "priority": "P0",
           "title": "Complete both workflows with pilot users",
           "description": "Use 20 real cases in one declared market. Verify materials, quantity, source age, listing interpretation and fee assumptions against the game; document unresolved discrepancies.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "BLOCKED",
+          "evidence": "Permitted real 100-item/25-recipe catalog, declared pilot market and 20 real workflows are unavailable; p1-catalog BLOCKED. Synthetic/HTTP tests do not satisfy real-user pilot. Owner deferred game testing until feature work."
         },
         {
           "id": "p6-patches",
           "priority": "P0",
           "title": "Make patch and outage handling recoverable",
           "description": "Version recipes, provider schemas and pricing rules. Add migration tests, provider health reporting and rollback to the last known-good data release.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "Part01 database.py/CLI: read-only structure/integrity checks and verified no-overwrite per-file SQLite backups. Part02 adds validated exact stored catalog-release JSON export with checksum/release-identity checks and overwrite refusal; recovery drill publishes/exports/starts a changed SYNTHETIC recipe catalog, rejects prior plan/journal digests without remapping, restores catalog/plans/ledger to new paths and recovers observations, calculations, revision 2 records and ledger result. GitHub Actions run 37310693174 on d01f575b2c4a88d802828820f0d1dd3f9c3f9ea7: 269 tests passed on Python 3.12.14, compile/catalog/bootstrap passed. Real-provider health/version integration remains blocked."
         },
         {
           "id": "p6-security",
           "priority": "P0",
           "title": "Review secrets, privacy and input handling",
           "description": "Keep provider credentials server-side; minimize collected data. Validate imported files and API input, restrict desktop privileges and document retention/deletion behavior.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "Focused read-only review reproduced cross-store migration, corrupt-storage HTTP disconnect and non-ASCII CSRF exception; fixes plus 8 local HTTP recovery/input tests pass. Bounded catalog reads, transactional plan guards, retention/privacy guidance. Broader security/release review and any future provider/desktop scope remain pending; no production-security claim."
         },
         {
           "id": "p6-package",
           "priority": "P1",
           "title": "Publish installation and operating guidance",
           "description": "Include supported clients/markets, update procedure, known limitations, data attribution, licensing and non-affiliation notice. Sign desktop releases when applicable.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "MANUAL_EDITION_GUIDE.md/README document source checkout, synthetic-only scope, updates, recovery, retention, attribution, licensing gap and non-affiliation. Part03 implementation 0ad954dc... adds deterministic validation-only source ZIP plus isolated clean-venv install; GitHub Actions run 37328773165 built two byte-identical archives (SHA-256 c03bac34...8132) and validated the extracted source. License decision and cross-environment source-install evidence remain pending; no public package."
         },
         {
           "id": "p6-golive",
           "priority": "P0",
           "title": "Run the release checklist and label the edition",
           "description": "Manual edition can ship without Gate A. Automatic-price and Overwolf editions require their respective gates plus quality checks. Archive the evidence supporting each public claim.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "BLOCKED",
+          "evidence": "PHASE_06_VALIDATION.md maps release criteria to evidence. Part03 SYNTHETIC cached-calculation run 37328773165 measured 250 warmups/2000 samples, p95 0.449492 ms on CPython 3.12.14/Linux/AMD EPYC 7763 and met the proposed <300 ms threshold for that workload. Brief release performance requires pilot datasets; real catalog/pilot, deferred visual/keyboard QA, license/cross-environment packaging acceptance remain open. Manual edition NOT RELEASED; Gates A/B UNVERIFIED."
         }
       ]
     }
   ],
-  "branch": "phase/03-market-prices",
+  "branch": "phase/06-release",
   "base_branch": "main",
-  "local_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
-  "pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
-  "verified_implementation_sha": "995c19fcbb8f3d1627602f41068d379be94b7837",
-  "remote_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
+  "local_base_sha": "e90c295b38245e57cf53a017d96885a770ed399f",
+  "pr_url": "https://github.com/T0rrag/AionCrafter/pull/8",
+  "verified_implementation_sha": "0ad954dc2fcb5a564544fe397f81f09c7a7dc89c",
+  "remote_base_sha": "e90c295b38245e57cf53a017d96885a770ed399f",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
-  "checkpoint_part": "02",
-  "next_eligible_phase": "04",
-  "next_phase_dependency_note": "ADR 0007: user authorized tested phase merges/autonomous continuation. PR #5 merged; next independent Phase 04 starts p4-batches in separate Aion2 chat. Phase 03 integration blocked, Gates A/B UNVERIFIED.",
-  "checkpoint_label": "Phase 03 groundwork merged; Phase 04 next",
-  "next_development_branch": "phase/04-crafting-intelligence",
-  "merged_pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
-  "verified_merge_sha": "bd23f4166ffe276179843761dea8e95275efbce1"
+  "checkpoint_part": "03",
+  "next_eligible_phase": "06",
+  "next_phase_dependency_note": "Continue Phase 06 Part04: cross-environment source-checkout installation/update-removal evidence; no public distribution, provider activation or license assumption.",
+  "checkpoint_label": "Phase 06 Part03 delivered: reproducible validation source artifact + declared SYNTHETIC p95 evidence; draft PR8; release blocked",
+  "next_development_branch": "phase/06-release"
 }

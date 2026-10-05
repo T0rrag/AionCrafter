@@ -114,14 +114,14 @@ class PlanStore:
     def __init__(self, path):
         self.connection = sqlite3.connect(path)
         try:
-            app = self.connection.execute('PRAGMA application_id').fetchone()[0]
-            tables = self.connection.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()
-            require(app == self.APPLICATION_ID or (app == 0 and not tables), 'PLAN_DATABASE', 'Choose a separate plan database')
-            version = self.connection.execute('PRAGMA user_version').fetchone()[0]
-            require(version <= 2, 'PLAN_VERSION', 'Plan database is from a newer application')
             with self.connection:
                 # Serialize schema migration and seed counters from old revisions.
                 self.connection.execute('BEGIN IMMEDIATE')
+                app = self.connection.execute('PRAGMA application_id').fetchone()[0]
+                tables = self.connection.execute("SELECT name FROM sqlite_master WHERE type='table'").fetchall()
+                require(app == self.APPLICATION_ID or (app == 0 and not tables), 'PLAN_DATABASE', 'Choose a separate plan database')
+                version = self.connection.execute('PRAGMA user_version').fetchone()[0]
+                require(version <= 2, 'PLAN_VERSION', 'Plan database is from a newer application')
                 self.connection.execute('CREATE TABLE IF NOT EXISTS plans (name TEXT, revision INTEGER, payload TEXT NOT NULL, PRIMARY KEY(name, revision))')
                 self.connection.execute('CREATE TABLE IF NOT EXISTS plan_versions (name TEXT PRIMARY KEY, last_revision INTEGER NOT NULL)')
                 self.connection.execute('INSERT OR IGNORE INTO plan_versions SELECT name, max(revision) FROM plans GROUP BY name')

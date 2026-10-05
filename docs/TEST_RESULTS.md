@@ -239,3 +239,84 @@ passed on Windows/Python 3.12.14. Those application tests were not rerun for thi
 documentation-only policy change. No remote CI, browser, game, provider or release pass is
 claimed by this checkpoint.
 
+
+
+## Phase 06 Part 01 — 2026-10-05
+
+Environment: Windows, bundled Python 3.12.14 / standard-library SQLite. No dependencies
+installed. Baseline main e90c295b38245e57cf53a017d96885a770ed399f: 238 tests passed
+in 10.576s before edits. Final implementation suite: 266 passed in 17.177s.
+Command: python -m unittest discover -q.
+
+28 new tests: 7 hand-calculated math acceptance, 13 recovery, 8 local HTTP/input recovery.
+Literal independent arithmetic derivations are in PHASE_06_VALIDATION.md; recovery tests
+exercise source preservation, copies/migrations, histories/WAL, stale revisions, foreign
+database refusal, sidecar protection, corrupted payload distinction and CLI exits.
+HTTP tests verify preserved inputs/previews, storage failures, malformed tokens/UTF-8/
+paths, guards/headers and a stalled-read inactivity timeout. They are not browser QA.
+
+python -m compileall -q aioncrafter tests: passed.
+python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json: passed,
+7 variants / 3 recipes. git diff --check passed during implementation; final manifest/
+bootstrap and fetched-tree evidence are recorded in delivery/phase-06-part-01.json.
+
+No arithmetic defect was found in the inspected paths. Fixed three reproduced storage/
+HTTP failures plus bounded-input/recovery edges. Sources and all new assertions are
+SYNTHETIC. No real-game pilot, provider integration, visual/keyboard QA, p95 benchmark,
+production security assessment, remote CI pass, merge or public release is claimed.
+
+Final documentation validation: bootstrap passed with 42 stable IDs and 124 checksums;
+9 tasks carry completion evidence and Gates A/B remain UNVERIFIED. Receipt diff leaves
+the tested code/tests, original brief/roadmap and older immutable continuation unchanged.
+A separate documented-command smoke passed: web CLI subprocess launch against the
+synthetic fixture, loopback GET, server stop, temporary plans backup and read-only check.
+This verifies local source-checkout commands only, not a distributed installation.
+
+
+## Phase 06 Part 02 — catalog export and recipe-change recovery (2026-10-05)
+
+Verified implementation checkpoint: `d01f575b2c4a88d802828820f0d1dd3f9c3f9ea7`,
+tree `9eeae62900aa741e386735dfa72a46279d65aa67`. The tree equals the prebuilt
+implementation tree. GitHub Actions run 37310693174 checked out that exact SHA on
+Ubuntu 24.04 / CPython 3.12.14 and completed successfully.
+
+- `python -m unittest discover -q`: **269 passed in 18.910s**.
+- `python -m compileall -q aioncrafter tests`: passed.
+- `python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json`: passed,
+  7 items / 3 recipes.
+- `python scripts/validate_bootstrap.py`: passed: 7 phases, 42 stable task IDs,
+  9 completed tasks with evidence, Gates A/B UNVERIFIED, 125 artifact checksums.
+- New recovery coverage: exact stored JSON export/checksum/release identity; overwrite and
+  missing/corrupt release refusal; changed-recipe publish/export/web startup; old plan and
+  journal catalog-digest rejection without mutation/remapping; restore to new catalog/plan/
+  ledger paths; recovery of original JSON, observation, calculation, plan/journal revisions
+  and ledger result.
+
+The runner emitted ResourceWarning messages for subprocess pipe handles while the complete
+suite still passed. No real provider, game/client pilot, visual/keyboard QA, performance
+benchmark, public release or production-security approval is implied by this CI pass.
+
+
+## Phase 06 Part 03 — source-checkout reproducibility and SYNTHETIC performance (2026-10-05)
+
+GitHub Actions run 37328773165 checked out exact implementation
+`0ad954dc2fcb5a564544fe397f81f09c7a7dc89c` on Linux x86_64 / CPython 3.12.14,
+AMD EPYC 7763 64-Core Processor, 4 logical CPUs.
+
+- `python -m unittest discover -q`: **271 passed in 16.036s**.
+- `python -m compileall -q aioncrafter tests scripts`: passed.
+- Two deterministic validation-only source-checkout ZIP builds were byte-identical:
+  SHA-256 `c03bac34b62271f5fbed3b16c488445cfc2712ba835de79b414ff52ac1718132`.
+- Isolated source install: archive extracted to a new directory, clean venv created,
+  synthetic catalog validation and bootstrap passed from the extracted checkout.
+- Benchmark: 250 warmups + 2,000 measured cached calculations; exactly one provider fetch.
+  p50 **0.386905 ms**, p95 **0.449492 ms**, p99 **0.521868 ms**, max **0.885099 ms**.
+  Proposed <300 ms p95 threshold met for this deterministic SYNTHETIC workload.
+- Synthetic catalog validation passed (release SYNTHETIC-demo-v1).
+- Bootstrap passed: 42 stable IDs, 131 artifact checksums, 9 completed tasks with evidence,
+  Gates A/B UNVERIFIED.
+
+The source archive declares license status unresolved and public_release=false; it is test
+evidence, not a released distribution. The benchmark is not pilot-data, provider, browser
+or overlay performance. No real-game pilot, visual/keyboard QA, release, deployment or
+production-security approval is claimed.

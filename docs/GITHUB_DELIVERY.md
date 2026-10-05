@@ -159,3 +159,74 @@ This protocol exists specifically so AionCrafter can continue safely across comp
 when a ChatGPT Work conversation is device-local or not visible elsewhere. Chat transcripts
 are helpful working context, but GitHub is the durable continuity source.
 
+
+
+## Phase 06 Part 01 — verified implementation and draft PR
+
+Verified starting main: e90c295b38245e57cf53a017d96885a770ed399f.
+Branch: phase/06-release; draft PR #8 https://github.com/T0rrag/AionCrafter/pull/8,
+base main. Historical PRs were not modified. Phase 06 remains IN_PROGRESS.
+
+Implementation 9f8128a84045f8ee1e24bd7c7d89b5efa984ff06, tree
+c8bc4bc7f5e22360f145b85be32c2b77f7d33774, parent equals starting main.
+266 local tests passed, compilation/catalog/diff checks passed and implementation
+bootstrap verified 42 IDs/122 hashes. GitHub tree creation matched the staged tree;
+HTTPS fetch returned the implementation SHA and complete tree comparison passed.
+PR read-back confirmed same head/base, draft=true and merged=false. Zero statuses,
+check runs, workflow runs and reviews were returned; no remote CI pass is claimed.
+
+Receipt: delivery/phase-06-part-01.json. The immutable continuation is
+continuations/phase-06-part-01-to-part-02-2026-10-05.md; NEXT_CHAT_PROMPT points there.
+A documentation-only receipt commit follows implementation, so fetch actual head.
+Its final manifest adds those two files. No merge/release/deployment or new-chat claim.
+
+
+## Phase 06 Part 02 — validated catalog export and recovery drill
+
+Starting branch head was `0f0c839ac93aebfef2841daadb4a3c18b2ec8db4`; main was
+`e90c295b38245e57cf53a017d96885a770ed399f`. PR #8 remained open, draft and
+unmerged. The branch was 2 commits ahead / 0 behind main before Part 02 writes.
+
+Implementation checkpoint `d01f575b2c4a88d802828820f0d1dd3f9c3f9ea7` has tree
+`9eeae62900aa741e386735dfa72a46279d65aa67`, equal to the prebuilt implementation
+tree. Publication used normal contents-API fast-forward commits after checking the expected
+head before each write; no force-push. A detached low-level commit created while diagnosing
+the connector's ref-update argument rejection was never attached to the branch and is not a
+delivery checkpoint.
+
+GitHub Actions run 37310693174 checked out the exact implementation SHA on Ubuntu 24.04 /
+Python 3.12.14 and succeeded: 269 tests in 18.910s, compileall, synthetic catalog
+validation (7 items/3 recipes) and bootstrap (42 stable IDs, 125 checksums, Gates A/B
+unchanged). This is remote CI evidence for the synthetic/local checkpoint.
+
+Delivered `export-catalog` validates stored release/checksum/payload identity, writes the
+exact stored JSON and refuses overwrite. The recovery drill changes a synthetic recipe,
+starts against the changed export, rejects old plan/journal digests without mutation, then
+restores prior catalog/plans/ledger to new paths and recovers observations, calculations,
+revision history and ledger result. p6-patches remains IN_PROGRESS for unavailable real
+provider health/version integration. No real pilot, visual QA, release or deployment.
+Part 02 receipt/continuation follow the tested implementation in documentation commits.
+
+
+## Phase 06 Part 03 — reproducible source-checkout and SYNTHETIC p95
+
+Starting remote head: cff1913271330ccb37fa47f71fb0cb279df44a71; main remained
+e90c295b38245e57cf53a017d96885a770ed399f. PR #8 was read back open, draft and
+unmerged before the fast-forward. Tested implementation:
+0ad954dc2fcb5a564544fe397f81f09c7a7dc89c, tree
+7ba2809b443efacb093069f16c98eb67e8c00868. Publication used a non-force ref
+fast-forward after an immediate expected-head read; the connector rejected its optional
+lease argument, so no force/lease bypass was used.
+
+GitHub Actions run 37328773165 on that exact SHA succeeded: 271 tests in 16.036s,
+compileall, two byte-identical source-checkout builds, isolated extracted-source validation,
+SYNTHETIC cached-calculation benchmark, catalog validation and bootstrap. Source archive
+SHA-256: c03bac34b62271f5fbed3b16c488445cfc2712ba835de79b414ff52ac1718132.
+Benchmark: 250 warmups / 2,000 samples, p95 0.449492 ms on CPython 3.12.14 / Linux x86_64 /
+AMD EPYC 7763 / 4 logical CPUs; proposed <300 ms target met for this SYNTHETIC workload.
+
+The archive declares unresolved license/public_release=false and is not uploaded as a
+release asset. p6-package remains IN_PROGRESS; p6-golive remains BLOCKED because pilot
+datasets, real workflows, deferred visual QA and other applicable evidence are absent.
+Receipt: delivery/phase-06-part-03.json. Immutable continuation advances to Part 04 on
+the same branch/PR for cross-environment source-install/update-removal evidence.

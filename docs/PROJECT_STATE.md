@@ -1,68 +1,68 @@
-# AionCrafter — Phase 04 manual groundwork
+# AionCrafter — Phase 06 manual-edition validation
 
-2026-10-04 · Brief v1.3 / ADR 0007 / ADR 0008. Phase 04 IN_PROGRESS.
-Gates A/B UNVERIFIED. All 42 backlog IDs preserved; one active Phase 04 writer.
+2026-10-05 · Brief v1.3 / ADR 0007–0010. Phase 06 IN_PROGRESS, Part 03 delivered.
+Gates A/B UNVERIFIED. All seven phases and 42 stable task IDs preserved.
 
-## Repository and delivery
+## Repository and verified checkpoint
 
 Repository: https://github.com/T0rrag/AionCrafter
-Merged branch: phase/04-crafting-intelligence. PR #6: https://github.com/T0rrag/AionCrafter/pull/6.
-Verified Part 01 receipt head: 88071d4cbd65df2f066310441c3231aea2173a04.
-Main before Part 02: 4f06404f1846f4d586dbbf71ae7e90b5a897435f.
-PR #6 is merged. Tested head: e34ddf478c63777a0e0555664337d7eed2900134.
-Merge on main: a185d0618cb315aa9468aec0de7716ccb1d56146.
-Read-back merged=true; fetched merge tree exactly matches the tested candidate.
-Receipt: delivery/phase-04-merge.json. Documentation receipt follows; fetch actual heads.
-User authorizes tested merges; no force-push, concurrent overwrite or check bypass.
+Active branch: phase/06-release; target main. Draft PR #8 remains open/unmerged.
+Verified base main at Part 03 start: e90c295b38245e57cf53a017d96885a770ed399f.
+Verified Part 02 documentation head: cff1913271330ccb37fa47f71fb0cb279df44a71.
 
-## Independent engineering delivered
+Part 03 tested implementation checkpoint:
+0ad954dc2fcb5a564544fe397f81f09c7a7dc89c, tree
+7ba2809b443efacb093069f16c98eb67e8c00868. GitHub Actions run 37328773165
+checked out that exact SHA and completed successfully on CPython 3.12.14. Documentation
+follows the tested implementation; the next writer must fetch actual heads before writing.
 
-Part 01: iterative deterministic recursive batches, shared-demand rounding, owned stock,
-coproducts/leftovers and bounded quantity-aware buy/craft comparisons; local saved plans.
-Part 02: one-attempt expected/downside scenarios with explicit probability/consumption
-evidence and separate independent-bonus contracts; source stock/volume distinctions;
-conditional rankings with explicit budget/profession/requirements/vendor/age filters;
-actual FIFO purchases/crafts/sales, unknown basis, exact allocations, failed-craft expense,
-estimate comparison, immutable SQLite revisions, local forms and lossless JSON transfer.
+## Delivered and tested
 
-p4-batches and p4-ledger COMPLETE for the independent engineering scope. p4-buycraft,
-p4-proc, p4-liquidity and p4-rank IN_PROGRESS pending validated real rule/catalog/market
-integration and acceptance. No global route optimum, repeat-attempt risk model, source
-verification or automatic provider activation is claimed. See PHASE_04_CRAFTING.md,
-PHASE_04_SCENARIOS_AND_LEDGER.md and handoffs/phase-04-part-02.md.
+- p6-mathqa remains COMPLETE from Part 01.
+- Part 02 recovery/export evidence remains intact; p6-patches stays IN_PROGRESS because
+  real-provider health/version integration is unavailable.
+- Part 03 adds a deterministic validation-only source-checkout ZIP builder. It uses a
+  fixed archive root/timestamp/mode, stable ordering and stored entries, excludes runtime
+  caches, refuses overwrite and embeds metadata that explicitly says license status is
+  unresolved and public_release=false. It does not create a wheel or public distribution.
+- Two independent builds on the exact implementation SHA were byte-identical with SHA-256
+  c03bac34b62271f5fbed3b16c488445cfc2712ba835de79b414ff52ac1718132.
+  CI extracted that archive into a clean directory, created a clean venv and validated
+  the SYNTHETIC catalog plus repository bootstrap from the extracted source tree.
+- The deterministic cached-calculation benchmark primes one SYNTHETIC provider fetch,
+  then measures PriceCache cached hits plus synthetic-bar item_economics. Run 37328773165
+  used 250 warmups and 2,000 measured samples on Linux x86_64 / CPython 3.12.14,
+  AMD EPYC 7763, 4 logical CPUs. p50=0.386905 ms, p95=0.449492 ms,
+  p99=0.521868 ms, max=0.885099 ms; the proposed <300 ms p95 threshold was met for
+  this SYNTHETIC workload only.
+- The same run passed 271 tests in 16.036s, compileall, synthetic catalog validation and
+  bootstrap with 42 stable IDs, 131 artifact checksums, 9 completed tasks with evidence
+  and Gates A/B unchanged.
 
-## Executed validation
+The brief's release performance criterion names pilot datasets. This synthetic benchmark
+does not satisfy that real-pilot requirement and is not provider/browser/overlay latency.
 
-Windows / Python 3.12.14: `python -m unittest discover -q` — 238 passed (21.480s).
-58 Part 02 tests: 14 stochastic, 8 liquidity, 14 ranking, 15 ledger, 7 HTTP form;
-ledger includes 60 conservation cases. Compilation and synthetic catalog validation
-passed; `git diff --check` passed. Pre-merge bootstrap validation passed: 42 IDs and 109 checksums.
-GitHub returned no reviews/comments/statuses/PR workflow runs; this is not a CI pass.
-Fixtures/evidence are SYNTHETIC only. No remote CI pass, visual QA or game pilot claim.
+## Remaining phase work and exact next task
 
-## Boundary and remaining evidence
+p6-patches/security/package remain IN_PROGRESS. p6-package now has reproducible Linux
+source-artifact and isolated-install evidence, but the redistribution-license decision
+and cross-environment source-install acceptance remain open. The next independent Part 04
+task is to validate the same source-checkout installation/update-removal path across
+declared Linux and Windows CI environments without publishing a package or inventing a
+license. Keep any environment-specific result explicit.
 
-PR #6 merge/receipt is verified. Next eligible independent work is Phase 06 manual
-release preparation in a separate Aion2 chat (ADR 0008). No Phase 06 application work
-starts here. Phase 04 remains incomplete for real-market integration. Phase 03 stays
-IN_PROGRESS with real adapter/reconciliation/activation BLOCKED; production quota/cache/
-transport integration pending. p1-catalog BLOCKED; Phase 05 DEFERRED; Gates A/B UNVERIFIED.
-Visual/keyboard QA remains deferred by the owner; no Chromium troubleshooting. Real-game
-pilot follows phase features. No public release until applicable quality evidence exists.
+p6-usertest is BLOCKED on permitted real data, a declared real market and 20 real
+workflows. p6-golive is BLOCKED on applicable pilot/quality evidence. Visual/keyboard QA
+remains deferred by the owner. Do not restart Chromium/cloud-browser troubleshooting.
 
-Phase 04 application writes stop at this handoff. No Phase 06 chat has been created or
-started by this checkpoint. Remote phase/06-release was absent at receipt time; recheck
-and create from current reviewed main if still absent. See handoffs/phase-04-to-phase-06.md.
+## Preserved earlier work and external blockers
 
-## Cross-device continuity policy
+Phase 04 manual groundwork is merged; p4-batches/p4-ledger COMPLETE for independent
+engineering, while p4-buycraft/proc/liquidity/rank remain IN_PROGRESS for real catalog/
+rule/market integration and acceptance. Phase 03 remains IN_PROGRESS with real adapter/
+reconciliation/activation BLOCKED. p1-catalog BLOCKED. Phase 05 DEFERRED.
+Gates A/B UNVERIFIED. No provider permission, quota, fee or probability is invented.
 
-AionCrafter development sessions now require a durable GitHub continuation before the
-writer stops. The moving entry point is `docs/NEXT_CHAT_PROMPT.md`; immutable prompts are
-stored under `docs/continuations/`. Missing/device-local ChatGPT history must not block
-recovery. The current immutable continuation is
-`docs/continuations/phase-04-to-phase-06-2026-10-05.md`.
-
-This policy changes no backlog status or gate. All 42 IDs are preserved; Gates A/B remain
-UNVERIFIED. The next engineering target remains Phase 06 manual-edition validation and
-guidance, with Phase 03 real integration/p1-catalog blocked and Phase 05 deferred.
-
+No public release, deployment, real-game pilot, visual QA, automatic-provider activation
+or production-security approval is claimed. GitHub is the durable continuity source; the
+next writer remains in Phase 06.
