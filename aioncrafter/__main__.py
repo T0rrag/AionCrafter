@@ -1,4 +1,4 @@
-"""Offline catalog validation/import commands; never contacts a provider."""
+"""Offline catalog validation/import/export commands; never contacts a provider."""
 import argparse
 import json
 from pathlib import Path
@@ -8,7 +8,7 @@ import sys
 from .catalog import MAX_IMPORT_BYTES, import_catalog
 from .codec import ValidationError, to_data
 from .storage import Store
-from .database import backup_database, check_database
+from .database import backup_database, check_database, export_catalog_release
 
 
 def main(argv=None):
@@ -26,6 +26,10 @@ def main(argv=None):
     rollback.add_argument("release_id")
     rollback.add_argument("--database", required=True)
     rollback.add_argument("--expect-active", required=True)
+    export = sub.add_parser('export-catalog', help='Export one validated stored catalog release to a new JSON file')
+    export.add_argument('--database', required=True, type=Path)
+    export.add_argument('--output', required=True, type=Path)
+    export.add_argument('--release-id', help='Stored release to export; omit to export the active release')
     check = sub.add_parser('check-database', help='Read-only schema and SQLite integrity check; no migration')
     check.add_argument('--database', required=True, type=Path)
     backup = sub.add_parser('backup', help='Verified per-file SQLite backup to a new path; never overwrites')
@@ -37,6 +41,8 @@ def main(argv=None):
             result = check_database(args.database)
         elif args.command == 'backup':
             result = backup_database(args.database, args.output)
+        elif args.command == 'export-catalog':
+            result = export_catalog_release(args.database, args.output, args.release_id)
         elif args.command in ("validate", "import"):
             with args.file.open("rb") as stream:
                 catalog = import_catalog(stream.read(MAX_IMPORT_BYTES + 1))
