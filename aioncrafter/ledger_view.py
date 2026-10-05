@@ -1,6 +1,7 @@
 """Local actual-record form; preview explicitly before writing a journal revision."""
 from dataclasses import replace
 from html import escape
+import sqlite3
 from uuid import uuid4
 
 from .codec import ValidationError, require
@@ -78,8 +79,9 @@ def ledger_page(catalog, form, token, database):
         if journal is not None:
             result = evaluate_journal(journal, catalog)
             form['journal_payload'] = encode_journal(journal).decode('utf-8')
-    except (ValidationError, ValueError) as exc:
-        notice = str(exc)
+    except (ValueError, sqlite3.Error, OSError) as exc:
+        notice = ('STORAGE_UNAVAILABLE: The operation could not be confirmed. The last valid preview is retained; reload the saved revision before retrying.'
+                  if isinstance(exc, (sqlite3.Error, OSError)) else str(exc))
         # Preserve the last valid preview; never turn a failed appended record into
         # a hidden payload that a later save could accidentally accept.
         try:

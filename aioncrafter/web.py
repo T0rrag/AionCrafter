@@ -2,6 +2,7 @@
 import argparse
 from dataclasses import replace
 import secrets
+import sqlite3
 from datetime import datetime, timezone
 from html import escape
 from http.server import BaseHTTPRequestHandler, HTTPServer
@@ -9,7 +10,7 @@ from pathlib import Path
 from urllib.parse import parse_qs, urlsplit
 
 from .crafting_view import crafting_controls, render_crafting
-from .catalog import import_catalog
+from .catalog import MAX_IMPORT_BYTES, import_catalog
 from .codec import ValidationError, require, dumps
 from .economics import SaleFees, amount, item_economics, materials_cost
 from .identity import Currency, FactionMode, MarketKind, MarketScope, PriceIdentity, normalize_alias
@@ -192,8 +193,15 @@ def handler(catalog, plan_database=None):
     reserved = {'action','csrf','plan_name','revision','favorite','import_data','import_format','confirm_delete','import_payload','reference_data','reference_payload'}
 
     class Handler(BaseHTTPRequestHandler):
+        request_timeout = 5
+
+        def setup(self):
+            super().setup()
+            self.connection.settimeout(self.request_timeout)
+
         def allowed_host(self):
-            return self.headers.get('Host') in (f'127.0.0.1:{self.server.server_port}', f'localhost:{self.server.server_port}')
+            return (len(self.headers.get_all('Host', [])) == 1 and
+                    self.headers.get('Host') in (f'127.0.0.1:{self.server.server_port}', f'localhost:{self.server.server_port}'))
 
         def page(self, form=None, *, notice='', observations=None):
             form = form or {}
@@ -208,8 +216,12 @@ def handler(catalog, plan_database=None):
             if form.get('import_payload'):
                 controls += '<input type="hidden" name="import_payload" value="' + escape(form['import_payload'], quote=True) + '">'
             if plan_database:
-                with PlanStore(plan_database) as store:
-                    plans = store.list()
+                try:
+                    with PlanStore(plan_database) as store:
+                        plans = store.list()
+                except (ValidationError, sqlite3.Error, OSError):
+                    plans = ()
+                    notice = 'STORAGE_UNAVAILABLE: Saved plans cannot be opened. Unsaved inputs are retained; check the database and restore a backup before retrying.'
                 controls += '<fieldset><legend>Local saved plans</legend><p>Save prices, market settings, quantities, inventory and cost records on this computer. Export before deleting.</p>'
                 controls += '<label>Plan name<input name="plan_name" value="' + escape(form.get('plan_name',''), quote=True) + '"></label>'
                 controls += '<input type="hidden" name="revision" value="' + escape(form.get('revision','0'), quote=True) + '">'
@@ -227,11 +239,16 @@ def handler(catalog, plan_database=None):
             if not self.allowed_host():
                 self.send_error(403)
                 return
-            if urlsplit(self.path).path == '/ledger':
+            try:
+                path = urlsplit(self.path).path
+            except ValueError:
+                self.send_error(400, 'Invalid request path')
+                return
+            if path == '/ledger':
                 html, _ = ledger_page(catalog, {}, token, str(plan_database) + '.ledger.sqlite3' if plan_database else None)
                 self.reply(html)
                 return
-            if urlsplit(self.path).path != '/':
+            if path != '/':
                 self.send_error(404)
                 return
             self.page()
@@ -241,15 +258,19 @@ def handler(catalog, plan_database=None):
                 self.send_error(403)
                 return
             try:
+                require(not self.headers.get_all('Transfer-Encoding') and len(self.headers.get_all('Content-Length', [])) == 1,
+                        'REQUEST_LENGTH', 'Send one explicit Content-Length without Transfer-Encoding')
                 size = int(self.headers.get('Content-Length', '0'))
                 if not 0 < size <= (1024 * 1024 if plan_database else 65536):
                     self.send_error(413)
                     return
-                data = parse_qs(self.rfile.read(size).decode('utf-8'), keep_blank_values=True, max_num_fields=200)
+                body = self.rfile.read(size)
+                require(len(body) == size, 'REQUEST_LENGTH', 'Incomplete form body')
+                data = parse_qs(body.decode('utf-8'), keep_blank_values=True, max_num_fields=200, errors='strict')
                 require(all(len(v) == 1 for v in data.values()), 'DUPLICATE_FIELD', 'Form fields repeat')
                 form = {k:v[0] for k,v in data.items()}
                 if urlsplit(self.path).path == '/ledger':
-                    require(secrets.compare_digest(form.get('csrf',''), token), 'CSRF', 'Reload before changing journal records')
+                    require(form.get('csrf','').isascii() and secrets.compare_digest(form.get('csrf',''), token), 'CSRF', 'Reload before changing journal records')
                     payload, exported = ledger_page(catalog, form, token, str(plan_database) + '.ledger.sqlite3' if plan_database else None)
                     self.reply(payload, content_type='application/json' if exported else 'text/html; charset=utf-8',
                                filename='aioncrafter-journal.json' if exported else None)
@@ -271,7 +292,7 @@ def handler(catalog, plan_database=None):
                     self.page(form)
                     return
                 require(plan_database is not None, 'PLAN_STORAGE', 'Saved plans are disabled')
-                require(secrets.compare_digest(form.get('csrf',''), token), 'CSRF', 'Reload this page before changing saved plans')
+                require(form.get('csrf','').isascii() and secrets.compare_digest(form.get('csrf',''), token), 'CSRF', 'Reload this page before changing saved plans')
                 if action == 'reset':
                     self.page(notice='Unsaved form reset. Saved plans retained.')
                     return
@@ -309,8 +330,13 @@ def handler(catalog, plan_database=None):
                     form['revision'] = str(revision)
                     form.pop('import_payload', None)
                     self.page(form, notice='Saved locally at revision ' + str(revision), observations=observations)
+            except TimeoutError:
+                self.send_error(408, 'Form upload timed out; retry the request')
             except (ValueError, UnicodeError) as exc:
                 self.page(form if 'form' in locals() else None, notice=str(exc))
+            except (sqlite3.Error, OSError):
+                self.page(form if 'form' in locals() else None,
+                          notice='STORAGE_UNAVAILABLE: The operation could not be confirmed. Unsaved inputs are retained; reload the saved revision before retrying.')
 
         def reply(self, text, *, content_type='text/html; charset=utf-8', filename=None):
             payload = text if type(text) is bytes else text.encode('utf-8')
@@ -320,6 +346,8 @@ def handler(catalog, plan_database=None):
             if filename:
                 self.send_header('Content-Disposition', 'attachment; filename="' + filename + '"')
             self.send_header('Cache-Control', 'no-store')
+            self.send_header('X-Content-Type-Options', 'nosniff')
+            self.send_header('Referrer-Policy', 'no-referrer')
             self.send_header('Content-Security-Policy', "default-src 'none'; style-src 'unsafe-inline'; form-action 'self'; frame-ancestors 'none'")
             self.end_headers()
             self.wfile.write(payload)
@@ -332,7 +360,8 @@ def main():
     parser.add_argument('--port', type=int, default=8765)
     parser.add_argument('--plans', type=Path, default=Path('local-data/plans.sqlite3'))
     args = parser.parse_args()
-    catalog = import_catalog(args.catalog.read_bytes())
+    with args.catalog.open('rb') as stream:
+        catalog = import_catalog(stream.read(MAX_IMPORT_BYTES + 1))
     print(f'Local calculator: http://127.0.0.1:{args.port} ({catalog.scope.dataset_kind.value})', flush=True)
     args.plans.parent.mkdir(parents=True, exist_ok=True)
     with HTTPServer(('127.0.0.1', args.port), handler(catalog, str(args.plans))) as server:

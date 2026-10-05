@@ -3,7 +3,7 @@
   "schemaVersion": 1,
   "roadmapVersion": "1.1",
   "researchDate": "2026-10-04",
-  "exportedAt": "2026-10-04T16:02:28.466127+00:00",
+  "exportedAt": "2026-10-05T08:52:41.142145+00:00",
   "completed": [
     "p0-audit",
     "p1-identity",
@@ -12,9 +12,10 @@
     "p1-validate",
     "p1-storage",
     "p4-batches",
-    "p4-ledger"
+    "p4-ledger",
+    "p6-mathqa"
   ],
-  "notes": "Phase 04 manual groundwork merged: 238 tests passed; p4-batches/p4-ledger engineering complete, other Phase 04 tasks IN_PROGRESS for real evidence/integration. PR #6 merged at a185d0618cb315aa9468aec0de7716ccb1d56146. Next independent Phase 06 after receipt, separate Aion2 chat. Gates A/B UNVERIFIED; p1-catalog BLOCKED; Phase 03 incomplete; Phase 05 DEFERRED. All 42 IDs preserved.",
+  "notes": "Phase 06 Part01: 266 local synthetic tests pass; p6-mathqa COMPLETE, p6-patches/security/package IN_PROGRESS; p6-usertest/golive BLOCKED. No release. Phase04 groundwork preserved; p1-catalog and Phase03 real integration blocked; Phase05 deferred; Gates A/B UNVERIFIED. All 42 IDs unchanged.",
   "theme": "dark",
   "language": "es"
 }

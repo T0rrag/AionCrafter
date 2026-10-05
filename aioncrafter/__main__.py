@@ -8,6 +8,7 @@ import sys
 from .catalog import MAX_IMPORT_BYTES, import_catalog
 from .codec import ValidationError, to_data
 from .storage import Store
+from .database import backup_database, check_database
 
 
 def main(argv=None):
@@ -25,9 +26,18 @@ def main(argv=None):
     rollback.add_argument("release_id")
     rollback.add_argument("--database", required=True)
     rollback.add_argument("--expect-active", required=True)
+    check = sub.add_parser('check-database', help='Read-only schema and SQLite integrity check; no migration')
+    check.add_argument('--database', required=True, type=Path)
+    backup = sub.add_parser('backup', help='Verified per-file SQLite backup to a new path; never overwrites')
+    backup.add_argument('--database', required=True, type=Path)
+    backup.add_argument('--output', required=True, type=Path)
     args = parser.parse_args(argv)
     try:
-        if args.command in ("validate", "import"):
+        if args.command == 'check-database':
+            result = check_database(args.database)
+        elif args.command == 'backup':
+            result = backup_database(args.database, args.output)
+        elif args.command in ("validate", "import"):
             with args.file.open("rb") as stream:
                 catalog = import_catalog(stream.read(MAX_IMPORT_BYTES + 1))
             result = {"release_id": catalog.release_id, "dataset_kind": catalog.scope.dataset_kind.value,

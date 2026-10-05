@@ -239,3 +239,28 @@ passed on Windows/Python 3.12.14. Those application tests were not rerun for thi
 documentation-only policy change. No remote CI, browser, game, provider or release pass is
 claimed by this checkpoint.
 
+
+
+## Phase 06 Part 01 — 2026-10-05
+
+Environment: Windows, bundled Python 3.12.14 / standard-library SQLite. No dependencies
+installed. Baseline main e90c295b38245e57cf53a017d96885a770ed399f: 238 tests passed
+in 10.576s before edits. Final implementation suite: 266 passed in 17.177s.
+Command: python -m unittest discover -q.
+
+28 new tests: 7 hand-calculated math acceptance, 13 recovery, 8 local HTTP/input recovery.
+Literal independent arithmetic derivations are in PHASE_06_VALIDATION.md; recovery tests
+exercise source preservation, copies/migrations, histories/WAL, stale revisions, foreign
+database refusal, sidecar protection, corrupted payload distinction and CLI exits.
+HTTP tests verify preserved inputs/previews, storage failures, malformed tokens/UTF-8/
+paths, guards/headers and a stalled-read inactivity timeout. They are not browser QA.
+
+python -m compileall -q aioncrafter tests: passed.
+python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json: passed,
+7 variants / 3 recipes. git diff --check passed during implementation; final manifest/
+bootstrap and fetched-tree evidence are recorded in delivery/phase-06-part-01.json.
+
+No arithmetic defect was found in the inspected paths. Fixed three reproduced storage/
+HTTP failures plus bounded-input/recovery edges. Sources and all new assertions are
+SYNTHETIC. No real-game pilot, provider integration, visual/keyboard QA, p95 benchmark,
+production security assessment, remote CI pass, merge or public release is claimed.

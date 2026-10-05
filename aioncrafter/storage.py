@@ -6,6 +6,7 @@ import sqlite3
 
 from .catalog import validate_catalog
 from .codec import dumps, loads, require
+from .database import CATALOG_APPLICATION_ID, CATALOG_V1, CATALOG_V2, schema_matches
 from .models import Calculation, Catalog, PriceObservation
 
 SCHEMA_VERSION = 2
@@ -77,10 +78,16 @@ class Store:
         with self._transaction():
             version = self.connection.execute("PRAGMA user_version").fetchone()[0]
             require(version <= SCHEMA_VERSION, "STORAGE_VERSION", "Database was created by a newer application")
+            app = self.connection.execute('PRAGMA application_id').fetchone()[0]
+            expected = {0: {}, 1: CATALOG_V1, 2: CATALOG_V2}.get(version)
+            require(app in (0, CATALOG_APPLICATION_ID) and expected is not None
+                    and schema_matches(self.connection, expected),
+                    'STORAGE_DATABASE', 'Choose a separate catalog database with a supported schema')
             for target in range(version + 1, SCHEMA_VERSION + 1):
                 for statement in MIGRATIONS[target]:
                     self.connection.execute(statement)
                 self.connection.execute(f"PRAGMA user_version={target}")
+            self.connection.execute(f'PRAGMA application_id={CATALOG_APPLICATION_ID}')
 
     @property
     def active_release_id(self) -> str | None:

@@ -2,8 +2,8 @@
   "schema_version": 1,
   "project": "AionCrafter",
   "brief_version": "1.3",
-  "checkpoint_date": "2026-10-04",
-  "publication_status": "PUBLISHED",
+  "checkpoint_date": "2026-10-05",
+  "publication_status": "LOCAL_TESTED",
   "intended_repository": "T0rrag/AionCrafter",
   "gates": {
     "A": "UNVERIFIED",
@@ -343,71 +343,69 @@
     {
       "phase": "06",
       "title": "Validate, release & maintain",
-      "status": "NOT_STARTED",
+      "status": "IN_PROGRESS",
       "tasks": [
         {
           "id": "p6-mathqa",
           "priority": "P0",
           "title": "Pass the calculation regression suite",
           "description": "Cover multi-output recipes, batch rounding, shared ingredients, fees, missing/zero values, unknown proc rates and non-tradable outputs. Verify exact monetary rounding.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "COMPLETE",
+          "evidence": "tests/test_math_acceptance.py: seven independent hand-calculated SYNTHETIC cases with nine currency-scale/rounding combinations; existing regression suite retained. 266 tests passed on Windows/Python 3.12.14. PHASE_06_VALIDATION.md derives literal totals; no real-game correctness claim."
         },
         {
           "id": "p6-usertest",
           "priority": "P0",
           "title": "Complete both workflows with pilot users",
           "description": "Use 20 real cases in one declared market. Verify materials, quantity, source age, listing interpretation and fee assumptions against the game; document unresolved discrepancies.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "BLOCKED",
+          "evidence": "Permitted real 100-item/25-recipe catalog, declared pilot market and 20 real workflows are unavailable; p1-catalog BLOCKED. Synthetic/HTTP tests do not satisfy real-user pilot. Owner deferred game testing until feature work."
         },
         {
           "id": "p6-patches",
           "priority": "P0",
           "title": "Make patch and outage handling recoverable",
           "description": "Version recipes, provider schemas and pricing rules. Add migration tests, provider health reporting and rollback to the last known-good data release.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "database.py/CLI: read-only structure/integrity checks and verified no-overwrite per-file SQLite backups; 13 recovery tests cover history, legacy migrations on copies, rollback, WAL, counters, invalid sources and preserved destination sidecars. Existing synthetic outage/quota tests pass. Part02 catalog JSON export/recipe-change launch recovery and real-provider integration remain pending."
         },
         {
           "id": "p6-security",
           "priority": "P0",
           "title": "Review secrets, privacy and input handling",
           "description": "Keep provider credentials server-side; minimize collected data. Validate imported files and API input, restrict desktop privileges and document retention/deletion behavior.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "Focused read-only review reproduced cross-store migration, corrupt-storage HTTP disconnect and non-ASCII CSRF exception; fixes plus 8 local HTTP recovery/input tests pass. Bounded catalog reads, transactional plan guards, retention/privacy guidance. Broader security/release review and any future provider/desktop scope remain pending; no production-security claim."
         },
         {
           "id": "p6-package",
           "priority": "P1",
           "title": "Publish installation and operating guidance",
           "description": "Include supported clients/markets, update procedure, known limitations, data attribution, licensing and non-affiliation notice. Sign desktop releases when applicable.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "IN_PROGRESS",
+          "evidence": "MANUAL_EDITION_GUIDE.md and current README document source checkout, synthetic-only support, updates, backup/restore, retention, attribution, licensing gap and non-affiliation. Reproducible packaging, license decision and cross-environment installation evidence remain pending."
         },
         {
           "id": "p6-golive",
           "priority": "P0",
           "title": "Run the release checklist and label the edition",
           "description": "Manual edition can ship without Gate A. Automatic-price and Overwolf editions require their respective gates plus quality checks. Archive the evidence supporting each public claim.",
-          "status": "NOT_STARTED",
-          "evidence": null
+          "status": "BLOCKED",
+          "evidence": "PHASE_06_VALIDATION.md maps release criteria to actual evidence. Real catalog/pilot, deferred visual/keyboard QA, performance and packaging acceptance remain open. Manual edition NOT RELEASED; optional Gates A/B remain UNVERIFIED."
         }
       ]
     }
   ],
-  "branch": "phase/03-market-prices",
+  "branch": "phase/06-release",
   "base_branch": "main",
-  "local_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
-  "pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
-  "verified_implementation_sha": "995c19fcbb8f3d1627602f41068d379be94b7837",
-  "remote_base_sha": "81f6493999b6bca1e86cd621e7815f7d05944020",
+  "local_base_sha": "e90c295b38245e57cf53a017d96885a770ed399f",
+  "pr_url": null,
+  "verified_implementation_sha": null,
+  "remote_base_sha": "e90c295b38245e57cf53a017d96885a770ed399f",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
-  "checkpoint_part": "02",
-  "next_eligible_phase": "04",
-  "next_phase_dependency_note": "ADR 0007: user authorized tested phase merges/autonomous continuation. PR #5 merged; next independent Phase 04 starts p4-batches in separate Aion2 chat. Phase 03 integration blocked, Gates A/B UNVERIFIED.",
-  "checkpoint_label": "Phase 03 groundwork merged; Phase 04 next",
-  "next_development_branch": "phase/04-crafting-intelligence",
-  "merged_pr_url": "https://github.com/T0rrag/AionCrafter/pull/5",
-  "verified_merge_sha": "bd23f4166ffe276179843761dea8e95275efbce1"
+  "checkpoint_part": "01",
+  "next_eligible_phase": "06",
+  "next_phase_dependency_note": "Continue Phase 06 Part02 p6-patches catalog JSON export and recipe-change recovery; no new phase or provider activation.",
+  "checkpoint_label": "Phase 06 Part01 manual validation, recovery and guidance; public release blocked",
+  "next_development_branch": "phase/06-release"
 }
