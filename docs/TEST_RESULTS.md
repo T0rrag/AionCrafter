@@ -218,3 +218,24 @@ Phase 04 merge verification: published e34ddf478c63777a0e0555664337d7eed2900134 
 tree. PR #6 merge a185d0618cb315aa9468aec0de7716ccb1d56146 was fetched and also matched exactly.
 No code changes after the final 238-test run. GitHub returned empty PR workflow/status/
 review/comment lists; not a CI pass. Final receipt manifest is validated separately.
+
+## Cross-device continuation policy - 2026-10-05
+
+Documentation-only repository policy checkpoint. No application code, backlog status or gate
+state changed. Verified the starting main commit was
+`92e533519bf29a729f706710b75616b09d685c89`; `phase/06-release` was absent before
+creating the documentation branch.
+
+Repository consistency checks for this checkpoint:
+- all 42 stable backlog IDs are preserved and Gates A/B remain UNVERIFIED;
+- the new immutable continuation names the verified Phase 04 tested head/merge and the exact
+  Phase 06 next task without claiming a newer implementation SHA;
+- NEXT_CHAT_PROMPT points to that immutable continuation and requires a fresh remote-head check;
+- AGENTS and ADR 0009 make continuation publication mandatory before a development chat stops;
+- ARTIFACT_MANIFEST is refreshed after these documentation writes.
+
+The prior Phase 04 application validation remains the applicable code baseline: 238 tests
+passed on Windows/Python 3.12.14. Those application tests were not rerun for this
+documentation-only policy change. No remote CI, browser, game, provider or release pass is
+claimed by this checkpoint.
+
