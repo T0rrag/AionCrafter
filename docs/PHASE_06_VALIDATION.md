@@ -1,4 +1,4 @@
-# Phase 06 — Manual-edition validation, Part 01
+# Phase 06 — Manual-edition validation, Parts 01–02
 
 2026-10-05. All new fixtures are **SYNTHETIC**. Monetary values in the tables below
 are integer minor currency units unless written as decimal input strings. Fractions
@@ -50,7 +50,7 @@ is configured or contacted. The guide describes manual-mode operation during an 
 | Catalog identity/recipes | Synthetic contracts pass; permitted real 100-item/25-recipe pilot BLOCKED with p1-catalog. |
 | Both workflows | Existing local HTTP behavior and owner acceptance retained; 20 real pilot cases BLOCKED. |
 | Provenance/completeness | Library and form regressions preserve source/time/scope/unknowns; visual and real-source acceptance pending. |
-| Failure/recovery | Per-file backup/restore and migrated-copy drills pass; changed-catalog JSON launch/plan compatibility drill remains Part 02 work. Production provider outage integration blocked. |
+| Failure/recovery | Per-file backup/restore plus validated stored-catalog JSON export and the Part 02 changed-recipe launch/compatibility/restore drill pass. Prior plans/journals reject mismatched catalog digests without remapping; original observations, revisions and results recover from last-known-good copies. Production provider outage integration remains blocked. |
 | Security/privacy | Focused source/input/storage review and regressions completed; single-user local scope. This is not a comprehensive independent security audit. |
 | Installation/operations | Source-checkout instructions, retention and recovery guidance published with this checkpoint; reproducible distribution/license decision and cross-environment install acceptance pending. |
 | Performance | No p95 or declared pilot-hardware performance result measured here. |
@@ -60,3 +60,25 @@ is configured or contacted. The guide describes manual-mode operation during an 
 Manual edition is **NOT RELEASED**: applicable pilot/quality evidence remains open.
 No remote CI, real-market reconciliation, anti-cheat safety or production-security
 approval is implied by the local tests. Phase 06 remains IN_PROGRESS.
+
+
+## Part 02 catalog-change evidence
+
+`export-catalog` reads a recognized catalog database without migration and exports either
+the active or an explicitly selected stored release to a new JSON path. Before writing it
+checks the stored SHA-256, strict catalog validity and equality between the row release ID
+and payload release ID; after writing it rechecks the digest. Existing destinations are
+refused and partial files created by the command are removed on failure.
+
+The end-to-end synthetic drill changes recipe requirements under a new release ID, publishes
+and exports that release, starts the local web process with the changed JSON, and confirms
+that a pre-change plan and journal are rejected by their existing digest contracts. Database
+rows are compared before/after rejection to prove no automatic remap. Backups are restored
+to new paths, the original release is exported again byte-for-byte, and the original
+observation, calculation, plan revision 2, journal revision 2 and evaluated ledger result
+are recovered.
+
+GitHub Actions run 37310693174 on implementation `d01f575b2c4a88d802828820f0d1dd3f9c3f9ea7`
+passed 269 tests, compileall, synthetic catalog validation and bootstrap on Python 3.12.14.
+This closes the specifically planned Part 02 recovery drill, not the whole p6-patches task:
+real provider health/version integration and the real pilot remain unavailable.
