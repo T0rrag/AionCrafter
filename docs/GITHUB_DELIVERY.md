@@ -179,3 +179,30 @@ Receipt: delivery/phase-06-part-01.json. The immutable continuation is
 continuations/phase-06-part-01-to-part-02-2026-10-05.md; NEXT_CHAT_PROMPT points there.
 A documentation-only receipt commit follows implementation, so fetch actual head.
 Its final manifest adds those two files. No merge/release/deployment or new-chat claim.
+
+
+## Phase 06 Part 02 — validated catalog export and recovery drill
+
+Starting branch head was `0f0c839ac93aebfef2841daadb4a3c18b2ec8db4`; main was
+`e90c295b38245e57cf53a017d96885a770ed399f`. PR #8 remained open, draft and
+unmerged. The branch was 2 commits ahead / 0 behind main before Part 02 writes.
+
+Implementation checkpoint `d01f575b2c4a88d802828820f0d1dd3f9c3f9ea7` has tree
+`9eeae62900aa741e386735dfa72a46279d65aa67`, equal to the prebuilt implementation
+tree. Publication used normal contents-API fast-forward commits after checking the expected
+head before each write; no force-push. A detached low-level commit created while diagnosing
+the connector's ref-update argument rejection was never attached to the branch and is not a
+delivery checkpoint.
+
+GitHub Actions run 37310693174 checked out the exact implementation SHA on Ubuntu 24.04 /
+Python 3.12.14 and succeeded: 269 tests in 18.910s, compileall, synthetic catalog
+validation (7 items/3 recipes) and bootstrap (42 stable IDs, 125 checksums, Gates A/B
+unchanged). This is remote CI evidence for the synthetic/local checkpoint.
+
+Delivered `export-catalog` validates stored release/checksum/payload identity, writes the
+exact stored JSON and refuses overwrite. The recovery drill changes a synthetic recipe,
+starts against the changed export, rejects old plan/journal digests without mutation, then
+restores prior catalog/plans/ledger to new paths and recovers observations, calculations,
+revision history and ledger result. p6-patches remains IN_PROGRESS for unavailable real
+provider health/version integration. No real pilot, visual QA, release or deployment.
+Part 02 receipt/continuation follow the tested implementation in documentation commits.
