@@ -1,4 +1,4 @@
-# Phase 06 — Manual-edition validation, Parts 01–02
+# Phase 06 — Manual-edition validation, Parts 01–03
 
 2026-10-05. All new fixtures are **SYNTHETIC**. Monetary values in the tables below
 are integer minor currency units unless written as decimal input strings. Fractions
@@ -52,14 +52,14 @@ is configured or contacted. The guide describes manual-mode operation during an 
 | Provenance/completeness | Library and form regressions preserve source/time/scope/unknowns; visual and real-source acceptance pending. |
 | Failure/recovery | Per-file backup/restore plus validated stored-catalog JSON export and the Part 02 changed-recipe launch/compatibility/restore drill pass. Prior plans/journals reject mismatched catalog digests without remapping; original observations, revisions and results recover from last-known-good copies. Production provider outage integration remains blocked. |
 | Security/privacy | Focused source/input/storage review and regressions completed; single-user local scope. This is not a comprehensive independent security audit. |
-| Installation/operations | Source-checkout instructions, retention and recovery guidance published with this checkpoint; reproducible distribution/license decision and cross-environment install acceptance pending. |
-| Performance | No p95 or declared pilot-hardware performance result measured here. |
+| Installation/operations | Part 03 builds a deterministic validation-only source-checkout ZIP twice, proves byte equality, extracts it into a clean directory and validates it from a clean venv on the declared Linux CI runner. License/distribution decision and cross-environment source-install acceptance remain pending. |
+| Performance | Part 03 SYNTHETIC cached-calculation benchmark: 250 warmups + 2,000 samples, p95 0.449492 ms on CPython 3.12.14 / Linux x86_64 / AMD EPYC 7763 / 4 logical CPUs. This meets the proposed <300 ms threshold for that workload only; the brief requires pilot datasets for release acceptance, which remain blocked. |
 | Localization/accessibility/display | Visual/keyboard/layout QA deferred by owner; no new browser attempt. Roadmap's original content preserved. |
 | Automatic-price/overlay | Gates A/B UNVERIFIED; real adapter blocked, Phase 05 deferred. These optional gates alone do not bar a manual release. |
 
 Manual edition is **NOT RELEASED**: applicable pilot/quality evidence remains open.
-No remote CI, real-market reconciliation, anti-cheat safety or production-security
-approval is implied by the local tests. Phase 06 remains IN_PROGRESS.
+Remote CI evidence exists for the explicitly identified Phase 06 implementation runs; it does
+not imply real-market reconciliation, anti-cheat safety or production-security approval. Phase 06 remains IN_PROGRESS.
 
 
 ## Part 02 catalog-change evidence
@@ -82,3 +82,33 @@ GitHub Actions run 37310693174 on implementation `d01f575b2c4a88d802828820f0d1dd
 passed 269 tests, compileall, synthetic catalog validation and bootstrap on Python 3.12.14.
 This closes the specifically planned Part 02 recovery drill, not the whole p6-patches task:
 real provider health/version integration and the real pilot remain unavailable.
+
+
+## Part 03 reproducible source-checkout and SYNTHETIC performance evidence
+
+Implementation `0ad954dc2fcb5a564544fe397f81f09c7a7dc89c` adds
+`scripts/build_source_checkout.py`, `scripts/benchmark_cached_calculation.py` and
+`tests/test_phase06_package_performance.py`. The source builder is deliberately not a
+wheel/installer/release: it creates an internal validation ZIP from the source checkout,
+fixes archive metadata/order, excludes runtime caches, refuses overwrite and writes
+`SOURCE_ARTIFACT.json` with `license_status=unresolved` and `public_release=false`.
+
+GitHub Actions run 37328773165 checked out that exact SHA. Two builds were byte-identical:
+SHA-256 `c03bac34b62271f5fbed3b16c488445cfc2712ba835de79b414ff52ac1718132`.
+The workflow extracted the archive into a fresh directory, created a fresh virtual
+environment and successfully ran synthetic catalog validation plus bootstrap from the
+extracted source tree.
+
+The performance workload is intentionally narrow and deterministic: one provider fetch
+primes `PriceCache`; measured operations must then be cache hits and execute
+`item_economics` for the deterministic `synthetic-bar` fixture. Environment:
+GitHub Actions Linux x86_64, Linux 6.17.0-1022-azure/glibc 2.39, CPython 3.12.14,
+AMD EPYC 7763 64-Core Processor, 4 logical CPUs. With 250 warmup iterations and
+2,000 measured samples: p50 0.386905 ms, p95 0.449492 ms, p99 0.521868 ms,
+max 0.885099 ms; exactly one provider call occurred and the proposed <300 ms p95
+threshold was met.
+
+This is **SYNTHETIC local-computation evidence**, not a pilot dataset, live provider,
+browser rendering or overlay measurement. Therefore it does not close p6-golive or the
+brief's pilot-dataset performance acceptance. p6-package also remains IN_PROGRESS because
+the redistribution-license decision and cross-environment source-install evidence are open.

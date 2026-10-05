@@ -4,9 +4,10 @@ A local, provider-independent crafting calculator with exact money, explicit mis
 prices, recursive batches, bounded buy/craft comparisons, one-attempt scenarios and
 an optional FIFO actual-results ledger. Bundled data is **SYNTHETIC ONLY**.
 
-Active work: **Phase 06, Part 01 — validation and recovery**. The manual edition is
-not released. Real catalog/market integration remains incomplete, Phase 05 overlay is
-deferred, and Gates A/B are UNVERIFIED. No game service is connected.
+Active work: **Phase 06, Part 03 delivered — validation and source-checkout evidence**.
+The manual edition is not released. Part 04 continues cross-environment installation
+evidence; real catalog/market integration remains incomplete, Phase 05 overlay is deferred,
+and Gates A/B are UNVERIFIED. No game service is connected.
 
 ## Run locally
 
@@ -15,6 +16,8 @@ From this directory (Windows launcher users can use `py -3.12`):
 
 ```text
 python -m unittest discover -q
+python scripts/build_source_checkout.py --output /tmp/aioncrafter-source.zip
+python scripts/benchmark_cached_calculation.py --warmup 250 --samples 2000 --target-p95-ms 300
 python scripts/validate_bootstrap.py
 python -m aioncrafter validate tests/fixtures/SYNTHETIC-catalog-v1.json
 python -m aioncrafter.web --catalog tests/fixtures/SYNTHETIC-catalog-v1.json
@@ -41,8 +44,9 @@ and copy supported databases without migrating the source or overwriting destina
 
 Tax, probabilities, eligibility and rounding are explicit assumptions until supported
 by real evidence. Source time never becomes newer merely because a record is reloaded.
-Unsold stock is not realized revenue. Synthetic tests are not real-game acceptance,
-browser visual QA, a remote CI pass or permission to enable automatic prices.
+Unsold stock is not realized revenue. Synthetic tests are not real-game acceptance or browser visual QA and do not permit
+automatic prices. Phase 06 Part 03 does have remote CI evidence for its exact SYNTHETIC
+source-checkout and cached-calculation workload; that evidence is not pilot performance.
 
 ## Continue development
 

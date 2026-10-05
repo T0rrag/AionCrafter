@@ -383,7 +383,7 @@
           "title": "Publish installation and operating guidance",
           "description": "Include supported clients/markets, update procedure, known limitations, data attribution, licensing and non-affiliation notice. Sign desktop releases when applicable.",
           "status": "IN_PROGRESS",
-          "evidence": "MANUAL_EDITION_GUIDE.md and current README document source checkout, synthetic-only support, updates, backup/restore, retention, attribution, licensing gap and non-affiliation. Reproducible packaging, license decision and cross-environment installation evidence remain pending."
+          "evidence": "MANUAL_EDITION_GUIDE.md/README document source checkout, synthetic-only scope, updates, recovery, retention, attribution, licensing gap and non-affiliation. Part03 implementation 0ad954dc... adds deterministic validation-only source ZIP plus isolated clean-venv install; GitHub Actions run 37328773165 built two byte-identical archives (SHA-256 c03bac34...8132) and validated the extracted source. License decision and cross-environment source-install evidence remain pending; no public package."
         },
         {
           "id": "p6-golive",
@@ -391,7 +391,7 @@
           "title": "Run the release checklist and label the edition",
           "description": "Manual edition can ship without Gate A. Automatic-price and Overwolf editions require their respective gates plus quality checks. Archive the evidence supporting each public claim.",
           "status": "BLOCKED",
-          "evidence": "PHASE_06_VALIDATION.md maps release criteria to actual evidence. Real catalog/pilot, deferred visual/keyboard QA, performance and packaging acceptance remain open. Manual edition NOT RELEASED; optional Gates A/B remain UNVERIFIED."
+          "evidence": "PHASE_06_VALIDATION.md maps release criteria to evidence. Part03 SYNTHETIC cached-calculation run 37328773165 measured 250 warmups/2000 samples, p95 0.449492 ms on CPython 3.12.14/Linux/AMD EPYC 7763 and met the proposed <300 ms threshold for that workload. Brief release performance requires pilot datasets; real catalog/pilot, deferred visual/keyboard QA, license/cross-environment packaging acceptance remain open. Manual edition NOT RELEASED; Gates A/B UNVERIFIED."
         }
       ]
     }
@@ -400,12 +400,12 @@
   "base_branch": "main",
   "local_base_sha": "e90c295b38245e57cf53a017d96885a770ed399f",
   "pr_url": "https://github.com/T0rrag/AionCrafter/pull/8",
-  "verified_implementation_sha": "9f8128a84045f8ee1e24bd7c7d89b5efa984ff06",
+  "verified_implementation_sha": "0ad954dc2fcb5a564544fe397f81f09c7a7dc89c",
   "remote_base_sha": "e90c295b38245e57cf53a017d96885a770ed399f",
   "architecture_pr_url": "https://github.com/T0rrag/AionCrafter/pull/1",
-  "checkpoint_part": "01",
+  "checkpoint_part": "03",
   "next_eligible_phase": "06",
-  "next_phase_dependency_note": "Continue Phase 06 Part02 p6-patches catalog JSON export and recipe-change recovery; no new phase or provider activation.",
-  "checkpoint_label": "Phase 06 Part01 published: manual validation, recovery and guidance; draft PR8; release blocked",
+  "next_phase_dependency_note": "Continue Phase 06 Part04: cross-environment source-checkout installation/update-removal evidence; no public distribution, provider activation or license assumption.",
+  "checkpoint_label": "Phase 06 Part03 delivered: reproducible validation source artifact + declared SYNTHETIC p95 evidence; draft PR8; release blocked",
   "next_development_branch": "phase/06-release"
 }

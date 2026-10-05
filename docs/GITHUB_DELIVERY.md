@@ -206,3 +206,27 @@ restores prior catalog/plans/ledger to new paths and recovers observations, calc
 revision history and ledger result. p6-patches remains IN_PROGRESS for unavailable real
 provider health/version integration. No real pilot, visual QA, release or deployment.
 Part 02 receipt/continuation follow the tested implementation in documentation commits.
+
+
+## Phase 06 Part 03 — reproducible source-checkout and SYNTHETIC p95
+
+Starting remote head: cff1913271330ccb37fa47f71fb0cb279df44a71; main remained
+e90c295b38245e57cf53a017d96885a770ed399f. PR #8 was read back open, draft and
+unmerged before the fast-forward. Tested implementation:
+0ad954dc2fcb5a564544fe397f81f09c7a7dc89c, tree
+7ba2809b443efacb093069f16c98eb67e8c00868. Publication used a non-force ref
+fast-forward after an immediate expected-head read; the connector rejected its optional
+lease argument, so no force/lease bypass was used.
+
+GitHub Actions run 37328773165 on that exact SHA succeeded: 271 tests in 16.036s,
+compileall, two byte-identical source-checkout builds, isolated extracted-source validation,
+SYNTHETIC cached-calculation benchmark, catalog validation and bootstrap. Source archive
+SHA-256: c03bac34b62271f5fbed3b16c488445cfc2712ba835de79b414ff52ac1718132.
+Benchmark: 250 warmups / 2,000 samples, p95 0.449492 ms on CPython 3.12.14 / Linux x86_64 /
+AMD EPYC 7763 / 4 logical CPUs; proposed <300 ms target met for this SYNTHETIC workload.
+
+The archive declares unresolved license/public_release=false and is not uploaded as a
+release asset. p6-package remains IN_PROGRESS; p6-golive remains BLOCKED because pilot
+datasets, real workflows, deferred visual QA and other applicable evidence are absent.
+Receipt: delivery/phase-06-part-03.json. Immutable continuation advances to Part 04 on
+the same branch/PR for cross-environment source-install/update-removal evidence.

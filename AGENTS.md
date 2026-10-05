@@ -4,14 +4,15 @@ Read docs/PROJECT_STATE.md, the latest handoff, docs/backlog.json and current AD
 The authoritative brief is AionCrafter_Project_Prompt.md v1.3 (workflow sections 20–21).
 Preserve all seven phases and 42 stable IDs with evidence-backed statuses.
 
-Current sequence: Phase 06 manual-edition validation/recovery, Part 02 delivered, on
-phase/06-release. Read PROJECT_STATE, handoffs/phase-06-part-02.md, the latest
-NEXT_CHAT_PROMPT/immutable continuation, delivery/phase-06-part-02.json and ADR 0010.
+Current sequence: Phase 06 manual-edition validation/recovery, Part 03 delivered, on
+phase/06-release. Read PROJECT_STATE, handoffs/phase-06-part-03.md, the latest
+NEXT_CHAT_PROMPT/immutable continuation, delivery/phase-06-part-03.json and ADR 0010.
 p6-mathqa regression requirement COMPLETE; p6-patches/security/package IN_PROGRESS;
-p6-usertest/golive BLOCKED on applicable evidence. Continue Part 03 within Phase 06:
-reproducible source packaging/installation evidence and declared synthetic performance.
-Phase 04 manual groundwork is merged but real integration incomplete; Phase 03 real
-integration/p1-catalog BLOCKED; Phase 05 DEFERRED; Gates A/B UNVERIFIED. No release.
+p6-usertest/golive BLOCKED on applicable evidence. Continue Part 04 within Phase 06:
+cross-environment source-checkout installation/update-removal evidence without inventing
+a redistribution license. Phase 04 manual groundwork is merged but real integration
+incomplete; Phase 03 real integration/p1-catalog BLOCKED; Phase 05 DEFERRED; Gates A/B
+UNVERIFIED. No release.
 
 Use exact money; missing prices are not zero. Preserve observation source/time, market,
 build and variant identity. Synthetic fixtures must remain clearly labelled. Do not invent

@@ -15,7 +15,7 @@
     "p4-ledger",
     "p6-mathqa"
   ],
-  "notes": "Phase 06 Part02: validated stored catalog JSON export and recipe-change launch/recovery drill delivered; GitHub Actions run 37310693174 on d01f575b2c4a88d802828820f0d1dd3f9c3f9ea7 passed 269 tests plus compile/catalog/bootstrap. p6-mathqa COMPLETE; p6-patches/security/package IN_PROGRESS; p6-usertest/golive BLOCKED. PR #8 remains draft/unmerged. No release. Phase04 real integration remains incomplete; p1-catalog and Phase03 real integration blocked; Phase05 deferred; Gates A/B UNVERIFIED. All 42 IDs unchanged.",
+  "notes": "Phase 06 Part03: implementation 0ad954dc...; GitHub Actions run 37328773165 passed 271 tests, compile/catalog/bootstrap, byte-identical deterministic source ZIP builds plus isolated clean-venv validation. SYNTHETIC cached calculation: 250 warmups/2000 samples, p95 0.449492 ms on CPython 3.12.14/Linux/AMD EPYC 7763; proposed <300 ms threshold met only for this synthetic workload. p6-mathqa COMPLETE; p6-patches/security/package IN_PROGRESS; p6-usertest/golive BLOCKED. License/cross-environment install and pilot evidence remain open. PR #8 draft/unmerged; Phase04 real integration incomplete; p1-catalog/Phase03 real integration blocked; Phase05 deferred; Gates A/B UNVERIFIED. No release; all 42 IDs unchanged.",
   "theme": "dark",
   "language": "es"
 }

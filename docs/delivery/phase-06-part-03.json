@@ -1,0 +1,37 @@
+{
+  "repository": "https://github.com/T0rrag/AionCrafter",
+  "phase": "06",
+  "part": "03",
+  "branch": "phase/06-release",
+  "base_branch": "main",
+  "pull_request": "https://github.com/T0rrag/AionCrafter/pull/8",
+  "state": "OPEN_DRAFT_UNMERGED",
+  "verified_starting_branch_sha": "cff1913271330ccb37fa47f71fb0cb279df44a71",
+  "verified_base_sha": "e90c295b38245e57cf53a017d96885a770ed399f",
+  "tested_implementation_sha": "0ad954dc2fcb5a564544fe397f81f09c7a7dc89c",
+  "tested_and_fetched_tree": "7ba2809b443efacb093069f16c98eb67e8c00868",
+  "task_ids": ["p6-package", "p6-golive"],
+  "tests": {
+    "environment": "GitHub Actions Linux x86_64 / CPython 3.12.14 / AMD EPYC 7763 / 4 logical CPUs",
+    "workflow_run_id": 37328773165,
+    "workflow_run_url": "https://github.com/T0rrag/AionCrafter/actions/runs/37328773165",
+    "suite": "271 tests passed in 16.036s",
+    "compileall": "passed: aioncrafter tests scripts",
+    "source_artifact": "two byte-identical validation-only ZIP builds; SHA-256 c03bac34b62271f5fbed3b16c488445cfc2712ba835de79b414ff52ac1718132",
+    "isolated_install": "passed: extracted source + clean venv + synthetic catalog/bootstrap",
+    "benchmark": {"dataset":"SYNTHETIC","workload":"PriceCache cached hit + deterministic synthetic-bar item_economics","warmup":250,"samples":2000,"provider_calls":1,"target_p95_ms":300,"target_met":true,"p50_ms":0.386905,"p95_ms":0.449492,"p99_ms":0.521868,"max_ms":0.885099},
+    "bootstrap": "passed: 42 stable IDs; 131 artifact checksums; 9 tasks with completion evidence; Gates A/B unchanged"
+  },
+  "gates": {"A":"UNVERIFIED","B":"UNVERIFIED"},
+  "phase_status": "IN_PROGRESS",
+  "remaining": {
+    "mathqa": "COMPLETE",
+    "patches_security_package": "IN_PROGRESS; license/cross-environment install and broader security/real-provider evidence remain",
+    "usertest_golive": "BLOCKED on real pilot/applicable quality evidence; synthetic p95 is not pilot-dataset acceptance",
+    "previous_phases": "p1-catalog and Phase03 real integration BLOCKED; Phase04 real integration incomplete; Phase05 DEFERRED"
+  },
+  "continuation": "docs/continuations/phase-06-part-03-to-part-04-2026-10-05.md",
+  "next": "Phase06 Part04: cross-environment source-checkout installation/update-removal evidence on declared Linux/Windows CI; same branch/PR; no package publication",
+  "no_claims": ["real game/client/pilot validation","visual or keyboard QA","real-provider integration","public release","deployment","production security approval","Gate A/B passage"],
+  "note": "Documentation follows the tested implementation SHA; the source archive digest belongs to that exact checkpoint. Fetch actual remote heads before writing."
+}

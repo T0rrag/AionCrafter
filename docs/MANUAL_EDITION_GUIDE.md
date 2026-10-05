@@ -11,8 +11,9 @@ Bundled fixture attribution is in `docs/sources/SYNTHETIC.md`.
 ## Start from a verified checkpoint
 
 Use Python 3.12 with its standard-library SQLite. No pip install or third-party packages
-are required. Local evidence is Windows/Python 3.12.14; other environments need their own
-installation checks. In commands below, Windows users with the Python launcher can
+are required. Earlier suite evidence exists on Windows/Python 3.12.14. Part 03 additionally
+validated a deterministic source artifact and isolated source-tree startup on GitHub Actions
+Linux/CPython 3.12.14. Cross-environment source-artifact acceptance remains pending. In commands below, Windows users with the Python launcher can
 replace `python` with `py -3.12`.
 
 ```text
@@ -43,6 +44,26 @@ No automatic provider is enabled. A source outage does not refresh old observati
 times or supply missing prices; enter a clearly attributed manual override only when
 you have the needed evidence. Saved plans retain original source observations. Synthetic
 outage/quota tests are library evidence, not a working production provider connection.
+
+## Validation-only source artifact and performance check
+
+For engineering verification only, the checkout can build a deterministic source ZIP:
+
+```text
+python scripts/build_source_checkout.py --output /tmp/aioncrafter-source.zip
+python scripts/benchmark_cached_calculation.py --warmup 250 --samples 2000 --target-p95-ms 300
+```
+
+The ZIP is not a wheel, signed installer or public release. Its embedded
+`SOURCE_ARTIFACT.json` says `license_status=unresolved` and `public_release=false`.
+The builder refuses overwrite. Phase 06 Part 03 CI built two byte-identical archives,
+extracted one into a fresh directory and validated it from a clean virtual environment.
+
+The benchmark primes one SYNTHETIC provider response and then measures cached
+`PriceCache` + deterministic `item_economics` operations. Run 37328773165 used 250
+warmups and 2,000 samples on CPython 3.12.14 / Linux x86_64 / AMD EPYC 7763
+(4 logical CPUs): p95 0.449492 ms. That is below the proposed 300 ms target for this
+SYNTHETIC workload only. It is not pilot-data, live-provider, browser or overlay evidence.
 
 ## Local data and retention
 
@@ -142,7 +163,8 @@ so the local server can handle another request; this is not public-service DoS p
 ## Release remains pending
 
 The current edition has no real-client support claim, signed desktop package, measured
-pilot p95, visual/keyboard acceptance or real-game pilot. See `PHASE_06_VALIDATION.md` for
+pilot-dataset p95, visual/keyboard acceptance or real-game pilot. Part 03 measured only
+the declared SYNTHETIC cached-calculation workload and does not satisfy pilot acceptance. See `PHASE_06_VALIDATION.md` for
 the evidence matrix, `TEST_RESULTS.md` for executed checks, and `NEXT_CHAT_PROMPT.md` for
 the current continuation. Optional Gates A/B remain UNVERIFIED. The manual edition can
 eventually release without them only after its own applicable quality criteria pass.

@@ -295,3 +295,28 @@ Ubuntu 24.04 / CPython 3.12.14 and completed successfully.
 The runner emitted ResourceWarning messages for subprocess pipe handles while the complete
 suite still passed. No real provider, game/client pilot, visual/keyboard QA, performance
 benchmark, public release or production-security approval is implied by this CI pass.
+
+
+## Phase 06 Part 03 — source-checkout reproducibility and SYNTHETIC performance (2026-10-05)
+
+GitHub Actions run 37328773165 checked out exact implementation
+`0ad954dc2fcb5a564544fe397f81f09c7a7dc89c` on Linux x86_64 / CPython 3.12.14,
+AMD EPYC 7763 64-Core Processor, 4 logical CPUs.
+
+- `python -m unittest discover -q`: **271 passed in 16.036s**.
+- `python -m compileall -q aioncrafter tests scripts`: passed.
+- Two deterministic validation-only source-checkout ZIP builds were byte-identical:
+  SHA-256 `c03bac34b62271f5fbed3b16c488445cfc2712ba835de79b414ff52ac1718132`.
+- Isolated source install: archive extracted to a new directory, clean venv created,
+  synthetic catalog validation and bootstrap passed from the extracted checkout.
+- Benchmark: 250 warmups + 2,000 measured cached calculations; exactly one provider fetch.
+  p50 **0.386905 ms**, p95 **0.449492 ms**, p99 **0.521868 ms**, max **0.885099 ms**.
+  Proposed <300 ms p95 threshold met for this deterministic SYNTHETIC workload.
+- Synthetic catalog validation passed (release SYNTHETIC-demo-v1).
+- Bootstrap passed: 42 stable IDs, 131 artifact checksums, 9 completed tasks with evidence,
+  Gates A/B UNVERIFIED.
+
+The source archive declares license status unresolved and public_release=false; it is test
+evidence, not a released distribution. The benchmark is not pilot-data, provider, browser
+or overlay performance. No real-game pilot, visual/keyboard QA, release, deployment or
+production-security approval is claimed.
